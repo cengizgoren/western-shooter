@@ -43,7 +43,7 @@ public class RayGun : MonoBehaviour
             }
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;
-            Audio.Play();
+            Audio.PlayOneShot(Audio.clip);
             // Debug.DrawRay(ray.origin, ray.direction * shotDistance, Color.blue, 1);
         }
 
