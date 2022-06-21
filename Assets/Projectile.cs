@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float maxProjectileDistance;
 
+    private bool shouldMove = false;
+
     void Start()
     {
         firingPoint = transform.position;
@@ -20,14 +22,24 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        MoveProjectile();
+        if (shouldMove)
+        {
+            MoveProjectile();
+        }
+    }
+
+    public void Move()
+    {
+        firingPoint = transform.position;
+        shouldMove = true;
     }
 
     void MoveProjectile()
     {
         if (Vector3.Distance(firingPoint, transform.position) > maxProjectileDistance)
         {
-            Destroy(this.gameObject);
+            ProjectilePool.Instance.ReturnToPool(this);
+            shouldMove = false;
         } 
         else
         {
