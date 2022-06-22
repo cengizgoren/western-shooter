@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof (CharacterController))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -11,9 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask groundMask;
 
+
+    private CharacterController controller;
+
     void Start()
     {
-
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -27,9 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         float _horizontal = Input.GetAxis("Horizontal");
         float _vertical = Input.GetAxis("Vertical");
-
         Vector3 _movemement = new Vector3(_horizontal, 0, _vertical);
-        transform.Translate(movementSpeed * Time.deltaTime * _movemement, Space.World);
+        controller.Move(movementSpeed * Time.deltaTime * _movemement);
     }
 
     void HandleRotationInput()
