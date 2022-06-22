@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float movementSpeed;
 
+    [SerializeField]
+    private LayerMask groundMask;
+
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -20,7 +23,7 @@ public class PlayerController : MonoBehaviour
         HandleShootInput();
     }
 
-    void HandleMovementInput() 
+    void HandleMovementInput()
     {
         float _horizontal = Input.GetAxis("Horizontal");
         float _vertical = Input.GetAxis("Vertical");
@@ -31,12 +34,12 @@ public class PlayerController : MonoBehaviour
 
     void HandleRotationInput()
     {
-        RaycastHit _hit;
-        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(_ray, out _hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
         {
-            transform.LookAt(new Vector3(_hit.point.x, transform.position.y, _hit.point.z));
+            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
     }
 
@@ -46,6 +49,21 @@ public class PlayerController : MonoBehaviour
         {
             //PlayerGun.Instance.Shoot();
             RayGun.Instance.Shoot();
+        }
+    }
+        
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying == false)
+        {
+            return;
+        }
+
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hitInfo, float.MaxValue))
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(ray.origin, 0.01f);
         }
     }
 }

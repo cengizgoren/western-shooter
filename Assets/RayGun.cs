@@ -54,7 +54,6 @@ public class RayGun : MonoBehaviour
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;
             Audio.PlayOneShot(Audio.clip);
-            Debug.DrawRay(ray.origin, ray.direction * shotDistance, Color.blue, 1);
         }
     }
 
@@ -81,5 +80,27 @@ public class RayGun : MonoBehaviour
             canShoot = false;
         }
         return canShoot;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying == false)
+        {
+            return;
+        }
+
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hitInfo, float.MaxValue))
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(spawn.position, hitInfo.point);
+        }
+
+        Ray ray2 = new Ray(spawn.position, spawn.forward);
+        if (Physics.Raycast(ray2, out var hitInfo2, float.MaxValue))
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(spawn.position, hitInfo2.point);
+        }
     }
 }
