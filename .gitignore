@@ -75,3 +75,7 @@ crashlytics-build.properties
 
 # Visual Studio Solution creation dir, not sure if has to be under version control
 /UnityPlayerStub/
+
+# Asset Store Packages
+/Assets/Kevin Iglesias.meta
+/Assets/Kevin Iglesias/
