@@ -5,19 +5,20 @@ using UnityEngine;
 [RequireComponent (typeof (CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField]
-    private float movementSpeed;
+    private float movementSpeed = 1f;
 
     [SerializeField]
     private LayerMask groundMask;
 
+    private Animator animator;
 
     private CharacterController controller;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -29,10 +30,19 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovementInput()
     {
-        float _horizontal = Input.GetAxis("Horizontal");
-        float _vertical = Input.GetAxis("Vertical");
-        Vector3 _movemement = new Vector3(_horizontal, 0, _vertical);
-        controller.Move(movementSpeed * Time.deltaTime * _movemement);
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.Move(move * Time.deltaTime * movementSpeed);
+
+        // Velocity calculation
+        Vector3 horizontalVelocity = controller.velocity;
+        Vector3 relVel = transform.InverseTransformDirection(horizontalVelocity);
+
+        horizontalVelocity = new Vector3(relVel.x, 0, relVel.z);
+        float horizontalSpeed = horizontalVelocity.magnitude;
+
+        animator.SetFloat("SpeedZ", relVel.z);
+        animator.SetFloat("SpeedX", relVel.x);
+        animator.SetFloat("SpeedHorizontal", horizontalSpeed);
     }
 
     void HandleRotationInput()
@@ -53,6 +63,7 @@ public class PlayerController : MonoBehaviour
             //PlayerGun.Instance.Shoot();
             RayGun.Instance.Shoot();
         }
+        animator.SetBool("IsShooting", Input.GetButton("Fire1"));
     }
         
     private void OnDrawGizmos()
