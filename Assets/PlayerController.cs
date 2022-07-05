@@ -1,12 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent (typeof (CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+
+    public event EventHandler<OnShootEventArgs> OnShoot;
+
+    public class OnShootEventArgs : EventArgs
+    {
+        public Vector3 gunEndPointPosition;
+        public Quaternion shootPosition;
+    }
     [SerializeField]
     private float movementSpeed = 1f;
+
+    public int selectedWeapon = 0;
 
     [SerializeField]
     private LayerMask groundMask;
@@ -15,10 +27,19 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController controller;
 
+    public Transform weaponHolder;
+
+    public Gun currentGun;
+    public Gun[] guns;
+
+    private float allowFireAfterWeaponSwitchTime;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        selectWeapon();
+        //OnSpacePressed += Testing_OnSpacePressed;
     }
 
     void Update()
@@ -26,12 +47,13 @@ public class PlayerController : MonoBehaviour
         HandleMovementInput();
         HandleRotationInput();
         HandleShootInput();
+        HandleWeaponSwitch();
     }
 
     void HandleMovementInput()
     {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * movementSpeed);
+        controller.SimpleMove(movementSpeed * move);
 
         // Velocity calculation
         Vector3 horizontalVelocity = controller.velocity;
@@ -58,14 +80,78 @@ public class PlayerController : MonoBehaviour
 
     void HandleShootInput()
     {
-        if (Input.GetButton("Fire1"))
+        if (IsWeaponFirePossible())
         {
-            //PlayerGun.Instance.Shoot();
-            RayGun.Instance.Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                OnShoot?.Invoke(this, new OnShootEventArgs { gunEndPointPosition = weaponHolder.position, shootPosition = weaponHolder.rotation });
+            } 
+            else if (Input.GetButton("Fire1") && currentGun.gunType == Gun.GunType.Auto)
+            {
+                OnShoot?.Invoke(this, new OnShootEventArgs { gunEndPointPosition = weaponHolder.position, shootPosition = weaponHolder.rotation });
+            }
         }
-        animator.SetBool("IsShooting", Input.GetButton("Fire1"));
     }
-        
+
+    private bool IsWeaponFirePossible()
+    {
+        bool canShoot = true;
+        if (Time.time < allowFireAfterWeaponSwitchTime)
+        {
+            canShoot = false;
+        }
+        return canShoot;
+    }
+
+    void HandleWeaponSwitch()
+    {
+        int previousSelectedWeapons = selectedWeapon;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            selectedWeapon++;
+            selectedWeapon = mod(selectedWeapon, transform.childCount);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            selectedWeapon--;
+            selectedWeapon = mod(selectedWeapon, transform.childCount);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            selectedWeapon = 0;
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && guns.Length >= 2)
+            selectedWeapon = 1;
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && guns.Length >= 3)
+            selectedWeapon = 2;
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) && guns.Length >= 4)
+            selectedWeapon = 3;
+
+        if (selectedWeapon != previousSelectedWeapons)
+            selectWeapon();
+    }
+
+    private void selectWeapon()
+    {
+        if (currentGun)
+        {
+            Destroy(currentGun.gameObject);
+        }
+        allowFireAfterWeaponSwitchTime = Time.time + 1.5f;
+        currentGun = Instantiate(guns[selectedWeapon], weaponHolder.position, weaponHolder.rotation);
+        currentGun.transform.parent = weaponHolder;
+        currentGun.transform.Rotate(90, 0, 0);
+        animator.SetTrigger("WeaponSwitch");
+    }
+
+    int mod(int x, int m)
+    {
+        return (x % m + m) % m;
+    }
+
     private void OnDrawGizmos()
     {
         if (Application.isPlaying == false)
@@ -74,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
 
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hitInfo, float.MaxValue))
+        if (Physics.Raycast(ray, out var hitInfo, float.MaxValue, groundMask))
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(ray.origin, 0.01f);

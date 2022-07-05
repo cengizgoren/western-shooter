@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProjectilePool : MonoBehaviour
 {
-
     [SerializeField]
     float poolSize;
 
