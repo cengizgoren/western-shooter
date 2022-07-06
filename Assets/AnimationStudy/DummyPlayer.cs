@@ -14,11 +14,42 @@ public class DummyPlayer : MonoBehaviour
     [Tooltip("Acceleration and deceleration")]
     public float SpeedChangeRate = 10.0f;
 
-    public LayerMask groundMask;
+    [Space(10)]
+    [Tooltip("The height the player can jump")]
+    public float JumpHeight = 1.2f;
+
+    [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+    public float Gravity = -15.0f;
+
+    [Space(10)]
+    [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
+    public float JumpTimeout = 0.50f;
+
+    [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+    public float FallTimeout = 0.15f;
+
+    [Header("Player Grounded")]
+    [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
+    public bool Grounded = true;
+
+    [Tooltip("Useful for rough ground")]
+    public float GroundedOffset = -0.14f;
+
+    [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
+    public float GroundedRadius = 0.28f;
+
+    [Tooltip("What layers the character uses as ground")]
+    public LayerMask GroundLayers;
 
     // player
     private float _speed;
     private float _turnSpeed = 10.0f;
+    private float _terminalVelocity = 53.0f;
+    private float _verticalVelocity;
+
+    // timeout deltatime
+    private float _jumpTimeoutDelta;
+    private float _fallTimeoutDelta;
 
     private Animator _animator;
     private CharacterController _controller;
@@ -34,6 +65,8 @@ public class DummyPlayer : MonoBehaviour
 
     void Update()
     {
+        JumpAndGravity();
+        GroundedCheck();
         Move();
     }
 
@@ -42,10 +75,15 @@ public class DummyPlayer : MonoBehaviour
         CameraRotation();
     }
 
+    private void GroundedCheck()
+    {
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+        Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+    }
+
     private void Move()
     {
         float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-
         float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
         float speedOffset = 0.1f;
         float inputMagnitude = 1f;
@@ -63,11 +101,11 @@ public class DummyPlayer : MonoBehaviour
 
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
         Vector3 relativeVelocity = transform.InverseTransformDirection(_controller.velocity);
-        _controller.Move(_speed * Time.deltaTime * inputDirection);
+
+        _controller.Move(inputDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
         if (_animator)
         {
-
             _animator.SetFloat("SpeedZ", relativeVelocity.z);
             _animator.SetFloat("SpeedX", relativeVelocity.x);
             _animator.SetFloat("SpeedHorizontal", currentHorizontalSpeed);
@@ -90,5 +128,47 @@ public class DummyPlayer : MonoBehaviour
         Vector3 direction = (lookPoint - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * _turnSpeed);
+    }
+
+    private void JumpAndGravity()
+    {
+        if (Grounded)
+        {
+            _fallTimeoutDelta = FallTimeout;
+
+            // Stop our velocity dropping infinitely when grounded
+            if (_verticalVelocity < 0.0f)
+            {
+                _verticalVelocity = -2f;
+            }
+
+            if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+            {
+                // The square root of H * -2 * G = how much velocity needed to reach desired height
+                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+            }
+
+            if (_jumpTimeoutDelta >= 0.0f)
+            {
+                _jumpTimeoutDelta -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            _jumpTimeoutDelta = JumpTimeout;
+
+            if (_fallTimeoutDelta >= 0.0f)
+            {
+                _fallTimeoutDelta -= Time.deltaTime;
+            }
+
+            _input.jump = false;
+        }
+
+        if (_verticalVelocity < _terminalVelocity)
+        {
+            _verticalVelocity += Gravity * Time.deltaTime;
+        }
     }
 }
