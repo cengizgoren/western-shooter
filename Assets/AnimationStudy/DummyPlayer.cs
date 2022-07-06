@@ -4,45 +4,91 @@ using UnityEngine;
 
 public class DummyPlayer : MonoBehaviour
 {
-    [SerializeField] private float speed = 1f;
+    [Header("Player")]
+    [Tooltip("Move speed of the character in m/s")]
+    public float MoveSpeed = 2.0f;
 
-    private CharacterController controller;
+    [Tooltip("Sprint speed of the character in m/s")]
+    public float SprintSpeed = 5.335f;
 
-    private Animator animator;
+    [Tooltip("Acceleration and deceleration")]
+    public float SpeedChangeRate = 10.0f;
 
-    [SerializeField]
-    private LayerMask groundMask;
+    public LayerMask groundMask;
+
+    // player
+    private float _speed;
+    private float _turnSpeed = 10.0f;
+
+    private Animator _animator;
+    private CharacterController _controller;
+    private DummyInput _input;
+    private GameObject _mainCamera;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        _controller = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
+        _input = GetComponent<DummyInput>();
     }
 
     void Update()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * speed);
+        Move();
+    }
 
-        // Velocity calculation
-        Vector3 horizontalVelocity = controller.velocity;
-        Vector3 relVel = transform.InverseTransformDirection(horizontalVelocity);
+    private void LateUpdate()
+    {
+        CameraRotation();
+    }
 
-        horizontalVelocity = new Vector3(relVel.x, 0, relVel.z);
-        float horizontalSpeed = horizontalVelocity.magnitude;
+    private void Move()
+    {
+        float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-        animator.SetFloat("SpeedZ", relVel.z);
-        animator.SetFloat("SpeedX", relVel.x);
-        animator.SetFloat("SpeedHorizontal", horizontalSpeed);
+        float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+        float speedOffset = 0.1f;
+        float inputMagnitude = 1f;
 
-        ///
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
+        if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+            currentHorizontalSpeed > targetSpeed + speedOffset)
         {
-            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
+            _speed = Mathf.Round(_speed * 1000f) / 1000f;
         }
+        else
+        {
+            _speed = targetSpeed;
+        }
+
+        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+        Vector3 relativeVelocity = transform.InverseTransformDirection(_controller.velocity);
+        _controller.Move(_speed * Time.deltaTime * inputDirection);
+
+        if (_animator)
+        {
+
+            _animator.SetFloat("SpeedZ", relativeVelocity.z);
+            _animator.SetFloat("SpeedX", relativeVelocity.x);
+            _animator.SetFloat("SpeedHorizontal", currentHorizontalSpeed);
+        }
+    }
+
+    void CameraRotation()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(_input.look);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        if (groundPlane.Raycast(ray, out float rayDistance))
+        {
+            Vector3 point = ray.GetPoint(rayDistance);
+            LookAt(point);
+        }
+    }
+
+    void LookAt(Vector3 lookPoint)
+    {
+        Vector3 direction = (lookPoint - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * _turnSpeed);
     }
 }
