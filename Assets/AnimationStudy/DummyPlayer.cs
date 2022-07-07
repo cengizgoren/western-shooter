@@ -14,6 +14,9 @@ public class DummyPlayer : MonoBehaviour
     [Tooltip("Acceleration and deceleration")]
     public float SpeedChangeRate = 10.0f;
 
+    [Tooltip("Offset player movement direction by this angle to make it relative to the camera position")]
+    public float CameraYRotationDeg = 45.0f;
+
     [Space(10)]
     [Tooltip("The height the player can jump")]
     public float JumpHeight = 1.2f;
@@ -41,6 +44,14 @@ public class DummyPlayer : MonoBehaviour
     [Tooltip("What layers the character uses as ground")]
     public LayerMask GroundLayers;
 
+    [Header("Cinemachine")]
+    [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
+    public GameObject CinemachineCameraTarget;
+
+    [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
+    public float CameraAngleOverride = 0.0f;
+
+
     // player
     private float _speed;
     private float _turnSpeed = 10.0f;
@@ -54,7 +65,7 @@ public class DummyPlayer : MonoBehaviour
     private Animator _animator;
     private CharacterController _controller;
     private DummyInput _input;
-    private GameObject _mainCamera;
+
 
     void Start()
     {
@@ -65,15 +76,13 @@ public class DummyPlayer : MonoBehaviour
 
     void Update()
     {
+        PlayerRotation();
         JumpAndGravity();
         GroundedCheck();
         Move();
     }
 
-    private void LateUpdate()
-    {
-        CameraRotation();
-    }
+    private void LateUpdate() { }
 
     private void GroundedCheck()
     {
@@ -99,10 +108,10 @@ public class DummyPlayer : MonoBehaviour
             _speed = targetSpeed;
         }
 
-        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+        Vector3 isometricDirection = Quaternion.AngleAxis(CameraYRotationDeg, Vector3.up) * new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
         Vector3 relativeVelocity = transform.InverseTransformDirection(_controller.velocity);
 
-        _controller.Move(inputDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        _controller.Move(isometricDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
         if (_animator)
         {
@@ -112,7 +121,7 @@ public class DummyPlayer : MonoBehaviour
         }
     }
 
-    void CameraRotation()
+    void PlayerRotation()
     {
         Ray ray = Camera.main.ScreenPointToRay(_input.look);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
