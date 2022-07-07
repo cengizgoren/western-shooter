@@ -128,6 +128,8 @@ public class DummyPlayer : MonoBehaviour
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
+            Vector3 halfPoint = transform.position + (point - transform.position) / 5;
+            CinemachineCameraTarget.transform.position = halfPoint;
             LookAt(point);
         }
     }
@@ -178,6 +180,27 @@ public class DummyPlayer : MonoBehaviour
         if (_verticalVelocity < _terminalVelocity)
         {
             _verticalVelocity += Gravity * Time.deltaTime;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying == false)
+        {
+            return;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(_input.look);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        if (groundPlane.Raycast(ray, out float rayDistance))
+        {
+            Vector3 point = ray.GetPoint(rayDistance);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(point, 0.5f);
+
+            Vector3 halfPoint = transform.position + (point - transform.position) / 5;
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(halfPoint, 0.5f);
         }
     }
 }
