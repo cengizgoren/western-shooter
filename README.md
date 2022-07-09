@@ -1,8 +1,11 @@
 # western-shooter
 
+Our own assets and modified imported assets should be placed in `Assets/_Assets/` which is under version control.
+
+
 ## Dependencies from Unity Asset Store
 
-All of the dependencies should be placed in `/Assets`
+These should be placed in `Assets/` which is ignored from version control.
 
 [Basic Motions FREE v1.1](https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271)
 
@@ -10,6 +13,6 @@ All of the dependencies should be placed in `/Assets`
 
 [Unity Particle Pack v1.6](https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-particle-pack-127325)
 
-## Other assets used (import not required)
+## Other assets (import not required)
 
 [Modular mech](https://rcorre.itch.io/modular-mech)

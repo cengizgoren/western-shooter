@@ -76,16 +76,10 @@ crashlytics-build.properties
 # Visual Studio Solution creation dir, not sure if has to be under version control
 /UnityPlayerStub/
 
-# Asset Store Packages
-/Assets/Kevin Iglesias.meta
-/Assets/Kevin Iglesias/
+## Asset Store Packages
 
-/Assets/SciFiWarriorPBRHPPolyart.meta
-/Assets/SciFiWarriorPBRHPPolyart/
+# Ignore everything in there
+Assets/*
 
-/Assets/EffectExamples.meta
-/Assets/EffectExamples/
-/Assets/TextMesh Pro
-/Assets/TextMesh Pro.meta
-/Assets/StarterAssets
-/Assets/StarterAssets.meta
+# However, include this
+!Assets/_Assets/
