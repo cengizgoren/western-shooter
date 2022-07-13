@@ -164,7 +164,10 @@ MonoBehaviour:
   WeaponName: Sunb
   WeaponRoot: {fileID: 4055505225673808323}
   WeaponMuzzle: {fileID: 2496450570939503281}
-  ShootType: 1
-  DelayBetweenShots: 0.1
+  ShootType: 0
+  DelayBetweenShots: 0.25
   ProjectilePrefab: {fileID: 8421957090899888546, guid: d32f8f07a55cc6b40babb25b5524bd01, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
+  RecoilForce: 1
+  AmmoReloadTime: 3
+  ClipSize: 6

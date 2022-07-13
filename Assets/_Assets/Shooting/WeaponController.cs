@@ -21,16 +21,26 @@ public class WeaponController : MonoBehaviour
 
     [Range(0f, 2f)] public float RecoilForce = 1.0f;
 
+    public float AmmoReloadTime;
+    public int ClipSize;
+
     public UnityAction OnShoot;
     public event EventHandler OnShootRecoil;
 
+    private int m_CurrentAmmo;
     private float m_LastTimeShot = Mathf.NegativeInfinity;
     private InputActions _inputActions;
     private bool triggerSqueezed = false;
 
+    public bool IsReloading { get; private set; }
+
+    private float m_ReloadStartedTime;
+
     private void Awake()
     {
         _inputActions = new InputActions();
+        IsReloading = false;
+        m_CurrentAmmo = ClipSize;
     }
 
     private void OnEnable()
@@ -68,23 +78,26 @@ public class WeaponController : MonoBehaviour
                 }
                 break;
         }
-    }
 
-    public void PressShootPerformed()
-    {
-        triggerSqueezed = true;
-    }
+        if (!IsReloading && m_CurrentAmmo <= 0)
+        {
+            IsReloading = true;
+            m_ReloadStartedTime = Time.time;
+        }
 
-    public void PressShootCancelled()
-    {
-        triggerSqueezed = false;
+        if (IsReloading && m_ReloadStartedTime + AmmoReloadTime < Time.time)
+        {
+            m_CurrentAmmo = ClipSize;
+            IsReloading = false;
+        }
     }
 
     bool TryShoot()
     {
-        if (m_LastTimeShot + DelayBetweenShots < Time.time)
+        if (!IsReloading && m_LastTimeShot + DelayBetweenShots < Time.time)
         {
             Shoot();
+            m_CurrentAmmo -= 1;
             OnShootRecoil?.Invoke(this, EventArgs.Empty);
             return true;
         }
@@ -104,5 +117,15 @@ public class WeaponController : MonoBehaviour
         }
 
         OnShoot?.Invoke();
+    }
+
+    public void PressShootPerformed()
+    {
+        triggerSqueezed = true;
+    }
+
+    public void PressShootCancelled()
+    {
+        triggerSqueezed = false;
     }
 }
