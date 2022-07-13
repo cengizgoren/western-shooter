@@ -67,6 +67,7 @@ public class DummyPlayer : MonoBehaviour
     private DummyInput _input;
 
 
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
