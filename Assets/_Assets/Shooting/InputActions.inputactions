@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Weapon",
+                    "type": "Value",
+                    "id": "63ab3143-780c-4d06-9f9e-1cbe781dc0bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -148,6 +157,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af2b1373-f039-4a6c-898d-2176933a010e",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e6c8410-3ac0-4a44-ab2d-3256b1a0b9d0",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "",
+                    "action": "Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b459ba26-446b-4a60-96b8-a23a84a56262",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "",
+                    "action": "Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dcb90741-5df4-4ffb-8891-7f8bf233e7ea",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "",
+                    "action": "Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

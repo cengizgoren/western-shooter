@@ -771,8 +771,6 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   shoot: 0
-  pressed: 0
-  held: 0
 --- !u!114 &527885142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,7 +1582,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4119678, y: 1}
+    m_SensorSize: {x: 1.0035046, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2283,6 +2281,7 @@ Transform:
   - {fileID: 975557603}
   - {fileID: 1280166431}
   - {fileID: 628363937}
+  - {fileID: 1840748102}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2318,9 +2317,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452cf359151d288469ed7db7d72325b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 1164435945824783914, guid: 2b9a6ca4171574d489f61bec72c6ed45, type: 3}
+  StartingWeapons:
+  - {fileID: 1164435945824783914, guid: 2b9a6ca4171574d489f61bec72c6ed45, type: 3}
+  - {fileID: 4389695552653952208, guid: 26b4a9a4cf88d694a859bab4be016252, type: 3}
   WeaponParentSocket: {fileID: 975557603}
   DefaultWeaponPosition: {fileID: 628363937}
+  DownWeaponPosition: {fileID: 1840748102}
+  WeaponSwitchDelay: 0.5
   MaxRecoilDistance: 0.5
   RecoilSharpness: 50
   RecoilRestitutionSharpness: 10
@@ -2341,8 +2344,6 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   shoot: 0
-  pressed: 0
-  held: 0
 --- !u!114 &1702734768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2448,6 +2449,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8e360c93-aba7-4c7c-9f45-d9a311f64b41
     m_ActionName: Player/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1702734767}
+        m_TargetAssemblyTypeName: DummyInput, Assembly-CSharp
+        m_MethodName: OnWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 63ab3143-780c-4d06-9f9e-1cbe781dc0bd
+    m_ActionName: Player/Weapon[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2504,6 +2521,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6513268781402560747, guid: 3c3f82082e7169d49b9edf0151b24e6d, type: 3}
   m_PrefabInstance: {fileID: 2092129392}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1840748101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1840748102}
+  m_Layer: 0
+  m_Name: DownWeaponPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1840748102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840748101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1702734764}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1952107867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3677b912bdd97634ca0de380ef969160, type: 3}

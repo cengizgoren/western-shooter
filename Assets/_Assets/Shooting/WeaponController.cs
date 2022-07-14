@@ -40,6 +40,9 @@ public class WeaponController : MonoBehaviour
     private bool triggerSqueezed = false;
 
     public bool IsReloading { get; private set; }
+    public GameObject Owner { get; set; }
+    public GameObject SourcePrefab { get; set; }
+    public bool IsWeaponActive { get; private set; }
 
     private float m_ReloadStartedTime;
 
@@ -146,10 +149,13 @@ public class WeaponController : MonoBehaviour
         // TODO: Understand why Slerp
         // onsphere
         Vector3 spreadWorldDirection = Vector3.Lerp(shootTransform.forward, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
-        Debug.Log(UnityEngine.Random.insideUnitSphere);
-        Debug.Log(UnityEngine.Random.insideUnitSphere);
-
         return spreadWorldDirection;
+    }
+
+    public void ShowWeapon(bool show)
+    {
+        WeaponRoot.SetActive(show);
+        IsWeaponActive = show;
     }
 
     public void PressShootPerformed()
