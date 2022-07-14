@@ -69,6 +69,12 @@ public class ProjectileStandard : ProjectileBase
 
         void OnHit(Vector3 point, Vector3 normal, Collider collider)
         {
+            TargetPractice targetPractice = collider.GetComponent<TargetPractice>();
+            if (targetPractice)
+            {
+                targetPractice.Damage(10);
+            }
+
             if (ImpactVfx)
             {
                 GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset), Quaternion.LookRotation(normal));

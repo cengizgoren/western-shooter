@@ -24,17 +24,21 @@ public class DummyWeaponsManager : MonoBehaviour
     public float MaxRecoilDistance = 0.5f;
     public float RecoilSharpness = 50f;
     public float RecoilRestitutionSharpness = 10f;
-    
+
+    public WeaponSwitchState m_WeaponSwitchState;
+    public AnimationCurve weaponSwitchCurve;
+
     private DummyInput _input;
     private InputActions _inputActions;
 
     private Vector3 m_WeaponMainLocalPosition;
     private Vector3 m_AccumulatedRecoil;
     private Vector3 m_WeaponRecoilLocalPosition;
+    private Quaternion m_WeaponMainLocalRotation;
 
     private WeaponController[] m_WeaponSlots = new WeaponController[9];
     private float m_TimeStartedWeaponSwitch;
-    public WeaponSwitchState m_WeaponSwitchState;
+
     private int m_WeaponSwitchNewWeaponIndex;
     private WeaponController activeWeapon;
 
@@ -68,6 +72,7 @@ public class DummyWeaponsManager : MonoBehaviour
         };
 
         m_WeaponMainLocalPosition = DefaultWeaponPosition.localPosition;
+        m_WeaponMainLocalRotation = DefaultWeaponPosition.localRotation;
 
         ActiveWeaponIndex = -1;
         m_WeaponSwitchState = WeaponSwitchState.Down;
@@ -109,7 +114,9 @@ public class DummyWeaponsManager : MonoBehaviour
         UpdateWeaponRecoil();
         UpdateWeaponSwitching();
         WeaponParentSocket.localPosition = m_WeaponMainLocalPosition + m_WeaponRecoilLocalPosition;
+        WeaponParentSocket.localRotation = m_WeaponMainLocalRotation;
     }
+
 
     void UpdateWeaponSwitching()
     {
@@ -167,11 +174,15 @@ public class DummyWeaponsManager : MonoBehaviour
         // Handle moving the weapon socket position for the animated weapon switching
         if (m_WeaponSwitchState == WeaponSwitchState.PutDownPrevious)
         {
-            m_WeaponMainLocalPosition = Vector3.Lerp(DefaultWeaponPosition.localPosition, DownWeaponPosition.localPosition, switchingTimeFactor);
+            float curve = weaponSwitchCurve.Evaluate(switchingTimeFactor);
+            m_WeaponMainLocalPosition = Vector3.Lerp(DefaultWeaponPosition.localPosition, DownWeaponPosition.localPosition, curve);
+            m_WeaponMainLocalRotation = Quaternion.Lerp(DefaultWeaponPosition.localRotation, DownWeaponPosition.localRotation, curve);
         }
         else if (m_WeaponSwitchState == WeaponSwitchState.PutUpNew)
         {
-            m_WeaponMainLocalPosition = Vector3.Lerp(DownWeaponPosition.localPosition, DefaultWeaponPosition.localPosition, switchingTimeFactor);
+            float curve = weaponSwitchCurve.Evaluate(switchingTimeFactor);
+            m_WeaponMainLocalPosition = Vector3.Lerp(DownWeaponPosition.localPosition, DefaultWeaponPosition.localPosition, curve);
+            m_WeaponMainLocalRotation = Quaternion.Lerp(DownWeaponPosition.localRotation, DefaultWeaponPosition.localRotation, curve);
         }
     }
 
@@ -187,7 +198,6 @@ public class DummyWeaponsManager : MonoBehaviour
         {
             if (m_WeaponSlots[i] == null)
             {
-
                 WeaponController weaponInstance = Instantiate(weaponPrefab, WeaponParentSocket);
                 weaponInstance.transform.localPosition = Vector3.zero;
                 weaponInstance.transform.localRotation = Quaternion.identity;

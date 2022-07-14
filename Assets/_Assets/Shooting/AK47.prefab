@@ -264,7 +264,7 @@ MonoBehaviour:
   WeaponMuzzle: {fileID: 4708424568244275276}
   ShootType: 1
   DelayBetweenShots: 0.1
-  BulletSpreadAngle: 5
+  BulletSpreadAngle: 3
   ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
   RecoilForce: 0.19
