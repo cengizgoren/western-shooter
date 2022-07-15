@@ -78,7 +78,7 @@ public class WeaponController : MonoBehaviour
         switch (ShootType)
         {
             case WeaponShootType.Manual:
-                if (triggerSqueezed && WeaponManager.m_WeaponSwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
+                if (triggerSqueezed && WeaponManager.SwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
                 {
                     TryShoot();
                     triggerSqueezed = false;
@@ -86,7 +86,7 @@ public class WeaponController : MonoBehaviour
                 break;
 
             case WeaponShootType.Automatic:
-                if (triggerSqueezed && WeaponManager.m_WeaponSwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
+                if (triggerSqueezed && WeaponManager.SwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
                 {
                     TryShoot();
                 }
