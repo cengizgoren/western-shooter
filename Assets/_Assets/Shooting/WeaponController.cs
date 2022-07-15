@@ -21,7 +21,6 @@ public class WeaponController : MonoBehaviour
     public ProjectileBase ProjectilePrefab;
     public GameObject MuzzleFlashPrefab;
 
-
     [Range(0f, 2f)] public float RecoilForce = 1.0f;
 
     public float AmmoReloadTime;
@@ -51,25 +50,12 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         m_ShootAudioSource = GetComponent<AudioSource>();
-        _inputActions = new InputActions();
         IsReloading = false;
         m_CurrentAmmo = ClipSize;
     }
 
-    private void OnEnable()
-    {
-        _inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _inputActions.Disable();
-    }
-
     private void Start()
     {
-        _inputActions.Player.Shoot.performed += _ => PressShootPerformed();
-        _inputActions.Player.Shoot.canceled += _ => PressShootCancelled();
     }
 
     public void Update()
@@ -156,13 +142,8 @@ public class WeaponController : MonoBehaviour
         IsWeaponActive = show;
     }
 
-    public void PressShootPerformed()
+    public void SetTriggerState(bool isTriggerSqueezed)
     {
-        triggerSqueezed = true;
-    }
-
-    public void PressShootCancelled()
-    {
-        triggerSqueezed = false;
+        triggerSqueezed = isTriggerSqueezed;
     }
 }

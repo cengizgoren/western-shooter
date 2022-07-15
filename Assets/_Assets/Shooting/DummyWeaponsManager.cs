@@ -47,6 +47,7 @@ public class DummyWeaponsManager : MonoBehaviour
     public UnityAction<WeaponController> OnSwitchedToWeapon;
     public UnityAction<WeaponController, int> OnAddedWeapon;
     public UnityAction<WeaponController, int> OnRemovedWeapon;
+    public UnityAction<bool> OnWeaponFire;
 
     private void Awake()
     {
@@ -74,6 +75,9 @@ public class DummyWeaponsManager : MonoBehaviour
         m_WeaponMainLocalPosition = DefaultWeaponPosition.localPosition;
         m_WeaponMainLocalRotation = DefaultWeaponPosition.localRotation;
 
+        _inputActions.Player.Shoot.performed += _ => PressShootPerformed();
+        _inputActions.Player.Shoot.canceled += _ => PressShootCancelled();
+
         ActiveWeaponIndex = -1;
         m_WeaponSwitchState = WeaponSwitchState.Down;
 
@@ -85,8 +89,17 @@ public class DummyWeaponsManager : MonoBehaviour
         }
 
         SwitchWeapon(true);
+    }
 
-        
+    public void PressShootPerformed()
+    {
+        if (m_WeaponSwitchState == WeaponSwitchState.Up)
+            OnWeaponFire?.Invoke(true);
+    }
+
+    public void PressShootCancelled()
+    {
+        OnWeaponFire?.Invoke(false);
     }
 
     private void MyWeaponSwitch(float weaponNumber)
@@ -141,6 +154,7 @@ public class DummyWeaponsManager : MonoBehaviour
                 if (oldWeapon != null)
                 {
                     oldWeapon.OnShootRecoil -= ApplyRecoil;
+                    OnWeaponFire -= oldWeapon.SetTriggerState;
                     oldWeapon.ShowWeapon(false);
                 }
 
@@ -274,6 +288,9 @@ public class DummyWeaponsManager : MonoBehaviour
     {
         if (force || (newWeaponIndex != ActiveWeaponIndex && newWeaponIndex >= 0))
         {
+            // Signal to stop shooting
+            OnWeaponFire?.Invoke(false);
+
             // Store data related to weapon switching animation
             m_WeaponSwitchNewWeaponIndex = newWeaponIndex;
             m_TimeStartedWeaponSwitch = Time.time;
@@ -328,6 +345,7 @@ public class DummyWeaponsManager : MonoBehaviour
         {
             newWeapon.ShowWeapon(true);
             newWeapon.OnShootRecoil += ApplyRecoil;
+            OnWeaponFire += newWeapon.SetTriggerState;
             activeWeapon = newWeapon;
         }
     }
