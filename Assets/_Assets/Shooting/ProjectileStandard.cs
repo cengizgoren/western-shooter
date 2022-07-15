@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileStandard : ProjectileBase
@@ -15,6 +17,7 @@ public class ProjectileStandard : ProjectileBase
     private float m_ShootTime;
     private Vector3 m_Velocity;
     private Vector3 m_LastRootPosition;
+    List<Collider> m_IgnoredColliders;
 
     const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
 
@@ -32,6 +35,10 @@ public class ProjectileStandard : ProjectileBase
         m_ShootTime = Time.time;
         m_LastRootPosition = Root.position;
         m_Velocity = transform.forward * Speed;
+
+        m_IgnoredColliders = new List<Collider>();
+        Collider[] ownerColliders = m_ProjectileBase.Owner.GetComponentsInChildren<Collider>();
+        m_IgnoredColliders.AddRange(ownerColliders);
     }
 
     void Update()
@@ -47,7 +54,7 @@ public class ProjectileStandard : ProjectileBase
 
             foreach (var hit in hits)
             {
-                if (hit.distance < closestHit.distance)
+                if (IsHitValid(hit) && hit.distance < closestHit.distance)
                 {
                     foundHit = true;
                     closestHit = hit;
@@ -86,5 +93,15 @@ public class ProjectileStandard : ProjectileBase
 
             Destroy(gameObject);
         }
+    }
+
+    private bool IsHitValid(RaycastHit hit)
+    {
+        if (m_IgnoredColliders != null && m_IgnoredColliders.Contains(hit.collider))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -5,12 +5,15 @@ using UnityEngine.Events;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
-    public UnityAction OnShoot;
+    public GameObject Owner { get; private set; }
     public Vector3 InitialPosition { get; private set; }
     public Vector3 InitialDirection { get; private set; }
 
+    public UnityAction OnShoot;
+
     public void Shoot(WeaponController controller)
     {
+        Owner = controller.Owner;
         InitialPosition = transform.position;
         InitialDirection = transform.forward;
         OnShoot?.Invoke();
