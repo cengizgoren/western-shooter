@@ -40,8 +40,10 @@ public class WeaponController : MonoBehaviour
 
     public bool IsReloading { get; private set; }
     public GameObject Owner { get; set; }
+    public DummyWeaponsManager WeaponManager { get; set; }
     public GameObject SourcePrefab { get; set; }
     public bool IsWeaponActive { get; private set; }
+
 
     private float m_ReloadStartedTime;
 
@@ -50,12 +52,25 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         m_ShootAudioSource = GetComponent<AudioSource>();
+        _inputActions = new InputActions();
         IsReloading = false;
         m_CurrentAmmo = ClipSize;
     }
 
     private void Start()
     {
+        _inputActions.Player.Shoot.performed += _ => PressShootPerformed();
+        _inputActions.Player.Shoot.canceled += _ => PressShootCancelled();
+    }
+
+    private void OnEnable()
+    {
+        _inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _inputActions.Disable();
     }
 
     public void Update()
@@ -63,7 +78,7 @@ public class WeaponController : MonoBehaviour
         switch (ShootType)
         {
             case WeaponShootType.Manual:
-                if (triggerSqueezed)
+                if (triggerSqueezed && WeaponManager.m_WeaponSwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
                 {
                     TryShoot();
                     triggerSqueezed = false;
@@ -71,7 +86,7 @@ public class WeaponController : MonoBehaviour
                 break;
 
             case WeaponShootType.Automatic:
-                if (triggerSqueezed)
+                if (triggerSqueezed && WeaponManager.m_WeaponSwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
                 {
                     TryShoot();
                 }
@@ -142,8 +157,13 @@ public class WeaponController : MonoBehaviour
         IsWeaponActive = show;
     }
 
-    public void SetTriggerState(bool isTriggerSqueezed)
+    public void PressShootPerformed()
     {
-        triggerSqueezed = isTriggerSqueezed;
+        triggerSqueezed = true;
+    }
+
+    public void PressShootCancelled()
+    {
+        triggerSqueezed = false;
     }
 }

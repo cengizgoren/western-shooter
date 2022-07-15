@@ -25,7 +25,7 @@ public class DummyWeaponsManager : MonoBehaviour
     public float RecoilSharpness = 50f;
     public float RecoilRestitutionSharpness = 10f;
 
-    public WeaponSwitchState m_WeaponSwitchState;
+    
     public AnimationCurve weaponSwitchCurve;
 
     private DummyInput _input;
@@ -43,6 +43,7 @@ public class DummyWeaponsManager : MonoBehaviour
     private WeaponController activeWeapon;
 
     public int ActiveWeaponIndex { get; private set; }
+    public WeaponSwitchState m_WeaponSwitchState { get; private set; }
 
     public UnityAction<WeaponController> OnSwitchedToWeapon;
     public UnityAction<WeaponController, int> OnAddedWeapon;
@@ -154,7 +155,6 @@ public class DummyWeaponsManager : MonoBehaviour
                 if (oldWeapon != null)
                 {
                     oldWeapon.OnShootRecoil -= ApplyRecoil;
-                    OnWeaponFire -= oldWeapon.SetTriggerState;
                     oldWeapon.ShowWeapon(false);
                 }
 
@@ -218,6 +218,7 @@ public class DummyWeaponsManager : MonoBehaviour
 
                 // Set owner to this gameObject so the weapon can alter projectile/damage logic accordingly
                 weaponInstance.Owner = gameObject;
+                weaponInstance.WeaponManager = this;
                 weaponInstance.SourcePrefab = weaponPrefab.gameObject;
                 weaponInstance.ShowWeapon(false);
 
@@ -345,7 +346,6 @@ public class DummyWeaponsManager : MonoBehaviour
         {
             newWeapon.ShowWeapon(true);
             newWeapon.OnShootRecoil += ApplyRecoil;
-            OnWeaponFire += newWeapon.SetTriggerState;
             activeWeapon = newWeapon;
         }
     }
