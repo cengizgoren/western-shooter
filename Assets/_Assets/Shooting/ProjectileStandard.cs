@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class ProjectileStandard : ProjectileBase
 {
-    public float MaxLifeTime = 5f;
-    public Transform Root;
-    public float Speed = 20f;
-    public Transform Tip;
-    public float Radius = 0.01f;
-    public LayerMask HittableLayers = -1;
-    public float ImpactVfxSpawnOffset = 0.1f;
-    public float ImpactVfxLifetime = 5f;
-    public GameObject ImpactVfx;
+    [SerializeField] private Transform Root;
+    [SerializeField] private Transform Tip;
 
-    private float m_ShootTime;
-    private Vector3 m_Velocity;
-    private Vector3 m_LastRootPosition;
-    List<Collider> m_IgnoredColliders;
+    [Space(10)]
+    [SerializeField] private float MaxLifeTime = 5f;
+    [SerializeField] private float Speed = 20f;
+    [SerializeField] private float Radius = 0.01f;
+    [SerializeField] private LayerMask HittableLayers = -1;
 
-    const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
+    [Space(10)]
+    [SerializeField] private GameObject ImpactVfx;
+    [SerializeField] private float ImpactVfxSpawnOffset = 0.1f;
+    [SerializeField] private float ImpactVfxLifetime = 5f;
+
+    private float shootTime;
+    private Vector3 velocity;
+    private Vector3 lastRootPosition;
+    private List<Collider> ignoredColliders;
+
+    private const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
 
     ProjectileBase m_ProjectileBase;
 
@@ -30,27 +34,27 @@ public class ProjectileStandard : ProjectileBase
         Destroy(gameObject, MaxLifeTime);
     }
 
-    new void OnShoot()
+    new private void OnShoot()
     {
-        m_ShootTime = Time.time;
-        m_LastRootPosition = Root.position;
-        m_Velocity = transform.forward * Speed;
+        shootTime = Time.time;
+        lastRootPosition = Root.position;
+        velocity = transform.forward * Speed;
 
-        m_IgnoredColliders = new List<Collider>();
+        ignoredColliders = new List<Collider>();
         Collider[] ownerColliders = m_ProjectileBase.Owner.GetComponentsInChildren<Collider>();
-        m_IgnoredColliders.AddRange(ownerColliders);
+        ignoredColliders.AddRange(ownerColliders);
     }
 
-    void Update()
+    private void Update()
     {
-        transform.position += m_Velocity * Time.deltaTime;
+        transform.position += velocity * Time.deltaTime;
         {
             RaycastHit closestHit = new RaycastHit();
             closestHit.distance = Mathf.Infinity;
             bool foundHit = false;
 
-            Vector3 displacementSinceLastFrame = Tip.position - m_LastRootPosition;
-            RaycastHit[] hits = Physics.SphereCastAll(m_LastRootPosition, Radius, displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers,k_TriggerInteraction);
+            Vector3 displacementSinceLastFrame = Tip.position - lastRootPosition;
+            RaycastHit[] hits = Physics.SphereCastAll(lastRootPosition, Radius, displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers,k_TriggerInteraction);
 
             foreach (var hit in hits)
             {
@@ -73,31 +77,31 @@ public class ProjectileStandard : ProjectileBase
                 OnHit(closestHit.point, closestHit.normal, closestHit.collider);
             }
         }
+    }
 
-        void OnHit(Vector3 point, Vector3 normal, Collider collider)
+    private void OnHit(Vector3 point, Vector3 normal, Collider collider)
+    {
+        TargetPractice targetPractice = collider.GetComponent<TargetPractice>();
+        if (targetPractice)
         {
-            TargetPractice targetPractice = collider.GetComponent<TargetPractice>();
-            if (targetPractice)
-            {
-                targetPractice.Damage(10);
-            }
-
-            if (ImpactVfx)
-            {
-                GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset), Quaternion.LookRotation(normal));
-                if (ImpactVfxLifetime > 0)
-                {
-                    Destroy(impactVfxInstance, ImpactVfxLifetime);
-                }
-            }
-
-            Destroy(gameObject);
+            targetPractice.Damage(10);
         }
+
+        if (ImpactVfx)
+        {
+            GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset), Quaternion.LookRotation(normal));
+            if (ImpactVfxLifetime > 0)
+            {
+                Destroy(impactVfxInstance, ImpactVfxLifetime);
+            }
+        }
+
+        Destroy(gameObject);
     }
 
     private bool IsHitValid(RaycastHit hit)
     {
-        if (m_IgnoredColliders != null && m_IgnoredColliders.Contains(hit.collider))
+        if (ignoredColliders != null && ignoredColliders.Contains(hit.collider))
         {
             return false;
         }

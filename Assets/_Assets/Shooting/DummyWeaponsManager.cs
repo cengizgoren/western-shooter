@@ -41,7 +41,6 @@ public class DummyWeaponsManager : MonoBehaviour
     // Components
     private InputActions inputActions;
 
-
     // Events
     private UnityAction<WeaponController> OnSwitchedToWeapon;
     private UnityAction<WeaponController, int> OnAddedWeapon;
@@ -332,9 +331,9 @@ public class DummyWeaponsManager : MonoBehaviour
         }
     }
 
-    private void ApplyRecoil(object sender, EventArgs e)
+    private void ApplyRecoil(float recoilForce)
     {
-        accumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
+        accumulatedRecoil += Vector3.back * recoilForce;
         accumulatedRecoil = Vector3.ClampMagnitude(accumulatedRecoil, MaxRecoilDistance);
     }
 }

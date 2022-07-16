@@ -2255,9 +2255,9 @@ GameObject:
   - component: {fileID: 1702734764}
   - component: {fileID: 1702734770}
   - component: {fileID: 1702734769}
-  - component: {fileID: 1702734768}
-  - component: {fileID: 1702734767}
   - component: {fileID: 1702734766}
+  - component: {fileID: 1702734767}
+  - component: {fileID: 1702734768}
   - component: {fileID: 1702734765}
   m_Layer: 0
   m_Name: Player
@@ -2325,9 +2325,6 @@ MonoBehaviour:
   DefaultWeaponPosition: {fileID: 628363937}
   DownWeaponPosition: {fileID: 1840748102}
   WeaponSwitchDelay: 0.5
-  MaxRecoilDistance: 0.5
-  RecoilSharpness: 50
-  RecoilRestitutionSharpness: 10
   weaponSwitchCurve:
     serializedVersion: 2
     m_Curve:
@@ -2352,6 +2349,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MaxRecoilDistance: 0.5
+  RecoilSharpness: 50
+  RecoilRestitutionSharpness: 10
 --- !u!114 &1702734767
 MonoBehaviour:
   m_ObjectHideFlags: 0
