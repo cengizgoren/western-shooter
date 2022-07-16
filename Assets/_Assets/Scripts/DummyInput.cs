@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,25 +9,26 @@ public class DummyInput : MonoBehaviour
     public Vector2 look;
     public bool jump;
     public bool sprint;
+    public bool shoot;
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        MoveInput(value.Get<Vector2>());
+        MoveInput(context.ReadValue<Vector2>());
     }
 
-    public void OnLook(InputValue value)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        LookInput(value.Get<Vector2>());
+        LookInput(context.ReadValue<Vector2>());
     }
 
-    public void OnJump(InputValue value)
+    public void OnJump(InputAction.CallbackContext context)
     {
-        JumpInput(value.isPressed);
+        JumpInput(context.action.IsPressed());
     }
 
-    public void OnSprint(InputValue value)
+    public void OnSprint(InputAction.CallbackContext context)
     {
-        SprintInput(value.isPressed);
+        SprintInput(context.action.IsPressed());
     }
 
     public void MoveInput(Vector2 newMoveDirection)

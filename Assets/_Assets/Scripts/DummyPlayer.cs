@@ -17,6 +17,8 @@ public class DummyPlayer : MonoBehaviour
     [Tooltip("Offset player movement direction by this angle to make it relative to the camera position")]
     public float CameraYRotationDeg = 45.0f;
 
+    public float TurnSpeed = 10.0f;
+
     [Space(10)]
     [Tooltip("The height the player can jump")]
     public float JumpHeight = 1.2f;
@@ -54,7 +56,6 @@ public class DummyPlayer : MonoBehaviour
 
     // player
     private float _speed;
-    private float _turnSpeed = 10.0f;
     private float _terminalVelocity = 53.0f;
     private float _verticalVelocity;
 
@@ -65,6 +66,7 @@ public class DummyPlayer : MonoBehaviour
     private Animator _animator;
     private CharacterController _controller;
     private DummyInput _input;
+
 
 
     void Start()
@@ -124,7 +126,8 @@ public class DummyPlayer : MonoBehaviour
     void PlayerRotation()
     {
         Ray ray = Camera.main.ScreenPointToRay(_input.look);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        //TODO: Align aiming plane in a better way
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, 1.4f, 0));
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
@@ -138,7 +141,7 @@ public class DummyPlayer : MonoBehaviour
     {
         Vector3 direction = (lookPoint - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * _turnSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * TurnSpeed);
     }
 
     private void JumpAndGravity()
