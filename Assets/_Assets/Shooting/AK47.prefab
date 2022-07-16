@@ -125,8 +125,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2697347381791909232}
-  - component: {fileID: 6612288783258669549}
   - component: {fileID: 4389695552653952208}
+  - component: {fileID: 6612288783258669549}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Untagged
@@ -151,6 +151,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4389695552653952208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809816431979793371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponName: AK47
+  WeaponRoot: {fileID: 6809816431979793371}
+  WeaponMuzzle: {fileID: 4708424568244275276}
+  ShootType: 1
+  DelayBetweenShots: 0.1
+  BulletSpreadAngle: 3
+  ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
+  MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
+  RecoilForce: 0.19
+  AmmoReloadTime: 3
+  ClipSize: 30
+  maxDeviation: 30
+  ShootSfx: {fileID: 8300000, guid: f9b7d2517ae2540499b99a5bd6dd1e7b, type: 3}
+  ReloadSfx: {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
 --- !u!82 &6612288783258669549
 AudioSource:
   m_ObjectHideFlags: 0
@@ -247,29 +273,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4389695552653952208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6809816431979793371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponName: AK47
-  WeaponRoot: {fileID: 6809816431979793371}
-  WeaponMuzzle: {fileID: 4708424568244275276}
-  ShootType: 1
-  DelayBetweenShots: 0.1
-  BulletSpreadAngle: 3
-  ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
-  MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
-  RecoilForce: 0.19
-  AmmoReloadTime: 3
-  ClipSize: 30
-  maxDeviation: 30
-  ShootSfx: {fileID: 8300000, guid: f9b7d2517ae2540499b99a5bd6dd1e7b, type: 3}
-  ReloadSfx: {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
