@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     
     private int currentHealthPoints;
 
-    public static UnityAction<int> OnHealthChanged;
+    public UnityAction<int> OnHealthChanged;
 
     private void Start()
     {

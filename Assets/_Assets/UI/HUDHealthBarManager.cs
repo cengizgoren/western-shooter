@@ -2,15 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDManager : MonoBehaviour
+public class HUDHealthBarManager : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
+
+    private Health health;
 
     private int healthPoints;
 
     private void Awake()
     {
-        Health.OnHealthChanged += ChangeValue;
+        health = GetComponent<Health>();
+        if (health)
+        {
+            health.OnHealthChanged += ChangeValue;
+        }
     }
 
     private void Update()
