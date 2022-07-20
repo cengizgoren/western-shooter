@@ -31,6 +31,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private GameObject MuzzleFlashPrefab;
     [SerializeField] private AudioClip ShootSfx;
     [SerializeField] private AudioClip ReloadSfx;
+    public Sprite Icon;
 
     private float lastTimeShot = Mathf.NegativeInfinity;
     private bool triggerSqueezed = false;

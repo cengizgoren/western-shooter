@@ -175,6 +175,7 @@ MonoBehaviour:
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
   ShootSfx: {fileID: 8300000, guid: fe9ace66745039c4c8e80f76e355bf08, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 48adeca3ce3aaeb40a2705e290267ecc, type: 3}
+  Icon: {fileID: 21300014, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
 --- !u!82 &5707576591114825003
 AudioSource:
   m_ObjectHideFlags: 0

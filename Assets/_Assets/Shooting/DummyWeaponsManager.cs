@@ -42,7 +42,7 @@ public class DummyWeaponsManager : MonoBehaviour
     private InputActions inputActions;
 
     // Events
-    private UnityAction<WeaponController> OnSwitchedToWeapon;
+    public UnityAction<WeaponController> OnSwitchedToWeapon;
     private UnityAction<WeaponController, int> OnAddedWeapon;
 
     // Properties
