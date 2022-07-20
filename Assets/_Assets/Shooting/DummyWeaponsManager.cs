@@ -43,7 +43,8 @@ public class DummyWeaponsManager : MonoBehaviour
 
     // Events
     public UnityAction<WeaponController> OnSwitchedToWeapon;
-    private UnityAction<WeaponController, int> OnAddedWeapon;
+    public UnityAction<WeaponController, int> OnAddedWeapon;
+    public UnityAction<WeaponController, int> OnRemovedWeapon;
 
     // Properties
     public int ActiveWeaponIndex { get; private set; }
