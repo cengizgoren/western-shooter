@@ -170,7 +170,7 @@ MonoBehaviour:
   ClipSize: 6
   AmmoReloadTime: 3
   RecoilForce: 1
-  BulletSpreadAngle: 1
+  BulletSpreadAngle: 0.5
   ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
   ShootSfx: {fileID: 8300000, guid: fe9ace66745039c4c8e80f76e355bf08, type: 3}
