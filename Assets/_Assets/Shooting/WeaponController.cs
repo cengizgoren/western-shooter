@@ -31,11 +31,11 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private GameObject MuzzleFlashPrefab;
     [SerializeField] private AudioClip ShootSfx;
     [SerializeField] private AudioClip ReloadSfx;
+    public Sprite Icon;
 
     private float lastTimeShot = Mathf.NegativeInfinity;
     private bool triggerSqueezed = false;
     private float reloadStartedTime;
-    private int currentAmmo;
 
     // Components
     private AudioSource shootAudioSource;
@@ -51,13 +51,14 @@ public class WeaponController : MonoBehaviour
     public GameObject SourcePrefab { get; set; }
     public bool IsReloading { get; private set; }
     public bool IsWeaponActive { get; private set; }
+    public int CurrentAmmo { get; private set; }
 
     private void Awake()
     {
         shootAudioSource = GetComponent<AudioSource>();
         inputActions = new InputActions();
         IsReloading = false;
-        currentAmmo = ClipSize;
+        CurrentAmmo = ClipSize;
     }
 
     private void OnEnable()
@@ -96,7 +97,7 @@ public class WeaponController : MonoBehaviour
                 break;
         }
 
-        if (!IsReloading && currentAmmo <= 0)
+        if (!IsReloading && CurrentAmmo <= 0)
         {
             IsReloading = true;
             reloadStartedTime = Time.time;
@@ -109,7 +110,7 @@ public class WeaponController : MonoBehaviour
 
         if (IsReloading && reloadStartedTime + AmmoReloadTime < Time.time)
         {
-            currentAmmo = ClipSize;
+            CurrentAmmo = ClipSize;
             IsReloading = false;
         }
     }
@@ -119,7 +120,7 @@ public class WeaponController : MonoBehaviour
         if (!IsReloading && lastTimeShot + DelayBetweenShots < Time.time)
         {
             Shoot();
-            currentAmmo -= 1;
+            CurrentAmmo -= 1;
             OnShootRecoil?.Invoke(RecoilForce);
             return true;
         }

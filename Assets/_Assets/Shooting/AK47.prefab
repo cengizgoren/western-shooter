@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516996141578515137}
-  m_Mesh: {fileID: -5414685603388326435, guid: dfac359818506114e8383c52e5d49c1d, type: 3}
+  m_Mesh: {fileID: -5414685603388326435, guid: cbff874949144b842b4339ff0eb0344d, type: 3}
 --- !u!23 &1012623288977019668
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,9 +61,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -633523365894102298, guid: dfac359818506114e8383c52e5d49c1d, type: 3}
-  - {fileID: -4451637568355366311, guid: dfac359818506114e8383c52e5d49c1d, type: 3}
-  - {fileID: -4602990371277189621, guid: dfac359818506114e8383c52e5d49c1d, type: 3}
+  - {fileID: -633523365894102298, guid: cbff874949144b842b4339ff0eb0344d, type: 3}
+  - {fileID: -4451637568355366311, guid: cbff874949144b842b4339ff0eb0344d, type: 3}
+  - {fileID: -4602990371277189621, guid: cbff874949144b842b4339ff0eb0344d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,15 +168,15 @@ MonoBehaviour:
   WeaponMuzzle: {fileID: 4708424568244275276}
   ShootType: 1
   DelayBetweenShots: 0.1
+  ClipSize: 30
+  AmmoReloadTime: 3
+  RecoilForce: 0.19
   BulletSpreadAngle: 3
   ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
-  RecoilForce: 0.19
-  AmmoReloadTime: 3
-  ClipSize: 30
-  maxDeviation: 30
   ShootSfx: {fileID: 8300000, guid: f9b7d2517ae2540499b99a5bd6dd1e7b, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
+  Icon: {fileID: 21300044, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
 --- !u!82 &6612288783258669549
 AudioSource:
   m_ObjectHideFlags: 0

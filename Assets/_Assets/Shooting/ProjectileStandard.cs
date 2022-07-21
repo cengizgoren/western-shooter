@@ -87,6 +87,12 @@ public class ProjectileStandard : ProjectileBase
             targetPractice.Damage(10);
         }
 
+        Health health = collider.GetComponent<Health>();
+        if (health)
+        {
+            health.Damage(10);
+        }
+
         if (ImpactVfx)
         {
             GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset), Quaternion.LookRotation(normal));
