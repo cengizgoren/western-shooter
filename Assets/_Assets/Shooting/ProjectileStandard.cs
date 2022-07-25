@@ -93,6 +93,12 @@ public class ProjectileStandard : ProjectileBase
             health.Damage(10);
         }
 
+        Destructable destructable = collider.GetComponent<Destructable>();
+        if (destructable)
+        {
+            destructable.Damage(10);
+        }
+
         if (ImpactVfx)
         {
             GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset), Quaternion.LookRotation(normal));
