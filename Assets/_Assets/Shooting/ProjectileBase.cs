@@ -18,4 +18,12 @@ public abstract class ProjectileBase : MonoBehaviour
         InitialDirection = transform.forward;
         OnShoot?.Invoke();
     }
+
+    public void Shoot(EnemyWeaponController controller)
+    {
+        Owner = controller.Owner;
+        InitialPosition = transform.position;
+        InitialDirection = transform.forward;
+        OnShoot?.Invoke();
+    }
 }
