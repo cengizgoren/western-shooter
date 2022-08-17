@@ -7,39 +7,62 @@ public class Search : IState
 {
     private const float WALKING_SPEED = 2f;
 
-    private Transform _transform;
+    private EnemyController _enemyController;
     private Transform _playerTransform;
     private NavMeshAgent _navMeshAgent;
     private EnemyDetector _enemyDetector;
 
     private float _prevSpeed;
+    private bool _reachedLastKnownPos = false;
+    private float _time = 0;
 
-    public Search(EnemyDetector enemyDetector, Transform transform, Transform playerTransform, NavMeshAgent navMeshAgent)
+    public Search(EnemyDetector enemyDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
     {
         _enemyDetector = enemyDetector;
-        _transform = transform;
+        _enemyController = enemyController;
         _playerTransform = playerTransform;
         _navMeshAgent = navMeshAgent;
     }
 
     public void Tick()
     {
-        if (_navMeshAgent.remainingDistance <= 0.1f)
+        if (!_reachedLastKnownPos)
         {
-            _navMeshAgent.SetDestination(_enemyDetector.LastKnownPosition + _enemyDetector.LastKnownVeloctity);
+            if (_navMeshAgent.remainingDistance <= 0.1f)
+            {
+                //_enemyController.LookAt(_enemyDetector.LastKnownVeloctity);
+                _reachedLastKnownPos = true;
+            }
+        } 
+        else
+        {
+            if (_time > 3.0f)
+            {
+                //_enemyController.Rotate();
+                _time = 0;
+            }
+            _time += Time.deltaTime;
         }
+
+        // look for a patrol route?
+        // investigate doors/breaches?
+        // go to another sector? return to original pos?
     }
 
     public void OnEnter()
     {
         Debug.Log("Search");
-        _prevSpeed = _navMeshAgent.speed;
-        _navMeshAgent.speed = WALKING_SPEED;
+        _reachedLastKnownPos = false;
+        //_prevSpeed = _navMeshAgent.speed;
+        //_navMeshAgent.speed = WALKING_SPEED;
         _navMeshAgent.SetDestination(_enemyDetector.LastKnownPosition);
     }
 
     public void OnExit()
     {
-        _navMeshAgent.speed = _prevSpeed;
+        Debug.Log("Exit Search");
+        _navMeshAgent.ResetPath();
+        //_navMeshAgent.speed = _prevSpeed;
+        _enemyController.StopAllCoroutines();
     }
 }

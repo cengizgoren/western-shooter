@@ -15,7 +15,9 @@ public class EnemyWeaponController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private WeaponShootType ShootType;
+    [SerializeField] private int BulletsPerBurst = 3;
     [SerializeField] private float DelayBetweenShots = 0.5f;
+    [SerializeField] private float DelayBetweenBursts = 3f;
 
     [SerializeField] private float BulletSpreadAngle = 1f;
 
@@ -24,8 +26,10 @@ public class EnemyWeaponController : MonoBehaviour
     [SerializeField] private GameObject MuzzleFlashPrefab;
     [SerializeField] private AudioClip ShootSfx;
 
+    private int timesShot = 0;
     private float lastTimeShot = Mathf.NegativeInfinity;
-    private bool triggerSqueezed = false;
+    private float timeBurstEnded = Mathf.NegativeInfinity;
+    public bool triggerSqueezed = false;
 
     // Components
     private AudioSource shootAudioSource;
@@ -47,12 +51,22 @@ public class EnemyWeaponController : MonoBehaviour
         }
     }
 
-
     void TryShoot()
     {
-        if (lastTimeShot + DelayBetweenShots < Time.time)
+        if (timesShot <= BulletsPerBurst)
         {
-            Shoot();
+            if (lastTimeShot + DelayBetweenShots < Time.time)
+            {
+                Shoot();
+                timesShot++;
+            }
+        }
+        else
+        {
+            if (lastTimeShot + DelayBetweenBursts < Time.time)
+            {
+                timesShot = 0;
+            }
         }
 
     }
@@ -62,6 +76,11 @@ public class EnemyWeaponController : MonoBehaviour
         lastTimeShot = Time.time;
         Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle);
         ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
+
+        // Hack
+        this.Owner = gameObject;
+
+
         newProjectile.Shoot(this);
 
         if (MuzzleFlashPrefab != null)

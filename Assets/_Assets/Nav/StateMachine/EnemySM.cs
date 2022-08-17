@@ -8,19 +8,20 @@ public class EnemySM : MonoBehaviour
 
     [SerializeField] private CharacterController _playerController;
 
-    
+
     public void Awake()
     {
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var enemyDetector = GetComponent<EnemyDetector>();
+        var enemyController = GetComponent<EnemyController>();
 
 
         _stateMachine = new StateMachine();
 
         var idle = new Idle();
         var chase = new Chase(enemyDetector, _playerController.transform, navMeshAgent);
-        var attack = new Attack(enemyDetector, transform, _playerController.transform, navMeshAgent);
-        var search = new Search(enemyDetector, transform, _playerController.transform, navMeshAgent);
+        var attack = new Attack(enemyDetector, transform, enemyController, _playerController.transform, navMeshAgent);
+        var search = new Search(enemyDetector, enemyController, _playerController.transform, navMeshAgent);
 
         At(idle, chase, TargetDetected());
         //At(chase, idle, TargetLost());

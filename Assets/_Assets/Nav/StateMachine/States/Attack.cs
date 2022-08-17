@@ -9,16 +9,18 @@ public class Attack : IState
     private Transform _transform;
     private NavMeshAgent _navMeshAgent;
     private EnemyDetector _enemyDetector;
+    private EnemyController _enemyController;
     private Transform transform;
     private Transform playerTransform;
     private NavMeshAgent navMeshAgent;
 
-    public Attack(EnemyDetector enemyDetector, Transform transform, Transform playerTransform, NavMeshAgent navMeshAgent)
+    public Attack(EnemyDetector enemyDetector, Transform transform, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
     {
         _transform = transform;
         _playerTransform = playerTransform;
         _navMeshAgent = navMeshAgent;
         _enemyDetector = enemyDetector;
+        _enemyController = enemyController;
     }
 
     public void Tick()
@@ -29,11 +31,13 @@ public class Attack : IState
     public void OnEnter()
     {
         Debug.Log("Attack");
+        _enemyController.SetAttack(true);
     }
 
     public void OnExit()
     {
         _enemyDetector.SaveLastKnownPosAndDir();
+        _enemyController.SetAttack(false);
     }
 
     private void LookAt(Vector3 lookPoint)
