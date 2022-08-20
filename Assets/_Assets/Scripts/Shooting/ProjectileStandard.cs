@@ -117,7 +117,7 @@ public class ProjectileStandard : ProjectileBase
         Collider[] hitColliders = Physics.OverlapSphere(point, SoundRadius, AlertedBySound);
         if (ShowSoundRadius)
         {
-            DebugTools.DrawArc.DrawTimedCircle(point, SoundRadius, Color.red);
+            DebugTools.Draw.DrawTimedCircle(point, SoundRadius, Color.red);
         }
 
         foreach (Collider hitCollider in hitColliders)

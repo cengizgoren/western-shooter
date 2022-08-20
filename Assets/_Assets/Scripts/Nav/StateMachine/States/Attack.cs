@@ -30,7 +30,7 @@ public class Attack : IState
 
         Vector3 toPlayerDir = _playerTransform.position - _transform.position;
         Vector3 toSide = Vector3.Cross(toPlayerDir, Vector3.up).normalized;
-        DebugTools.DrawArrow.ForDebug(_transform.position, toSide * 3);
+        DebugTools.Draw.DebugArrow(_transform.position, toSide * 3);
 
         bool success;
         if (time > 2f)

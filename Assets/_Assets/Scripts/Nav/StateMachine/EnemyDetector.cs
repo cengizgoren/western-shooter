@@ -84,22 +84,22 @@ public class EnemyDetector : MonoBehaviour
         if (isThereLastKnownPos)
         {
             Gizmos.color = Color.cyan;
-            DebugTools.DrawArrow.ForGizmo(LastKnownPosition, LastKnownDirection);
+            DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownDirection);
 
             Gizmos.color = Color.magenta;
-            DebugTools.DrawArrow.ForGizmo(LastKnownPosition, LastKnownVeloctity);
+            DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownVeloctity);
         }
 
         if (_showFieldOfView)
         {
             Gizmos.color = Color.red;
-            DebugTools.DrawArc.DrawWireArc(transform.position, transform.forward.normalized, _sightDetectionAngle, _sightDetectionRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, _sightDetectionAngle, _sightDetectionRadius);
         }
 
         if (_showHearingRadius)
         {
             Gizmos.color = Color.blue;
-            DebugTools.DrawArc.DrawWireArc(transform.position, transform.forward.normalized, 360f, _hearingDetectionRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, _hearingDetectionRadius);
         }
 
         if (_showLineToPlayer)
