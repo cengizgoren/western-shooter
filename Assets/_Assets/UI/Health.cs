@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     private int currentHealthPoints;
 
     public UnityAction<int> OnHealthChanged;
+    public UnityAction OnHealthLost;
     public UnityAction OnHealthDepleted;
 
     private void Start()
@@ -22,6 +23,7 @@ public class Health : MonoBehaviour
     {
         currentHealthPoints -= amount;
         OnHealthChanged?.Invoke(currentHealthPoints);
+        OnHealthLost?.Invoke();
         if (currentHealthPoints <= 0)
             OnHealthDepleted?.Invoke();
     }

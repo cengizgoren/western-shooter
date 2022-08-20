@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4984172705992090742}
-  - component: {fileID: 4984172705992090743}
   - component: {fileID: 2676942871222497078}
+  - component: {fileID: 4984172705992090743}
   m_Layer: 0
   m_Name: RevolverTrail
   m_TagString: Untagged
@@ -34,6 +34,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2676942871222497078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984172705992090740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149dd0d03a075904199f947f242db886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Root: {fileID: 4984172705992090742}
+  Tip: {fileID: 1277733899088868668}
+  MaxLifeTime: 3
+  Speed: 75
+  Radius: 0.01
+  HittableLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  ImpactVfx: {fileID: 3536255215777686827, guid: 97bd7b2a293bc514583b99dd24153115, type: 3}
+  ImpactVfxSpawnOffset: 0.1
+  ImpactVfxLifetime: 5
+  ShowSoundRadius: 0
+  AlertedBySound:
+    serializedVersion: 2
+    m_Bits: 256
+  SoundRadius: 15
 --- !u!96 &4984172705992090743
 TrailRenderer:
   serializedVersion: 2
@@ -76,37 +104,46 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.03
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1983591
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.17532623
-        inSlope: 1.0441743
-        outSlope: 1.0441743
-        tangentMode: 0
+        value: 0
+        inSlope: 0.3914409
+        outSlope: 0.3914409
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4484442
+        value: 0.17553939
+        inSlope: 0.000033038163
+        outSlope: 0.000033038163
+        tangentMode: 1
+        weightedMode: 0
+        inWeight: 0.21809018
+        outWeight: 0.2197803
+      - serializedVersion: 3
+        time: 1
+        value: 0.0053253174
+        inSlope: -0.30860716
+        outSlope: -0.30860716
+        tangentMode: 1
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.12992501
-      - serializedVersion: 3
-        time: 0.41661394
-        value: 0
-        inSlope: -4.0782695
-        outSlope: -4.0782695
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.059774064
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.8228265, b: 0, a: 1}
+      key0: {r: 1, g: 0.8235295, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -139,32 +176,9 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &2676942871222497078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4984172705992090740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 149dd0d03a075904199f947f242db886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxLifeTime: 3
-  Root: {fileID: 4984172705992090742}
-  Speed: 200
-  Tip: {fileID: 1277733899088868668}
-  Radius: 0.01
-  HittableLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  ImpactVfxSpawnOffset: 0.1
-  ImpactVfxLifetime: 5
-  ImpactVfx: {fileID: 1807932160032325880, guid: 97bd7b2a293bc514583b99dd24153115, type: 3}
 --- !u!1 &5439384873159346879
 GameObject:
   m_ObjectHideFlags: 0

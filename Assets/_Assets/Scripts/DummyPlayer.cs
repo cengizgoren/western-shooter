@@ -133,7 +133,10 @@ public class DummyPlayer : MonoBehaviour
             Vector3 point = ray.GetPoint(rayDistance);
             Vector3 halfPoint = transform.position + (point - transform.position) / 5;
             CinemachineCameraTarget.transform.position = halfPoint;
-            LookAt(point);
+            //LookAt(point);
+            Vector3 dirToMouse = point - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(dirToMouse.x, 0f, dirToMouse.z), Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 720f);
         }
     }
 

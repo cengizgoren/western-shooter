@@ -7,7 +7,14 @@ public class Destructable : MonoBehaviour
 {
     [SerializeField] private float MaxHealthPoints = 100f;
     // [SerializeField] private AnimationCurve colorPhaseCurve;
-    
+
+    [Space(10)]
+    [SerializeField] private GameObject DeathVfx;
+    [SerializeField] private float DeathVfxSpawnOffset = 0f;
+    [SerializeField] private float DeathVfxLifetime = 5f;
+    // Is this setting meaningful? If so which rotation to choose?
+    [SerializeField] private Quaternion DeathVfxRotation;
+
     private float currentHealthPoints;
 
     private void Start()
@@ -20,6 +27,14 @@ public class Destructable : MonoBehaviour
         currentHealthPoints -= amount;
         if (currentHealthPoints <= 0) 
         {
+            if (DeathVfx)
+            {
+                GameObject impactVfxInstance = Instantiate(DeathVfx, transform.position + (transform.forward * DeathVfxSpawnOffset), DeathVfxRotation);
+                if (DeathVfxLifetime > 0)
+                {
+                    Destroy(impactVfxInstance, DeathVfxLifetime);
+                }
+            }
             Destroy(gameObject);
         }
 

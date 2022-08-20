@@ -13,6 +13,13 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private EnemyWeaponController weapon;
 
+    [Space(10)]
+    [SerializeField] private GameObject DeathVfx;
+    [SerializeField] private float DeathVfxSpawnOffset = 0f;
+    [SerializeField] private float DeathVfxLifetime = 5f;
+    // Is this setting meaningful? If so which rotation to choose?
+    [SerializeField] private Quaternion DeathVfxRotation;
+
     public void Awake()
     {
         GetComponent<Health>().OnHealthDepleted += Die;
@@ -53,6 +60,14 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        if (DeathVfx)
+        {
+            GameObject impactVfxInstance = Instantiate(DeathVfx, transform.position + (transform.up * DeathVfxSpawnOffset), DeathVfxRotation);
+            if (DeathVfxLifetime > 0)
+            {
+                Destroy(impactVfxInstance, DeathVfxLifetime);
+            }
+        }
         Destroy(gameObject);
     }
 }

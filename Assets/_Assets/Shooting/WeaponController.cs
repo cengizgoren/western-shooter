@@ -170,4 +170,10 @@ public class WeaponController : MonoBehaviour
     {
         triggerSqueezed = false;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(WeaponMuzzle.position, WeaponMuzzle.forward * 100f);
+    }
 }

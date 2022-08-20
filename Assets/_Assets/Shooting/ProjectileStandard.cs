@@ -18,6 +18,12 @@ public class ProjectileStandard : ProjectileBase
     [SerializeField] private float ImpactVfxSpawnOffset = 0.1f;
     [SerializeField] private float ImpactVfxLifetime = 5f;
 
+    [Space(10)]
+    [SerializeField] private bool ShowSoundRadius = true;
+    [SerializeField] private LayerMask AlertedBySound = -1;
+    [SerializeField] private float SoundRadius;
+
+
     private float shootTime;
     private Vector3 velocity;
     private Vector3 lastRootPosition;
@@ -105,6 +111,22 @@ public class ProjectileStandard : ProjectileBase
             if (ImpactVfxLifetime > 0)
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);
+            }
+        }
+
+        Collider[] hitColliders = Physics.OverlapSphere(point, SoundRadius, AlertedBySound);
+        if (ShowSoundRadius)
+        {
+            DebugTools.DrawArc.DrawTimedCircle(point, SoundRadius, Color.red);
+        }
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            //Debug.Log(hitCollider.name);
+            EnemyDetector enemyDetector = hitCollider.GetComponent<EnemyDetector>();
+            if (enemyDetector)
+            {
+                enemyDetector.EnemyDetected = true;
             }
         }
 

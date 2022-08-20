@@ -33,7 +33,7 @@ public class EnemySM : MonoBehaviour
 
         _stateMachine.SetState(idle);
 
-        Func<bool> TargetDetected() => () => enemyDetector.EnemyInRange;
+        Func<bool> TargetDetected() => () => enemyDetector.EnemyDetected;
         //Func<bool> TargetLost() => () => chase.TimeTargetLost > 2f;
         Func<bool> TargetContact() => () => Vector3.Distance(transform.position, _playerController.transform.position) < 10f && !navMeshAgent.Raycast(_playerController.transform.position, out NavMeshHit hit);
         Func<bool> TargetObstructed() => () => navMeshAgent.Raycast(_playerController.transform.position, out NavMeshHit hit);

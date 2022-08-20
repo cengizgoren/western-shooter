@@ -168,12 +168,12 @@ MonoBehaviour:
   WeaponMuzzle: {fileID: 4708424568244275276}
   ShootType: 1
   DelayBetweenShots: 0.1
-  ClipSize: 30
-  AmmoReloadTime: 3
+  ClipSize: 45
+  AmmoReloadTime: 2
   RecoilForce: 0.19
-  BulletSpreadAngle: 3
+  BulletSpreadAngle: 0
   ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
-  MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
+  MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1aa64d86152d7fa43929aff7b38e76e8, type: 3}
   ShootSfx: {fileID: 8300000, guid: f9b7d2517ae2540499b99a5bd6dd1e7b, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
   Icon: {fileID: 21300044, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}

@@ -30,18 +30,20 @@ public class Search : IState
         {
             if (_navMeshAgent.remainingDistance <= 0.1f)
             {
-                //_enemyController.LookAt(_enemyDetector.LastKnownVeloctity);
                 _reachedLastKnownPos = true;
             }
         } 
         else
         {
+            _time += Time.deltaTime;
             if (_time > 3.0f)
             {
-                //_enemyController.Rotate();
                 _time = 0;
+                Vector3 nextPos = _enemyDetector.GetNextPositionToSearch();
+                _navMeshAgent.SetDestination(nextPos);
+                _reachedLastKnownPos = false;
+                
             }
-            _time += Time.deltaTime;
         }
 
         // look for a patrol route?
