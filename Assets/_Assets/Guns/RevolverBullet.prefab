@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2676942871222497078}
   - component: {fileID: 4984172705992090743}
   m_Layer: 0
-  m_Name: RevolverTrail
+  m_Name: RevolverBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,19 +48,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 4984172705992090742}
   Tip: {fileID: 1277733899088868668}
+  ImpactDamageAmount: 50
+  IsExplosive: 0
+  ExplosionDamageAmount: 0
+  ExplosionRange: 0
   MaxLifeTime: 3
   Speed: 75
   Radius: 0.01
   HittableLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 320
   ImpactVfx: {fileID: 3536255215777686827, guid: 97bd7b2a293bc514583b99dd24153115, type: 3}
   ImpactVfxSpawnOffset: 0.1
   ImpactVfxLifetime: 5
   ShowSoundRadius: 0
-  AlertedBySound:
+  AffectedLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4294967295
   SoundRadius: 15
 --- !u!96 &4984172705992090743
 TrailRenderer:

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Destructable : MonoBehaviour
+public class Destructable : MonoBehaviour, IDamagable
 {
-    [SerializeField] private float MaxHealthPoints = 100f;
+    [SerializeField] private int MaxHealthPoints = 100;
     // [SerializeField] private AnimationCurve colorPhaseCurve;
 
     [Space(10)]
@@ -15,14 +15,32 @@ public class Destructable : MonoBehaviour
     // Is this setting meaningful? If so which rotation to choose?
     [SerializeField] private Quaternion DeathVfxRotation;
 
-    private float currentHealthPoints;
+    [SerializeField] private int currentHealthPoints;
+
+    private Renderer _renderer;
+    private Dictionary<int, Color> originalColors;
 
     private void Start()
     {
         currentHealthPoints = MaxHealthPoints;
+        _renderer = GetComponent<Renderer>();
+
+        if (_renderer) 
+        {
+            originalColors = new Dictionary<int, Color>();
+            foreach (Material mat in _renderer.materials)
+            {
+                originalColors[mat.GetInstanceID()] = mat.color;
+            }
+        }
     }
 
-    public void Damage(int amount)
+    public int GetCurrentHP()
+    {
+        return currentHealthPoints;
+    }
+
+    public void DealDamage(int amount)
     {
         currentHealthPoints -= amount;
         if (currentHealthPoints <= 0) 
@@ -38,15 +56,17 @@ public class Destructable : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer) 
+        if (_renderer) 
         {
-            float colorPhaseFactor = 1 - currentHealthPoints / MaxHealthPoints;
-            foreach (Material mat in renderer.materials)
+            float colorPhaseFactor = 1f - ((float)currentHealthPoints / (float)MaxHealthPoints);
+            foreach (Material mat in _renderer.materials)
             {
+                // TODO: test color change curve
                 // mat.color = Color.Lerp(mat.color, Color.red, colorPhaseCurve.Evaluate(colorPhaseFactor));
-                mat.color = Color.Lerp(mat.color, Color.red, colorPhaseFactor);
+                mat.color = Color.Lerp(originalColors[mat.GetInstanceID()], Color.red, colorPhaseFactor);
             }
         }
     }
+
+
 }

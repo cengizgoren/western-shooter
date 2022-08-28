@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamagable
 {
     [SerializeField] private int MaxHealthPoints = 100;
     
@@ -19,12 +19,17 @@ public class Health : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealthPoints);
     }
 
-    public void Damage(int amount)
+    public void DealDamage(int amount)
     {
         currentHealthPoints -= amount;
         OnHealthChanged?.Invoke(currentHealthPoints);
         OnHealthLost?.Invoke();
         if (currentHealthPoints <= 0)
             OnHealthDepleted?.Invoke();
+    }
+
+    public int GetCurrentHP()
+    {
+        return currentHealthPoints;
     }
 }

@@ -1,11 +1,41 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class ProjectileStandard : ProjectileBase
+public class ProjectileStandard : MonoBehaviour
 {
+    private class DamagableObject
+    {
+        public Collider Collider;
+        public int Damage;
+        public IDamagable Damagable = null;
+
+        public DamagableObject(Collider collider, int damage, IDamagable damagable)
+        {
+            Collider = collider;
+            Damage = damage;
+            Damagable = damagable;
+        }
+
+        public void CommitDamage()
+        {
+            if (Damagable != null && Damage > 0)
+            {
+                Damagable.DealDamage(Damage);
+            }
+        }
+    }
+
     [SerializeField] private Transform Root;
     [SerializeField] private Transform Tip;
+
+    [Space(10)]
+    [SerializeField] private int ImpactDamageAmount;
+    [SerializeField] private bool IsExplosive = false;
+    [SerializeField] private bool ShowExplosionRadius = true;
+    [SerializeField] private int ExplosionDamageAmount;
+    [SerializeField] private float ExplosionRange;
 
     [Space(10)]
     [SerializeField] private float MaxLifeTime = 5f;
@@ -20,35 +50,22 @@ public class ProjectileStandard : ProjectileBase
 
     [Space(10)]
     [SerializeField] private bool ShowSoundRadius = true;
-    [SerializeField] private LayerMask AlertedBySound = -1;
+    [SerializeField] private LayerMask AffectedLayers = -1;
     [SerializeField] private float SoundRadius;
-
 
     private float shootTime;
     private Vector3 velocity;
     private Vector3 lastRootPosition;
     private List<Collider> ignoredColliders;
-
     private const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
 
-    ProjectileBase m_ProjectileBase;
+    public GameObject Owner { get; private set; }
+    public Vector3 InitialPosition { get; private set; }
+    public Vector3 InitialDirection { get; private set; }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        m_ProjectileBase = GetComponent<ProjectileBase>();
-        m_ProjectileBase.OnShoot += OnShoot;
         Destroy(gameObject, MaxLifeTime);
-    }
-
-    new private void OnShoot()
-    {
-        shootTime = Time.time;
-        lastRootPosition = Root.position;
-        velocity = transform.forward * Speed;
-
-        ignoredColliders = new List<Collider>();
-        Collider[] ownerColliders = m_ProjectileBase.Owner.GetComponentsInChildren<Collider>();
-        ignoredColliders.AddRange(ownerColliders);
     }
 
     private void Update()
@@ -60,7 +77,7 @@ public class ProjectileStandard : ProjectileBase
             bool foundHit = false;
 
             Vector3 displacementSinceLastFrame = Tip.position - lastRootPosition;
-            RaycastHit[] hits = Physics.SphereCastAll(lastRootPosition, Radius, displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers,k_TriggerInteraction);
+            RaycastHit[] hits = Physics.SphereCastAll(lastRootPosition, Radius, displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers, k_TriggerInteraction);
 
             foreach (var hit in hits)
             {
@@ -85,25 +102,37 @@ public class ProjectileStandard : ProjectileBase
         }
     }
 
+    public void Shoot(WeaponController controller)
+    {
+        Owner = controller.Owner;
+        InitialPosition = transform.position;
+        InitialDirection = transform.forward;
+        RenameThisFunc();
+    }
+
+    public void Shoot(EnemyWeaponController controller)
+    {
+        Owner = controller.Owner;
+        InitialPosition = transform.position;
+        InitialDirection = transform.forward;
+        RenameThisFunc();
+    }
+
+    private void RenameThisFunc()
+    {
+        shootTime = Time.time;
+        lastRootPosition = Root.position;
+        velocity = transform.forward * Speed;
+
+        ignoredColliders = new List<Collider>();
+        Collider[] ownerColliders = Owner.GetComponentsInChildren<Collider>();
+        ignoredColliders.AddRange(ownerColliders);
+    }
+
     private void OnHit(Vector3 point, Vector3 normal, Collider collider)
     {
-        TargetPractice targetPractice = collider.GetComponent<TargetPractice>();
-        if (targetPractice)
-        {
-            targetPractice.Damage(10);
-        }
-
-        Health health = collider.GetComponent<Health>();
-        if (health)
-        {
-            health.Damage(10);
-        }
-
-        Destructable destructable = collider.GetComponent<Destructable>();
-        if (destructable)
-        {
-            destructable.Damage(10);
-        }
+        IDamagable damagable = collider.GetComponent<IDamagable>();
+        damagable?.DealDamage(ImpactDamageAmount);
 
         if (ImpactVfx)
         {
@@ -114,19 +143,57 @@ public class ProjectileStandard : ProjectileBase
             }
         }
 
-        Collider[] hitColliders = Physics.OverlapSphere(point, SoundRadius, AlertedBySound);
+        Vector3 inFrontPosition = point + normal;
+
+        Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
+
+
         if (ShowSoundRadius)
         {
-            DebugTools.Draw.DrawTimedCircle(point, SoundRadius, Color.red);
+            DebugTools.Draw.DrawTimedCircle(point, SoundRadius, Color.blue);
         }
 
-        foreach (Collider hitCollider in hitColliders)
+        foreach (Collider soundCollider in hitBySoundColliders)
         {
-            //Debug.Log(hitCollider.name);
-            EnemyDetector enemyDetector = hitCollider.GetComponent<EnemyDetector>();
+            EnemyDetector enemyDetector = soundCollider.GetComponent<EnemyDetector>();
+
             if (enemyDetector)
-            {
                 enemyDetector.EnemyDetected = true;
+        }
+
+        if (IsExplosive)
+        {
+            Collider[] hitByExplosionColliders = Physics.OverlapSphere(inFrontPosition, ExplosionRange, HittableLayers);
+            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<IDamagable>()));
+
+            if (ShowExplosionRadius)
+            {
+                DebugTools.Draw.DrawTimedCircle(point, ExplosionRange, Color.red);
+            }
+
+            foreach (Collider explosionCollider in hitByExplosionColliders)
+            {
+                Vector3 direction = (explosionCollider.bounds.center - inFrontPosition).normalized;
+                RaycastHit[] hitInfos = Physics.RaycastAll(inFrontPosition, new Vector3(direction.x, 0, direction.z), ExplosionRange, HittableLayers);
+                hitInfos = hitInfos.OrderBy(hit => hit.distance).ToArray();
+                int expolsionDamagePointsLeft = ExplosionDamageAmount;
+
+                foreach (RaycastHit raycastHit in hitInfos)
+                {
+                    int id = raycastHit.collider.GetInstanceID();
+                    if (expolsionDamagePointsLeft > 0 && collidersDictionary[id].Damagable != null)
+                    {
+                        int damageToDeal = Mathf.Min(collidersDictionary[id].Damagable.GetCurrentHP(), expolsionDamagePointsLeft);
+                        collidersDictionary[id].Damage = Mathf.Max(collidersDictionary[id].Damage, damageToDeal);
+                        expolsionDamagePointsLeft -= damageToDeal;
+                    }
+                }
+
+            }
+
+            foreach (DamagableObject damagableObject in collidersDictionary.Values)
+            {
+                damagableObject.CommitDamage();
             }
         }
 

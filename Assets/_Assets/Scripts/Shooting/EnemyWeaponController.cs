@@ -22,7 +22,7 @@ public class EnemyWeaponController : MonoBehaviour
     [SerializeField] private float BulletSpreadAngle = 1f;
 
     [Space(10)]
-    [SerializeField] private ProjectileBase ProjectilePrefab;
+    [SerializeField] private ProjectileStandard ProjectilePrefab;
     [SerializeField] private GameObject MuzzleFlashPrefab;
     [SerializeField] private AudioClip ShootSfx;
 
@@ -75,7 +75,7 @@ public class EnemyWeaponController : MonoBehaviour
     {
         lastTimeShot = Time.time;
         Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle);
-        ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
+        ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
 
         // Hack
         this.Owner = gameObject;

@@ -15,7 +15,7 @@ public class TargetPractice : MonoBehaviour
        
     }
 
-    internal void Damage(int damageAmount)
+    public void DealDamage(int damageAmount)
     {
         DamagePopup.Create(transform.position, damageAmount);
     }

@@ -58,7 +58,7 @@ public class Gun : MonoBehaviour
 
                 TargetPractice targetPractice = hit.collider.GetComponent<TargetPractice>();
                 if (targetPractice != null)
-                    targetPractice.Damage(weaponDamage);
+                    targetPractice.DealDamage(weaponDamage);
             }
             else
             {
