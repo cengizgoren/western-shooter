@@ -71,35 +71,37 @@ public class ProjectileStandard : MonoBehaviour
     private void Update()
     {
         transform.position += velocity * Time.deltaTime;
+
+        RaycastHit closestHit = new RaycastHit();
+        closestHit.distance = Mathf.Infinity;
+        bool foundHit = false;
+
+        Vector3 displacementSinceLastFrame = Tip.position - lastRootPosition;
+        RaycastHit[] hits = Physics.SphereCastAll(lastRootPosition, Radius, displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers, k_TriggerInteraction);
+
+        foreach (var hit in hits)
         {
-            RaycastHit closestHit = new RaycastHit();
-            closestHit.distance = Mathf.Infinity;
-            bool foundHit = false;
-
-            Vector3 displacementSinceLastFrame = Tip.position - lastRootPosition;
-            RaycastHit[] hits = Physics.SphereCastAll(lastRootPosition, Radius, displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers, k_TriggerInteraction);
-
-            foreach (var hit in hits)
+            if (IsHitValid(hit) && hit.distance < closestHit.distance)
             {
-                if (IsHitValid(hit) && hit.distance < closestHit.distance)
-                {
-                    foundHit = true;
-                    closestHit = hit;
-                }
-            }
-
-            if (foundHit)
-            {
-                // Handle case of casting while already inside a collider
-                if (closestHit.distance <= 0f)
-                {
-                    closestHit.point = Root.position;
-                    closestHit.normal = -transform.forward;
-                }
-
-                OnHit(closestHit.point, closestHit.normal, closestHit.collider);
+                foundHit = true;
+                closestHit = hit;
             }
         }
+
+        if (foundHit)
+        {
+            // Handle case of casting while already inside a collider
+            if (closestHit.distance <= 0f)
+            {
+                closestHit.point = Root.position;
+                closestHit.normal = -transform.forward;
+            }
+
+            OnHit(closestHit.point, closestHit.normal, closestHit.collider);
+        }
+
+        lastRootPosition = Root.position;
+
     }
 
     public void Shoot(WeaponController controller)
@@ -107,7 +109,7 @@ public class ProjectileStandard : MonoBehaviour
         Owner = controller.Owner;
         InitialPosition = transform.position;
         InitialDirection = transform.forward;
-        RenameThisFunc();
+        OnShoot();
     }
 
     public void Shoot(EnemyWeaponController controller)
@@ -115,15 +117,14 @@ public class ProjectileStandard : MonoBehaviour
         Owner = controller.Owner;
         InitialPosition = transform.position;
         InitialDirection = transform.forward;
-        RenameThisFunc();
+        OnShoot();
     }
 
-    private void RenameThisFunc()
+    private void OnShoot()
     {
         shootTime = Time.time;
         lastRootPosition = Root.position;
         velocity = transform.forward * Speed;
-
         ignoredColliders = new List<Collider>();
         Collider[] ownerColliders = Owner.GetComponentsInChildren<Collider>();
         ignoredColliders.AddRange(ownerColliders);
@@ -145,8 +146,7 @@ public class ProjectileStandard : MonoBehaviour
 
         Vector3 inFrontPosition = point + normal;
 
-        Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
-
+        /*Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
 
         if (ShowSoundRadius)
         {
@@ -158,8 +158,8 @@ public class ProjectileStandard : MonoBehaviour
             EnemyDetector enemyDetector = soundCollider.GetComponent<EnemyDetector>();
 
             if (enemyDetector)
-                enemyDetector.EnemyDetected = true;
-        }
+                enemyDetector.EnemyInLineOfSight = true;
+        } */
 
         if (IsExplosive)
         {

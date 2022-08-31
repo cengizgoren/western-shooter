@@ -6,7 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyDetector : MonoBehaviour
 {
-    public bool EnemyDetected = false;
+    public bool EnemyInSightRange = false;
+    public bool EnemyInHearingRange = false;
+    public bool EnemyObstructed = false;
 
     [SerializeField] private CharacterController _playerController;
 
@@ -25,29 +27,27 @@ public class EnemyDetector : MonoBehaviour
     [SerializeField] private float _sightDetectionRadius = 10f;
     [SerializeField] private float _hearingDetectionRadius = 5f;
 
+    private NavMeshAgent navMeshAgent;
 
-    private float timeSinceDetection;
+    private float time =0;
 
     public void Awake()
     {
-        GetComponent<Health>().OnHealthLost += () => EnemyDetected = true;
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        GetComponent<Health>().OnHealthLost += () => EnemyInSightRange = true;
     }
 
-    private void Update()
+    private void Update() 
     {
-        if (!EnemyDetected)
+        if (time > 1.5f)
         {
-            EnemyDetected = IsPlayerDetected();
+            EnemyInSightRange = IsPlayerInSightRange();
+            EnemyInHearingRange = IsPlayerHearingRange();
+            EnemyObstructed = IsPlayerObstructed();
+            time = 0;
         }
-        else
-        {
-            timeSinceDetection += Time.deltaTime;
-            if (timeSinceDetection > 3f)
-            {
-                EnemyDetected = IsPlayerDetected();
-                timeSinceDetection = 0f;
-            }
-        }
+
+        time += Time.deltaTime;
     }
 
     public Vector3 GetNextPositionToSearch()
@@ -56,19 +56,25 @@ public class EnemyDetector : MonoBehaviour
         return _playerController.transform.position;
     }
 
-    private bool IsPlayerDetected()
+    private bool IsPlayerInSightRange()
     {
         float distance = Vector3.Distance(transform.position, _playerController.transform.position);
         if (distance < _sightDetectionRadius)
         {
             Vector3 toPlayer = _playerController.transform.position - transform.position;
-            if (Vector3.Angle(toPlayer, transform.forward) < _sightDetectionAngle / 2f)
-                return true;
-
-            if (distance < _hearingDetectionRadius)
-                return true;
+            return Vector3.Angle(toPlayer, transform.forward) < _sightDetectionAngle / 2f;
         }
         return false;
+    }
+
+    private bool IsPlayerHearingRange()
+    {
+        return _hearingDetectionRadius > Vector3.Distance(transform.position, _playerController.transform.position);
+    }
+
+    private bool IsPlayerObstructed()
+    {
+        return navMeshAgent.Raycast(_playerController.transform.position, out NavMeshHit _);
     }
 
     public void SaveLastKnownPosAndDir()

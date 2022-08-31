@@ -15,7 +15,7 @@ public class EnemyWeaponController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private WeaponShootType ShootType;
-    [SerializeField] private int BulletsPerBurst = 3;
+    [SerializeField] private int BulletsPerBurst = 1;
     [SerializeField] private float DelayBetweenShots = 0.5f;
     [SerializeField] private float DelayBetweenBursts = 3f;
 

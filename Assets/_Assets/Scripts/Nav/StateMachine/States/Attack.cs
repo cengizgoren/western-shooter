@@ -55,6 +55,7 @@ public class Attack : IState
         Debug.Log("Attack");
         time = 0;
         _enemyController.SetAttack(true);
+        _navMeshAgent.ResetPath();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.speed = 2f;
     }

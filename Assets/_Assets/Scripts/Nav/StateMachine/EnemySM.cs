@@ -8,13 +8,11 @@ public class EnemySM : MonoBehaviour
 
     [SerializeField] private CharacterController _playerController;
 
-
     public void Awake()
     {
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var enemyDetector = GetComponent<EnemyDetector>();
         var enemyController = GetComponent<EnemyController>();
-
 
         _stateMachine = new StateMachine();
 
@@ -23,20 +21,18 @@ public class EnemySM : MonoBehaviour
         var attack = new Attack(enemyDetector, transform, enemyController, _playerController.transform, navMeshAgent);
         var search = new Search(enemyDetector, enemyController, _playerController.transform, navMeshAgent);
 
-        At(idle, chase, TargetDetected());
-        //At(chase, idle, TargetLost());
-        At(chase, attack, TargetContact());
+        At(idle, attack, TargetDetected());
         At(attack, search, TargetObstructed());
-        At(search, attack, TargetContact());
+        At(search, attack, TargetDetected());
 
         void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
 
         _stateMachine.SetState(idle);
 
-        Func<bool> TargetDetected() => () => enemyDetector.EnemyDetected;
-        //Func<bool> TargetLost() => () => chase.TimeTargetLost > 2f;
-        Func<bool> TargetContact() => () => Vector3.Distance(transform.position, _playerController.transform.position) < 10f && !navMeshAgent.Raycast(_playerController.transform.position, out NavMeshHit hit);
-        Func<bool> TargetObstructed() => () => navMeshAgent.Raycast(_playerController.transform.position, out NavMeshHit hit);
+        Func<bool> TargetDetected() => () => enemyDetector.EnemyInSightRange && !enemyDetector.EnemyObstructed;
+        Func<bool> TargetTooFarAway() => () => !enemyDetector.EnemyInSightRange;
+        Func<bool> TargetInRange() => () => enemyDetector.EnemyInSightRange;
+        Func<bool> TargetObstructed() => () => enemyDetector.EnemyObstructed;
     }
 
     private void Update() => _stateMachine.Tick();

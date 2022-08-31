@@ -195,7 +195,7 @@ MonoBehaviour:
   ShootType: 1
   BulletsPerBurst: 3
   DelayBetweenShots: 0.1
-  DelayBetweenBursts: 3
+  DelayBetweenBursts: 1
   BulletSpreadAngle: 3
   ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1aa64d86152d7fa43929aff7b38e76e8, type: 3}
