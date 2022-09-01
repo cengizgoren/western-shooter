@@ -58,7 +58,7 @@ MonoBehaviour:
   Radius: 0.03
   HittableLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 448
   ImpactVfx: {fileID: 3536255215777686827, guid: 97bd7b2a293bc514583b99dd24153115, type: 3}
   ImpactVfxSpawnOffset: 0.1
   ImpactVfxLifetime: 5

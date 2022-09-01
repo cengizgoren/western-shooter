@@ -35,6 +35,7 @@ public class DummyWeaponsManager : MonoBehaviour
 
     private Vector3 weaponMainLocalPosition;
     private Quaternion weaponMainLocalRotation;
+    //private Quaternion weaponAimRotation;
     private Vector3 accumulatedRecoil;
     private Vector3 weaponRecoilLocalPosition;
 
@@ -205,6 +206,18 @@ public class DummyWeaponsManager : MonoBehaviour
             }
         }
     }
+
+    public void RotateWeaponVertically(Vector3 point)
+    {
+        Vector3 dirToMouse = point - DefaultWeaponPosition.position;
+        Quaternion targetRotation = Quaternion.LookRotation(dirToMouse, Vector3.up);
+        targetRotation.eulerAngles = new Vector3(
+            targetRotation.eulerAngles.x,
+            DefaultWeaponPosition.localRotation.eulerAngles.y,
+            DefaultWeaponPosition.localRotation.eulerAngles.z);
+        WeaponParentSocket.localRotation = targetRotation;
+        //DefaultWeaponPosition.localRotation = targetRotation;
+     }
 
     private void SwitchWeaponByNumber(float weaponNumber)
     {
