@@ -14,6 +14,8 @@ public class DummyPlayer : MonoBehaviour
     [Tooltip("Acceleration and deceleration")]
     public float SpeedChangeRate = 10.0f;
 
+    public float RotationSpeed = 720f;
+
     [Tooltip("Offset player movement direction by this angle to make it relative to the camera position")]
     public float CameraYRotationDeg = 45.0f;
 
@@ -66,14 +68,14 @@ public class DummyPlayer : MonoBehaviour
     private Animator _animator;
     private CharacterController _controller;
     private DummyInput _input;
-
-
+    private DummyWeaponsManager _weaponsManager;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _input = GetComponent<DummyInput>();
+        _weaponsManager = GetComponent<DummyWeaponsManager>();
     }
 
     void Update()
@@ -127,13 +129,16 @@ public class DummyPlayer : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(_input.look);
         //TODO: Align aiming plane in a better way
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, 1.4f, 0));
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
             Vector3 halfPoint = transform.position + (point - transform.position) / 5;
             CinemachineCameraTarget.transform.position = halfPoint;
-            LookAt(point);
+            Vector3 dirToMouse = point - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(dirToMouse.x, 0f, dirToMouse.z), Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
+            _weaponsManager.RotateWeaponVertically(point);
         }
     }
 

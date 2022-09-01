@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
             TargetPractice targetPractice = contact.otherCollider.GetComponent<TargetPractice>();
             if (targetPractice != null)
             {
-                targetPractice.Damage(damage);
+                targetPractice.DealDamage(damage);
             }
 
         }
