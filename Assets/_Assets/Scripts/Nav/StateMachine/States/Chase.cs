@@ -26,7 +26,6 @@ public class Chase : IState
 
     public void OnEnter()
     {
-        Debug.Log("Chase");
         TimeTargetLost = 0f;
         _navMeshAgent.SetDestination(_targetTransform.position);
     }

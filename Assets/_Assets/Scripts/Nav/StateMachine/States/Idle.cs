@@ -20,7 +20,7 @@ public class Idle : IState
 
     public void OnEnter()
     {
-        Debug.Log("Idle");
+
     }
 
     public void OnExit()

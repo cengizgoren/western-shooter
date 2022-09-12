@@ -53,7 +53,6 @@ public class Search : IState
 
     public void OnEnter()
     {
-        Debug.Log("Search");
         _reachedLastKnownPos = false;
         //_prevSpeed = _navMeshAgent.speed;
         //_navMeshAgent.speed = WALKING_SPEED;
@@ -62,7 +61,6 @@ public class Search : IState
 
     public void OnExit()
     {
-        Debug.Log("Exit Search");
         _navMeshAgent.ResetPath();
         //_navMeshAgent.speed = _prevSpeed;
         _enemyController.StopAllCoroutines();

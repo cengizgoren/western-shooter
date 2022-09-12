@@ -63,11 +63,13 @@ public class WeaponController : MonoBehaviour
 
     private void OnEnable()
     {
+        
         inputActions.Enable();
     }
 
     private void OnDisable()
     {
+        // do the same when game is paused
         inputActions.Disable();
     }
 

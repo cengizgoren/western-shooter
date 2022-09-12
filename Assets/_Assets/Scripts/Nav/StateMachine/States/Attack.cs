@@ -26,7 +26,7 @@ public class Attack : IState
     public void Tick()
     {
         Quaternion targetRotation = Quaternion.LookRotation(_playerTransform.position - _transform.position);
-        _transform.rotation = Quaternion.RotateTowards(_transform.rotation, targetRotation, Time.deltaTime * 90f);
+        _transform.rotation = Quaternion.RotateTowards(_transform.rotation, targetRotation, Time.deltaTime * 180f);
 
         Vector3 toPlayerDir = _playerTransform.position - _transform.position;
         Vector3 toSide = Vector3.Cross(toPlayerDir, Vector3.up).normalized;
@@ -52,7 +52,6 @@ public class Attack : IState
 
     public void OnEnter()
     {
-        Debug.Log("Attack");
         time = 0;
         _enemyController.SetAttack(true);
         _navMeshAgent.ResetPath();
