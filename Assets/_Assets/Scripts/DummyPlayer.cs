@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,26 +57,38 @@ public class DummyPlayer : MonoBehaviour
     public float CameraAngleOverride = 0.0f;
 
 
-    // player
+    // Player
     private float _speed;
     private float _terminalVelocity = 53.0f;
     private float _verticalVelocity;
 
-    // timeout deltatime
+    // Timeout deltatime
     private float _jumpTimeoutDelta;
     private float _fallTimeoutDelta;
 
+    // Components
     private Animator _animator;
     private CharacterController _controller;
-    private DummyInput _input;
     private DummyWeaponsManager _weaponsManager;
+    private Health _health;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
-        _input = GetComponent<DummyInput>();
+        //_input = GetComponent<DummyInput>();
         _weaponsManager = GetComponent<DummyWeaponsManager>();
+        _health = GetComponent<Health>();
+
+        _health.OnHealthDepleted += DieIGuess;
+        GameManager.Instance.UpdateGameState(GameState.Playing);
+
+        
+    }
+
+    private void DieIGuess()
+    {
+        //gameObject.SetActive(false);
     }
 
     void Update()
@@ -96,7 +109,7 @@ public class DummyPlayer : MonoBehaviour
 
     private void Move()
     {
-        float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+        float targetSpeed = Controls.InputActions.Player.Sprint.IsPressed() ? SprintSpeed : MoveSpeed;
         float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
         float speedOffset = 0.1f;
         float inputMagnitude = 1f;
@@ -112,7 +125,8 @@ public class DummyPlayer : MonoBehaviour
             _speed = targetSpeed;
         }
 
-        Vector3 isometricDirection = Quaternion.AngleAxis(CameraYRotationDeg, Vector3.up) * new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+        Vector2 move = Controls.InputActions.Player.Move.ReadValue<Vector2>();
+        Vector3 isometricDirection = Quaternion.AngleAxis(CameraYRotationDeg, Vector3.up) * new Vector3(move.x, 0.0f, move.y).normalized;
         Vector3 relativeVelocity = transform.InverseTransformDirection(_controller.velocity);
 
         _controller.Move(isometricDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -127,7 +141,7 @@ public class DummyPlayer : MonoBehaviour
 
     void PlayerRotation()
     {
-        Ray ray = Camera.main.ScreenPointToRay(_input.look);
+        Ray ray = Camera.main.ScreenPointToRay(Controls.InputActions.Player.Look.ReadValue<Vector2>());
         //TODO: Align aiming plane in a better way
         Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
         if (groundPlane.Raycast(ray, out float rayDistance))
@@ -161,7 +175,7 @@ public class DummyPlayer : MonoBehaviour
                 _verticalVelocity = -2f;
             }
 
-            if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+            if (Controls.InputActions.Player.Jump.IsPressed() && _jumpTimeoutDelta <= 0.0f)
             {
                 // The square root of H * -2 * G = how much velocity needed to reach desired height
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -182,7 +196,7 @@ public class DummyPlayer : MonoBehaviour
                 _fallTimeoutDelta -= Time.deltaTime;
             }
 
-            _input.jump = false;
+            //_input.jump = false;
         }
 
         if (_verticalVelocity < _terminalVelocity)
@@ -198,7 +212,7 @@ public class DummyPlayer : MonoBehaviour
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(_input.look);
+        Ray ray = Camera.main.ScreenPointToRay(Controls.InputActions.Player.Look.ReadValue<Vector2>());
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
@@ -210,5 +224,10 @@ public class DummyPlayer : MonoBehaviour
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(halfPoint, 0.5f);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _health.OnHealthDepleted += DieIGuess;
     }
 }

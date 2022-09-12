@@ -39,7 +39,6 @@ public class WeaponController : MonoBehaviour
 
     // Components
     private AudioSource shootAudioSource;
-    private InputActions inputActions;
 
     // Events
     public UnityAction OnShoot;
@@ -56,27 +55,14 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         shootAudioSource = GetComponent<AudioSource>();
-        inputActions = new InputActions();
         IsReloading = false;
         CurrentAmmo = ClipSize;
     }
 
-    private void OnEnable()
-    {
-        
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        // do the same when game is paused
-        inputActions.Disable();
-    }
-
     private void Start()
     {
-        inputActions.Player.Shoot.performed += _ => PressShootPerformed();
-        inputActions.Player.Shoot.canceled += _ => PressShootCancelled();
+        Controls.InputActions.Player.Shoot.performed += _ => PressShootPerformed();
+        Controls.InputActions.Player.Shoot.canceled += _ => PressShootCancelled();
     }
 
     public void Update()

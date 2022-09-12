@@ -39,9 +39,6 @@ public class DummyWeaponsManager : MonoBehaviour
     private Vector3 accumulatedRecoil;
     private Vector3 weaponRecoilLocalPosition;
 
-    // Components
-    private InputActions inputActions;
-
     // Events
     public UnityAction<WeaponController> OnSwitchedToWeapon;
     public UnityAction<WeaponController, int> OnAddedWeapon;
@@ -50,21 +47,6 @@ public class DummyWeaponsManager : MonoBehaviour
     // Properties
     public int ActiveWeaponIndex { get; private set; }
     public WeaponSwitchState SwitchState { get; private set; }
-
-    private void Awake()
-    {
-        inputActions = new InputActions();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Disable();
-    }
 
     private void Start()
     {
@@ -76,7 +58,7 @@ public class DummyWeaponsManager : MonoBehaviour
 
         OnSwitchedToWeapon += OnWeaponSwitched;
 
-        inputActions.Player.Weapon.performed += ctx =>
+        Controls.InputActions.Player.Weapon.performed += ctx =>
         {
             SwitchWeaponByNumber(ctx.ReadValue<float>());
         };
