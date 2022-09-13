@@ -81,14 +81,12 @@ public class DummyPlayer : MonoBehaviour
         _health = GetComponent<Health>();
 
         _health.OnHealthDepleted += DieIGuess;
-        GameManager.Instance.UpdateGameState(GameState.Playing);
-
-        
+        GameManager.Instance.UpdateGameState(GameState.Active);
     }
 
     private void DieIGuess()
     {
-        //gameObject.SetActive(false);
+        GameManager.Instance.PlayerHasDied();
     }
 
     void Update()

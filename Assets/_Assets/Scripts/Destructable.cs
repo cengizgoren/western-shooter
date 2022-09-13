@@ -20,6 +20,8 @@ public class Destructable : MonoBehaviour, IDamagable
     private Renderer _renderer;
     private Dictionary<int, Color> originalColors;
 
+    public UnityAction OnHealthDepleted;
+
     private void Start()
     {
         currentHealthPoints = MaxHealthPoints;
@@ -45,6 +47,7 @@ public class Destructable : MonoBehaviour, IDamagable
         currentHealthPoints -= amount;
         if (currentHealthPoints <= 0) 
         {
+            OnHealthDepleted?.Invoke();
             if (DeathVfx)
             {
                 GameObject impactVfxInstance = Instantiate(DeathVfx, transform.position + (transform.forward * DeathVfxSpawnOffset), DeathVfxRotation);

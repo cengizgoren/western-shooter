@@ -8,16 +8,31 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameState State;
+    public GameState GameState = GameState.MainMenu;
+    public GameState PrevGameState = GameState.MainMenu;
+    
+    public VictoryState VictoryState;
+    public VictoryState PrevVictoryState;
 
+
+    public UnityAction OnLaunch;
     public UnityAction OnLost;
+    public UnityAction OnWon;
+    public UnityAction OnPause;
+    public UnityAction OnUnpause;
+    public UnityAction OnRestart;
 
+    //private readonly Dictionary<Tuple<GameState, GameState>, Action> gameTransitions = new Dictionary<Tuple<GameState, GameState>, Action>();
+    //private readonly Dictionary<Tuple<VictoryState, VictoryState>, Action> victoryTransitions = new Dictionary<Tuple<VictoryState, VictoryState>, Action>();
 
     void Awake()
     {
         if (!Instance)
         {
             Instance = this;
+            //gameTransitions.Add(Tuple.Create(GameState.Launch, GameState.MainMenu), () => Debug.Log("Launch"));
+            //gameTransitions.Add(Tuple.Create(GameState.InProgress, GameState.Paused), Pause);
+            //gameTransitions.Add(Tuple.Create(GameState.Paused, GameState.InProgress), Unpause);
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -29,53 +44,103 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        UpdateGameState(GameState.MainMenu);
+        Controls.InputActions.UI.Escape.started += _ => OnEscape();
     }
 
-    // Awful...
+    public void Pause()
+    {
+        UpdateGameState(GameState.Paused);
+        OnPause?.Invoke();
+        Controls.InputActions.Player.Disable();
+        Time.timeScale = 0f;
+    }
+
+    public void Unpause()
+    {
+        UpdateGameState(GameState.Active);
+        OnUnpause?.Invoke();
+        Controls.InputActions.Player.Enable();
+        Time.timeScale = 1f;
+    }
+
+    public void Restart()
+    {
+        Controls.InputActions.Player.Enable();
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UpdateGameState(GameState.Active);
+        OnRestart?.Invoke();
+    }
+
+    public void PlayerHasDied()
+    {
+        UpdateVictoryCondition(VictoryState.Lost);
+    }
+
+    public void Quit()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
+    }
+
+    private void OnEscape()
+    {
+        if (GameState == GameState.Paused)
+        {
+            Unpause();
+        }
+        else if (GameState == GameState.Active)
+        {
+            Pause();
+        }
+    }
+
     public void UpdateGameState(GameState newState)
     {
-        State = newState;
+        PrevGameState = GameState;
+        GameState = newState;
+    }
 
-        switch (State)
+    public void UpdateVictoryCondition(VictoryState newState)
+    {
+        VictoryState = newState;
+
+        switch (VictoryState)
         {
-            case GameState.MainMenu:
+            case VictoryState.ObjectiveInProgress:
                 break;
-            case GameState.Playing:
-                if (GameObject.FindGameObjectWithTag("Player"))
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().OnHealthDepleted += PlayerLost;
-                }
-                Controls.InputActions.Player.Enable();
+            case VictoryState.ObjectiveCompleted:
                 break;
-            case GameState.Paused:
-                break;
-            case GameState.Victory:
-                break;
-            case GameState.Lost:
-                if (GameObject.FindGameObjectWithTag("Player"))
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().OnHealthDepleted -= PlayerLost;
-                }
+            case VictoryState.Won:
+                OnWon?.Invoke();
                 Controls.InputActions.Player.Disable();
+                Time.timeScale = 0f;
+                UpdateGameState(GameState.Ended);
+                break;
+            case VictoryState.Lost:
+                OnLost?.Invoke();
+                Controls.InputActions.Player.Disable();
+                Time.timeScale = 0f;
+                UpdateGameState(GameState.Ended);
                 break;
             default:
                 break;
         }
     }
-
-    private void PlayerLost()
-    {
-        UpdateGameState(GameState.Lost);
-        OnLost?.Invoke();
-    }
 }
 
-public enum GameState 
+public enum GameState
 {
     MainMenu,
-    Playing,
+    Active,
     Paused,
-    Victory,
+    Ended,
+}
+
+public enum VictoryState
+{
+    ObjectiveInProgress,
+    ObjectiveCompleted,
+    Won,
     Lost
 }

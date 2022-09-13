@@ -7,7 +7,7 @@ public class MainMenuNavigator : MonoBehaviour
     public void LoadGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        GameManager.Instance.UpdateGameState(GameState.Playing);
+        GameManager.Instance.UpdateGameState(GameState.Active);
     }
 
     public void QuitGame()

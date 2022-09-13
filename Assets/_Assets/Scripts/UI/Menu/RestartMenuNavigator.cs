@@ -1,37 +1,53 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RestartMenuNavigator : MonoBehaviour
 {
     public GameObject RestartMenuCanvas;
+    public TextMeshProUGUI EndStateLabel;
+
 
     void Start()
     {
-        GameManager.Instance.OnLost += Activate;
+        GameManager.Instance.OnLost += ShowLose;
+        GameManager.Instance.OnWon += ShowWin;
+        GameManager.Instance.OnRestart += Hide;
     }
 
-    private void Activate()
+    private void ShowWin()
     {
+        EndStateLabel.SetText("Victory!");
         RestartMenuCanvas.SetActive(true);
     }
 
-    public void LoadGame()
+    private void ShowLose()
+    {
+        EndStateLabel.SetText("Lost!");
+        RestartMenuCanvas.SetActive(true);
+    }
+
+    private void Hide()
     {
         RestartMenuCanvas.SetActive(false);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        GameManager.Instance.UpdateGameState(GameState.Playing);
     }
 
-    public void QuitGame()
+    public void RestartPressed()
     {
-        Application.Quit();
-        Debug.Log("Quit");
+        GameManager.Instance.Restart();
     }
 
-    void OnDestroy()
+    public void QuitPressed()
     {
-        GameManager.Instance.OnLost -= Activate;
+        GameManager.Instance.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnLost -= ShowLose;
+        GameManager.Instance.OnWon -= ShowWin;
+        GameManager.Instance.OnRestart -= Hide;
     }
 }

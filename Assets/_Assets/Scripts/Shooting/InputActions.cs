@@ -80,15 +80,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Escape"",
-                    ""type"": ""Value"",
-                    ""id"": ""b5aba4a9-5e91-445d-a4f5-5382530dae24"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -234,10 +225,27 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""d73188d0-edad-4f78-ba5e-7eda050f0e52"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Value"",
+                    ""id"": ""b34170fc-806a-4dea-86fa-4f13bd183f46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""b7209034-a177-4c19-a95b-fa90bf34e7c1"",
+                    ""id"": ""483b36f5-a56c-48fd-8597-b9894f5271b6"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -259,7 +267,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Weapon = m_Player.FindAction("Weapon", throwIfNotFound: true);
-        m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -325,7 +335,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Weapon;
-    private readonly InputAction m_Player_Escape;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -336,7 +345,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Weapon => m_Wrapper.m_Player_Weapon;
-        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,9 +372,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Weapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeapon;
                 @Weapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeapon;
                 @Weapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeapon;
-                @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
-                @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
-                @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -389,13 +394,43 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Weapon.started += instance.OnWeapon;
                 @Weapon.performed += instance.OnWeapon;
                 @Weapon.canceled += instance.OnWeapon;
+            }
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Escape;
+    public struct UIActions
+    {
+        private @InputActions m_Wrapper;
+        public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_UI_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Escape.started -= m_Wrapper.m_UIActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnEscape;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -404,6 +439,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnWeapon(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
         void OnEscape(InputAction.CallbackContext context);
     }
 }

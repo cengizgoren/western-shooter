@@ -58,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Escape",
-                    "type": "Value",
-                    "id": "b5aba4a9-5e91-445d-a4f5-5382530dae24",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -212,10 +203,27 @@
                     "action": "Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "d73188d0-edad-4f78-ba5e-7eda050f0e52",
+            "actions": [
+                {
+                    "name": "Escape",
+                    "type": "Value",
+                    "id": "b34170fc-806a-4dea-86fa-4f13bd183f46",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "b7209034-a177-4c19-a95b-fa90bf34e7c1",
+                    "id": "483b36f5-a56c-48fd-8597-b9894f5271b6",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",

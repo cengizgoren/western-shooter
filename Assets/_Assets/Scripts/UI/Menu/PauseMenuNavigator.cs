@@ -6,53 +6,42 @@ public class PauseMenuNavigator : MonoBehaviour
 {
     public GameObject PauseMenuCanvas;
 
-    private InputActions inputActions;
-
-    void Awake()
-    {
-        inputActions = new InputActions();
-    }
-
     void Start()
     {
-        inputActions.Player.Escape.started += _ => OnEscape();
+        GameManager.Instance.OnPause += Show;
+        GameManager.Instance.OnUnpause += Hide;
+        GameManager.Instance.OnRestart += Hide;
     }
 
-    private void OnEnable() => inputActions.Enable();
-
-    private void OnDisable() => inputActions.Disable();
-
-    public void OnEscape()
+    private void Show()
     {
-        if (GameManager.Instance.State == GameState.Paused)
-        {
-            Unpause();
-        }
-        else
-        {
-            Pause();
-        }
-    }
-
-    private void Pause()
-    {
-        Time.timeScale = 0f;
         PauseMenuCanvas.SetActive(true);
-        GameManager.Instance.UpdateGameState(GameState.Paused);
     }
 
-    private void Unpause()
+    private void Hide()
     {
-        Time.timeScale = 1f;
         PauseMenuCanvas.SetActive(false);
-        GameManager.Instance.UpdateGameState(GameState.Playing);
     }
 
-    public void OnContinue() => Unpause();
-
-    public void QuitGame()
+    public void ContinuePressed()
     {
-        Application.Quit();
-        Debug.Log("Quit");
+        GameManager.Instance.Unpause();
+    }
+
+    public void RestartPressed()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void QuitPressed()
+    {
+        GameManager.Instance.Quit();
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.OnPause -= Show;
+        GameManager.Instance.OnUnpause -= Hide;
+        GameManager.Instance.OnRestart -= Hide;
     }
 }
