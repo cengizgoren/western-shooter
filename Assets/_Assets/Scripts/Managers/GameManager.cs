@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameState GameState = GameState.MainMenu;
     public VictoryState VictoryState;
+    public int CurrentLevelID;
 
     public UnityAction OnLaunch;
     public UnityAction OnLost;
@@ -51,16 +52,17 @@ public class GameManager : MonoBehaviour
         OnUnpause?.Invoke();
     }
 
-    public void Play()
+    public void LoadLevel(int level)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        CurrentLevelID = level;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(level, UnityEngine.SceneManagement.LoadSceneMode.Single);
         UnfreezeTime();
         UpdateGameState(GameState.Active);
     }
 
     public void Restart()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentLevelID, UnityEngine.SceneManagement.LoadSceneMode.Single);
         UnfreezeTime();
         UpdateGameState(GameState.Active);
         OnRestart?.Invoke();

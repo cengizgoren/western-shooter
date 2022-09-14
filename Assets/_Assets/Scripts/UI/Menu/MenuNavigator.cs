@@ -9,9 +9,9 @@ public class MenuNavigator : MonoBehaviour
     public GameObject GameEndedMenuCanvas;
     public TextMeshProUGUI EndStateLabel;
 
-    public void PlayPressed()
+    public void LevelSelectionPressed(int level)
     {
-        GameManager.Instance.Play();
+        GameManager.Instance.LoadLevel(level);
     }
 
     public void RestartPressed()
