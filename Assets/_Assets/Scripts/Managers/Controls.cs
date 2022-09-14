@@ -27,6 +27,6 @@ public class Controls : MonoBehaviour
 
     void OnDisable()
     {
-        InputActions.Disable();
+        //InputActions.Disable();
     }
 }

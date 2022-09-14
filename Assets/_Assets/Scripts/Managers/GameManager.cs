@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public UnityAction OnUnpause;
     public UnityAction OnRestart;
 
+
+
     //private readonly Dictionary<Tuple<GameState, GameState>, Action> gameTransitions = new Dictionary<Tuple<GameState, GameState>, Action>();
     //private readonly Dictionary<Tuple<VictoryState, VictoryState>, Action> victoryTransitions = new Dictionary<Tuple<VictoryState, VictoryState>, Action>();
 
@@ -63,6 +65,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void Play()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        Time.timeScale = 1f;
+        Controls.InputActions.Player.Enable();
+        UpdateGameState(GameState.Active);
+    }
+
     public void Restart()
     {
         Controls.InputActions.Player.Enable();
@@ -70,6 +80,12 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
         UpdateGameState(GameState.Active);
         OnRestart?.Invoke();
+    }
+
+    public void MainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UpdateGameState(GameState.MainMenu);
     }
 
     public void PlayerHasDied()

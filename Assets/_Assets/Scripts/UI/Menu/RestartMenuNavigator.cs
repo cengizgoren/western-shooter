@@ -39,6 +39,11 @@ public class RestartMenuNavigator : MonoBehaviour
         GameManager.Instance.Restart();
     }
 
+    public void MainMenuPressed()
+    {
+        GameManager.Instance.MainMenu();
+    }
+
     public void QuitPressed()
     {
         GameManager.Instance.Quit();

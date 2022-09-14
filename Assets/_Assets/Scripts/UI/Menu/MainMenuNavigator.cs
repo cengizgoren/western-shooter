@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class MainMenuNavigator : MonoBehaviour
 {
-    public void LoadGame()
+    public void PlayPressed()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        GameManager.Instance.UpdateGameState(GameState.Active);
+        GameManager.Instance.Play();
     }
 
-    public void QuitGame()
+    public void QuitPressed()
     {
-        Application.Quit();
-        Debug.Log("Quit");
+        GameManager.Instance.Quit();
     }
 }
