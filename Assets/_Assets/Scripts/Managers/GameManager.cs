@@ -9,11 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameState GameState = GameState.MainMenu;
-    public GameState PrevGameState = GameState.MainMenu;
-    
     public VictoryState VictoryState;
-    public VictoryState PrevVictoryState;
-
 
     public UnityAction OnLaunch;
     public UnityAction OnLost;
@@ -22,19 +18,11 @@ public class GameManager : MonoBehaviour
     public UnityAction OnUnpause;
     public UnityAction OnRestart;
 
-
-
-    //private readonly Dictionary<Tuple<GameState, GameState>, Action> gameTransitions = new Dictionary<Tuple<GameState, GameState>, Action>();
-    //private readonly Dictionary<Tuple<VictoryState, VictoryState>, Action> victoryTransitions = new Dictionary<Tuple<VictoryState, VictoryState>, Action>();
-
     void Awake()
     {
         if (!Instance)
         {
             Instance = this;
-            //gameTransitions.Add(Tuple.Create(GameState.Launch, GameState.MainMenu), () => Debug.Log("Launch"));
-            //gameTransitions.Add(Tuple.Create(GameState.InProgress, GameState.Paused), Pause);
-            //gameTransitions.Add(Tuple.Create(GameState.Paused, GameState.InProgress), Unpause);
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -51,33 +39,29 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        FreezeTime();
         UpdateGameState(GameState.Paused);
         OnPause?.Invoke();
-        Controls.InputActions.Player.Disable();
-        Time.timeScale = 0f;
     }
 
     public void Unpause()
     {
+        UnfreezeTime();
         UpdateGameState(GameState.Active);
         OnUnpause?.Invoke();
-        Controls.InputActions.Player.Enable();
-        Time.timeScale = 1f;
     }
 
     public void Play()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        Time.timeScale = 1f;
-        Controls.InputActions.Player.Enable();
+        UnfreezeTime();
         UpdateGameState(GameState.Active);
     }
 
     public void Restart()
     {
-        Controls.InputActions.Player.Enable();
-        Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnfreezeTime();
         UpdateGameState(GameState.Active);
         OnRestart?.Invoke();
     }
@@ -99,6 +83,23 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    private void FreezeTime()
+    {
+        Time.timeScale = 0f;
+        Controls.InputActions.Player.Disable();
+    }
+
+    private void UnfreezeTime()
+    {
+        Time.timeScale = 1f;
+        Controls.InputActions.Player.Enable();
+    }
+
+    public void UpdateGameState(GameState newState)
+    {
+        GameState = newState;
+    }
+
     private void OnEscape()
     {
         if (GameState == GameState.Paused)
@@ -109,12 +110,6 @@ public class GameManager : MonoBehaviour
         {
             Pause();
         }
-    }
-
-    public void UpdateGameState(GameState newState)
-    {
-        PrevGameState = GameState;
-        GameState = newState;
     }
 
     public void UpdateVictoryCondition(VictoryState newState)
@@ -128,16 +123,14 @@ public class GameManager : MonoBehaviour
             case VictoryState.ObjectiveCompleted:
                 break;
             case VictoryState.Won:
-                OnWon?.Invoke();
-                Controls.InputActions.Player.Disable();
-                Time.timeScale = 0f;
+                FreezeTime();
                 UpdateGameState(GameState.Ended);
+                OnWon?.Invoke();
                 break;
             case VictoryState.Lost:
-                OnLost?.Invoke();
-                Controls.InputActions.Player.Disable();
-                Time.timeScale = 0f;
+                FreezeTime();
                 UpdateGameState(GameState.Ended);
+                OnLost?.Invoke();
                 break;
             default:
                 break;

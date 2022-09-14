@@ -317,8 +317,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407063794}
-        m_TargetAssemblyTypeName: PauseMenuNavigator, Assembly-CSharp
+      - m_Target: {fileID: 1407063796}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: MainMenuPressed
         m_Mode: 1
         m_Arguments:
@@ -2049,7 +2049,7 @@ GameObject:
   - component: {fileID: 276994678}
   - component: {fileID: 276994677}
   m_Layer: 5
-  m_Name: RestartMenuCanvas
+  m_Name: GameEndedMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6349,7 +6349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1407063796}
-        m_TargetAssemblyTypeName: RestartMenuNavigator, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: QuitPressed
         m_Mode: 1
         m_Arguments:
@@ -8670,8 +8670,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407063794}
-        m_TargetAssemblyTypeName: PauseMenuNavigator, Assembly-CSharp
+      - m_Target: {fileID: 1407063796}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: RestartPressed
         m_Mode: 1
         m_Arguments:
@@ -9460,8 +9460,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407063794}
-        m_TargetAssemblyTypeName: PauseMenuNavigator, Assembly-CSharp
+      - m_Target: {fileID: 1407063796}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: QuitPressed
         m_Mode: 1
         m_Arguments:
@@ -10005,7 +10005,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1407063795}
-  - component: {fileID: 1407063794}
   - component: {fileID: 1407063796}
   m_Layer: 0
   m_Name: Menus
@@ -10014,19 +10013,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1407063794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1407063793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b780ddea94671142acfc3242ad29c78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PauseMenuCanvas: {fileID: 237144364}
 --- !u!4 &1407063795
 Transform:
   m_ObjectHideFlags: 0
@@ -10053,10 +10039,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1407063793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c313c303ad129844bc0f06a11baffae, type: 3}
+  m_Script: {fileID: 11500000, guid: 485c8984d5193f6438f45cb8a0ae9376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RestartMenuCanvas: {fileID: 276994674}
+  PauseMenuCanvas: {fileID: 237144364}
+  GameEndedMenuCanvas: {fileID: 276994674}
   EndStateLabel: {fileID: 780865619}
 --- !u!1 &1411024000
 GameObject:
@@ -12345,7 +12332,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1407063796}
-        m_TargetAssemblyTypeName: RestartMenuNavigator, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: MainMenuPressed
         m_Mode: 1
         m_Arguments:
@@ -14724,7 +14711,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1407063796}
-        m_TargetAssemblyTypeName: RestartMenuNavigator, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: RestartPressed
         m_Mode: 1
         m_Arguments:
@@ -19355,8 +19342,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407063794}
-        m_TargetAssemblyTypeName: PauseMenuNavigator, Assembly-CSharp
+      - m_Target: {fileID: 1407063796}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
         m_MethodName: ContinuePressed
         m_Mode: 1
         m_Arguments:
