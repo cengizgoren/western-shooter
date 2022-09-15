@@ -56,6 +56,8 @@ public class DummyPlayer : MonoBehaviour
     [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
     public float CameraAngleOverride = 0.0f;
 
+    public Transform AimArrow;
+
 
     // Player
     private float _speed;
@@ -140,7 +142,6 @@ public class DummyPlayer : MonoBehaviour
     void PlayerRotation()
     {
         Ray ray = Camera.main.ScreenPointToRay(Controls.InputActions.Player.Look.ReadValue<Vector2>());
-        //TODO: Align aiming plane in a better way
         Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
@@ -151,6 +152,9 @@ public class DummyPlayer : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(dirToMouse.x, 0f, dirToMouse.z), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
             _weaponsManager.RotateWeaponVertically(point);
+
+            // Position aim arrow
+            AimArrow.position = new Vector3(point.x, AimArrow.position.y, point.z);
         }
     }
 

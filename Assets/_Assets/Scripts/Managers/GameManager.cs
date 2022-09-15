@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     {
         FreezeTime();
         UpdateGameState(GameState.Paused);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         OnPause?.Invoke();
     }
 
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
     {
         UnfreezeTime();
         UpdateGameState(GameState.Active);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
         OnUnpause?.Invoke();
     }
 
@@ -57,6 +61,8 @@ public class GameManager : MonoBehaviour
         CurrentLevelID = level;
         UnityEngine.SceneManagement.SceneManager.LoadScene(level, UnityEngine.SceneManagement.LoadSceneMode.Single);
         UnfreezeTime();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
         UpdateGameState(GameState.Active);
     }
 
@@ -89,12 +95,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         Controls.InputActions.Player.Disable();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void UnfreezeTime()
     {
         Time.timeScale = 1f;
         Controls.InputActions.Player.Enable();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     public void UpdateGameState(GameState newState)
@@ -136,6 +146,38 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            switch (GameState)
+            {
+                case GameState.MainMenu:
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    break;
+                case GameState.Active:
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = false;
+                    break;
+                case GameState.Paused:
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    break;
+                case GameState.Ended:
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    break;
+            }
+        }
+        if (!hasFocus)
+        {
+            //Pause();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
