@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         UpdateGameState(GameState.MainMenu);
     }
 

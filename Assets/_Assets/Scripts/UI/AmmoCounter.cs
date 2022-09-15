@@ -7,15 +7,14 @@ public class AmmoCounter : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] private TextMeshProUGUI ammo;
 
-    private DummyWeaponsManager weaponsManager;
+    private DummyPlayer weaponsManager;
     private WeaponController currentWeapon;
 
     private void Awake()
     {
-        weaponsManager = FindObjectOfType<DummyWeaponsManager>();
+        weaponsManager = FindObjectOfType<DummyPlayer>();
         weaponsManager.OnSwitchedToWeapon += ChangeWeapon;
-        // weaponsManager.OnAddedWeapon += AddWeapon;
-        // weaponsManager.OnRemovedWeapon += RemoveWeapon;
+
     }
 
     private void Update()
@@ -34,10 +33,4 @@ public class AmmoCounter : MonoBehaviour
         currentWeapon = weapon;
         weaponImage.sprite = weapon.Icon;
     }
-
-    // void AddWeapon(WeaponController newWeapon, int weaponIndex)
-    // { }
-
-    // void RemoveWeapon(WeaponController newWeapon, int weaponIndex)
-    // { }
 }

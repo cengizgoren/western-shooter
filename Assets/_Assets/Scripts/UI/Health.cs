@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour, IDamagable
 {
     [SerializeField] private int MaxHealthPoints = 100;
-    
-    private int currentHealthPoints;
+
+    [SerializeField] private int CurrentHealthPoints;
 
     public UnityAction<int> OnHealthChanged;
     public UnityAction OnHealthLost;
@@ -15,21 +15,21 @@ public class Health : MonoBehaviour, IDamagable
 
     private void Start()
     {
-        currentHealthPoints = MaxHealthPoints;
-        OnHealthChanged?.Invoke(currentHealthPoints);
+        CurrentHealthPoints = MaxHealthPoints;
+        OnHealthChanged?.Invoke(CurrentHealthPoints);
     }
 
     public void DealDamage(int amount)
     {
-        currentHealthPoints -= amount;
-        OnHealthChanged?.Invoke(currentHealthPoints);
+        CurrentHealthPoints -= amount;
+        OnHealthChanged?.Invoke(CurrentHealthPoints);
         OnHealthLost?.Invoke();
-        if (currentHealthPoints <= 0)
+        if (CurrentHealthPoints <= 0)
             OnHealthDepleted?.Invoke();
     }
 
     public int GetCurrentHP()
     {
-        return currentHealthPoints;
+        return CurrentHealthPoints;
     }
 }

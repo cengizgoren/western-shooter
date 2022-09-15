@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private string WeaponName;
     [SerializeField] private GameObject WeaponRoot;
-    [SerializeField] private Transform WeaponMuzzle;
+    public Transform WeaponMuzzle;
     
     [Space(10)]
     [SerializeField] private WeaponShootType ShootType;
@@ -46,7 +46,7 @@ public class WeaponController : MonoBehaviour
 
     // Properties
     public GameObject Owner { get; set; }
-    public DummyWeaponsManager WeaponManager { get; set; }
+    public DummyPlayer DummyPlayer { get; set; }
     public GameObject SourcePrefab { get; set; }
     public bool IsReloading { get; private set; }
     public bool IsWeaponActive { get; private set; }
@@ -70,17 +70,17 @@ public class WeaponController : MonoBehaviour
         switch (ShootType)
         {
             case WeaponShootType.Manual:
-                if (triggerSqueezed && WeaponManager.SwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
+                if (triggerSqueezed && DummyPlayer.SwitchState == DummyPlayer.WeaponSwitchState.Up)
                 {
-                    TryShoot();
+                    TryToShoot();
                     triggerSqueezed = false;
                 }
                 break;
 
             case WeaponShootType.Automatic:
-                if (triggerSqueezed && WeaponManager.SwitchState == DummyWeaponsManager.WeaponSwitchState.Up)
+                if (triggerSqueezed && DummyPlayer.SwitchState == DummyPlayer.WeaponSwitchState.Up)
                 {
-                    TryShoot();
+                    TryToShoot();
                 }
                 break;
         }
@@ -101,9 +101,23 @@ public class WeaponController : MonoBehaviour
             CurrentAmmo = ClipSize;
             IsReloading = false;
         }
+
+        Vector3 rotationMask = new Vector3(1f, 0f, 0f);
+        Vector3 muzzleToMousePoint = DummyPlayer.AimPoint - WeaponMuzzle.transform.position;
+        Vector3 lookAtRotation = Quaternion.LookRotation(muzzleToMousePoint).eulerAngles;
+        WeaponMuzzle.transform.localRotation = Quaternion.Euler(Vector3.Scale(lookAtRotation, rotationMask));
+
+        Ray ray = new Ray(WeaponMuzzle.transform.position, WeaponMuzzle.transform.forward);
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
+        if (groundPlane.Raycast(ray, out float rayDistance))
+        {
+            Vector3 groundPoint = ray.GetPoint(rayDistance);
+            DummyPlayer.LaserSight.SetPosition(0, WeaponMuzzle.position);
+            DummyPlayer.LaserSight.SetPosition(1, groundPoint);
+        }
     }
 
-    bool TryShoot()
+    private bool TryToShoot()
     {
         if (!IsReloading && lastTimeShot + DelayBetweenShots < Time.time)
         {
@@ -115,11 +129,11 @@ public class WeaponController : MonoBehaviour
         return false;
     }
 
-    void Shoot()
+    private void Shoot()
     {
         lastTimeShot = Time.time;
-        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle);
-        ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
+        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
+        ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, WeaponMuzzle.rotation);
         newProjectile.Shoot(this);
 
         if (MuzzleFlashPrefab != null)
@@ -136,10 +150,10 @@ public class WeaponController : MonoBehaviour
         OnShoot?.Invoke();
     }
 
-    public Vector3 GetShotDirectionWithinSpread(Transform shootTransform)
+    public Vector3 GetShotDirectionWithinSpread(Vector3 aimDirection)
     {
         float spreadAngleRatio = BulletSpreadAngle / 180f;
-        Vector3 spreadWorldDirection = Vector3.Slerp(shootTransform.forward, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
+        Vector3 spreadWorldDirection = Vector3.Slerp(aimDirection.normalized, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
         return spreadWorldDirection;
     }
 
@@ -157,11 +171,5 @@ public class WeaponController : MonoBehaviour
     public void PressShootCancelled()
     {
         triggerSqueezed = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(WeaponMuzzle.position, WeaponMuzzle.forward * 100f);
     }
 }

@@ -53,12 +53,14 @@ public class MenuNavigator : MonoBehaviour
 
     private void ShowPauseMenu()
     {
-        PauseMenuCanvas.SetActive(true);
+        if(PauseMenuCanvas) 
+            PauseMenuCanvas.SetActive(true);
     }
 
     private void HidePauseMenu()
     {
-        PauseMenuCanvas.SetActive(false);
+        if (PauseMenuCanvas)
+            PauseMenuCanvas.SetActive(false);
     }
 
     void Start()
