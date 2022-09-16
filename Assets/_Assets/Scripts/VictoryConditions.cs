@@ -7,7 +7,7 @@ public class VictoryConditions : MonoBehaviour
 {
     // Interfaces (IDamagable) are not serializable in unity
     public List<Destructable> DestroyTargets = new List<Destructable>();
-    public List<Health> KillTargets = new List<Health>();
+    public List<EnemyHealth> KillTargets = new List<EnemyHealth>();
 
     private int destroyTargetsCount;
     private int killTargetsCount;
@@ -30,9 +30,9 @@ public class VictoryConditions : MonoBehaviour
             target.OnHealthDepleted += TargetDestroyed;
         }
 
-        foreach (Health target in KillTargets)
+        foreach (EnemyHealth target in KillTargets)
         {
-            target.OnHealthDepleted += TargetKilled;
+            target.OnHpDepleted += TargetKilled;
         }
     }
 
