@@ -18,8 +18,6 @@ public class WeaponController : MonoBehaviour
     [Space(10)]
     [SerializeField] private WeaponShootType ShootType;
     [SerializeField] private float DelayBetweenShots = 0.5f;
-    [SerializeField] private int ClipSize;
-    [SerializeField] private float AmmoReloadTime;
 
     [Space(10)]
     [Range(0f, 2f)]
@@ -35,10 +33,10 @@ public class WeaponController : MonoBehaviour
 
     private float lastTimeShot = Mathf.NegativeInfinity;
     private bool triggerSqueezed = false;
-    private float reloadStartedTime;
 
     // Components
     private AudioSource shootAudioSource;
+    private WeaponAmmo weaponAmmo;
 
     // Events
     public UnityAction OnShoot;
@@ -50,15 +48,12 @@ public class WeaponController : MonoBehaviour
 
     public PlayerWeaponManager PlayerWeaponSwitch { get; set; }
     public GameObject SourcePrefab { get; set; }
-    public bool IsReloading { get; private set; }
     public bool IsWeaponActive { get; private set; }
-    public int CurrentAmmo { get; private set; }
 
     private void Awake()
     {
+        weaponAmmo = GetComponent<WeaponAmmo>();
         shootAudioSource = GetComponent<AudioSource>();
-        IsReloading = false;
-        CurrentAmmo = ClipSize;
     }
 
     private void Start()
@@ -87,23 +82,6 @@ public class WeaponController : MonoBehaviour
                 break;
         }
 
-        if (!IsReloading && CurrentAmmo <= 0)
-        {
-            IsReloading = true;
-            reloadStartedTime = Time.time;
-            
-            if (ReloadSfx)
-            {
-                shootAudioSource.PlayOneShot(ReloadSfx);
-            }
-        }
-
-        if (IsReloading && reloadStartedTime + AmmoReloadTime < Time.time)
-        {
-            CurrentAmmo = ClipSize;
-            IsReloading = false;
-        }
-
         Vector3 rotationMask = new Vector3(1f, 0f, 0f);
         Vector3 muzzleToMousePoint = PlayerRotation.AimPoint - WeaponMuzzle.transform.position;
         Vector3 lookAtRotation = Quaternion.LookRotation(muzzleToMousePoint).eulerAngles;
@@ -121,10 +99,10 @@ public class WeaponController : MonoBehaviour
 
     private bool TryToShoot()
     {
-        if (!IsReloading && lastTimeShot + DelayBetweenShots < Time.time)
+        if (!weaponAmmo.IsReloading && lastTimeShot + DelayBetweenShots < Time.time)
         {
             Shoot();
-            CurrentAmmo -= 1;
+            weaponAmmo.Spend(1);
             OnShootRecoil?.Invoke(RecoilForce);
             return true;
         }
