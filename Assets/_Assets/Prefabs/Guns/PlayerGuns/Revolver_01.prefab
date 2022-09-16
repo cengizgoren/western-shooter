@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6680553336891224670}
   - component: {fileID: 1164435945824783914}
+  - component: {fileID: 4251656054320204747}
   - component: {fileID: -4830156685668007716}
   - component: {fileID: 8224779039163830451}
   - component: {fileID: 5707576591114825003}
@@ -176,6 +177,20 @@ MonoBehaviour:
   ShootSfx: {fileID: 8300000, guid: fe9ace66745039c4c8e80f76e355bf08, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 48adeca3ce3aaeb40a2705e290267ecc, type: 3}
   Icon: {fileID: 21300014, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+--- !u!114 &4251656054320204747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6340443142827010276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ff9c04806611349956f297eff608d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MouseAndAimPointDistance: 2
+  WeaponMuzzle: {fileID: 2496450570939503281}
 --- !u!114 &-4830156685668007716
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -42,7 +42,6 @@ public class WeaponController : MonoBehaviour
     private WeaponAmmo weaponAmmo;
 
     public GameObject Owner { get; set; }
-    public PlayerRotation PlayerRotation { get; set; }
     public PlayerWeaponManager PlayerWeaponSwitch { get; set; }
     public GameObject SourcePrefab { get; set; }
     public bool IsWeaponActive { get; private set; }
@@ -78,10 +77,6 @@ public class WeaponController : MonoBehaviour
                 }
                 break;
         }
-
-        Vector3 muzzleToMousePoint = PlayerRotation.AimPoint - WeaponMuzzle.transform.position;
-        Vector3 lookAtRotation = Quaternion.LookRotation(muzzleToMousePoint).eulerAngles;
-        WeaponMuzzle.transform.localRotation = Quaternion.Euler(Vector3.Scale(lookAtRotation, rotationMask));
     }
 
     private bool TryToShoot()

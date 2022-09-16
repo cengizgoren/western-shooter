@@ -191,7 +191,6 @@ public class PlayerWeaponManager : MonoBehaviour
                 weaponInstance.transform.localRotation = Quaternion.identity;
 
                 weaponInstance.Owner = gameObject;
-                weaponInstance.PlayerRotation = GetComponent<PlayerRotation>();
                 weaponInstance.PlayerWeaponSwitch = GetComponent<PlayerWeaponManager>();
                 weaponInstance.SourcePrefab = weaponPrefab.gameObject;
                 weaponInstance.ShowWeapon(false);
