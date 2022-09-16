@@ -11,6 +11,9 @@ public class WeaponController : MonoBehaviour
         Automatic,
     }
 
+    public UnityAction OnShoot;
+    public UnityAction<float> OnShootRecoil;
+
     [SerializeField] private string WeaponName;
     [SerializeField] private GameObject WeaponRoot;
     public Transform WeaponMuzzle;
@@ -33,19 +36,13 @@ public class WeaponController : MonoBehaviour
 
     private float lastTimeShot = Mathf.NegativeInfinity;
     private bool triggerSqueezed = false;
+    private Vector3 rotationMask = new Vector3(1f, 0f, 0f);
 
-    // Components
     private AudioSource shootAudioSource;
     private WeaponAmmo weaponAmmo;
 
-    // Events
-    public UnityAction OnShoot;
-    public UnityAction<float> OnShootRecoil;
-
-    // Properties
     public GameObject Owner { get; set; }
     public PlayerRotation PlayerRotation { get; set; }
-
     public PlayerWeaponManager PlayerWeaponSwitch { get; set; }
     public GameObject SourcePrefab { get; set; }
     public bool IsWeaponActive { get; private set; }
@@ -58,8 +55,8 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
-        Controls.InputActions.Player.Shoot.performed += _ => PressShootPerformed();
-        Controls.InputActions.Player.Shoot.canceled += _ => PressShootCancelled();
+        Controls.InputActions.Player.Shoot.performed += _ => triggerSqueezed = true;
+        Controls.InputActions.Player.Shoot.canceled += _ => triggerSqueezed = false;
     }
 
     public void Update()
@@ -82,19 +79,9 @@ public class WeaponController : MonoBehaviour
                 break;
         }
 
-        Vector3 rotationMask = new Vector3(1f, 0f, 0f);
         Vector3 muzzleToMousePoint = PlayerRotation.AimPoint - WeaponMuzzle.transform.position;
         Vector3 lookAtRotation = Quaternion.LookRotation(muzzleToMousePoint).eulerAngles;
         WeaponMuzzle.transform.localRotation = Quaternion.Euler(Vector3.Scale(lookAtRotation, rotationMask));
-
-        Ray ray = new Ray(WeaponMuzzle.transform.position, WeaponMuzzle.transform.forward);
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
-        if (groundPlane.Raycast(ray, out float rayDistance))
-        {
-            Vector3 groundPoint = ray.GetPoint(rayDistance);
-            PlayerRotation.LaserSight.SetPosition(0, WeaponMuzzle.position);
-            PlayerRotation.LaserSight.SetPosition(1, groundPoint);
-        }
     }
 
     private bool TryToShoot()
@@ -141,15 +128,5 @@ public class WeaponController : MonoBehaviour
     {
         WeaponRoot.SetActive(show);
         IsWeaponActive = show;
-    }
-
-    public void PressShootPerformed()
-    {
-        triggerSqueezed = true;
-    }
-
-    public void PressShootCancelled()
-    {
-        triggerSqueezed = false;
     }
 }

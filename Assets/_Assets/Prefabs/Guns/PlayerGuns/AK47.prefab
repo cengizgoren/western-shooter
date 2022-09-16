@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 2697347381791909232}
   - component: {fileID: 4389695552653952208}
   - component: {fileID: 1752310866403024715}
+  - component: {fileID: -2101906162636698459}
   - component: {fileID: 6612288783258669549}
   m_Layer: 0
   m_Name: AK47
@@ -192,6 +193,20 @@ MonoBehaviour:
   AmmoReloadTime: 1
   ReloadSfx: {fileID: 0}
   IntVariable: {fileID: 11400000, guid: 9529b550065645d46a6dff519febeb24, type: 2}
+--- !u!114 &-2101906162636698459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809816431979793371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f35dd5c32e95044c83700945a7384b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LaserSightEffectPrefab: {fileID: 6237820242584301931, guid: 7450d4231a7def6419084f2847a898ed, type: 3}
+  Origin: {fileID: 4708424568244275276}
 --- !u!82 &6612288783258669549
 AudioSource:
   m_ObjectHideFlags: 0

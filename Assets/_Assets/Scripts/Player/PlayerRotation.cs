@@ -10,7 +10,6 @@ public class PlayerRotation : MonoBehaviour
     public Vector3 AimPoint;
     public Transform CameraRoot;
     public Transform AimArrow;
-    public LineRenderer LaserSight;
     public float RotationSpeed = 720f;
 
     private void Update()
