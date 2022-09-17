@@ -3,41 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerWeaponManager : MonoBehaviour
+public class PlayerWeaponSwitcher : MonoBehaviour
 {
+    public UnityAction<Weapon> OnSwitchedToWeapon;
+
     public Transform WeaponParentSocket;
     public Transform DefaultWeaponPosition;
     public Transform DownWeaponPosition;
+    [Space(10)]
+    public WeaponSwitchState switchState;
+    public int ActiveWeaponIndex;
     public float WeaponSwitchDelay = 1f;
     public AnimationCurve weaponSwitchCurve;
-    public float MaxRecoilDistance = 0.5f;
-    public float RecoilSharpness = 50f;
-    public float RecoilRestitutionSharpness = 10f;
+    public BoolVariable AllowToShoot;
 
+    private PlayerWeaponArsenal playerWeaponArsenal;
 
-    [Header("Weapons Manager")]
-    [SerializeField] private List<WeaponController> StartingWeapons = new List<WeaponController>();
-
-    private readonly WeaponController[] weaponSlots = new WeaponController[9];
     private float timeStartedWeaponSwitch;
     private int meaponSwitchNewWeaponIndex;
-    private WeaponController activeWeapon;
+    private Weapon activeWeapon;
     private Vector3 weaponMainLocalPosition;
     private Quaternion weaponMainLocalRotation;
-    private Vector3 accumulatedRecoil;
-    private Vector3 weaponRecoilLocalPosition;
 
-    public int ActiveWeaponIndex { get; private set; }
-    public WeaponSwitchState SwitchState { get; private set; }
-
-    public UnityAction<WeaponController> OnSwitchedToWeapon;
-    public UnityAction<WeaponController, int> OnAddedWeapon;
-    public UnityAction<WeaponController, int> OnRemovedWeapon;
 
     private void Start()
     {
         ActiveWeaponIndex = -1;
-        SwitchState = WeaponSwitchState.Down;
+        playerWeaponArsenal = GetComponent<PlayerWeaponArsenal>();
+
+        UpdateState(WeaponSwitchState.Down);
         weaponMainLocalPosition = DefaultWeaponPosition.localPosition;
         weaponMainLocalRotation = DefaultWeaponPosition.localRotation;
         OnSwitchedToWeapon += OnWeaponSwitched;
@@ -47,47 +41,67 @@ public class PlayerWeaponManager : MonoBehaviour
             SwitchWeaponByNumber(ctx.ReadValue<float>());
         };
 
-        foreach (var weapon in StartingWeapons)
-        {
-            AddWeapon(weapon);
-        }
-
         SwitchWeaponAscending(true);
+    }
+
+    public Weapon GetActiveWeapon()
+    {
+        return playerWeaponArsenal.GetWeaponAtSlotIndex(ActiveWeaponIndex);
+    }
+
+    // Temporary workaround to decouple other calss
+    private void UpdateState(WeaponSwitchState newState)
+    {
+        switchState = newState;
+
+        switch (switchState)
+        {
+            case WeaponSwitchState.Up:
+                AllowToShoot.Value = true;
+                break;
+            case WeaponSwitchState.Down:
+                AllowToShoot.Value = false;
+                break;
+            case WeaponSwitchState.PutDownPrevious:
+                AllowToShoot.Value = false;
+                break;
+            case WeaponSwitchState.PutUpNew:
+                AllowToShoot.Value = false;
+                break;
+        }
     }
 
     private void Update()
     {
         UpdateWeaponSwitching();
-        UpdateWeaponRecoil();
 
-        WeaponParentSocket.localPosition = weaponMainLocalPosition + weaponRecoilLocalPosition;
+        WeaponParentSocket.localPosition = weaponMainLocalPosition;
         WeaponParentSocket.localRotation = weaponMainLocalRotation;
     }
 
-    void OnWeaponSwitched(WeaponController newWeapon)
+    private void OnWeaponSwitched(Weapon newWeapon)
     {
         if (newWeapon != null)
         {
-            newWeapon.ShowWeapon(true);
+            newWeapon.gameObject.SetActive(true);
             activeWeapon = newWeapon;
         }
     }
 
     private void SwitchWeaponByNumber(float weaponNumber)
     {
-        if (SwitchState == WeaponSwitchState.Up || SwitchState == WeaponSwitchState.Down)
+        if (switchState == WeaponSwitchState.Up || switchState == WeaponSwitchState.Down)
         {
             int switchWeaponInput = (int)weaponNumber;
             if (switchWeaponInput != 0)
             {
-                if (GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
+                if (playerWeaponArsenal.GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
                 {
                     SwitchToWeaponIndex(switchWeaponInput - 1);
                 }
             }
         }
     }
-
 
     private void UpdateWeaponSwitching()
     {
@@ -103,18 +117,18 @@ public class PlayerWeaponManager : MonoBehaviour
 
         if (switchingTimeFactor >= 1f)
         {
-            if (SwitchState == WeaponSwitchState.PutDownPrevious)
+            if (switchState == WeaponSwitchState.PutDownPrevious)
             {
-                WeaponController oldWeapon = GetWeaponAtSlotIndex(ActiveWeaponIndex);
+                Weapon oldWeapon = playerWeaponArsenal.GetWeaponAtSlotIndex(ActiveWeaponIndex);
                 if (oldWeapon != null)
                 {
-                    oldWeapon.ShowWeapon(false);
+                    oldWeapon.gameObject.SetActive(false);
                 }
 
                 ActiveWeaponIndex = meaponSwitchNewWeaponIndex;
                 switchingTimeFactor = 0f;
 
-                WeaponController newWeapon = GetWeaponAtSlotIndex(ActiveWeaponIndex);
+                Weapon newWeapon = playerWeaponArsenal.GetWeaponAtSlotIndex(ActiveWeaponIndex);
                 if (OnSwitchedToWeapon != null)
                 {
                     OnSwitchedToWeapon.Invoke(newWeapon);
@@ -123,26 +137,26 @@ public class PlayerWeaponManager : MonoBehaviour
                 if (newWeapon)
                 {
                     timeStartedWeaponSwitch = Time.time;
-                    SwitchState = WeaponSwitchState.PutUpNew;
+                    UpdateState(WeaponSwitchState.PutUpNew);
                 }
                 else
                 {
-                    SwitchState = WeaponSwitchState.Down;
+                    UpdateState(WeaponSwitchState.Down);
                 }
             }
-            else if (SwitchState == WeaponSwitchState.PutUpNew)
+            else if (switchState == WeaponSwitchState.PutUpNew)
             {
-                SwitchState = WeaponSwitchState.Up;
+                UpdateState(WeaponSwitchState.Up);
             }
         }
 
-        if (SwitchState == WeaponSwitchState.PutDownPrevious)
+        if (switchState == WeaponSwitchState.PutDownPrevious)
         {
             float curve = weaponSwitchCurve.Evaluate(switchingTimeFactor);
             weaponMainLocalPosition = Vector3.Lerp(DefaultWeaponPosition.localPosition, DownWeaponPosition.localPosition, curve);
             weaponMainLocalRotation = Quaternion.Lerp(DefaultWeaponPosition.localRotation, DownWeaponPosition.localRotation, curve);
         }
-        else if (SwitchState == WeaponSwitchState.PutUpNew)
+        else if (switchState == WeaponSwitchState.PutUpNew)
         {
             float curve = weaponSwitchCurve.Evaluate(switchingTimeFactor);
             weaponMainLocalPosition = Vector3.Lerp(DownWeaponPosition.localPosition, DefaultWeaponPosition.localPosition, curve);
@@ -150,77 +164,13 @@ public class PlayerWeaponManager : MonoBehaviour
         }
     }
 
-    public WeaponController GetWeaponAtSlotIndex(int index)
-    {
-        if (index >= 0 &&
-            index < weaponSlots.Length)
-        {
-            return weaponSlots[index];
-        }
-
-        return null;
-    }
-
-    public WeaponController HasWeapon(WeaponController weaponPrefab)
-    {
-        for (var index = 0; index < weaponSlots.Length; index++)
-        {
-            var w = weaponSlots[index];
-            if (w != null && w.SourcePrefab == weaponPrefab.gameObject)
-            {
-                return w;
-            }
-        }
-
-        return null;
-    }
-
-    public bool AddWeapon(WeaponController weaponPrefab)
-    {
-        if (HasWeapon(weaponPrefab) != null)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < weaponSlots.Length; i++)
-        {
-            if (weaponSlots[i] == null)
-            {
-                WeaponController weaponInstance = Instantiate(weaponPrefab, WeaponParentSocket);
-                weaponInstance.transform.localPosition = Vector3.zero;
-                weaponInstance.transform.localRotation = Quaternion.identity;
-
-                weaponInstance.Owner = gameObject;
-                weaponInstance.PlayerWeaponSwitch = GetComponent<PlayerWeaponManager>();
-                weaponInstance.SourcePrefab = weaponPrefab.gameObject;
-                weaponInstance.ShowWeapon(false);
-
-                weaponSlots[i] = weaponInstance;
-
-                if (OnAddedWeapon != null)
-                {
-                    OnAddedWeapon.Invoke(weaponInstance, i);
-                }
-
-                return true;
-            }
-        }
-
-        if (GetActiveWeapon() == null)
-        {
-            SwitchWeaponAscending(true);
-        }
-
-        return false;
-    }
-
     public void SwitchWeaponAscending(bool ascendingOrder)
     {
         int newWeaponIndex = -1;
-        int closestSlotDistance = weaponSlots.Length;
-        for (int i = 0; i < weaponSlots.Length; i++)
+        int closestSlotDistance = PlayerWeaponArsenal.WEAPON_SLOTS_NUMBER;
+        for (int i = 0; i < PlayerWeaponArsenal.WEAPON_SLOTS_NUMBER; i++)
         {
-            if (i != ActiveWeaponIndex && GetWeaponAtSlotIndex(i) != null)
+            if (i != ActiveWeaponIndex && playerWeaponArsenal.GetWeaponAtSlotIndex(i) != null)
             {
                 int distanceToActiveIndex = GetDistanceBetweenWeaponSlots(ActiveWeaponIndex, i, ascendingOrder);
 
@@ -245,11 +195,10 @@ public class PlayerWeaponManager : MonoBehaviour
             if (GetActiveWeapon() == null)
             {
                 weaponMainLocalPosition = DownWeaponPosition.localPosition;
-                SwitchState = WeaponSwitchState.PutUpNew;
+                UpdateState(WeaponSwitchState.PutUpNew);
                 ActiveWeaponIndex = meaponSwitchNewWeaponIndex;
 
-                WeaponController newWeapon = GetWeaponAtSlotIndex(meaponSwitchNewWeaponIndex);
-
+                Weapon newWeapon = playerWeaponArsenal.GetWeaponAtSlotIndex(meaponSwitchNewWeaponIndex);
 
                 if (OnSwitchedToWeapon != null)
                 {
@@ -258,7 +207,7 @@ public class PlayerWeaponManager : MonoBehaviour
             }
             else
             {
-                SwitchState = WeaponSwitchState.PutDownPrevious;
+                UpdateState(WeaponSwitchState.PutDownPrevious);
             }
         }
     }
@@ -273,27 +222,9 @@ public class PlayerWeaponManager : MonoBehaviour
             distanceBetweenSlots = -1 * (toSlotIndex - fromSlotIndex);
 
         if (distanceBetweenSlots < 0)
-            distanceBetweenSlots = weaponSlots.Length + distanceBetweenSlots;
+            distanceBetweenSlots = PlayerWeaponArsenal.WEAPON_SLOTS_NUMBER + distanceBetweenSlots;
 
         return distanceBetweenSlots;
-    }
-
-    public WeaponController GetActiveWeapon()
-    {
-        return GetWeaponAtSlotIndex(ActiveWeaponIndex);
-    }
-
-    private void UpdateWeaponRecoil()
-    {
-        if (weaponRecoilLocalPosition.z >= accumulatedRecoil.z * 0.99f)
-        {
-            weaponRecoilLocalPosition = Vector3.Lerp(weaponRecoilLocalPosition, accumulatedRecoil, RecoilSharpness * Time.deltaTime);
-        }
-        else
-        {
-            weaponRecoilLocalPosition = Vector3.Lerp(weaponRecoilLocalPosition, Vector3.zero, RecoilRestitutionSharpness * Time.deltaTime);
-            accumulatedRecoil = weaponRecoilLocalPosition;
-        }
     }
 
     public enum WeaponSwitchState

@@ -8,12 +8,12 @@ public class AmmoCounter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammo;
     public IntVariable Variable;
 
-    private PlayerWeaponManager weaponsManager;
-    private WeaponController currentWeapon;
+    private PlayerWeaponSwitcher weaponsManager;
+    private Weapon currentWeapon;
 
     private void Awake()
     {
-        weaponsManager = FindObjectOfType<PlayerWeaponManager>();
+        weaponsManager = FindObjectOfType<PlayerWeaponSwitcher>();
         weaponsManager.OnSwitchedToWeapon += ChangeWeapon;
     }
 
@@ -22,7 +22,7 @@ public class AmmoCounter : MonoBehaviour
         ammo.SetText(Variable.RuntimeValue.ToString());
     }
 
-    private void ChangeWeapon(WeaponController weapon)
+    private void ChangeWeapon(Weapon weapon)
     { 
         currentWeapon = weapon;
         weaponImage.sprite = weapon.Icon;

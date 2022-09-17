@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
-public class WeaponController : MonoBehaviour
+public class WeaponShooting : MonoBehaviour
 {
     public enum WeaponShootType
     {
@@ -11,43 +11,28 @@ public class WeaponController : MonoBehaviour
         Automatic,
     }
 
-    public UnityAction OnShoot;
-    public UnityAction<float> OnShootRecoil;
-
-    [SerializeField] private string WeaponName;
-    [SerializeField] private GameObject WeaponRoot;
+    public GameObject WeaponRoot;
     public Transform WeaponMuzzle;
-    
+    public BoolVariable AllowedToShoot;
     [Space(10)]
-    [SerializeField] private WeaponShootType ShootType;
-    [SerializeField] private float DelayBetweenShots = 0.5f;
-
+    public WeaponShootType ShootType;
+    public float DelayBetweenShots = 0.5f;
+    public float BulletSpreadAngle = 1f;
     [Space(10)]
-    [Range(0f, 2f)]
-    [SerializeField] private float RecoilForce = 1.0f;
-    [SerializeField] private float BulletSpreadAngle = 1f;
-
-    [Space(10)]
-    [SerializeField] private ProjectileStandard ProjectilePrefab;
-    [SerializeField] private GameObject MuzzleFlashPrefab;
-    [SerializeField] private AudioClip ShootSfx;
-    [SerializeField] private AudioClip ReloadSfx;
-    public Sprite Icon;
-
-    private float lastTimeShot = Mathf.NegativeInfinity;
-    private bool triggerSqueezed = false;
-    private Vector3 rotationMask = new Vector3(1f, 0f, 0f);
+    public ProjectileStandard ProjectilePrefab;
+    public GameObject MuzzleFlashPrefab;
+    public AudioClip ShootSfx;
 
     private AudioSource shootAudioSource;
     private WeaponAmmo weaponAmmo;
+    private Weapon weapon;
 
-    public GameObject Owner { get; set; }
-    public PlayerWeaponManager PlayerWeaponSwitch { get; set; }
-    public GameObject SourcePrefab { get; set; }
-    public bool IsWeaponActive { get; private set; }
+    private float lastTimeShot = Mathf.NegativeInfinity;
+    private bool triggerSqueezed = false;
 
     private void Awake()
     {
+        weapon = GetComponent<Weapon>();
         weaponAmmo = GetComponent<WeaponAmmo>();
         shootAudioSource = GetComponent<AudioSource>();
     }
@@ -63,7 +48,7 @@ public class WeaponController : MonoBehaviour
         switch (ShootType)
         {
             case WeaponShootType.Manual:
-                if (triggerSqueezed && PlayerWeaponSwitch.SwitchState == PlayerWeaponManager.WeaponSwitchState.Up)
+                if (triggerSqueezed && AllowedToShoot.Value)
                 {
                     TryToShoot();
                     triggerSqueezed = false;
@@ -71,7 +56,7 @@ public class WeaponController : MonoBehaviour
                 break;
 
             case WeaponShootType.Automatic:
-                if (triggerSqueezed && PlayerWeaponSwitch.SwitchState == PlayerWeaponManager.WeaponSwitchState.Up)
+                if (triggerSqueezed && AllowedToShoot.Value)
                 {
                     TryToShoot();
                 }
@@ -83,45 +68,46 @@ public class WeaponController : MonoBehaviour
     {
         if (!weaponAmmo.IsReloading && lastTimeShot + DelayBetweenShots < Time.time)
         {
-            Shoot();
+            ShootProjectile();
+            SpawnMuzzleFlash();
+            PlayGunShot();
             weaponAmmo.Spend(1);
-            OnShootRecoil?.Invoke(RecoilForce);
             return true;
         }
         return false;
     }
 
-    private void Shoot()
+    private void ShootProjectile()
     {
         lastTimeShot = Time.time;
         Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
+
         ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, WeaponMuzzle.rotation);
-        newProjectile.Shoot(this);
-
-        if (MuzzleFlashPrefab != null)
-        {
-            GameObject muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
-            Destroy(muzzleFlashInstance, 2f);
-        }
-
-        if (ShootSfx)
-        {
-            shootAudioSource.PlayOneShot(ShootSfx);
-        }
-
-        OnShoot?.Invoke();
+        newProjectile.Setup(weapon.GetOwner());
+        newProjectile.Shoot();
     }
 
-    public Vector3 GetShotDirectionWithinSpread(Vector3 aimDirection)
+    private Vector3 GetShotDirectionWithinSpread(Vector3 aimDirection)
     {
         float spreadAngleRatio = BulletSpreadAngle / 180f;
         Vector3 spreadWorldDirection = Vector3.Slerp(aimDirection.normalized, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
         return spreadWorldDirection;
     }
 
-    public void ShowWeapon(bool show)
+    private void SpawnMuzzleFlash()
     {
-        WeaponRoot.SetActive(show);
-        IsWeaponActive = show;
+        if (MuzzleFlashPrefab != null)
+        {
+            GameObject muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
+            Destroy(muzzleFlashInstance, 2f);
+        }
+    }
+
+    private void PlayGunShot()
+    {
+        if (ShootSfx)
+        {
+            shootAudioSource.PlayOneShot(ShootSfx);
+        }
     }
 }

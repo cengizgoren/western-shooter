@@ -888,6 +888,7 @@ GameObject:
   - component: {fileID: 2254493178143105301}
   - component: {fileID: 2254493178143105307}
   - component: {fileID: 2254493178143105306}
+  - component: {fileID: -8612763893024910462}
   - component: {fileID: 2254493178143105300}
   - component: {fileID: 2254493178143105311}
   - component: {fileID: 2254493178143105308}
@@ -978,7 +979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2044d81e1c21e240b595942f67758ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseAndAimPointDistance: 5
   MousePoint: {x: 0, y: 0, z: 0}
   AimPoint: {x: 0, y: 0, z: 0}
   CameraRoot: {fileID: 2254493178800537779}
@@ -1006,6 +1006,23 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &-8612763893024910462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2254493178143105287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4583fd6fe718d0b4aa1bad65b409b1f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponSocket: {fileID: 2254493177351936335}
+  StartingWeapons:
+  - {fileID: -6810820386306557078, guid: 2b9a6ca4171574d489f61bec72c6ed45, type: 3}
+  - {fileID: 1170892884836132827, guid: 26b4a9a4cf88d694a859bab4be016252, type: 3}
+  - {fileID: -5488947287673647547, guid: e630822c12e89bc47bf5c22de4135db7, type: 3}
 --- !u!114 &2254493178143105300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,6 +1038,8 @@ MonoBehaviour:
   WeaponParentSocket: {fileID: 2254493177351936335}
   DefaultWeaponPosition: {fileID: 2254493177069918221}
   DownWeaponPosition: {fileID: 2254493178265132266}
+  switchState: 0
+  ActiveWeaponIndex: 0
   WeaponSwitchDelay: 0.5
   weaponSwitchCurve:
     serializedVersion: 2
@@ -1046,13 +1065,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxRecoilDistance: 0.5
-  RecoilSharpness: 50
-  RecoilRestitutionSharpness: 10
-  StartingWeapons:
-  - {fileID: 1164435945824783914, guid: 2b9a6ca4171574d489f61bec72c6ed45, type: 3}
-  - {fileID: 4389695552653952208, guid: 26b4a9a4cf88d694a859bab4be016252, type: 3}
-  - {fileID: 4389695552653952208, guid: e630822c12e89bc47bf5c22de4135db7, type: 3}
+  AllowToShoot: {fileID: 11400000, guid: f80e2c66ade23fe409b1e3ca1ab914b7, type: 2}
 --- !u!114 &2254493178143105311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,7 +1448,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7948
+  m_VersionIndex: 7951
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

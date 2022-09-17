@@ -104,9 +104,13 @@ public class ProjectileStandard : MonoBehaviour
 
     }
 
-    public void Shoot(WeaponController controller)
+    public void Setup(GameObject owner)
     {
-        Owner = controller.Owner;
+        Owner = owner;
+    }
+
+    public void Shoot()
+    {
         InitialPosition = transform.position;
         InitialDirection = transform.forward;
         OnShoot();
