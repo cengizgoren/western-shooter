@@ -5,10 +5,9 @@ using UnityEngine.Events;
 
 public class Destructable : MonoBehaviour, IDamagable
 {
-    [SerializeField] private int MaxHealthPoints = 100;
-    // [SerializeField] private AnimationCurve colorPhaseCurve;
+    public UnityAction OnHealthDepleted;
 
-    [Space(10)]
+    [SerializeField] private IntVariable MaxHPSetting;
     [SerializeField] private GameObject DeathVfx;
     [SerializeField] private float DeathVfxSpawnOffset = 0f;
     [SerializeField] private float DeathVfxLifetime = 5f;
@@ -19,12 +18,12 @@ public class Destructable : MonoBehaviour, IDamagable
 
     private Renderer _renderer;
     private Dictionary<int, Color> originalColors;
-
-    public UnityAction OnHealthDepleted;
+    private int maxHealthPoints;
 
     private void Start()
     {
-        currentHealthPoints = MaxHealthPoints;
+        maxHealthPoints = MaxHPSetting.InitialValue;
+        currentHealthPoints = MaxHPSetting.InitialValue;
         _renderer = GetComponent<Renderer>();
 
         if (_renderer) 
@@ -61,7 +60,7 @@ public class Destructable : MonoBehaviour, IDamagable
 
         if (_renderer) 
         {
-            float colorPhaseFactor = 1f - ((float)currentHealthPoints / (float)MaxHealthPoints);
+            float colorPhaseFactor = 1f - ((float)currentHealthPoints / (float)maxHealthPoints);
             foreach (Material mat in _renderer.materials)
             {
                 // TODO: test color change curve
@@ -70,6 +69,4 @@ public class Destructable : MonoBehaviour, IDamagable
             }
         }
     }
-
-
 }
