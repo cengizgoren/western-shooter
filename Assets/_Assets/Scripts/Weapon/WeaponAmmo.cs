@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponAmmo : MonoBehaviour
 {
+    public UnityAction<int> OnAmmoChange;
+
     public int ClipSize;
     public float AmmoReloadTime;
     public AudioClip ReloadSfx;
-    public IntVariable IntVariable;
 
     private AudioSource audioSource;
     private float reloadStartedTime;
@@ -27,16 +29,6 @@ public class WeaponAmmo : MonoBehaviour
     {
         CheckIfReloadNeeded();
         CheckIfReloadEnded();
-    }
-
-    private void OnEnable()
-    {
-        // Extract to player exclusive component
-        if (IntVariable)
-        {
-            IntVariable.RuntimeValue = CurrentAmmo;
-        }
-        
     }
 
     public void Spend(int amount)
@@ -70,9 +62,6 @@ public class WeaponAmmo : MonoBehaviour
     private void UpdateAmmo(int newValue)
     {
         CurrentAmmo = newValue;
-        if (IntVariable)
-        {
-            IntVariable.RuntimeValue = newValue;
-        }
+        OnAmmoChange?.Invoke(CurrentAmmo);
     }
 }

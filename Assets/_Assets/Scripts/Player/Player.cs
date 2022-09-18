@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerRotation))]
 [RequireComponent(typeof(PlayerGravity))]
 [RequireComponent(typeof(PlayerHealth))]
-[RequireComponent(typeof(PlayerWeaponSwitcher))]
+[RequireComponent(typeof(WeaponSwitcher))]
 
 public class Player : MonoBehaviour
 {

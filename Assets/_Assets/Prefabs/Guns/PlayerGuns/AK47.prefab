@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6006824dcadb8fc4e8c3f563640b341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300044, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  WeaponIconSprite: {fileID: 21300044, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
 --- !u!114 &81750694858102857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponRoot: {fileID: 6809816431979793371}
   WeaponMuzzle: {fileID: 4708424568244275276}
-  AllowedToShoot: 0
+  SafetyOn: 0
   TriggerSqueezed: 0
   ShootType: 1
   DelayBetweenShots: 0.1

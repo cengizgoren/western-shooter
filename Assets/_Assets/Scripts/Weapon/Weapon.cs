@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public Sprite Icon;
+    public Sprite WeaponIconSprite;
     private GameObject Owner;
 
     public void Setup(GameObject owner)

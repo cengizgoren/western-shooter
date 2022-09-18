@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerWeaponSwitcher : MonoBehaviour
+[RequireComponent(typeof(WeaponArsenal))]
+public class WeaponSwitcher : MonoBehaviour
 {
     public UnityAction<Weapon> OnSwitchedToWeapon;
     public UnityAction<bool> OnWeaponReady;
@@ -18,7 +19,7 @@ public class PlayerWeaponSwitcher : MonoBehaviour
     public float WeaponSwitchDelay = 1f;
     public AnimationCurve weaponSwitchCurve;
 
-    private PlayerWeaponArsenal playerWeaponArsenal;
+    private WeaponArsenal playerWeaponArsenal;
 
     private float timeStartedWeaponSwitch;
     private int meaponSwitchNewWeaponIndex;
@@ -29,7 +30,7 @@ public class PlayerWeaponSwitcher : MonoBehaviour
     private void Start()
     {
         ActiveWeaponIndex = -1;
-        playerWeaponArsenal = GetComponent<PlayerWeaponArsenal>();
+        playerWeaponArsenal = GetComponent<WeaponArsenal>();
 
         UpdateState(WeaponSwitchState.Down);
         weaponMainLocalPosition = DefaultWeaponPosition.localPosition;
@@ -167,8 +168,8 @@ public class PlayerWeaponSwitcher : MonoBehaviour
     public void SwitchWeaponAscending(bool ascendingOrder)
     {
         int newWeaponIndex = -1;
-        int closestSlotDistance = PlayerWeaponArsenal.WEAPON_SLOTS_NUMBER;
-        for (int i = 0; i < PlayerWeaponArsenal.WEAPON_SLOTS_NUMBER; i++)
+        int closestSlotDistance = WeaponArsenal.WEAPON_SLOTS_NUMBER;
+        for (int i = 0; i < WeaponArsenal.WEAPON_SLOTS_NUMBER; i++)
         {
             if (i != ActiveWeaponIndex && playerWeaponArsenal.GetWeaponAtSlotIndex(i) != null)
             {
@@ -222,7 +223,7 @@ public class PlayerWeaponSwitcher : MonoBehaviour
             distanceBetweenSlots = -1 * (toSlotIndex - fromSlotIndex);
 
         if (distanceBetweenSlots < 0)
-            distanceBetweenSlots = PlayerWeaponArsenal.WEAPON_SLOTS_NUMBER + distanceBetweenSlots;
+            distanceBetweenSlots = WeaponArsenal.WEAPON_SLOTS_NUMBER + distanceBetweenSlots;
 
         return distanceBetweenSlots;
     }

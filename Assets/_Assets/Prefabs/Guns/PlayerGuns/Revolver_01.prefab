@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6680553336891224670}
   - component: {fileID: -6810820386306557078}
+  - component: {fileID: 7808077328798606296}
   - component: {fileID: 1164435945824783914}
   - component: {fileID: 4251656054320204747}
   - component: {fileID: -4830156685668007716}
@@ -166,7 +167,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6006824dcadb8fc4e8c3f563640b341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300014, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  WeaponIconSprite: {fileID: 21300014, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+--- !u!114 &7808077328798606296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6340443142827010276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d836b5d6209b11a49a9b83168dcd1567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1164435945824783914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponRoot: {fileID: 6340443142827010276}
   WeaponMuzzle: {fileID: 2496450570939503281}
-  AllowedToShoot: {fileID: 11400000, guid: f80e2c66ade23fe409b1e3ca1ab914b7, type: 2}
+  SafetyOn: 0
+  TriggerSqueezed: 0
   ShootType: 0
   DelayBetweenShots: 0.25
   BulletSpreadAngle: 0.5

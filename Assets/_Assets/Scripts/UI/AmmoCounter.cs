@@ -4,27 +4,28 @@ using TMPro;
 
 public class AmmoCounter : MonoBehaviour
 {
-    [SerializeField] private Image weaponImage;
-    [SerializeField] private TextMeshProUGUI ammo;
-    public IntVariable Variable;
+    public Image weaponImage;
+    public TextMeshProUGUI ammoCount;
 
-    private PlayerWeaponSwitcher weaponsManager;
-    private Weapon currentWeapon;
+    private WeaponSwitcher playersWeaponsManager;
+    private WeaponAmmo activeWeaponAmmo;
 
     private void Awake()
     {
-        weaponsManager = FindObjectOfType<PlayerWeaponSwitcher>();
-        weaponsManager.OnSwitchedToWeapon += ChangeWeapon;
+        playersWeaponsManager = FindObjectOfType<Player>().GetComponent<WeaponSwitcher>();
+        playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
     }
 
-    private void Update()
+    private void UpdateAmmoText(int number)
     {
-        ammo.SetText(Variable.RuntimeValue.ToString());
+        ammoCount.SetText(number.ToString());
     }
 
-    private void ChangeWeapon(Weapon weapon)
-    { 
-        currentWeapon = weapon;
-        weaponImage.sprite = weapon.Icon;
+    private void UpdateActiveWeapon(Weapon weapon)
+    {
+        activeWeaponAmmo =  weapon.GetComponent<WeaponAmmo>();
+        UpdateAmmoText(activeWeaponAmmo.CurrentAmmo);
+        activeWeaponAmmo.OnAmmoChange += UpdateAmmoText;
+        weaponImage.sprite = weapon.WeaponIconSprite;
     }
 }

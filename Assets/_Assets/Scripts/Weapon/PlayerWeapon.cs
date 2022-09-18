@@ -9,6 +9,4 @@ using UnityEngine;
 [RequireComponent(typeof(WeaponAim))]
 [RequireComponent(typeof(WeaponLaserSight))]
 public class PlayerWeapon : Weapon
-{
-    public Sprite Icon;
-}
+{}

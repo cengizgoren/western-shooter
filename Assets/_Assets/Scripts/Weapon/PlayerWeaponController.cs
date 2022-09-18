@@ -9,12 +9,12 @@ public class PlayerWeaponController : WeaponController
     //[SerializeField]  // Debug trick, good to remember
     private Weapon playerWeapon;
     //[SerializeField]
-    private PlayerWeaponSwitcher weaponSwitcher;
+    private WeaponSwitcher weaponSwitcher;
 
     private void Start()
     {
         playerWeapon = GetComponent<Weapon>();
-        weaponSwitcher = playerWeapon.GetOwner().GetComponent<PlayerWeaponSwitcher>();
+        weaponSwitcher = playerWeapon.GetOwner().GetComponent<WeaponSwitcher>();
 
         Controls.InputActions.Player.Shoot.performed += _ => base.OnTriggerPressed?.Invoke();
         Controls.InputActions.Player.Shoot.canceled += _ => base.OnTriggerReleased?.Invoke();

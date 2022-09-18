@@ -7,6 +7,4 @@ using UnityEngine;
 [RequireComponent(typeof(WeaponShooting))]
 [RequireComponent(typeof(WeaponAmmo))]
 public class EnemyWeapon : Weapon
-{
-
-}
+{}

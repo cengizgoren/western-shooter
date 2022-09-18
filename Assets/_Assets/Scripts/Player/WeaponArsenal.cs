@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerWeaponArsenal : MonoBehaviour
+public class WeaponArsenal : MonoBehaviour
 {
     public static readonly int WEAPON_SLOTS_NUMBER = 9;
 
