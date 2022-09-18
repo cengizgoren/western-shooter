@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class PlayerWeaponSwitcher : MonoBehaviour
 {
     public UnityAction<Weapon> OnSwitchedToWeapon;
+    public UnityAction<bool> OnWeaponReady;
+   
 
     public Transform WeaponParentSocket;
     public Transform DefaultWeaponPosition;
@@ -15,7 +17,6 @@ public class PlayerWeaponSwitcher : MonoBehaviour
     public int ActiveWeaponIndex;
     public float WeaponSwitchDelay = 1f;
     public AnimationCurve weaponSwitchCurve;
-    public BoolVariable AllowToShoot;
 
     private PlayerWeaponArsenal playerWeaponArsenal;
 
@@ -24,7 +25,6 @@ public class PlayerWeaponSwitcher : MonoBehaviour
     private Weapon activeWeapon;
     private Vector3 weaponMainLocalPosition;
     private Quaternion weaponMainLocalRotation;
-
 
     private void Start()
     {
@@ -57,16 +57,16 @@ public class PlayerWeaponSwitcher : MonoBehaviour
         switch (switchState)
         {
             case WeaponSwitchState.Up:
-                AllowToShoot.Value = true;
+                OnWeaponReady?.Invoke(true);
                 break;
             case WeaponSwitchState.Down:
-                AllowToShoot.Value = false;
+                OnWeaponReady?.Invoke(false);
                 break;
             case WeaponSwitchState.PutDownPrevious:
-                AllowToShoot.Value = false;
+                OnWeaponReady?.Invoke(false);
                 break;
             case WeaponSwitchState.PutUpNew:
-                AllowToShoot.Value = false;
+                OnWeaponReady?.Invoke(false);
                 break;
         }
     }

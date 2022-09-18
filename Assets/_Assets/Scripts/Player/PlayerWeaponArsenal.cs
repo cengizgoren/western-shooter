@@ -12,7 +12,7 @@ public class PlayerWeaponArsenal : MonoBehaviour
 
     private readonly Weapon[] weaponSlots = new Weapon[9];
 
-    private void Start()
+    private void Awake()
     {
         foreach (Weapon weapon in StartingWeapons)
         {

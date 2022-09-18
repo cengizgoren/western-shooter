@@ -31,7 +31,12 @@ public class WeaponAmmo : MonoBehaviour
 
     private void OnEnable()
     {
-        IntVariable.RuntimeValue = CurrentAmmo;
+        // Extract to player exclusive component
+        if (IntVariable)
+        {
+            IntVariable.RuntimeValue = CurrentAmmo;
+        }
+        
     }
 
     public void Spend(int amount)

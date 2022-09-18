@@ -53,7 +53,7 @@ public class Attack : IState
     public void OnEnter()
     {
         time = 0;
-        _enemyController.SetAttack(true);
+        _enemyController.OnAttack?.Invoke(true);
         _navMeshAgent.ResetPath();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.speed = 2f;
@@ -62,7 +62,7 @@ public class Attack : IState
     public void OnExit()
     {
         _enemyDetector.SaveLastKnownPosAndDir();
-        _enemyController.SetAttack(false);
+        _enemyController.OnAttack?.Invoke(false);
         _navMeshAgent.updateRotation = true;
         _navMeshAgent.speed = 4f;
     }

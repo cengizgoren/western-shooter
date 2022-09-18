@@ -126,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2697347381791909232}
   - component: {fileID: 1170892884836132827}
+  - component: {fileID: 81750694858102857}
   - component: {fileID: 4389695552653952208}
   - component: {fileID: -4903484879384938706}
   - component: {fileID: 1752310866403024715}
@@ -168,6 +169,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300044, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+--- !u!114 &81750694858102857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809816431979793371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d836b5d6209b11a49a9b83168dcd1567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4389695552653952208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,10 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponName: AK47
   WeaponRoot: {fileID: 6809816431979793371}
   WeaponMuzzle: {fileID: 4708424568244275276}
-  AllowedToShoot: {fileID: 11400000, guid: f80e2c66ade23fe409b1e3ca1ab914b7, type: 2}
+  AllowedToShoot: 0
+  TriggerSqueezed: 0
   ShootType: 1
   DelayBetweenShots: 0.1
   BulletSpreadAngle: 0
@@ -218,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClipSize: 45
   AmmoReloadTime: 1
-  ReloadSfx: {fileID: 0}
+  ReloadSfx: {fileID: 8300000, guid: 48adeca3ce3aaeb40a2705e290267ecc, type: 3}
   IntVariable: {fileID: 11400000, guid: 9529b550065645d46a6dff519febeb24, type: 2}
 --- !u!114 &-2101906162636698459
 MonoBehaviour:

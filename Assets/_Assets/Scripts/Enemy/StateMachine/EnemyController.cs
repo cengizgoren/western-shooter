@@ -2,16 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
+    public UnityAction<bool> OnAttack;
+
     [SerializeField] private bool _rotationOrdered = false;
     [SerializeField] private float timeStartedWeaponSwitch;
     [SerializeField] private Quaternion _startingRotation;
     //[SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private Quaternion _finalRotation;
-
-    [SerializeField] private EnemyWeaponController weapon;
 
     [Space(10)]
     [SerializeField] private GameObject DeathVfx;
@@ -23,11 +24,6 @@ public class EnemyController : MonoBehaviour
     public void Awake()
     {
         GetComponent<EnemyHealth>().OnHpDepleted += Die;
-    }
-
-    public void SetAttack(bool value) 
-    {
-        weapon.triggerSqueezed = value;
     }
 
     public void Rotate()

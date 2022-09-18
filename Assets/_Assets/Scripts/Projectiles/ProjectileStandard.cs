@@ -116,14 +116,6 @@ public class ProjectileStandard : MonoBehaviour
         OnShoot();
     }
 
-    public void Shoot(EnemyWeaponController controller)
-    {
-        Owner = controller.Owner;
-        InitialPosition = transform.position;
-        InitialDirection = transform.forward;
-        OnShoot();
-    }
-
     private void OnShoot()
     {
         shootTime = Time.time;

@@ -13,7 +13,10 @@ public class WeaponShooting : MonoBehaviour
 
     public GameObject WeaponRoot;
     public Transform WeaponMuzzle;
-    public BoolVariable AllowedToShoot;
+
+    [Space(10)]
+    public bool SafetyOn;
+    public bool TriggerSqueezed;
     [Space(10)]
     public WeaponShootType ShootType;
     public float DelayBetweenShots = 0.5f;
@@ -24,23 +27,29 @@ public class WeaponShooting : MonoBehaviour
     public AudioClip ShootSfx;
 
     private AudioSource shootAudioSource;
-    private WeaponAmmo weaponAmmo;
     private Weapon weapon;
+    private WeaponAmmo weaponAmmo;
+    private WeaponController weaponController;
+
 
     private float lastTimeShot = Mathf.NegativeInfinity;
-    private bool triggerSqueezed = false;
 
     private void Awake()
     {
         weapon = GetComponent<Weapon>();
+        weaponController = GetComponent<WeaponController>();
         weaponAmmo = GetComponent<WeaponAmmo>();
         shootAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        Controls.InputActions.Player.Shoot.performed += _ => triggerSqueezed = true;
-        Controls.InputActions.Player.Shoot.canceled += _ => triggerSqueezed = false;
+        weaponController.OnTriggerPressed += () => TriggerSqueezed = true;
+        weaponController.OnTriggerReleased += () => TriggerSqueezed = false;
+        weaponController.OnShootingAllowed += () => SafetyOn = false;
+        weaponController.OnShootingForbidden += () => SafetyOn = true;
+        SafetyOn = true;
+        TriggerSqueezed = false;
     }
 
     public void Update()
@@ -48,15 +57,15 @@ public class WeaponShooting : MonoBehaviour
         switch (ShootType)
         {
             case WeaponShootType.Manual:
-                if (triggerSqueezed && AllowedToShoot.Value)
+                if (TriggerSqueezed && !SafetyOn)
                 {
                     TryToShoot();
-                    triggerSqueezed = false;
+                    TriggerSqueezed = false;
                 }
                 break;
 
             case WeaponShootType.Automatic:
-                if (triggerSqueezed && AllowedToShoot.Value)
+                if (TriggerSqueezed && !SafetyOn)
                 {
                     TryToShoot();
                 }
