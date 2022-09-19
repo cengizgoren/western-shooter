@@ -215,7 +215,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ff9c04806611349956f297eff608d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseAndAimPointDistance: 2
+  OveraimDistance: 3
+  OveraimFactor: 0
+  MaxCurveDistance: 50
+  Magnitude: 0
+  DistanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 3
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   WeaponMuzzle: {fileID: 4708424568244275276}
 --- !u!114 &1752310866403024715
 MonoBehaviour:
@@ -232,7 +259,6 @@ MonoBehaviour:
   ClipSize: 45
   AmmoReloadTime: 1
   ReloadSfx: {fileID: 8300000, guid: 48adeca3ce3aaeb40a2705e290267ecc, type: 3}
-  IntVariable: {fileID: 11400000, guid: 9529b550065645d46a6dff519febeb24, type: 2}
 --- !u!114 &-2101906162636698459
 MonoBehaviour:
   m_ObjectHideFlags: 0

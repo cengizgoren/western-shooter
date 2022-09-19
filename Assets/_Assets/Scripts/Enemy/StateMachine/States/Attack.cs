@@ -8,13 +8,13 @@ public class Attack : IState
     private Transform _playerTransform;
     private Transform _transform;
     private NavMeshAgent _navMeshAgent;
-    private EnemyDetector _enemyDetector;
+    private TargetDetector _enemyDetector;
     private EnemyController _enemyController;
 
     private float time;
     private int directionFactor = 1;
 
-    public Attack(EnemyDetector enemyDetector, Transform transform, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
+    public Attack(TargetDetector enemyDetector, Transform transform, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
     {
         _transform = transform;
         _playerTransform = playerTransform;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     public Vector3 MousePoint;
-    public Vector3 AimPoint;
+    //public Vector3 AimPoint;
     public Transform CameraRoot;
     public Transform AimArrow;
     public float RotationSpeed = 720f;

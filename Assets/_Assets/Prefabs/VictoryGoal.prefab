@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 0}
   DeathVfxSpawnOffset: 0
   DeathVfxLifetime: 5

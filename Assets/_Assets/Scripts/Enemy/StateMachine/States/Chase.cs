@@ -9,9 +9,9 @@ public class Chase : IState
 
     private NavMeshAgent _navMeshAgent;
     private Transform _targetTransform;
-    private EnemyDetector _enemyDetector;
+    private TargetDetector _enemyDetector;
 
-    public Chase(EnemyDetector enemyDetector, Transform targetTransform, NavMeshAgent navMeshAgent)
+    public Chase(TargetDetector enemyDetector, Transform targetTransform, NavMeshAgent navMeshAgent)
     {
         _enemyDetector = enemyDetector;
         _targetTransform = targetTransform;

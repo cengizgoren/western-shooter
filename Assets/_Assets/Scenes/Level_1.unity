@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -898,7 +898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -2338,7 +2338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -2581,7 +2581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -3019,7 +3019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -3058,7 +3058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -3270,7 +3270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -3378,7 +3378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -3557,7 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -4242,7 +4242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -4416,7 +4416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -4704,7 +4704,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.9902439, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4944,7 +4944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -6115,7 +6115,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3004
+  m_Name: pb_Mesh-2996
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6441,7 +6441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -6480,7 +6480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -6595,7 +6595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -6933,7 +6933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -6982,7 +6982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -7021,7 +7021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -7126,7 +7126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -7244,7 +7244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -7417,7 +7417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -7723,7 +7723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -7941,7 +7941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -8124,7 +8124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -8430,7 +8430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -8667,7 +8667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -8745,7 +8745,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-158298
+  m_Name: pb_Mesh-2494
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9099,7 +9099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -9143,7 +9143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -9309,7 +9309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -9625,7 +9625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -9664,7 +9664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -9764,7 +9764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -9872,7 +9872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -10112,7 +10112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -10151,7 +10151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoints: 100
+  MaxHPSetting: {fileID: 11400000, guid: 865b31ae3397aa54c9990f352213827e, type: 2}
   DeathVfx: {fileID: 1025285306637258, guid: 19db0ff2ca1972849922f079bd42ae1c, type: 3}
   DeathVfxSpawnOffset: 2
   DeathVfxLifetime: 50
@@ -10680,6 +10680,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2254493178647626882, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254493178647626882, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254493178647626882, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254493178647626882, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254493178647626882, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2254493178647626883, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -10694,7 +10714,7 @@ PrefabInstance:
       objectReference: {fileID: 1956406960}
     - target: {fileID: 2254493178647626911, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
       propertyPath: m_VersionIndex
-      value: 8044
+      value: 8047
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
@@ -10864,7 +10884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5739381111400674471, guid: e842b622dbf4f6344ab0b1799563e524, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.58
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5739381111400674471, guid: e842b622dbf4f6344ab0b1799563e524, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10872,7 +10892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5739381111400674471, guid: e842b622dbf4f6344ab0b1799563e524, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.82
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 5739381111400674471, guid: e842b622dbf4f6344ab0b1799563e524, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10917,7 +10937,7 @@ PrefabInstance:
       objectReference: {fileID: 1209557043}
     - target: {fileID: 8887736975020415352, guid: 2cc6e1e1be7750a4abab0c304598a90c, type: 3}
       propertyPath: m_VersionIndex
-      value: 4562
+      value: 4565
       objectReference: {fileID: 0}
     - target: {fileID: 8887736975020415355, guid: 2cc6e1e1be7750a4abab0c304598a90c, type: 3}
       propertyPath: m_Mesh

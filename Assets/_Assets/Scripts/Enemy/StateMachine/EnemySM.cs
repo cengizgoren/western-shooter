@@ -11,28 +11,31 @@ public class EnemySM : MonoBehaviour
     public void Awake()
     {
         var navMeshAgent = GetComponent<NavMeshAgent>();
-        var enemyDetector = GetComponent<EnemyDetector>();
+        var targetDetector = GetComponent<TargetDetector>();
         var enemyController = GetComponent<EnemyController>();
 
         _stateMachine = new StateMachine();
 
         var idle = new Idle();
-        var chase = new Chase(enemyDetector, _playerController.transform, navMeshAgent);
-        var attack = new Attack(enemyDetector, transform, enemyController, _playerController.transform, navMeshAgent);
-        var search = new Search(enemyDetector, enemyController, _playerController.transform, navMeshAgent);
+        var chase = new Chase(targetDetector, _playerController.transform, navMeshAgent);
+        var attack = new Attack(targetDetector, transform, enemyController, _playerController.transform, navMeshAgent);
+        var search = new Search(targetDetector, enemyController, _playerController.transform, navMeshAgent);
 
-        At(idle, attack, TargetDetected());
+        At(idle, chase, TargetDetected());
+        At(idle, attack, TargetContact());
+        At(chase, attack, TargetContact());
         At(attack, search, TargetObstructed());
-        At(search, attack, TargetDetected());
+        At(search, attack, TargetContact());
 
         void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
 
         _stateMachine.SetState(idle);
 
-        Func<bool> TargetDetected() => () => enemyDetector.EnemyInSightRange && !enemyDetector.EnemyObstructed;
+        Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.AlertedByDamage;
+        Func<bool> TargetContact() => () => targetDetector.TargetSighted && !targetDetector.TargetObstructed;
         //Func<bool> TargetTooFarAway() => () => !enemyDetector.EnemyInSightRange;
         //Func<bool> TargetInRange() => () => enemyDetector.EnemyInSightRange;
-        Func<bool> TargetObstructed() => () => enemyDetector.EnemyObstructed;
+        Func<bool> TargetObstructed() => () => targetDetector.TargetObstructed;
     }
 
     private void Update() => _stateMachine.Tick();

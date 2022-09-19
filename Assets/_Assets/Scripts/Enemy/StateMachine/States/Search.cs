@@ -10,13 +10,13 @@ public class Search : IState
     private EnemyController _enemyController;
     private Transform _playerTransform;
     private NavMeshAgent _navMeshAgent;
-    private EnemyDetector _enemyDetector;
+    private TargetDetector _enemyDetector;
 
     private float _prevSpeed;
     private bool _reachedLastKnownPos = false;
     private float _time = 0;
 
-    public Search(EnemyDetector enemyDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
+    public Search(TargetDetector enemyDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
     {
         _enemyDetector = enemyDetector;
         _enemyController = enemyController;

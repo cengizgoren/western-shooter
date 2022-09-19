@@ -2,7 +2,7 @@ Shader "Unlit/NewUnlitShader"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _MainTex ("Texture", 2D) = "bump" {}
         _Color("Always visible color", Color) = (0,0,0,0)
     }
     SubShader

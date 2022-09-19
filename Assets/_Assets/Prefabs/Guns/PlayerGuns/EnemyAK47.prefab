@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6d39ce23937ac4586c65aefa0c306e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  WeaponIconSprite: {fileID: 0}
 --- !u!114 &4041732762282952571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,9 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClipSize: 5
-  AmmoReloadTime: 0.5
+  AmmoReloadTime: 0.75
   ReloadSfx: {fileID: 0}
-  IntVariable: {fileID: 0}
 --- !u!82 &6612288783258669549
 AudioSource:
   m_ObjectHideFlags: 0

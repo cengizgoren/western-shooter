@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyDetector : MonoBehaviour
+public class TargetDetector : MonoBehaviour
 {
-    public bool EnemyInSightRange = false;
-    public bool EnemyInHearingRange = false;
-    public bool EnemyObstructed = false;
+    public bool TargetSighted = false;
+    public bool TargetHeard = false;
+    public bool TargetObstructed = false;
+    public bool AlertedByDamage = false;
 
     [SerializeField] private CharacterController _playerController;
 
@@ -34,16 +35,16 @@ public class EnemyDetector : MonoBehaviour
     public void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        GetComponent<EnemyHealth>().OnHpLost += () => EnemyInSightRange = true;
+        GetComponent<EnemyHealth>().OnHpLost += () => AlertedByDamage = true;
     }
 
     private void Update() 
     {
         if (time > 1.5f)
         {
-            EnemyInSightRange = IsPlayerInSightRange();
-            EnemyInHearingRange = IsPlayerHearingRange();
-            EnemyObstructed = IsPlayerObstructed();
+            TargetSighted = IsPlayerInSightRange();
+            TargetHeard = IsPlayerHearingRange();
+            TargetObstructed = IsPlayerObstructed();
             time = 0;
         }
 
