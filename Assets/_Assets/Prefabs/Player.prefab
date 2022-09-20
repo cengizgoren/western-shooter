@@ -683,7 +683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2254493177873510368}
   - component: {fileID: 2254493177868597690}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DummyMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +980,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MousePoint: {x: 0, y: 0, z: 0}
-  AimPoint: {x: 0, y: 0, z: 0}
   CameraRoot: {fileID: 2254493178800537779}
   AimArrow: {fileID: 2254493178647626882}
   RotationSpeed: 720
@@ -1065,7 +1064,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AllowToShoot: {fileID: 11400000, guid: f80e2c66ade23fe409b1e3ca1ab914b7, type: 2}
 --- !u!114 &2254493178143105311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1251,7 +1249,7 @@ GameObject:
   - component: {fileID: 2254493178647626909}
   - component: {fileID: 2254493178647626908}
   - component: {fileID: 2254493178647626883}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AimArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,7 +1498,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e615471bfcc57b04d8f9ce7e8215e783, type: 2}
+  - {fileID: 2100000, guid: 8caa1f6d8cf641c45b92d439d951e364, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

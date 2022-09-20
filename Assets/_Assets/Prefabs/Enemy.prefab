@@ -997,7 +997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5739381110624339002}
   - component: {fileID: 5739381110627816032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DummyMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1601,9 +1601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276fb3e63535efa48999b7b0aadb2fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyInSightRange: 0
-  EnemyInHearingRange: 0
-  EnemyObstructed: 0
+  TargetSighted: 0
+  TargetHeard: 0
+  TargetObstructed: 0
+  AlertedByDamage: 0
   _playerController: {fileID: 0}
   LastKnownPosition: {x: 0, y: 0, z: 0}
   LastKnownDirection: {x: 0, y: 0, z: 0}
