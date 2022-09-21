@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
 public class WeaponShooting : MonoBehaviour
 {
     public enum WeaponShootType
@@ -114,9 +113,6 @@ public class WeaponShooting : MonoBehaviour
 
     private void PlayGunShot()
     {
-        if (ShootSfx)
-        {
-            shootAudioSource.PlayOneShot(ShootSfx);
-        }
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/AK_Shoot", transform.position);
     }
 }

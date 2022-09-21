@@ -10,7 +10,6 @@ public class WeaponAmmo : MonoBehaviour
 
     public int ClipSize;
     public float AmmoReloadTime;
-    public AudioClip ReloadSfx;
 
     private AudioSource audioSource;
     private float reloadStartedTime;
@@ -43,10 +42,7 @@ public class WeaponAmmo : MonoBehaviour
             reloadStartedTime = Time.time;
             IsReloading = true;
 
-            if (ReloadSfx)
-            {
-                audioSource.PlayOneShot(ReloadSfx);
-            }
+
         }
     }
 
