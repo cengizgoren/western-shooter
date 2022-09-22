@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using FMOD.Studio;
 
 public class WeaponShooting : MonoBehaviour
 {
@@ -23,13 +24,13 @@ public class WeaponShooting : MonoBehaviour
     [Space(10)]
     public ProjectileStandard ProjectilePrefab;
     public GameObject MuzzleFlashPrefab;
-    public AudioClip ShootSfx;
+    [Space(10)]
+    public FMODUnity.EventReference WeaponFireSFX;
 
-    private AudioSource shootAudioSource;
     private Weapon weapon;
     private WeaponAmmo weaponAmmo;
     private WeaponController weaponController;
-
+    private EventInstance weaponFireSfxInstance;
 
     private float lastTimeShot = Mathf.NegativeInfinity;
 
@@ -38,17 +39,17 @@ public class WeaponShooting : MonoBehaviour
         weapon = GetComponent<Weapon>();
         weaponController = GetComponent<WeaponController>();
         weaponAmmo = GetComponent<WeaponAmmo>();
-        shootAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        weaponController.OnTriggerPressed += () => TriggerSqueezed = true;
-        weaponController.OnTriggerReleased += () => TriggerSqueezed = false;
+        weaponFireSfxInstance = FMODUnity.RuntimeManager.CreateInstance(WeaponFireSFX);
+        weaponController.OnTriggerPressed += () => { TriggerSqueezed = true; };
+        weaponController.OnTriggerReleased += () => { TriggerSqueezed = false; };
         weaponController.OnShootingAllowed += () => SafetyOn = false;
         weaponController.OnShootingForbidden += () => SafetyOn = true;
-        SafetyOn = true;
         TriggerSqueezed = false;
+        SafetyOn = true;
     }
 
     public void Update()
@@ -56,7 +57,7 @@ public class WeaponShooting : MonoBehaviour
         switch (ShootType)
         {
             case WeaponShootType.Manual:
-                if (TriggerSqueezed && !SafetyOn)
+                if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
                 {
                     TryToShoot();
                     TriggerSqueezed = false;
@@ -64,32 +65,52 @@ public class WeaponShooting : MonoBehaviour
                 break;
 
             case WeaponShootType.Automatic:
-                if (TriggerSqueezed && !SafetyOn)
+                if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
                 {
                     TryToShoot();
+                }
+                else
+                {
+                    StopSoundLoopIfPlaying();
                 }
                 break;
         }
     }
 
-    private bool TryToShoot()
+    private void TryToShoot()
     {
-        if (!weaponAmmo.IsReloading && lastTimeShot + DelayBetweenShots < Time.time)
+        if (lastTimeShot + DelayBetweenShots < Time.time)
         {
+            weaponFireSfxInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(WeaponMuzzle)); // The sound doesn't follow its source every update, so far it hasn't been a problem.
             ShootProjectile();
             SpawnMuzzleFlash();
-            PlayGunShot();
+            StartSoundLoopIfSilent();
             weaponAmmo.Spend(1);
-            return true;
         }
-        return false;
+    }
+
+    private void StartSoundLoopIfSilent()
+    {
+        weaponFireSfxInstance.getPlaybackState(out PLAYBACK_STATE playbackState);
+        if (playbackState == PLAYBACK_STATE.STOPPED || playbackState == PLAYBACK_STATE.STOPPING)
+        {
+            weaponFireSfxInstance.start();
+        }
+    }
+
+    private void StopSoundLoopIfPlaying()
+    {
+        weaponFireSfxInstance.getPlaybackState(out PLAYBACK_STATE playbackState);
+        if (playbackState == PLAYBACK_STATE.PLAYING)
+        {
+            weaponFireSfxInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 
     private void ShootProjectile()
     {
         lastTimeShot = Time.time;
-        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
-
+        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward); // TODO: fix spread being unused
         ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, WeaponMuzzle.rotation);
         newProjectile.Setup(weapon.GetOwner());
         newProjectile.Shoot();
@@ -109,10 +130,5 @@ public class WeaponShooting : MonoBehaviour
             GameObject muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
             Destroy(muzzleFlashInstance, 2f);
         }
-    }
-
-    private void PlayGunShot()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/AK_Shoot", transform.position);
     }
 }
