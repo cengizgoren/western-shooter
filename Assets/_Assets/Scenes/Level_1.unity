@@ -10690,10 +10690,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8612763893024910462, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
       propertyPath: StartingWeapons.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8612763893024910462, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
       propertyPath: StartingWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: -6810820386306557078, guid: 2b9a6ca4171574d489f61bec72c6ed45, type: 3}
+    - target: {fileID: -8612763893024910462, guid: bb2f91cf7666573478470d4e62557e20, type: 3}
+      propertyPath: StartingWeapons.Array.data[1]
       value: 
       objectReference: {fileID: 1170892884836132827, guid: 26b4a9a4cf88d694a859bab4be016252, type: 3}
     - target: {fileID: 2254493178143105280, guid: bb2f91cf7666573478470d4e62557e20, type: 3}

@@ -59,7 +59,7 @@ public class WeaponShooting : MonoBehaviour
             case WeaponShootType.Manual:
                 if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
                 {
-                    TryToShoot();
+                    TryToSemiFire();
                     TriggerSqueezed = false;
                 }
                 break;
@@ -67,7 +67,7 @@ public class WeaponShooting : MonoBehaviour
             case WeaponShootType.Automatic:
                 if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
                 {
-                    TryToShoot();
+                    TryToAutoFire();
                 }
                 else
                 {
@@ -77,7 +77,20 @@ public class WeaponShooting : MonoBehaviour
         }
     }
 
-    private void TryToShoot()
+    private void TryToSemiFire()
+    {
+        if (lastTimeShot + DelayBetweenShots < Time.time)
+        {
+            weaponFireSfxInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(WeaponMuzzle));
+            ShootProjectile();
+            SpawnMuzzleFlash();
+            FMODUnity.RuntimeManager.PlayOneShot(WeaponFireSFX, WeaponMuzzle.position);
+            weaponAmmo.Spend(1);
+        }
+    }
+
+    // This class is a candidate for spliting into base class and inheriting classes.
+    private void TryToAutoFire()
     {
         if (lastTimeShot + DelayBetweenShots < Time.time)
         {

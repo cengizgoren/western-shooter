@@ -191,22 +191,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStateEvent:
-    Guid:
-      Data1: 278789767
-      Data2: 1167412974
-      Data3: -1881692002
-      Data4: 1015015936
-    Path: event:/SFX/M4
   WeaponRoot: {fileID: 6340443142827010276}
   WeaponMuzzle: {fileID: 2496450570939503281}
   SafetyOn: 0
   TriggerSqueezed: 0
   ShootType: 0
-  DelayBetweenShots: 0.25
+  DelayBetweenShots: 0.2
   BulletSpreadAngle: 0.5
   ProjectilePrefab: {fileID: 2676942871222497078, guid: e4790d573da3b734a9434531fc753511, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1d29eae076276f043b48ffbf444f09ba, type: 3}
+  WeaponFireSFX:
+    Guid:
+      Data1: 2139531752
+      Data2: 1127265806
+      Data3: 1271017643
+      Data4: 1368916938
+    Path: event:/SFX/Revolver
 --- !u!114 &4251656054320204747
 MonoBehaviour:
   m_ObjectHideFlags: 0
