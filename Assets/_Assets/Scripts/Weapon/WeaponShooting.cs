@@ -123,8 +123,8 @@ public class WeaponShooting : MonoBehaviour
     private void ShootProjectile()
     {
         lastTimeShot = Time.time;
-        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward); // TODO: fix spread being unused
-        ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, WeaponMuzzle.rotation);
+        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
+        ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
         newProjectile.Setup(weapon.GetOwner());
         newProjectile.Shoot();
     }
