@@ -31,6 +31,7 @@ public class WeaponShooting : MonoBehaviour
     private WeaponAmmo weaponAmmo;
     private WeaponController weaponController;
     private EventInstance weaponFireSfxInstance;
+    private Animator animator;
 
     private float lastTimeShot = Mathf.NegativeInfinity;
 
@@ -39,6 +40,7 @@ public class WeaponShooting : MonoBehaviour
         weapon = GetComponent<Weapon>();
         weaponController = GetComponent<WeaponController>();
         weaponAmmo = GetComponent<WeaponAmmo>();
+        animator = transform.parent.parent.GetComponent<Animator>();
     }
 
     private void Start()
@@ -72,6 +74,7 @@ public class WeaponShooting : MonoBehaviour
                 else
                 {
                     StopSoundLoopIfPlaying();
+                    animator.SetBool("IsShooting", false);
                 }
                 break;
         }
@@ -99,6 +102,7 @@ public class WeaponShooting : MonoBehaviour
             SpawnMuzzleFlash();
             StartSoundLoopIfSilent();
             weaponAmmo.Spend(1);
+            animator.SetBool("IsShooting", true);
         }
     }
 
