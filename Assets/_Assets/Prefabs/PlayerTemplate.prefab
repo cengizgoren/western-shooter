@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 8143561313886008644}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1702317069543698834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6616540302015942106}
+  m_Layer: 0
+  m_Name: CenterMassToTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6616540302015942106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702317069543698834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.306, z: 0.031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8143561313886008644}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832895145900129485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,14 +2409,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8143561313886008644}
+  - component: {fileID: 1558666947524953042}
   - component: {fileID: 8089292328698757585}
   - component: {fileID: 8089292328698757584}
   - component: {fileID: 8089292328698757589}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
+  - component: {fileID: 3928391025034219905}
   m_Layer: 0
-  m_Name: CharacterTemplatePrefab
+  m_Name: PlayerTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2429,9 +2462,22 @@ Transform:
   - {fileID: 2910459726844810727}
   - {fileID: 7927277942824863464}
   - {fileID: 6431496564097576865}
+  - {fileID: 6616540302015942106}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1558666947524953042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7b5f52b154bc8468f3f1c486c1ebdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &8089292328698757585
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2478,10 +2524,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2044d81e1c21e240b595942f67758ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseOveraimDistance: 3
-  OveraimFactor: 0
-  MaxCurveDistance: 50
-  Magnitude: 0
+  CameraRoot: {fileID: 8147984661329040604}
+  RotationSpeed: 720
+  AimPoint: {fileID: 7927277942824863464}
+  DirectionArrow: {fileID: 6431496564097576865}
+  MousePoint: {x: 0, y: 0, z: 0}
   DistanceCurve:
     serializedVersion: 2
     m_Curve:
@@ -2506,11 +2553,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MousePoint: {x: 0, y: 0, z: 0}
-  CameraRoot: {fileID: 8147984661329040604}
-  DirectionArrow: {fileID: 6431496564097576865}
-  AimPoint: {fileID: 7927277942824863464}
-  RotationSpeed: 720
+  BaseOveraimDistance: 3
+  MaxCurveDistance: 50
+  Magnitude: 0
+  OveraimFactor: 0
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2567,6 +2613,20 @@ MonoBehaviour:
   - m_Rig: {fileID: 8147984661816632822}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &3928391025034219905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda4f1fe184529d4aa0b12ecb8a2d6dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
+  CurrentHP: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
 --- !u!1 &8148628684651371972
 GameObject:
   m_ObjectHideFlags: 0

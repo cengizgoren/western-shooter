@@ -21,9 +21,12 @@ public class EnemyController : MonoBehaviour
     // Is this setting meaningful? If so which rotation to choose?
     [SerializeField] private Quaternion DeathVfxRotation;
 
+    private EnemyAim enemyAim;
+
     public void Awake()
     {
         GetComponent<EnemyHealth>().OnHpDepleted += Die;
+        enemyAim = GetComponent<EnemyAim>();
     }
 
     public void Rotate()
@@ -41,6 +44,11 @@ public class EnemyController : MonoBehaviour
         {
             HandleRotation();
         }
+    }
+
+    public void SetTargetTransform(Transform target)
+    {
+        enemyAim.Target = target;
     }
 
     private void HandleRotation()

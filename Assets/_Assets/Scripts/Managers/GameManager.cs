@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameState GameState = GameState.MainMenu;
     public VictoryState VictoryState;
     public int CurrentLevelID;
+
 
     public UnityAction OnLaunch;
     public UnityAction OnLost;
@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
         if (!Instance)
         {
             Instance = this;
+            if (GameState == GameState.Active)
+            {
+                var p = FindObjectOfType<Player>();
+                var c = p.GetComponent<PlayerHealth>();
+                c.OnHpDepleted += () => UpdateVictoryCondition(VictoryState.Lost);
+            }
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Controls.InputActions.UI.Escape.started += _ => OnEscape();
+
     }
 
     public void Pause()
@@ -58,25 +65,36 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
+        StartCoroutine(LoadSceneAsync(level));
+    }
+
+    private IEnumerator LoadSceneAsync(int level)
+    {
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
+        while (!asyncLoadLevel.isDone)
+            yield return null;
+
+        yield return new WaitForEndOfFrame();
+
         CurrentLevelID = level;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(level, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        UnfreezeTime();
+        var p = FindObjectOfType<Player>();
+        var c = p.GetComponent<PlayerHealth>();
+        c.OnHpDepleted += () => UpdateVictoryCondition(VictoryState.Lost);
+
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+        UnfreezeTime();
         UpdateGameState(GameState.Active);
     }
 
     public void Restart()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentLevelID, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        UnfreezeTime();
-        UpdateGameState(GameState.Active);
-        OnRestart?.Invoke();
+    { 
+        StartCoroutine(LoadSceneAsync(CurrentLevelID));
     }
 
     public void MainMenu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         UpdateGameState(GameState.MainMenu);

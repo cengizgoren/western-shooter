@@ -7,13 +7,13 @@ public class AmmoCounter : MonoBehaviour
     public Image weaponImage;
     public TextMeshProUGUI ammoCount;
 
-    private WeaponSwitcher playersWeaponsManager;
+    private WeaponArsenal playersWeaponsManager;
     private WeaponAmmo activeWeaponAmmo;
 
     private void Awake()
     {
-        //playersWeaponsManager = FindObjectOfType<Player>().GetComponent<WeaponSwitcher>();
-        //playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
+        playersWeaponsManager = FindObjectOfType<Player>().GetComponent<WeaponArsenal>();
+        playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
     }
 
     private void UpdateAmmoText(int number)
@@ -23,7 +23,7 @@ public class AmmoCounter : MonoBehaviour
 
     private void UpdateActiveWeapon(Weapon weapon)
     {
-        activeWeaponAmmo =  weapon.GetComponent<WeaponAmmo>();
+        activeWeaponAmmo = weapon.GetComponent<WeaponAmmo>();
         UpdateAmmoText(activeWeaponAmmo.CurrentAmmo);
         activeWeaponAmmo.OnAmmoChange += UpdateAmmoText;
         weaponImage.sprite = weapon.WeaponIconSprite;

@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class WeaponArsenal : MonoBehaviour
 {
+
+    public UnityAction<Weapon> OnSwitchedToWeapon;
     public static readonly int WEAPON_SLOTS_NUMBER = 9;
 
     public Transform WeaponParent;
@@ -33,6 +35,7 @@ public class WeaponArsenal : MonoBehaviour
                 weapon.gameObject.SetActive(true);
                 activeWeapon = weapon;
                 activeWeaponIndex = i;
+                OnSwitchedToWeapon?.Invoke(activeWeapon);
                 break;
             }
             i++;
@@ -48,6 +51,7 @@ public class WeaponArsenal : MonoBehaviour
                 activeWeapon = weaponSlots[weaponNumber];
                 activeWeaponIndex = weaponNumber;
                 activeWeapon.gameObject.SetActive(true);
+                OnSwitchedToWeapon?.Invoke(activeWeapon);
             }
         };
     }

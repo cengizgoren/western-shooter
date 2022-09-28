@@ -154,4 +154,14 @@ public class WeaponShooting : MonoBehaviour
             Destroy(muzzleFlashInstance, 2f);
         }
     }
+
+    private void OnDisable()
+    {
+        StopSoundLoopIfPlaying();
+    }
+
+    private void OnDestroy()
+    {
+        StopSoundLoopIfPlaying();
+    }
 }

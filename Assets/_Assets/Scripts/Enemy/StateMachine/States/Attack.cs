@@ -57,6 +57,7 @@ public class Attack : IState
         _navMeshAgent.ResetPath();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.speed = 2f;
+        _enemyController.SetTargetTransform(_playerTransform);
     }
 
     public void OnExit()
