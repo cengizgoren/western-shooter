@@ -124,10 +124,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6680553336891224670}
-  - component: {fileID: -6810820386306557078}
+  - component: {fileID: 9002117916590149791}
   - component: {fileID: 7808077328798606296}
   - component: {fileID: 1164435945824783914}
-  - component: {fileID: 4251656054320204747}
   - component: {fileID: -4830156685668007716}
   - component: {fileID: 8224779039163830451}
   m_Layer: 0
@@ -154,7 +153,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6810820386306557078
+--- !u!114 &9002117916590149791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +162,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6340443142827010276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6006824dcadb8fc4e8c3f563640b341c, type: 3}
+  m_Script: {fileID: 11500000, guid: 815c692eb1491df4ea6b1e6c05add6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponIconSprite: {fileID: 21300014, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  WeaponIconSprite: {fileID: 0}
 --- !u!114 &7808077328798606296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileOwner: {fileID: 0}
   WeaponRoot: {fileID: 6340443142827010276}
   WeaponMuzzle: {fileID: 2496450570939503281}
   SafetyOn: 0
@@ -207,47 +207,6 @@ MonoBehaviour:
       Data3: 1271017643
       Data4: 1368916938
     Path: event:/SFX/Revolver
---- !u!114 &4251656054320204747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6340443142827010276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ff9c04806611349956f297eff608d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseOveraimDistance: 2
-  OveraimFactor: 0
-  MaxCurveDistance: 50
-  Magnitude: 0
-  DistanceCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 3
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  WeaponMuzzle: {fileID: 2496450570939503281}
 --- !u!114 &-4830156685668007716
 MonoBehaviour:
   m_ObjectHideFlags: 0

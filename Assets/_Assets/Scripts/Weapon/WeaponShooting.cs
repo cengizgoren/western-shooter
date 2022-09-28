@@ -11,6 +11,7 @@ public class WeaponShooting : MonoBehaviour
         Automatic,
     }
 
+    public GameObject projectileOwner;
     public GameObject WeaponRoot;
     public Transform WeaponMuzzle;
 
@@ -40,18 +41,23 @@ public class WeaponShooting : MonoBehaviour
         weapon = GetComponent<Weapon>();
         weaponController = GetComponent<WeaponController>();
         weaponAmmo = GetComponent<WeaponAmmo>();
-        animator = transform.parent.parent.GetComponent<Animator>();
+        animator = transform.root.GetComponent<Animator>();
     }
 
     private void Start()
     {
+        if (projectileOwner == null)
+        {
+            projectileOwner = weapon.GetOwner();
+        }
+
         weaponFireSfxInstance = FMODUnity.RuntimeManager.CreateInstance(WeaponFireSFX);
         weaponController.OnTriggerPressed += () => { TriggerSqueezed = true; };
         weaponController.OnTriggerReleased += () => { TriggerSqueezed = false; };
         weaponController.OnShootingAllowed += () => SafetyOn = false;
         weaponController.OnShootingForbidden += () => SafetyOn = true;
         TriggerSqueezed = false;
-        SafetyOn = true;
+        SafetyOn = false; // If not controlled by superior object, always allow to shoot
     }
 
     public void Update()
@@ -129,7 +135,7 @@ public class WeaponShooting : MonoBehaviour
         lastTimeShot = Time.time;
         Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
         ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
-        newProjectile.Setup(weapon.GetOwner());
+        newProjectile.Setup(projectileOwner);
         newProjectile.Shoot();
     }
 

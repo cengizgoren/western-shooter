@@ -12,8 +12,8 @@ public class AmmoCounter : MonoBehaviour
 
     private void Awake()
     {
-        playersWeaponsManager = FindObjectOfType<Player>().GetComponent<WeaponSwitcher>();
-        playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
+        //playersWeaponsManager = FindObjectOfType<Player>().GetComponent<WeaponSwitcher>();
+        //playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
     }
 
     private void UpdateAmmoText(int number)

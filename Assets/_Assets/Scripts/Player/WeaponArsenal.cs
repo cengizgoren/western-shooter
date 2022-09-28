@@ -7,10 +7,12 @@ public class WeaponArsenal : MonoBehaviour
 {
     public static readonly int WEAPON_SLOTS_NUMBER = 9;
 
-    public Transform WeaponSocket;
+    public Transform WeaponParent;
     public List<Weapon> StartingWeapons = new List<Weapon>();
 
     private readonly Weapon[] weaponSlots = new Weapon[9];
+    private Weapon activeWeapon;
+    private int activeWeaponIndex = 0;
 
     private void Awake()
     {
@@ -20,13 +22,43 @@ public class WeaponArsenal : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        int i = 0;
+
+        foreach (Weapon weapon in weaponSlots)
+        {
+            if (weapon)
+            {
+                weapon.gameObject.SetActive(true);
+                activeWeapon = weapon;
+                activeWeaponIndex = i;
+                break;
+            }
+            i++;
+        }
+
+        Controls.InputActions.Player.Weapon.performed += ctx =>
+        {
+            int weaponNumber = (int)ctx.ReadValue<float>();
+            weaponNumber -= 1;
+            if (weaponNumber >= 0 && weaponNumber <= 8 && weaponNumber != activeWeaponIndex && weaponSlots[weaponNumber] != null)
+            {
+                activeWeapon.gameObject.SetActive(false);
+                activeWeapon = weaponSlots[weaponNumber];
+                activeWeaponIndex = weaponNumber;
+                activeWeapon.gameObject.SetActive(true);
+            }
+        };
+    }
+
     public void AddWeapon(Weapon weaponPrefab)
     {
         for (int i = 0; i < WEAPON_SLOTS_NUMBER; i++)
         {
             if (weaponSlots[i] == null)
             {
-                Weapon weaponInstance = Instantiate(weaponPrefab, WeaponSocket);
+                Weapon weaponInstance = Instantiate(weaponPrefab, WeaponParent);
                 weaponInstance.Setup(gameObject);
                 weaponInstance.gameObject.SetActive(false);
                 weaponSlots[i] = weaponInstance;

@@ -14,11 +14,15 @@ public class PlayerWeaponController : WeaponController
     private void Start()
     {
         playerWeapon = GetComponent<Weapon>();
-        weaponSwitcher = playerWeapon.GetOwner().GetComponent<WeaponSwitcher>();
+        //weaponSwitcher = playerWeapon.GetOwner().GetComponent<WeaponSwitcher>();
 
         Controls.InputActions.Player.Shoot.performed += _ => base.OnTriggerPressed?.Invoke();
         Controls.InputActions.Player.Shoot.canceled += _ => base.OnTriggerReleased?.Invoke();
-        weaponSwitcher.OnWeaponReady += isReady => CheckReadiness(isReady);
+
+        if (weaponSwitcher)
+        {
+            weaponSwitcher.OnWeaponReady += isReady => CheckReadiness(isReady);
+        }
     }
 
     private void CheckReadiness(bool isReady)

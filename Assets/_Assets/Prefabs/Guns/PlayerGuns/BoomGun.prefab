@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2697347381791909232}
-  - component: {fileID: -5488947287673647547}
+  - component: {fileID: 1588812122420966854}
   - component: {fileID: 81750694858102857}
   - component: {fileID: 4389695552653952208}
   - component: {fileID: -3369112169168360141}
@@ -155,7 +155,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5488947287673647547
+--- !u!114 &1588812122420966854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,10 +164,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6809816431979793371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6006824dcadb8fc4e8c3f563640b341c, type: 3}
+  m_Script: {fileID: 11500000, guid: 815c692eb1491df4ea6b1e6c05add6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponIconSprite: {fileID: 21300032, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  WeaponIconSprite: {fileID: 0}
 --- !u!114 &81750694858102857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,13 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStateEvent:
-    Guid:
-      Data1: 278789767
-      Data2: 1167412974
-      Data3: -1881692002
-      Data4: 1015015936
-    Path: event:/SFX/M4
+  projectileOwner: {fileID: 0}
   WeaponRoot: {fileID: 6809816431979793371}
   WeaponMuzzle: {fileID: 4708424568244275276}
   SafetyOn: 0
@@ -208,6 +202,13 @@ MonoBehaviour:
   BulletSpreadAngle: 0
   ProjectilePrefab: {fileID: 2676942871222497078, guid: 419940cb0bb6ddf408045aa134a1d88c, type: 3}
   MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1aa64d86152d7fa43929aff7b38e76e8, type: 3}
+  WeaponFireSFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &-3369112169168360141
 MonoBehaviour:
   m_ObjectHideFlags: 0
