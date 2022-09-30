@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6237820242584301924}
   - component: {fileID: 6237820242584301931}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LaserSightEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
