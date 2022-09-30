@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 {
     public IntVariable MaxHP;
     public IntVariable CurrentHP;
+    public bool Invincible = false;
 
     public UnityAction OnHpLost;
     public UnityAction OnHpDepleted;
@@ -23,11 +24,14 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     public void DealDamage(int amount)
     {
-        CurrentHP.RuntimeValue -= amount;
-        OnHpLost?.Invoke();
-        if (CurrentHP.RuntimeValue <= 0)
+        if (!Invincible)
         {
-            OnHpDepleted?.Invoke();
+            CurrentHP.RuntimeValue -= amount;
+            OnHpLost?.Invoke();
+            if (CurrentHP.RuntimeValue <= 0)
+            {
+                OnHpDepleted?.Invoke();
+            }
         }
     }
 
