@@ -2401,11 +2401,6 @@ MonoBehaviour:
   DeathVfxLifetime: 5
   DeathVfxRotation: {x: 0, y: 0, z: 0, w: 0}
   currentHealthPoints: 0
---- !u!1 &336883634 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1054208194594048, guid: 2c8381f8275e52f4fa749cd18f2833df, type: 3}
-  m_PrefabInstance: {fileID: 1860610703}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &342941785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11113,22 +11108,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4321234093039028, guid: 2c8381f8275e52f4fa749cd18f2833df, type: 3}
   m_PrefabInstance: {fileID: 1860610703}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &1860610708
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336883634}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.439, y: 1.1090001, z: 3.5260003}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.5510001, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1001 &1862129697
 PrefabInstance:
   m_ObjectHideFlags: 0
