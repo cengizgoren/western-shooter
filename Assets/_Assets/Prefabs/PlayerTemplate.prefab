@@ -2529,34 +2529,9 @@ MonoBehaviour:
   AimPoint: {fileID: 7927277942824863464}
   DirectionArrow: {fileID: 6431496564097576865}
   MousePoint: {x: 0, y: 0, z: 0}
-  DistanceCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 3
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  BaseOveraimDistance: 3
-  MaxCurveDistance: 50
-  Magnitude: 0
-  OveraimFactor: 0
+  OveraimFactor: 1.5
+  MouseWeight: 0.6
+  MaxCameraOffset: 30
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2627,6 +2602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
   CurrentHP: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
+  Invincible: 0
 --- !u!1 &8148628684651371972
 GameObject:
   m_ObjectHideFlags: 0
