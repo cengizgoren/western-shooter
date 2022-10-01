@@ -8,10 +8,13 @@ public class WeaponLaserSight : MonoBehaviour
     public Transform Origin;
 
     private LineRenderer LaserSightEffect;
+    private LineRenderer GroundLaserSightEffect;
 
     private void Start()
     {
         LaserSightEffect = Instantiate(LaserSightEffectPrefab, transform);
+        GroundLaserSightEffect = Instantiate(LaserSightEffectPrefab, transform);
+
     }
 
     private void Update()
@@ -23,6 +26,9 @@ public class WeaponLaserSight : MonoBehaviour
             Vector3 groundPoint = ray.GetPoint(rayDistance);
             LaserSightEffect.SetPosition(0, Origin.position);
             LaserSightEffect.SetPosition(1, groundPoint);
+
+            GroundLaserSightEffect.SetPosition(0, new Vector3(Origin.position.x, 0f, Origin.position.z));
+            GroundLaserSightEffect.SetPosition(1, groundPoint);
         }
     }
 }
