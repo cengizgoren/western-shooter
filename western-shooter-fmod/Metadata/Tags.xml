@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MasterTagFolder" id="{ba016cea-6256-491d-a037-9d63e3858e0e}">
+		<property name="name">
+			<value>Master</value>
+		</property>
+		<relationship name="items">
+			<destination>{1a7c886d-e590-4b2f-9211-9cdf62996a25}</destination>
+			<destination>{7f404094-a62d-490d-93f2-131673036a48}</destination>
+			<destination>{df631fd1-ecd0-44c7-a9fb-e33dde5987fd}</destination>
+			<destination>{be82f4b2-9415-4b43-9119-f7b2ffc8b9b1}</destination>
+			<destination>{3871657e-7c9a-4c1b-bff6-80d039cef131}</destination>
+			<destination>{4b271294-48c8-4bd7-bad8-3151f91dd6b5}</destination>
+			<destination>{0c9a3c9d-6a72-476a-a7c8-c41377c4885a}</destination>
+			<destination>{f761edec-4d42-4103-ab00-e580f45c542a}</destination>
+		</relationship>
+	</object>
+	<object class="Tag" id="{1a7c886d-e590-4b2f-9211-9cdf62996a25}">
+		<property name="name">
+			<value>ahdsr-modulator</value>
+		</property>
+	</object>
+	<object class="Tag" id="{7f404094-a62d-490d-93f2-131673036a48}">
+		<property name="name">
+			<value>async</value>
+		</property>
+	</object>
+	<object class="Tag" id="{df631fd1-ecd0-44c7-a9fb-e33dde5987fd}">
+		<property name="name">
+			<value>loop-region</value>
+		</property>
+	</object>
+	<object class="Tag" id="{be82f4b2-9415-4b43-9119-f7b2ffc8b9b1}">
+		<property name="name">
+			<value>multi-instrument</value>
+		</property>
+	</object>
+	<object class="Tag" id="{3871657e-7c9a-4c1b-bff6-80d039cef131}">
+		<property name="name">
+			<value>parameter</value>
+		</property>
+	</object>
+	<object class="Tag" id="{4b271294-48c8-4bd7-bad8-3151f91dd6b5}">
+		<property name="name">
+			<value>random-modulator</value>
+		</property>
+	</object>
+	<object class="Tag" id="{0c9a3c9d-6a72-476a-a7c8-c41377c4885a}">
+		<property name="name">
+			<value>send</value>
+		</property>
+	</object>
+	<object class="Tag" id="{f761edec-4d42-4103-ab00-e580f45c542a}">
+		<property name="name">
+			<value>spatializer</value>
+		</property>
+	</object>
+</objects>
