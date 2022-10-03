@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHPSetting: {fileID: 11400000, guid: 066e1e2946319a54e92030eb9bcb66d6, type: 2}
-  DeathVfx: {fileID: 0}
+  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
   DeathVfxSpawnOffset: 0
   DeathVfxLifetime: 5
   DeathVfxRotation: {x: 0, y: 0, z: 0, w: 0}

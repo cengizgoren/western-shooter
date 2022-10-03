@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class Destructable : MonoBehaviour, IDamagable
     public UnityAction OnHealthDepleted;
 
     [SerializeField] private IntVariable MaxHPSetting;
-    [SerializeField] private GameObject DeathVfx;
+    [SerializeField] private DestructionEffect DestructionEffect;
     [SerializeField] private float DeathVfxSpawnOffset = 0f;
     [SerializeField] private float DeathVfxLifetime = 5f;
     // Is this setting meaningful? If so which rotation to choose?
@@ -47,9 +48,10 @@ public class Destructable : MonoBehaviour, IDamagable
         if (currentHealthPoints <= 0) 
         {
             OnHealthDepleted?.Invoke();
-            if (DeathVfx)
+            if (DestructionEffect)
             {
-                GameObject impactVfxInstance = Instantiate(DeathVfx, transform.position + (transform.forward * DeathVfxSpawnOffset), DeathVfxRotation);
+                GameObject impactVfxInstance = Instantiate(DestructionEffect.DestructionVFX, transform.position + (transform.forward * DeathVfxSpawnOffset), DeathVfxRotation);
+                RuntimeManager.PlayOneShot(DestructionEffect.DestructionSFX, transform.position);
                 if (DeathVfxLifetime > 0)
                 {
                     Destroy(impactVfxInstance, DeathVfxLifetime);
