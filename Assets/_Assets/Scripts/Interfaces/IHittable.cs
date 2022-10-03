@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHittable
 {
-    public GameObject GetImpactVFX(ImpactType impactType);
+    public Surface GetSurface();
 }

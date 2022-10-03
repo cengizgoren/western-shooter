@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9939da6c8b5cc41beb260b51c954fc, type: 3}
-  m_Name: DefaultDatabase
+  m_Script: {fileID: 11500000, guid: ab08052c78fe59f4cb05bc7165626454, type: 3}
+  m_Name: Metal
   m_EditorClassIdentifier: 
-  DefaultSurfaceVFX: {fileID: 1067536016464596, guid: 57e18706e2792ff4bb5561ed74b796e2, type: 3}
+  ImpactEffects:
+  - {fileID: 11400000, guid: 19ad33c3ec8aa934cadb399c018af5a2, type: 2}

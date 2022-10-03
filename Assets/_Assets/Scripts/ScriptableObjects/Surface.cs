@@ -7,13 +7,6 @@ using FMODUnity;
 [CreateAssetMenu(menuName = "Impact System/Surface", fileName = "Surface")]
 public class Surface : ScriptableObject
 {
-    [Serializable]
-    public class SurfaceImpactEffect
-    {
-        public ImpactType ImpactType;
-        public GameObject SurfaceVFX;
-        public EventReference SurfaceSFX;
-    }
 
-    public List<SurfaceImpactEffect> ImpactTypeEffects = new List<SurfaceImpactEffect>();
+    public List<ImpactEffect> ImpactEffects = new List<ImpactEffect>();
 }

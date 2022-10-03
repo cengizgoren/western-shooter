@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ public class ProjectileStandard : MonoBehaviour
     [SerializeField] private Transform Root;
     [SerializeField] private Transform Tip;
     [SerializeField] private ImpactType ImpactType;
-    [SerializeField] private GameObject FallbackImpactVFX;
+    [SerializeField] private ImpactEffect FallbackImpactEffect;
 
     [Space(10)]
     [SerializeField] private int ImpactDamageAmount;
@@ -133,18 +134,27 @@ public class ProjectileStandard : MonoBehaviour
 
         if (collider.TryGetComponent(out IHittable hittable))
         {
-            GameObject impactVFX = hittable.GetImpactVFX(ImpactType);
-            if (!impactVFX && FallbackImpactVFX)
+            Surface surface = hittable.GetSurface();
+            GameObject vfx = FallbackImpactEffect.SurfaceVFX;
+            EventReference sfx = FallbackImpactEffect.SurfaceSFX;
+
+            foreach (ImpactEffect impactEffect in surface.ImpactEffects)
             {
-                impactVFX = FallbackImpactVFX;
+                if (ImpactType == impactEffect.ImpactType)
+                {
+                    vfx = impactEffect.SurfaceVFX;
+                    sfx = impactEffect.SurfaceSFX;
+                }
+                break;
             }
-            
-            GameObject impactVfxInstance = Instantiate(impactVFX, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
+
+            GameObject impactVfxInstance = Instantiate(vfx, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
+            RuntimeManager.PlayOneShot(sfx, transform.position);
             if (ImpactVfxLifetime > 0)
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);
             }
-        } 
+        }
 
         /*Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
 

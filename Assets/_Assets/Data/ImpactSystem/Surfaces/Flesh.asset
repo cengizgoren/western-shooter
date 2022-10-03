@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab08052c78fe59f4cb05bc7165626454, type: 3}
   m_Name: Flesh
   m_EditorClassIdentifier: 
-  ImpactTypeEffects:
-  - ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
-    SurfaceVFX: {fileID: 1489431029902184, guid: 4430919f14c50f84085d287cbcb2c30e, type: 3}
-  - ImpactType: {fileID: 11400000, guid: ff0f9dff057e91840b84e8ffc932698f, type: 2}
-    SurfaceVFX: {fileID: 1489431029902184, guid: 4430919f14c50f84085d287cbcb2c30e, type: 3}
+  ImpactEffects:
+  - {fileID: 11400000, guid: 37d373ca754128a42b08cfaac8455282, type: 2}
