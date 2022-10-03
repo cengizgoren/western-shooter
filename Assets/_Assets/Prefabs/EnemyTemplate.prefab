@@ -2389,6 +2389,7 @@ GameObject:
   - component: {fileID: 8555749047885385819}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
+  - component: {fileID: 1113741816659177493}
   m_Layer: 0
   m_Name: EnemyTemplate
   m_TagString: Untagged
@@ -2628,6 +2629,19 @@ MonoBehaviour:
   - m_Rig: {fileID: 8147984661816632822}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &1113741816659177493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
 --- !u!1 &8148628684651371972
 GameObject:
   m_ObjectHideFlags: 0

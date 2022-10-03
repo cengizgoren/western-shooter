@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 4984172705992090742}
   Tip: {fileID: 1277733899088868668}
+  ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
+  FallbackImpactVFX: {fileID: 1067536016464596, guid: 57e18706e2792ff4bb5561ed74b796e2, type: 3}
   ImpactDamageAmount: 10
   IsExplosive: 0
   ShowExplosionRadius: 1
@@ -60,8 +62,6 @@ MonoBehaviour:
   HittableLayers:
     serializedVersion: 2
     m_Bits: 448
-  ImpactVfx: {fileID: 3536255215777686827, guid: 97bd7b2a293bc514583b99dd24153115, type: 3}
-  ImpactVfxSpawnOffset: 0.1
   ImpactVfxLifetime: 5
   AffectedLayers:
     serializedVersion: 2

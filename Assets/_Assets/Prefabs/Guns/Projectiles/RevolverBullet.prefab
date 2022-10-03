@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2676942871222497078}
   - component: {fileID: 4984172705992090743}
   m_Layer: 0
-  m_Name: BoomBullet
+  m_Name: RevolverBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,24 +48,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 4984172705992090742}
   Tip: {fileID: 1277733899088868668}
-  ImpactDamageAmount: 0
-  IsExplosive: 1
+  ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
+  FallbackImpactVFX: {fileID: 1067536016464596, guid: 57e18706e2792ff4bb5561ed74b796e2, type: 3}
+  ImpactDamageAmount: 50
+  IsExplosive: 0
   ShowExplosionRadius: 1
-  ExplosionDamageAmount: 130
-  ExplosionRange: 15
+  ExplosionDamageAmount: 0
+  ExplosionRange: 0
   MaxLifeTime: 3
-  Speed: 40
-  Radius: 0.03
+  Speed: 75
+  Radius: 0.01
   HittableLayers:
     serializedVersion: 2
     m_Bits: 448
-  ImpactVfx: {fileID: 3536255215777686827, guid: 97bd7b2a293bc514583b99dd24153115, type: 3}
-  ImpactVfxSpawnOffset: 0.1
   ImpactVfxLifetime: 5
-  ShowSoundRadius: 0
   AffectedLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4294967295
   SoundRadius: 15
 --- !u!96 &4984172705992090743
 TrailRenderer:

@@ -29,6 +29,8 @@ public class ProjectileStandard : MonoBehaviour
 
     [SerializeField] private Transform Root;
     [SerializeField] private Transform Tip;
+    [SerializeField] private ImpactType ImpactType;
+    [SerializeField] private GameObject FallbackImpactVFX;
 
     [Space(10)]
     [SerializeField] private int ImpactDamageAmount;
@@ -44,8 +46,6 @@ public class ProjectileStandard : MonoBehaviour
     [SerializeField] private LayerMask HittableLayers = -1;
 
     [Space(10)]
-    [SerializeField] private GameObject ImpactVfx;
-    [SerializeField] private float ImpactVfxSpawnOffset = 0.1f;
     [SerializeField] private float ImpactVfxLifetime = 5f;
 
     [Space(10)]
@@ -131,16 +131,20 @@ public class ProjectileStandard : MonoBehaviour
         IDamagable damagable = collider.GetComponent<IDamagable>();
         damagable?.DealDamage(ImpactDamageAmount);
 
-        if (ImpactVfx)
+        if (collider.TryGetComponent(out IHittable hittable))
         {
-            GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset), Quaternion.LookRotation(normal));
+            GameObject impactVFX = hittable.GetImpactVFX(ImpactType);
+            if (!impactVFX && FallbackImpactVFX)
+            {
+                impactVFX = FallbackImpactVFX;
+            }
+            
+            GameObject impactVfxInstance = Instantiate(impactVFX, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
             if (ImpactVfxLifetime > 0)
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);
             }
-        }
-
-        Vector3 inFrontPosition = point + normal;
+        } 
 
         /*Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
 
@@ -157,6 +161,7 @@ public class ProjectileStandard : MonoBehaviour
                 enemyDetector.EnemyInLineOfSight = true;
         } */
 
+        Vector3 inFrontPosition = point + normal;
         if (IsExplosive)
         {
             Collider[] hitByExplosionColliders = Physics.OverlapSphere(inFrontPosition, ExplosionRange, HittableLayers);
