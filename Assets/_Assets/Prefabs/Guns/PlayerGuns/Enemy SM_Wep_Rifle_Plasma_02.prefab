@@ -249,7 +249,10 @@ MonoBehaviour:
   DelayBetweenShots: 0.1
   BulletSpreadAngle: 1
   ProjectilePrefab: {fileID: 2676942871222497078, guid: f4b7cda6c43b75b499566011269b6be1, type: 3}
-  MuzzleFlashPrefab: {fileID: 1743301284569550, guid: 1aa64d86152d7fa43929aff7b38e76e8, type: 3}
+  FallbackMuzzleFlashEffect: {fileID: 11400000, guid: 4cf646716c4054d49859434d88e88e61, type: 2}
+  MuzzleFlashEffect: {fileID: 0}
+  MuzzleFlashSingle: {fileID: 1198663731479534, guid: b46264f9e12caed4cb53e7c2ad64aa54, type: 3}
+  MuzzleFlashContinious: {fileID: 1565131197722278, guid: 9e08e7eea9b67324f9c545b241004b0b, type: 3}
   WeaponFireSFX:
     Guid:
       Data1: 404932473

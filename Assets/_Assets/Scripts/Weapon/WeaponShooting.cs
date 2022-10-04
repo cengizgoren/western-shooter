@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using FMOD.Studio;
+using Unity.VisualScripting;
 
 public class WeaponShooting : MonoBehaviour
 {
@@ -24,7 +25,9 @@ public class WeaponShooting : MonoBehaviour
     public float BulletSpreadAngle = 1f;
     [Space(10)]
     public ProjectileStandard ProjectilePrefab;
-    public GameObject MuzzleFlashPrefab;
+    [Space(10)]
+    public MuzzleFlashEffect FallbackMuzzleFlashEffect;
+    public MuzzleFlashEffect MuzzleFlashEffect;
     [Space(10)]
     public FMODUnity.EventReference WeaponFireSFX;
 
@@ -36,12 +39,42 @@ public class WeaponShooting : MonoBehaviour
 
     private float lastTimeShot = Mathf.NegativeInfinity;
 
+    private GameObject muzzleFlashInstance;
+    private GameObject singleMuzzleFlashInstance;
+
+    private ParticleSystem gunshot;
+
     private void Awake()
     {
         weapon = GetComponent<Weapon>();
         weaponController = GetComponent<WeaponController>();
         weaponAmmo = GetComponent<WeaponAmmo>();
         animator = transform.root.GetComponent<Animator>();
+
+        if (ShootType == WeaponShootType.Automatic)
+        {
+            if (MuzzleFlashEffect)
+            {
+                muzzleFlashInstance = Instantiate(MuzzleFlashEffect.ContiniousFire, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
+            }
+            else
+            {
+                muzzleFlashInstance = Instantiate(FallbackMuzzleFlashEffect.ContiniousFire, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
+            }
+            gunshot = muzzleFlashInstance.GetComponent<ParticleSystem>();
+        }
+
+        if (ShootType == WeaponShootType.Manual)
+        {
+            if (MuzzleFlashEffect)
+            {
+                singleMuzzleFlashInstance = MuzzleFlashEffect.SingleShot;
+            }
+            else
+            {
+                singleMuzzleFlashInstance = FallbackMuzzleFlashEffect.SingleShot;
+            }
+        }
     }
 
     private void Start()
@@ -81,6 +114,7 @@ public class WeaponShooting : MonoBehaviour
                 {
                     StopSoundLoopIfPlaying();
                     animator.SetBool("IsShooting", false);
+                    gunshot.Stop();
                 }
                 break;
         }
@@ -92,7 +126,8 @@ public class WeaponShooting : MonoBehaviour
         {
             weaponFireSfxInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(WeaponMuzzle));
             ShootProjectile();
-            SpawnMuzzleFlash();
+            Instantiate(singleMuzzleFlashInstance, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
+
             FMODUnity.RuntimeManager.PlayOneShot(WeaponFireSFX, WeaponMuzzle.position);
             weaponAmmo.Spend(1);
         }
@@ -105,7 +140,8 @@ public class WeaponShooting : MonoBehaviour
         {
             weaponFireSfxInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(WeaponMuzzle)); // The sound doesn't follow its source every update, so far it hasn't been a problem.
             ShootProjectile();
-            SpawnMuzzleFlash();
+
+            gunshot.Play();
             StartSoundLoopIfSilent();
             weaponAmmo.Spend(1);
             animator.SetBool("IsShooting", true);
@@ -144,15 +180,6 @@ public class WeaponShooting : MonoBehaviour
         float spreadAngleRatio = BulletSpreadAngle / 180f;
         Vector3 spreadWorldDirection = Vector3.Slerp(aimDirection.normalized, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
         return spreadWorldDirection;
-    }
-
-    private void SpawnMuzzleFlash()
-    {
-        if (MuzzleFlashPrefab != null)
-        {
-            GameObject muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
-            Destroy(muzzleFlashInstance, 2f);
-        }
     }
 
     private void OnDisable()

@@ -49,7 +49,7 @@ MonoBehaviour:
   Root: {fileID: 4984172705992090742}
   Tip: {fileID: 1277733899088868668}
   ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
-  FallbackImpactVFX: {fileID: 1067536016464596, guid: 57e18706e2792ff4bb5561ed74b796e2, type: 3}
+  FallbackImpactEffect: {fileID: 11400000, guid: b149a7a8fbbcc134aa9101fb391b3f1e, type: 2}
   ImpactDamageAmount: 50
   IsExplosive: 0
   ShowExplosionRadius: 1
