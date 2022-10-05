@@ -25,6 +25,7 @@ public class WeaponShooting : MonoBehaviour
     public float BulletSpreadAngle = 1f;
     [Space(10)]
     public ProjectileStandard ProjectilePrefab;
+    public ProjectileStats projectileStats;
     [Space(10)]
     public MuzzleFlashEffect FallbackMuzzleFlashEffect;
     public MuzzleFlashEffect MuzzleFlashEffect;
@@ -171,7 +172,7 @@ public class WeaponShooting : MonoBehaviour
         lastTimeShot = Time.time;
         Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
         ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
-        newProjectile.Setup(projectileOwner);
+        newProjectile.Setup(projectileOwner, projectileStats);
         newProjectile.Shoot();
     }
 

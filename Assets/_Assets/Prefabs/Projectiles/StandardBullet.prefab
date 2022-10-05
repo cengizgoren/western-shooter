@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2676942871222497078}
   - component: {fileID: 4984172705992090743}
   m_Layer: 0
-  m_Name: AK47Bullet
+  m_Name: StandardBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

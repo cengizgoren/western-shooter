@@ -2468,7 +2468,7 @@ MonoBehaviour:
   timeStartedWeaponSwitch: 0
   _startingRotation: {x: 0, y: 0, z: 0, w: 0}
   _finalRotation: {x: 0, y: 0, z: 0, w: 0}
-  DeathVfx: {fileID: 1337198075554910, guid: 1fd2b75951b0218428458a62cfc06222, type: 3}
+  DeathVfx: {fileID: 1277154925287174, guid: 3b517eddec185dd4a830743a742ad00b, type: 3}
   DeathVfxSpawnOffset: 1
   DeathVfxLifetime: 5
   DeathVfxRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}

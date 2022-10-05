@@ -2547,7 +2547,6 @@ MonoBehaviour:
   WeaponParent: {fileID: 6389449598670594784}
   StartingWeapons:
   - {fileID: 6318658315848839874, guid: d3ced10f285473c41942a9bf59f59227, type: 3}
-  - {fileID: 9002117916590149791, guid: 2b9a6ca4171574d489f61bec72c6ed45, type: 3}
 --- !u!95 &8089292328698757614
 Animator:
   serializedVersion: 4

@@ -34,7 +34,7 @@ public class ProjectileStandard : MonoBehaviour
     [SerializeField] private ImpactEffect FallbackImpactEffect;
 
     [Space(10)]
-    [SerializeField] private int ImpactDamageAmount;
+    [SerializeField] private int ImpactDamage;
     [SerializeField] private bool IsExplosive = false;
     [SerializeField] private bool ShowExplosionRadius = true;
     [SerializeField] private int ExplosionDamageAmount;
@@ -42,7 +42,7 @@ public class ProjectileStandard : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private float MaxLifeTime = 5f;
-    [SerializeField] private float Speed = 20f;
+    [SerializeField] private float Velocity = 20f;
     [SerializeField] private float Radius = 0.01f;
     [SerializeField] private LayerMask HittableLayers = -1;
 
@@ -105,9 +105,11 @@ public class ProjectileStandard : MonoBehaviour
 
     }
 
-    public void Setup(GameObject owner)
+    public void Setup(GameObject owner, ProjectileStats projectileStats)
     {
         Owner = owner;
+        Velocity = projectileStats.Velocity;
+        ImpactDamage = projectileStats.ImpactDamage;
     }
 
     public void Shoot()
@@ -121,7 +123,7 @@ public class ProjectileStandard : MonoBehaviour
     {
         shootTime = Time.time;
         lastRootPosition = Root.position;
-        velocity = transform.forward * Speed;
+        velocity = transform.forward * Velocity;
         ignoredColliders = new List<Collider>();
         Collider[] ownerColliders = Owner.GetComponentsInChildren<Collider>();
         ignoredColliders.AddRange(ownerColliders);
@@ -130,7 +132,7 @@ public class ProjectileStandard : MonoBehaviour
     private void OnHit(Vector3 point, Vector3 normal, Collider collider)
     {
         IDamagable damagable = collider.GetComponent<IDamagable>();
-        damagable?.DealDamage(ImpactDamageAmount);
+        damagable?.DealDamage(ImpactDamage);
 
         if (collider.TryGetComponent(out IHittable hittable))
         {
