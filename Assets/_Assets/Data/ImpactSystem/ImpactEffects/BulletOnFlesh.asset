@@ -16,8 +16,8 @@ MonoBehaviour:
   SurfaceVFX: {fileID: 1489431029902184, guid: 4430919f14c50f84085d287cbcb2c30e, type: 3}
   SurfaceSFX:
     Guid:
-      Data1: -1088727964
-      Data2: 1293853852
-      Data3: -502771292
-      Data4: 1722123226
-    Path: event:/SFX/Metal Impact
+      Data1: -2071995192
+      Data2: 1287199111
+      Data3: 442495923
+      Data4: 1229083977
+    Path: event:/SFX/Flesh Impact

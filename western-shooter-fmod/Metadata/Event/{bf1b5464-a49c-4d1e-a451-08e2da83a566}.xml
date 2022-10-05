@@ -58,7 +58,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{6d423e83-af5f-44ba-b87f-1803cdb613d6}">
 		<property name="maximumDistance">
-			<value>70</value>
+			<value>150</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{53ea6223-e8c5-4571-9c07-3614577798a1}" />
@@ -93,11 +93,18 @@
 	</object>
 	<object class="MixerBusPanner" id="{f66deafc-ec6e-4ed3-8ea0-76e8f2716ed7}" />
 	<object class="SingleSound" id="{fc913e43-de9b-46dc-8716-e6ed1fa63207}">
+		<relationship name="modulators">
+			<destination>{06a55fa4-8142-4607-b744-cf4d6d865682}</destination>
+			<destination>{95030608-6aed-4a59-a992-330a89f3f79f}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{de2e035c-c220-48dd-816c-a1c84524e606}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{e861b375-5f04-4cfe-b68f-40f46ea3d137}">
+		<property name="volume">
+			<value>-19.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -119,6 +126,22 @@
 	</object>
 	<object class="MixerBusPanner" id="{32116172-4911-46e3-93ea-6ef2b9026769}" />
 	<object class="MixerBusFader" id="{2ed0f6a9-8700-4828-9a01-57f6fc5f4b73}" />
+	<object class="RandomizerModulator" id="{06a55fa4-8142-4607-b744-cf4d6d865682}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="amount">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{95030608-6aed-4a59-a992-330a89f3f79f}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>4.5</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{c23c25e3-9aef-4427-be66-06f298179221}">
 		<relationship name="effects">
 			<destination>{728e69df-2b22-4f1b-91b1-5167d8fb311d}</destination>
@@ -128,7 +151,7 @@
 	<object class="MixerBusFader" id="{092c3709-1f58-42ab-b165-b9596d120663}" />
 	<object class="SpatialiserEffect" id="{82250cca-19ae-4505-81e5-504ceccc4d8d}">
 		<property name="maximumDistance">
-			<value>70</value>
+			<value>150</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{728e69df-2b22-4f1b-91b1-5167d8fb311d}" />

@@ -58,7 +58,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{5b47eb0e-f631-4dce-bba4-bd8e1ef797ea}">
 		<property name="maximumDistance">
-			<value>100</value>
+			<value>150</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{cb2430e2-76fc-448b-bca6-701515fd89f8}" />
@@ -96,11 +96,18 @@
 		<property name="length">
 			<value>1.25</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{edab35b4-4772-4ced-9603-d2e178bd7e8c}</destination>
+			<destination>{7c68d4c6-27e8-4ddb-9395-98460a2a63dd}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{141d1458-cb7b-4689-a9ce-b876b4d01ff5}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{fa5eca19-6aa9-47b2-84a2-c98d2bc92fde}">
+		<property name="volume">
+			<value>-14.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -122,6 +129,22 @@
 	</object>
 	<object class="MixerBusPanner" id="{526e9447-8759-4685-acff-7fbbafe45aed}" />
 	<object class="MixerBusFader" id="{0457da66-e1ce-4ff2-91ef-9d9a07202846}" />
+	<object class="RandomizerModulator" id="{edab35b4-4772-4ced-9603-d2e178bd7e8c}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="amount">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{7c68d4c6-27e8-4ddb-9395-98460a2a63dd}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>4.5</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{c601f670-c4a7-42e7-8e91-3684e0f69859}">
 		<relationship name="effects">
 			<destination>{c3033f74-a332-4ba6-aa57-90974069dc64}</destination>
@@ -131,7 +154,7 @@
 	<object class="MixerBusFader" id="{1ef5f5ca-22f4-4732-9eb7-d2018aa82324}" />
 	<object class="SpatialiserEffect" id="{63567b0f-d5a0-4252-bc29-427d92136d8b}">
 		<property name="maximumDistance">
-			<value>100</value>
+			<value>150</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{c3033f74-a332-4ba6-aa57-90974069dc64}" />

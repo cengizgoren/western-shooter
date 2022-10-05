@@ -9388,14 +9388,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1583787653248412801, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
-      propertyPath: StartingWeapons.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1583787653248412801, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
-      propertyPath: StartingWeapons.Array.data[1]
-      value: 
-      objectReference: {fileID: -8357744022313904275, guid: 1e3f05c4ac7438d4e9d6399d9acba8b3, type: 3}
     - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: Invincible
       value: 1
@@ -9414,7 +9406,7 @@ PrefabInstance:
       objectReference: {fileID: 654441654}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8173
+      value: 8179
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576895, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Mesh
