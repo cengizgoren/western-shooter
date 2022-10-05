@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e551ca70ffcbb4ca7fca332c34c5ae, type: 3}
   m_Name: DefaultMuzzleFlashEffect
   m_EditorClassIdentifier: 
-  SingleShot: {fileID: 0}
-  ContiniousFire: {fileID: 0}
+  SingleShot: {fileID: 1198663731479534, guid: b46264f9e12caed4cb53e7c2ad64aa54, type: 3}
+  ContiniousFire: {fileID: 1565131197722278, guid: 9e08e7eea9b67324f9c545b241004b0b, type: 3}
