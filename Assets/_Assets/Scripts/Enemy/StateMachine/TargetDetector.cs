@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class TargetDetector : MonoBehaviour
 {
     public bool TargetSighted = false;
     public bool TargetHeard = false;
     public bool TargetObstructed = false;
-    public bool AlertedByDamage = false;
+    public bool Alerted = false;
 
     [SerializeField] private CharacterController _playerController;
 
@@ -29,13 +30,17 @@ public class TargetDetector : MonoBehaviour
     [SerializeField] private float _hearingDetectionRadius = 5f;
 
     private NavMeshAgent navMeshAgent;
+    private Messager messager;
 
-    private float time =0;
+    private float time = 0;
 
     public void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        GetComponent<EnemyHealth>().OnHpLost += () => AlertedByDamage = true;
+        messager = GetComponent<Messager>();
+
+        messager.OnAlert += () => Alerted = true;
+        GetComponent<EnemyHealth>().OnHpLost += () => Alerted = true;
     }
 
     private void Update() 

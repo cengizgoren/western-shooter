@@ -13,10 +13,11 @@ public class EnemySM : MonoBehaviour
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var targetDetector = GetComponent<TargetDetector>();
         var enemyController = GetComponent<EnemyController>();
+        var messager = GetComponent<Messager>();
 
         _stateMachine = new StateMachine();
 
-        var idle = new Idle();
+        var idle = new Idle(messager);
         var chase = new Chase(targetDetector, _playerController.transform, navMeshAgent);
         var attack = new Attack(targetDetector, transform, enemyController, _playerController.transform, navMeshAgent);
         var search = new Search(targetDetector, enemyController, _playerController.transform, navMeshAgent);
@@ -31,7 +32,7 @@ public class EnemySM : MonoBehaviour
 
         _stateMachine.SetState(idle);
 
-        Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.AlertedByDamage;
+        Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.Alerted;
         Func<bool> TargetContact() => () => targetDetector.TargetSighted && !targetDetector.TargetObstructed;
         //Func<bool> TargetTooFarAway() => () => !enemyDetector.EnemyInSightRange;
         //Func<bool> TargetInRange() => () => enemyDetector.EnemyInSightRange;

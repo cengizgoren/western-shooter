@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class Idle : IState
 {
-    private Transform transform;
-    private NavMeshAgent navMeshAgent;
+    private readonly Messager messager;
 
-
-    public Idle()
+    public Idle(Messager messager)
     {
+        this.messager = messager;
     }
+
 
     public void Tick()
     {
@@ -25,7 +25,6 @@ public class Idle : IState
 
     public void OnExit()
     {
-
+        messager.SendMessage(Messager.Messages.ALERT);
     }
-
 }

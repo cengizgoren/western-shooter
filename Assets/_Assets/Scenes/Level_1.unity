@@ -5739,6 +5739,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1115708679}
+    - target: {fileID: 6999111639316909953, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: MessagableLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7046,6 +7050,14 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: _showLineToPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: _showHearingRadius
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: _playerController
       value: 
@@ -7066,13 +7078,17 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 743258192}
+    - target: {fileID: 6999111639316909953, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: MessagableLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7080,7 +7096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7092,7 +7108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.000000014901161
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalRotation.z
