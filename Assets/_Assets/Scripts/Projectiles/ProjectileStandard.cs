@@ -59,10 +59,16 @@ public class ProjectileStandard : MonoBehaviour
     private Vector3 lastRootPosition;
     private List<Collider> ignoredColliders;
     private const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
+    private Messager messager;
 
     public GameObject Owner { get; private set; }
     public Vector3 InitialPosition { get; private set; }
     public Vector3 InitialDirection { get; private set; }
+
+    private void Awake()
+    {
+        messager = GetComponent<Messager>();
+    }
 
     private void OnEnable()
     {
@@ -152,6 +158,7 @@ public class ProjectileStandard : MonoBehaviour
 
             GameObject impactVfxInstance = Instantiate(vfx, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
             RuntimeManager.PlayOneShot(sfx, transform.position);
+            messager.SendMessage();
             if (ImpactVfxLifetime > 0)
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);

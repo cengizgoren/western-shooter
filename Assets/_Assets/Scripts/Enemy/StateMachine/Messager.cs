@@ -9,19 +9,15 @@ public class Messager : MonoBehaviour
 {
     public UnityAction OnAlert;
 
-    public enum Messages
-    {
-        ALERT
-    }
-
-    public LayerMask MessagableLayers = -1;
-    public float MessageRadius;
+    public Message message;
     [Header("Gizmos")]
     public bool ShowMessageRadius;
 
-    public void SendMessage(Messages message)
+
+    // Make Messager hold mesages to sent for now, as an experiment
+    public void SendMessage()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, MessageRadius, MessagableLayers);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, message.BroadCastRadius, message.MessageReceivers);
         foreach (Collider hitCollider in hitColliders)
         {
             if (hitCollider.TryGetComponent(out Messager messagrereceiver))
@@ -29,16 +25,16 @@ public class Messager : MonoBehaviour
                 messagrereceiver.ProcessMessage(message);
             } else
             {
-                Debug.LogWarningFormat("Message ({0}) broadcasted by object {1} received by object without Messager component: {2}", Enum.GetName(typeof(Messages), message), transform.name, hitCollider.name);
+                Debug.LogWarningFormat("Message ({0}) broadcasted by object {1} received by object without Messager component: {2}", Enum.GetName(typeof(MessageType), message.messageType), transform.name, hitCollider.name);
             }
         }
     }
 
-    public void ProcessMessage(Messages message)
+    public void ProcessMessage(Message message)
     {
-        switch (message)
+        switch (message.messageType)
         {
-            case Messages.ALERT:
+            case MessageType.ALERT:
                 OnAlert?.Invoke();
                 break;
         }
@@ -49,7 +45,7 @@ public class Messager : MonoBehaviour
         if (ShowMessageRadius)
         {
             Gizmos.color = Color.yellow;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, MessageRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, message.BroadCastRadius);
         }
     }
 }

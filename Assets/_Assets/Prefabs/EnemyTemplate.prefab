@@ -2524,10 +2524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d5e7ee35a628a479664c950d74dccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MessagableLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  MessageRadius: 20
+  message: {fileID: 11400000, guid: dea588161e4f3fb48a4f567d0da497dc, type: 2}
   ShowMessageRadius: 0
 --- !u!114 &7529303639434750992
 MonoBehaviour:

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4984172705992090742}
   - component: {fileID: 2676942871222497078}
   - component: {fileID: 4984172705992090743}
+  - component: {fileID: 1285642659665121132}
   m_Layer: 0
   m_Name: StandardBullet
   m_TagString: Untagged
@@ -51,13 +52,13 @@ MonoBehaviour:
   Tip: {fileID: 1277733899088868668}
   ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
   FallbackImpactEffect: {fileID: 11400000, guid: b149a7a8fbbcc134aa9101fb391b3f1e, type: 2}
-  ImpactDamageAmount: 10
+  ImpactDamage: 0
   IsExplosive: 0
   ShowExplosionRadius: 1
   ExplosionDamageAmount: 0
   ExplosionRange: 0
   MaxLifeTime: 3
-  Speed: 75
+  Velocity: 20
   Radius: 0.01
   HittableLayers:
     serializedVersion: 2
@@ -184,6 +185,20 @@ TrailRenderer:
   m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1285642659665121132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984172705992090740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d5e7ee35a628a479664c950d74dccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 11400000, guid: 53011f085e2ba1a43946736ca46f2f3b, type: 2}
+  ShowMessageRadius: 1
 --- !u!1 &5439384873159346879
 GameObject:
   m_ObjectHideFlags: 0

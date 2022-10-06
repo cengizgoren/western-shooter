@@ -25,6 +25,6 @@ public class Idle : IState
 
     public void OnExit()
     {
-        messager.SendMessage(Messager.Messages.ALERT);
+        messager.SendMessage();
     }
 }
