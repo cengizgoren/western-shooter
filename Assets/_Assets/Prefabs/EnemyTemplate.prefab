@@ -3213,7 +3213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8143629243339227656}
   - component: {fileID: 8139200889867326276}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Character_Cyber_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5385,6 +5385,10 @@ PrefabInstance:
     - target: {fileID: 7344909444217556109, guid: 1006db803b8505a4c9e20483c6aa15bf, type: 3}
       propertyPath: m_Name
       value: AimArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344909444217556109, guid: 1006db803b8505a4c9e20483c6aa15bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7344909444217556110, guid: 1006db803b8505a4c9e20483c6aa15bf, type: 3}
       propertyPath: m_RootOrder
