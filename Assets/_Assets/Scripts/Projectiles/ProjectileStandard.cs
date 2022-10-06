@@ -158,7 +158,7 @@ public class ProjectileStandard : MonoBehaviour
 
             GameObject impactVfxInstance = Instantiate(vfx, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
             RuntimeManager.PlayOneShot(sfx, transform.position);
-            messager.SendMessage();
+            
             if (ImpactVfxLifetime > 0)
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);
@@ -217,6 +217,7 @@ public class ProjectileStandard : MonoBehaviour
             }
         }
 
+        messager.SendMessage();
         Destroy(gameObject);
     }
 
