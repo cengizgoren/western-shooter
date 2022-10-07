@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0d9b8ac6-a7e3-4fe8-91e7-16af536cdefe}">
+		<property name="assetPath">
+			<value>Sci-Fi Gun Sounds PRO/Additional/Additional Weapon Sounds 2_4.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.1189569160997732</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{85328c07-4868-452c-b252-824036edaaeb}</destination>
+		</relationship>
+	</object>
+</objects>

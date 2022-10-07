@@ -4,40 +4,28 @@ using TMPro;
 
 public class AmmoCounter : MonoBehaviour
 {
-    [SerializeField] private Image weaponImage;
-    [SerializeField] private TextMeshProUGUI ammo;
+    public Image weaponImage;
+    public TextMeshProUGUI ammoCount;
 
-    private DummyWeaponsManager weaponsManager;
-    private WeaponController currentWeapon;
+    private WeaponArsenal playersWeaponsManager;
+    private WeaponAmmo activeWeaponAmmo;
 
     private void Awake()
     {
-        weaponsManager = FindObjectOfType<DummyWeaponsManager>();
-        weaponsManager.OnSwitchedToWeapon += ChangeWeapon;
-        // weaponsManager.OnAddedWeapon += AddWeapon;
-        // weaponsManager.OnRemovedWeapon += RemoveWeapon;
+        playersWeaponsManager = FindObjectOfType<Player>().GetComponent<WeaponArsenal>();
+        playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
     }
 
-    private void Update()
+    private void UpdateAmmoText(int number)
     {
-        UpdateAmmmo();
+        ammoCount.SetText(number.ToString());
     }
 
-    private void UpdateAmmmo() 
+    private void UpdateActiveWeapon(Weapon weapon)
     {
-        if (currentWeapon)
-            ammo.SetText(currentWeapon.CurrentAmmo.ToString());
+        activeWeaponAmmo = weapon.GetComponent<WeaponAmmo>();
+        UpdateAmmoText(activeWeaponAmmo.CurrentAmmo);
+        activeWeaponAmmo.OnAmmoChange += UpdateAmmoText;
+        weaponImage.sprite = weapon.WeaponIconSprite;
     }
-
-    private void ChangeWeapon(WeaponController weapon)
-    { 
-        currentWeapon = weapon;
-        weaponImage.sprite = weapon.Icon;
-    }
-
-    // void AddWeapon(WeaponController newWeapon, int weaponIndex)
-    // { }
-
-    // void RemoveWeapon(WeaponController newWeapon, int weaponIndex)
-    // { }
 }
