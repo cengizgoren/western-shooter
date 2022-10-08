@@ -16,6 +16,8 @@ public class EnemyWeaponController : WeaponController
 
         enemyController.OnAttack += isAttacking => CheckAttack(isAttacking);
         GameManager.Instance.OnPause += () => { base.OnShootingForbidden?.Invoke(); };
+        GameManager.Instance.OnWon += () => { base.OnShootingForbidden?.Invoke(); };
+        GameManager.Instance.OnLost += () => { base.OnShootingForbidden?.Invoke(); };
         GameManager.Instance.OnUnpause += () => { base.OnShootingAllowed?.Invoke(); };
     }
 
