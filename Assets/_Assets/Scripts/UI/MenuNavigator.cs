@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MenuNavigator : MonoBehaviour
 {
+    public GameObject MainMenuCanvas;
+    public GameObject LevelSelectionCanvas;
     public GameObject PauseMenuCanvas;
+    public GameObject OptionsCanvas;
     public GameObject GameEndedMenuCanvas;
     public TextMeshProUGUI EndStateLabel;
     [Header("Sounds")]
@@ -21,6 +24,20 @@ public class MenuNavigator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void PlayPressed()
+    {
+        RuntimeManager.PlayOneShot(Click);
+        MainMenuCanvas.SetActive(false);
+        LevelSelectionCanvas.SetActive(true);
+    }
+
+    public void PlayBackPressed()
+    {
+        RuntimeManager.PlayOneShot(Click);
+        LevelSelectionCanvas.SetActive(false);
+        MainMenuCanvas.SetActive(true);
+    }
+
     public void RestartPressed()
     {
         RuntimeManager.PlayOneShot(Click);
@@ -32,6 +49,20 @@ public class MenuNavigator : MonoBehaviour
     {
         RuntimeManager.PlayOneShot(Click);
         GameManager.Instance.Unpause();
+    }
+
+    public void OptionsPressed()
+    {
+        RuntimeManager.PlayOneShot(Click);
+        MainMenuCanvas.SetActive(false);
+        OptionsCanvas.SetActive(true);
+    }
+
+    public void OptionsBackPressed()
+    {
+        RuntimeManager.PlayOneShot(Click);
+        OptionsCanvas.SetActive(false);
+        MainMenuCanvas.SetActive(true);
     }
 
     public void MainMenuPressed()
