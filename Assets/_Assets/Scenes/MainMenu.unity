@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.11480223, g: 0.11976789, b: 0.10575684, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2808,6 +2808,41 @@ MonoBehaviour:
   PauseMenuCanvas: {fileID: 0}
   GameEndedMenuCanvas: {fileID: 0}
   EndStateLabel: {fileID: 0}
+  Click:
+    Guid:
+      Data1: 1892971098
+      Data2: 1109248973
+      Data3: 352963465
+      Data4: 1544654086
+    Path: event:/UI/Click
+  LesserClick:
+    Guid:
+      Data1: -1433807513
+      Data2: 1236692983
+      Data3: 659316917
+      Data4: 1198238167
+    Path: event:/UI/SmallClick
+  BeginGame:
+    Guid:
+      Data1: -133436158
+      Data2: 1146701396
+      Data3: -20090724
+      Data4: 326957300
+    Path: event:/UI/BeginGame
+  MenuUp:
+    Guid:
+      Data1: -775416181
+      Data2: 1129867201
+      Data3: 904148156
+      Data4: 2114611593
+    Path: event:/UI/WhooshIn
+  MenuAway:
+    Guid:
+      Data1: 975224132
+      Data2: 1254867740
+      Data3: -1392993349
+      Data4: -1532138545
+    Path: event:/UI/WhooshOut
 --- !u!1 &1938536467
 GameObject:
   m_ObjectHideFlags: 0

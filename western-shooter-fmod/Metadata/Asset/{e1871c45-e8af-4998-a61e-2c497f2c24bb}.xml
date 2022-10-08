@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{e1871c45-e8af-4998-a61e-2c497f2c24bb}">
+		<property name="assetPath">
+			<value>Essential Sounds Bundle/PowerUp &amp; Whoosh/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{85328c07-4868-452c-b252-824036edaaeb}</destination>
+		</relationship>
+	</object>
+</objects>
