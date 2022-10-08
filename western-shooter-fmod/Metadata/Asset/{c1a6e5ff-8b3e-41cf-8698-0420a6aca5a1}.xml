@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{c1a6e5ff-8b3e-41cf-8698-0420a6aca5a1}">
+		<property name="assetPath">
+			<value>Essential Sounds Bundle/Interface &amp; Item/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{85328c07-4868-452c-b252-824036edaaeb}</destination>
+		</relationship>
+	</object>
+</objects>

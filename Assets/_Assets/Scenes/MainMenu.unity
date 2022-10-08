@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.11480223, g: 0.11976789, b: 0.10575684, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -748,10 +748,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091384806}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1507105048}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
+        m_MethodName: OptionsBackPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -759,18 +759,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1485405292}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &271345636
 MonoBehaviour:
@@ -1498,10 +1486,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1485405292}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1507105048}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
+        m_MethodName: PlayPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1509,18 +1497,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1950597036}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &631060117
 MonoBehaviour:
@@ -1859,10 +1835,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1485405292}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1507105048}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
+        m_MethodName: OptionsPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1870,18 +1846,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1091384806}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &926409653
 MonoBehaviour:
@@ -2005,10 +1969,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1950597036}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1507105048}
+        m_TargetAssemblyTypeName: MenuNavigator, Assembly-CSharp
+        m_MethodName: PlayBackPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2016,18 +1980,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1485405292}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1079890398
 MonoBehaviour:
@@ -2805,9 +2757,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485c8984d5193f6438f45cb8a0ae9376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainMenuCanvas: {fileID: 1485405292}
+  LevelSelectionCanvas: {fileID: 1950597036}
   PauseMenuCanvas: {fileID: 0}
+  OptionsCanvas: {fileID: 1091384806}
   GameEndedMenuCanvas: {fileID: 0}
   EndStateLabel: {fileID: 0}
+  Click:
+    Guid:
+      Data1: 1892971098
+      Data2: 1109248973
+      Data3: 352963465
+      Data4: 1544654086
+    Path: event:/UI/Click
+  LesserClick:
+    Guid:
+      Data1: -1433807513
+      Data2: 1236692983
+      Data3: 659316917
+      Data4: 1198238167
+    Path: event:/UI/SmallClick
+  BeginGame:
+    Guid:
+      Data1: -133436158
+      Data2: 1146701396
+      Data3: -20090724
+      Data4: 326957300
+    Path: event:/UI/BeginGame
+  MenuUp:
+    Guid:
+      Data1: -775416181
+      Data2: 1129867201
+      Data3: 904148156
+      Data4: 2114611593
+    Path: event:/UI/WhooshIn
+  MenuAway:
+    Guid:
+      Data1: 975224132
+      Data2: 1254867740
+      Data3: -1392993349
+      Data4: -1532138545
+    Path: event:/UI/WhooshOut
 --- !u!1 &1938536467
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,3 +3008,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950597036}
   m_CullTransparentMesh: 1
+--- !u!1001 &2052194608
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2565992827212588065, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265581, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_Name
+      value: Fader
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565992827891265583, guid: 84ffd73a02e683541977f0379640d98c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84ffd73a02e683541977f0379640d98c, type: 3}

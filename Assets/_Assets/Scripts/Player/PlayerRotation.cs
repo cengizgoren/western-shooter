@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
+    public Vector2 pos;
     public Transform CameraRoot;
     public float RotationSpeed = 720f;
     [Space(10)]
@@ -26,24 +27,28 @@ public class PlayerRotation : MonoBehaviour
 
     private void Rotation()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Controls.InputActions.Player.Look.ReadValue<Vector2>());
+        pos = Controls.InputActions.Player.Look.ReadValue<Vector2>();
+        Ray ray = Camera.main.ScreenPointToRay(pos);
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
             MousePoint = ray.GetPoint(rayDistance);
             Vector3 playersDirectionToMouse = MousePoint - transform.position;
 
-            // Camera
-            CameraRoot.position = transform.position + Vector3.ClampMagnitude(MouseWeight * playersDirectionToMouse, MaxCameraOffset);
+            if (Controls.InputActions.Player.enabled)
+            {
+                // Camera
+                CameraRoot.position = transform.position + Vector3.ClampMagnitude(MouseWeight * playersDirectionToMouse, MaxCameraOffset);
 
-            // Rotation
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playersDirectionToMouse.x, 0f, playersDirectionToMouse.z), Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
+                // Rotation
+                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playersDirectionToMouse.x, 0f, playersDirectionToMouse.z), Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
 
-            // Aim Point
-            AimPoint.position = transform.position + OveraimFactor * playersDirectionToMouse;
-
-            // Direction Arrow
-            DirectionArrow.position = new Vector3(MousePoint.x, DirectionArrow.position.y, MousePoint.z);
+                // Aim Point
+                AimPoint.position = transform.position + OveraimFactor * playersDirectionToMouse;
+            
+                // Direction Arrow
+                DirectionArrow.position = new Vector3(MousePoint.x, DirectionArrow.position.y, MousePoint.z);
+            }
         }
     }
 }

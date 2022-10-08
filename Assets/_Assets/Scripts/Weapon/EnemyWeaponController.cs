@@ -14,7 +14,9 @@ public class EnemyWeaponController : WeaponController
         enemyWeapon = GetComponent<Weapon>();
         enemyController = enemyWeapon.GetOwner().GetComponent<EnemyController>();
 
-        enemyController.OnAttack += isAttacking => CheckAttack(isAttacking); 
+        enemyController.OnAttack += isAttacking => CheckAttack(isAttacking);
+        GameManager.Instance.OnPause += () => { base.OnShootingForbidden?.Invoke(); };
+        GameManager.Instance.OnUnpause += () => { base.OnShootingAllowed?.Invoke(); };
     }
 
     private void CheckAttack(bool isAttacking)
@@ -22,12 +24,10 @@ public class EnemyWeaponController : WeaponController
         if (isAttacking)
         {
             base.OnTriggerPressed?.Invoke();
-            base.OnShootingAllowed?.Invoke();
         }
         else
         {
             base.OnTriggerReleased?.Invoke();
-            base.OnShootingForbidden?.Invoke();
         }
     }
 }

@@ -649,10 +649,10 @@ RectTransform:
   m_Father: {fileID: 3403529547365119095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.8313, y: -27.4605}
-  m_SizeDelta: {x: 277.6626, y: 44.921}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 277.6626, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3403529547000810471
 CanvasRenderer:
@@ -783,10 +783,10 @@ RectTransform:
   m_Father: {fileID: 3403529547365119095}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.8313, y: -77.3815}
-  m_SizeDelta: {x: 277.6626, y: 44.921}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 277.6626, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3403529547170691506
 CanvasRenderer:
@@ -1052,10 +1052,10 @@ RectTransform:
   m_Father: {fileID: 3403529547365119095}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.8313, y: -127.302505}
-  m_SizeDelta: {x: 277.6626, y: 44.921}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 277.6626, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3403529547264265406
 CanvasRenderer:
@@ -1551,6 +1551,41 @@ MonoBehaviour:
   PauseMenuCanvas: {fileID: 3403529548334528984}
   GameEndedMenuCanvas: {fileID: 3403529548378565254}
   EndStateLabel: {fileID: 3403529547808759975}
+  Click:
+    Guid:
+      Data1: 1892971098
+      Data2: 1109248973
+      Data3: 352963465
+      Data4: 1544654086
+    Path: event:/UI/Click
+  LesserClick:
+    Guid:
+      Data1: -1433807513
+      Data2: 1236692983
+      Data3: 659316917
+      Data4: 1198238167
+    Path: event:/UI/SmallClick
+  BeginGame:
+    Guid:
+      Data1: -133436158
+      Data2: 1146701396
+      Data3: -20090724
+      Data4: 326957300
+    Path: event:/UI/BeginGame
+  MenuUp:
+    Guid:
+      Data1: -775416181
+      Data2: 1129867201
+      Data3: 904148156
+      Data4: 2114611593
+    Path: event:/UI/WhooshIn
+  MenuAway:
+    Guid:
+      Data1: 975224132
+      Data2: 1254867740
+      Data3: -1392993349
+      Data4: -1532138545
+    Path: event:/UI/WhooshOut
 --- !u!1 &3403529547365119092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,10 +2319,10 @@ RectTransform:
   m_Father: {fileID: 3403529547365119095}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.8313, y: -77.3815}
-  m_SizeDelta: {x: 277.6626, y: 44.921}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 277.6626, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3403529548139617979
 CanvasRenderer:
@@ -2401,7 +2436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3403529548334528964
 RectTransform:
   m_ObjectHideFlags: 0
