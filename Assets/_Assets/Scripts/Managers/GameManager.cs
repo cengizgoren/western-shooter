@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,6 @@ public class GameManager : MonoBehaviour
     public GameState GameState = GameState.MainMenu;
     public VictoryState VictoryState;
     public int CurrentLevelID;
-
 
     public UnityAction OnLaunch;
     public UnityAction OnLost;
@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Controls.InputActions.UI.Escape.started += _ => OnEscape();
-
     }
 
     public void Pause()
@@ -70,12 +69,20 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(int level)
     {
+        Fader fader = FindObjectOfType<Fader>();
+        if (fader)
+        {
+            fader.FadeOut();
+        }
+
+        yield return new WaitForSecondsRealtime(1);
+
         AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         while (!asyncLoadLevel.isDone)
             yield return null;
 
         yield return new WaitForEndOfFrame();
-
+        
         CurrentLevelID = level;
         var p = FindObjectOfType<Player>();
         var c = p.GetComponent<PlayerHealth>();
@@ -88,9 +95,30 @@ public class GameManager : MonoBehaviour
     }
 
     public void Restart()
-    { 
+    {
         StartCoroutine(LoadSceneAsync(CurrentLevelID));
     }
+
+    //private IEnumerator FadeThenDoAction(float seconds, Action action)
+    //{
+    //    var f = FindObjectOfType<Fader>();
+    //    if (f)
+    //    {
+    //        f.FadeOut();
+    //    }
+    //    yield return new WaitForSeconds(seconds);
+    //}
+
+    //private IEnumerator WaitCoroutine(int seconds)
+    //{
+    //    Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+    //    //yield on a new YieldInstruction that waits for 5 seconds.
+    //    yield return new WaitForSeconds(seconds);
+
+    //    //After we have waited 5 seconds print the time again.
+    //    Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    //}
 
     public void MainMenu()
     {

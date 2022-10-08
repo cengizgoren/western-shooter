@@ -17,6 +17,7 @@ public class MenuNavigator : MonoBehaviour
     public void RestartPressed()
     {
         GameManager.Instance.Restart();
+        gameObject.SetActive(false);
     }
 
     public void ContinuePressed()
