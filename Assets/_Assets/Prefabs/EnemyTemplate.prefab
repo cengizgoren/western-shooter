@@ -2534,8 +2534,8 @@ MonoBehaviour:
   TargetSighted: 0
   TargetObstructed: 0
   Alerted: 0
-  SightDetectionAngle: 90
-  SightDetectionRadius: 10
+  SightDetectionAngle: 180
+  SightDetectionRadius: 30
   HearingDetectionRadius: 5
   CanBeSeen:
     serializedVersion: 2
@@ -2545,10 +2545,10 @@ MonoBehaviour:
   LastKnownPosition: {x: 0, y: 0, z: 0}
   LastKnownDirection: {x: 0, y: 0, z: 0}
   LastKnownVeloctity: {x: 0, y: 0, z: 0}
-  ShowFieldOfView: 1
-  ShowHearingRadius: 1
-  ShowLineToPlayer: 1
-  ShowVisionRaycasts: 1
+  ShowFieldOfView: 0
+  ShowHearingRadius: 0
+  ShowLineToPlayer: 0
+  ShowVisionRaycasts: 0
 --- !u!114 &6999111639316909953
 MonoBehaviour:
   m_ObjectHideFlags: 0

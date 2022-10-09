@@ -23,9 +23,10 @@ public class Search : IState
 
     public void Tick()
     {
-        if (time > 0.1f)
+        if (time > 0.3f)
         {
-            if (navMeshAgent.remainingDistance <= 1f)
+            // Carefull! The distance might not be ready yet here!
+            if (navMeshAgent.remainingDistance < 0.2f)
             {
                 navMeshAgent.SetDestination(enemyDetector.GetNextPositionToSearch());
             }
