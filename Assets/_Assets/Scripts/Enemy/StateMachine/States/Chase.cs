@@ -7,32 +7,37 @@ public class Chase : IState
 {
     public float TimeTargetLost;
 
-    private NavMeshAgent _navMeshAgent;
-    private Transform _targetTransform;
-    private TargetDetector _enemyDetector;
+    private NavMeshAgent navMeshAgent;
+    private Transform targetTransform;
+    private TargetDetector enemyDetector;
+    private float time;
 
     public Chase(TargetDetector enemyDetector, Transform targetTransform, NavMeshAgent navMeshAgent)
     {
-        _enemyDetector = enemyDetector;
-        _targetTransform = targetTransform;
-        _navMeshAgent = navMeshAgent;
+        this.enemyDetector = enemyDetector;
+        this.targetTransform = targetTransform;
+        this.navMeshAgent = navMeshAgent;
     }
 
     public void Tick()
     {
-        if (!_navMeshAgent.Raycast(_targetTransform.position, out NavMeshHit hit))
-            TimeTargetLost += Time.deltaTime;
+        if (time > 0.1f)
+        {
+            navMeshAgent.SetDestination(targetTransform.position);
+            time = 0;
+        }
+
+        time += Time.deltaTime;
     }
 
     public void OnEnter()
     {
         TimeTargetLost = 0f;
-        _navMeshAgent.SetDestination(_targetTransform.position);
+        navMeshAgent.SetDestination(targetTransform.position);
     }
 
     public void OnExit()
     {
-        _navMeshAgent.ResetPath();
+        navMeshAgent.ResetPath();
     }
-
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,7 +44,7 @@ public class TargetDetector : MonoBehaviour
 
     private void Update() 
     {
-        if (time > 1.5f)
+        if (time > 0.1f)
         {
             TargetSighted = IsPlayerInSightRange();
             //TargetHeard = IsPlayerHearingRange();
@@ -59,7 +58,28 @@ public class TargetDetector : MonoBehaviour
     public Vector3 GetNextPositionToSearch()
     {
         // Make it less obvious by randomizing or by having a dedicated algo
-        return PlayerController.transform.position;
+        RandomPointOnCircle(transform.position, 10f, out Vector3 result);
+        return result;
+    }
+
+    private bool RandomPointOnCircle(Vector3 center, float range, out Vector3 result)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized;
+            Vector3 randomPoint = center + new Vector3(randomPointOnCircle.x, 0f, randomPointOnCircle.y) * range;
+            NavMeshHit hit;
+            // Also check if line of sight is going to be maintained
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) && !navMeshAgent.Raycast(hit.position, out _))
+            {
+                Debug.DrawRay(hit.position, Vector3.up, Color.blue, 3f);
+                result = hit.position;
+                return true;
+            }
+        }
+        Debug.LogWarning("Could not find viable random point!");
+        result = Vector3.zero;
+        return false;
     }
 
     private bool IsPlayerInSightRange()
@@ -88,7 +108,7 @@ public class TargetDetector : MonoBehaviour
             if (ShowVisionRaycasts)
             {
                 Debug.DrawRay(position, hit.point - position, Color.yellow, 1.0f);
-                Debug.LogWarningFormat("Enemy {0} looks towards player and sees: {1}", transform.name, hit.collider.name);
+                Debug.LogWarningFormat("Enemy {0} direct line of sight check: {1}", transform.name, hit.collider.name);
             }
             if (hit.collider.gameObject.CompareTag("Player"))
             {

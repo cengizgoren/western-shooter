@@ -66,6 +66,7 @@ public class Attack : IState
         _enemyController.OnAttack?.Invoke(false);
         _navMeshAgent.updateRotation = true;
         _navMeshAgent.speed = 4f;
+        _enemyController.ResetTargetTransform();
     }
 
     private void LookAt(Vector3 lookPoint)

@@ -4,9 +4,10 @@ using UnityEngine.AI;
 
 public class EnemySM : MonoBehaviour
 {
-    private StateMachine _stateMachine;
+    public CharacterController PlayerController;
+    public string State;
 
-    [SerializeField] private CharacterController _playerController;
+    private StateMachine StateMachine;
 
     public void Awake()
     {
@@ -15,22 +16,23 @@ public class EnemySM : MonoBehaviour
         var enemyController = GetComponent<EnemyController>();
         var messager = GetComponent<Messager>();
 
-        _stateMachine = new StateMachine();
+        StateMachine = new StateMachine();
 
         var idle = new Idle(messager);
-        var chase = new Chase(targetDetector, _playerController.transform, navMeshAgent);
-        var attack = new Attack(targetDetector, transform, enemyController, _playerController.transform, navMeshAgent);
-        var search = new Search(targetDetector, enemyController, _playerController.transform, navMeshAgent);
+        var chase = new Chase(targetDetector, PlayerController.transform, navMeshAgent);
+        var attack = new Attack(targetDetector, transform, enemyController, PlayerController.transform, navMeshAgent);
+        var search = new Search(targetDetector, enemyController, PlayerController.transform, navMeshAgent);
 
         At(idle, chase, TargetDetected());
         At(idle, attack, TargetContact());
         At(chase, attack, TargetContact());
+        At(chase, search, TargetObstructed());
         At(attack, search, TargetObstructed());
         At(search, attack, TargetContact());
 
-        void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
+        void At(IState to, IState from, Func<bool> condition) => StateMachine.AddTransition(to, from, condition);
 
-        _stateMachine.SetState(idle);
+        StateMachine.SetState(idle);
 
         Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.Alerted;
         Func<bool> TargetContact() => () => targetDetector.TargetSighted && !targetDetector.TargetObstructed;
@@ -39,6 +41,10 @@ public class EnemySM : MonoBehaviour
         Func<bool> TargetObstructed() => () => targetDetector.TargetObstructed;
     }
 
-    private void Update() => _stateMachine.Tick();
+    private void Update()
+    {
+        StateMachine.Tick();
+        State = StateMachine.CurrentState.GetType().Name;
+    }
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAim : MonoBehaviour
 {
+    public Transform DefaultTarget;
     public Transform Target;
     public Transform AimPoint;
     public float RotationSpeed = 360f;
