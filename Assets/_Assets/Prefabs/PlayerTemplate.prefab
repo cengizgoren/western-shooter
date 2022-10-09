@@ -2420,7 +2420,7 @@ GameObject:
   - component: {fileID: 880282390615595008}
   m_Layer: 0
   m_Name: PlayerTemplate
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2525,6 +2525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2044d81e1c21e240b595942f67758ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
   CameraRoot: {fileID: 8147984661329040604}
   RotationSpeed: 720
   AimPoint: {fileID: 7927277942824863464}

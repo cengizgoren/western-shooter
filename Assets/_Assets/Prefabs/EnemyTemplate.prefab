@@ -2506,7 +2506,7 @@ MonoBehaviour:
   LastKnownPosition: {x: 0, y: 0, z: 0}
   LastKnownDirection: {x: 0, y: 0, z: 0}
   LastKnownVeloctity: {x: 0, y: 0, z: 0}
-  _showFieldOfView: 1
+  _showFieldOfView: 0
   _showHearingRadius: 0
   _showLineToPlayer: 0
   _sightDetectionAngle: 180

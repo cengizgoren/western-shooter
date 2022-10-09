@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: {fileID: 11400000, guid: 53011f085e2ba1a43946736ca46f2f3b, type: 2}
-  ShowMessageRadius: 1
+  ShowMessageRadius: 0
 --- !u!1 &5439384873159346879
 GameObject:
   m_ObjectHideFlags: 0
