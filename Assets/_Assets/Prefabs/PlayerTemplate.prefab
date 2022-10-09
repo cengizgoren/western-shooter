@@ -2530,9 +2530,9 @@ MonoBehaviour:
   RotationSpeed: 720
   AimPoint: {fileID: 7927277942824863464}
   DirectionArrow: {fileID: 6431496564097576865}
-  OveraimFactor: 1.5
-  MouseWeight: 0.6
-  MaxCameraOffset: 30
+  OveraimFactor: 1.6
+  MouseWeight: 0.5
+  MaxCameraOffset: 20
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0
