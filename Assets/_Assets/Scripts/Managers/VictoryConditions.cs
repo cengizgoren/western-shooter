@@ -2,26 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class VictoryConditions : MonoBehaviour
 {
+    public UnityAction OnTargetKilled;
+
     // Interfaces (IDamagable) are not serializable in unity
-    public List<Destructable> DestroyTargets = new List<Destructable>();
     public List<EnemyHealth> KillTargets = new List<EnemyHealth>();
+    public List<Destructable> DestroyTargets = new List<Destructable>();
+
+    public int KillTargetsTotal;
+    public int KillTargetsCurrent;
 
     private int destroyTargetsCount;
-    private int killTargetsCount;
-
     private int currentDestroyTargetsCount;
-    private int currentKillTargetsCount;
 
-    void Start()
+    private ObjectiveTracker objectiveTracker;
+
+    private void Awake()
     {
         destroyTargetsCount = DestroyTargets.Count;
         currentDestroyTargetsCount = DestroyTargets.Count;
 
-        killTargetsCount = KillTargets.Count;
-        currentKillTargetsCount = KillTargets.Count;
+        KillTargetsTotal = KillTargets.Count;
+        KillTargetsCurrent = KillTargets.Count;
 
         GameManager.Instance.UpdateVictoryCondition(VictoryState.ObjectiveInProgress);
 
@@ -47,10 +52,11 @@ public class VictoryConditions : MonoBehaviour
 
     private void TargetKilled()
     {
-        currentKillTargetsCount--;
-        if (currentKillTargetsCount <= 0)
+        KillTargetsCurrent--;
+        if (KillTargetsCurrent <= 0)
         {
             GameManager.Instance.UpdateVictoryCondition(VictoryState.Won);
         }
+        OnTargetKilled?.Invoke();
     }
 }
