@@ -37,7 +37,7 @@ public class Search : IState
 
     public void OnEnter()
     {
-        navMeshAgent.SetDestination(enemyDetector.LastKnownPosition);
+        navMeshAgent.SetDestination(enemyDetector.PlayerController.transform.position);
     }
 
     public void OnExit()
