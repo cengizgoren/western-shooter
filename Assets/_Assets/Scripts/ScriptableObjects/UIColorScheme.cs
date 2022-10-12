@@ -6,4 +6,5 @@ using UnityEngine;
 public class UIColorScheme : ScriptableObject
 {
     public Color ObjectivesBackground;
+    public Color ObjectivesBackgroundComplete;
 }

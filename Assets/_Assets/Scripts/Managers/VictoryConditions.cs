@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class VictoryConditions : MonoBehaviour
 {
     public UnityAction OnTargetKilled;
+    public UnityAction OnObjectiveComplete;
 
     // Interfaces (IDamagable) are not serializable in unity
     public List<EnemyHealth> KillTargets = new List<EnemyHealth>();
@@ -40,7 +41,7 @@ public class VictoryConditions : MonoBehaviour
         if (KillTargetsCurrent <= 0)
         {
             exit.gameObject.SetActive(true);
-
+            OnObjectiveComplete?.Invoke();
         }
         OnTargetKilled?.Invoke();
     }

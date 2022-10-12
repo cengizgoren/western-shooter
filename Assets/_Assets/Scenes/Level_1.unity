@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-24102
+  m_Name: pb_Mesh-6470
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11141,7 +11141,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh39184
+  m_Name: pb_Mesh30976
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33178,7 +33178,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh39592
+  m_Name: pb_Mesh31384
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36798,9 +36798,33 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
+      propertyPath: ColorScheme
+      value: 
+      objectReference: {fileID: 11400000, guid: ffe6ed4efc831a248999602ca1cb5a8b, type: 2}
+    - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
       propertyPath: ObjectivePrefab
       value: 
       objectReference: {fileID: 3073305886734523449, guid: e2a0d629e9826824abc3e49ce9fd3779, type: 3}
+    - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
+      propertyPath: ObjectiveComplete.Path
+      value: event:/UI/ObjectiveComplete
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
+      propertyPath: ObjectiveComplete.Guid.Data1
+      value: 743984474
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
+      propertyPath: ObjectiveComplete.Guid.Data2
+      value: 1252681688
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
+      propertyPath: ObjectiveComplete.Guid.Data3
+      value: -1376071533
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138670920478447232, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
+      propertyPath: ObjectiveComplete.Guid.Data4
+      value: 1808611582
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c793c196aa990964a848d86e3cdc8c42, type: 3}
 --- !u!1001 &2565992827297658177
