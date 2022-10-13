@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6466629679388458958}
   - component: {fileID: 1135730504510016838}
-  - component: {fileID: 9138670920478447232}
   m_Layer: 5
   m_Name: Objectives
   m_TagString: Untagged
@@ -64,22 +63,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &9138670920478447232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563858658297774439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b79d55ea8252d45bfb435b5c75f3a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ColorScheme: {fileID: 0}
-  objectivesDone: {fileID: 0}
-  objectivesTotal: {fileID: 0}
-  ObjectivePrefab: {fileID: 3073305886734523449, guid: e2a0d629e9826824abc3e49ce9fd3779, type: 3}
 --- !u!1 &2097398657892975288
 GameObject:
   m_ObjectHideFlags: 0
