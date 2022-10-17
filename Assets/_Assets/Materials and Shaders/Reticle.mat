@@ -115,7 +115,7 @@ Material:
     - _Gradient1_1: 1
     - _Gradient2: 1
     - _GradientClampMax: 1
-    - _GradientClampMin: 0
+    - _GradientClampMin: 0.15
     - _GradientMultiplier: 1
     - _GradientOffset: 2.55
     - _Hue: 202
