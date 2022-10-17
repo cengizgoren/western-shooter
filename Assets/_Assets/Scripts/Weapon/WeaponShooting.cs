@@ -190,6 +190,6 @@ public class WeaponShooting : MonoBehaviour
 
     private void OnDestroy()
     {
-        StopSoundLoopIfPlaying();
+        weaponFireSfxInstance.stop(STOP_MODE.ALLOWFADEOUT);
     }
 }

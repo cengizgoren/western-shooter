@@ -13,7 +13,7 @@ public class PlayerRotation : MonoBehaviour
     public Transform DirectionArrow; 
     
     [Header("Camera")]
-    [Range(1.0f, 2.0f)] public float OveraimFactor = 1.25f;
+    [Range(1.0f, 5.0f)] public float OveraimFactor = 1.25f;
     [Range(0.0f, 1.0f)] public float MouseWeight = 0.6f;
     [Range(0.0f, 100.0f)] public float MaxCameraOffset = 25f;
 

@@ -37,7 +37,6 @@ public class EnemyController : MonoBehaviour
         timeStartedWeaponSwitch = Time.time;
     }
 
-
     void Update()
     {
         if (_rotationOrdered)
@@ -49,6 +48,11 @@ public class EnemyController : MonoBehaviour
     public void SetTargetTransform(Transform target)
     {
         enemyAim.Target = target;
+    }
+
+    public void ResetTargetTransform()
+    {
+        enemyAim.Target = enemyAim.DefaultTarget;
     }
 
     private void HandleRotation()

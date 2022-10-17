@@ -1,37 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
 public class TargetDetector : MonoBehaviour
 {
     public bool TargetSighted = false;
-    public bool TargetHeard = false;
+    //public bool TargetHeard = false;
     public bool TargetObstructed = false;
     public bool Alerted = false;
 
-    [SerializeField] private CharacterController _playerController;
+    [Header("Senses Range")]
+    [Tooltip("Cone of player detection in from of an enemy agent. The value is doubled.")]
+    public float SightDetectionAngle = 90f;
+    public float SightDetectionRadius = 10f;
+    public float HearingDetectionRadius = 5f;
+    public LayerMask CanBeSeen;
 
-    // Make it a struct or class
-    bool isThereLastKnownPos = false;
+    // Make it a struct or class Maybe?
+    [Header("Last known Position")]
+    public CharacterController PlayerController;
+    public bool isThereLastKnownPos = false;
     public Vector3 LastKnownPosition;
     public Vector3 LastKnownDirection;
     public Vector3 LastKnownVeloctity;
 
-    [Space(10)]
-    [SerializeField] private bool _showFieldOfView = true;
-    [SerializeField] private bool _showHearingRadius = true;
-    [SerializeField] private bool _showLineToPlayer = true;
-    [Tooltip("Cone of player detection in from of an enemy agent. The value is doubled.")]
-    [SerializeField] private float _sightDetectionAngle = 90f;
-    [SerializeField] private float _sightDetectionRadius = 10f;
-    [SerializeField] private float _hearingDetectionRadius = 5f;
+    [Header("Debug")]
+    public bool ShowFieldOfView = true;
+    public bool ShowHearingRadius = true;
+    public bool ShowLineToPlayer = true;
+    public bool ShowVisionRaycasts = true;
 
     private NavMeshAgent navMeshAgent;
     private Messager messager;
-
     private float time = 0;
 
     public void Awake()
@@ -45,10 +44,10 @@ public class TargetDetector : MonoBehaviour
 
     private void Update() 
     {
-        if (time > 1.5f)
+        if (time > 0.1f)
         {
             TargetSighted = IsPlayerInSightRange();
-            TargetHeard = IsPlayerHearingRange();
+            //TargetHeard = IsPlayerHearingRange();
             TargetObstructed = IsPlayerObstructed();
             time = 0;
         }
@@ -59,35 +58,71 @@ public class TargetDetector : MonoBehaviour
     public Vector3 GetNextPositionToSearch()
     {
         // Make it less obvious by randomizing or by having a dedicated algo
-        return _playerController.transform.position;
+        RandomPointOnCircle(transform.position, 10f, out Vector3 result);
+        return result;
+    }
+
+    private bool RandomPointOnCircle(Vector3 center, float range, out Vector3 result)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized;
+            Vector3 randomPoint = center + new Vector3(randomPointOnCircle.x, 0f, randomPointOnCircle.y) * range;
+            NavMeshHit hit;
+            // Also check if line of sight is going to be maintained
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) && !navMeshAgent.Raycast(hit.position, out _))
+            {
+                Debug.DrawRay(hit.position, Vector3.up, Color.blue, 3f);
+                result = hit.position;
+                return true;
+            }
+        }
+        Debug.LogWarning("Could not find viable random point!");
+        result = Vector3.zero;
+        return false;
     }
 
     private bool IsPlayerInSightRange()
     {
-        float distance = Vector3.Distance(transform.position, _playerController.transform.position);
-        if (distance < _sightDetectionRadius)
+        float distance = Vector3.Distance(transform.position, PlayerController.transform.position);
+        if (distance < SightDetectionRadius)
         {
-            Vector3 toPlayer = _playerController.transform.position - transform.position;
-            return Vector3.Angle(toPlayer, transform.forward) < _sightDetectionAngle / 2f;
+            Vector3 toPlayer = PlayerController.transform.position - transform.position;
+            return Vector3.Angle(toPlayer, transform.forward) < SightDetectionAngle / 2f;
         }
         return false;
     }
 
-    private bool IsPlayerHearingRange()
-    {
-        return _hearingDetectionRadius > Vector3.Distance(transform.position, _playerController.transform.position);
-    }
+    //private bool IsPlayerHearingRange()
+    //{
+    //    return HearingDetectionRadius > Vector3.Distance(transform.position, PlayerController.transform.position);
+    //}
 
     private bool IsPlayerObstructed()
     {
-        return navMeshAgent.Raycast(_playerController.transform.position, out NavMeshHit _);
+        Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+        Vector3 toPlayer = PlayerController.transform.position - transform.position;
+
+        if (Physics.Raycast(position, toPlayer, out RaycastHit hit))
+        {
+            if (ShowVisionRaycasts)
+            {
+                Debug.DrawRay(position, hit.point - position, Color.yellow, 1.0f);
+                Debug.LogWarningFormat("Enemy {0} direct line of sight check: {1}", transform.name, hit.collider.name);
+            }
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void SaveLastKnownPosAndDir()
     {
-        LastKnownPosition = _playerController.transform.position;
-        LastKnownDirection = _playerController.transform.forward.normalized;
-        LastKnownVeloctity = _playerController.velocity;
+        LastKnownPosition = PlayerController.transform.position;
+        LastKnownDirection = PlayerController.transform.forward.normalized;
+        LastKnownVeloctity = PlayerController.velocity;
         isThereLastKnownPos = true;
     }
 
@@ -102,22 +137,22 @@ public class TargetDetector : MonoBehaviour
             DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownVeloctity);
         }
 
-        if (_showFieldOfView)
+        if (ShowFieldOfView)
         {
             Gizmos.color = Color.red;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, _sightDetectionAngle, _sightDetectionRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius);
         }
 
-        if (_showHearingRadius)
+        if (ShowHearingRadius)
         {
             Gizmos.color = Color.blue;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, _hearingDetectionRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, HearingDetectionRadius);
         }
 
-        if (_showLineToPlayer)
+        if (ShowLineToPlayer)
         {
             Gizmos.color = Color.yellow;
-            Vector3 toPlayer = _playerController.transform.position - transform.position;
+            Vector3 toPlayer = PlayerController.transform.position - transform.position;
             Gizmos.DrawLine(transform.position, transform.position + toPlayer);
         }
     }

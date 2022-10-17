@@ -10,9 +10,9 @@ public class ProjectileStandard : MonoBehaviour
     {
         public Collider Collider;
         public int Damage;
-        public IDamagable Damagable = null;
+        public Damagable Damagable = null;
 
-        public DamagableObject(Collider collider, int damage, IDamagable damagable)
+        public DamagableObject(Collider collider, int damage, Damagable damagable)
         {
             Collider = collider;
             Damage = damage;
@@ -137,16 +137,13 @@ public class ProjectileStandard : MonoBehaviour
 
     private void OnHit(Vector3 point, Vector3 normal, Collider collider)
     {
-        IDamagable damagable = collider.GetComponent<IDamagable>();
-        damagable?.DealDamage(ImpactDamage);
-
-        if (collider.TryGetComponent(out IHittable hittable))
+        if (collider.TryGetComponent(out Damagable damagable2))
         {
-            Surface surface = hittable.GetSurface();
+            damagable2?.DealDamage(ImpactDamage);
             GameObject vfx = FallbackImpactEffect.SurfaceVFX;
             EventReference sfx = FallbackImpactEffect.SurfaceSFX;
 
-            foreach (ImpactEffect impactEffect in surface.ImpactEffects)
+            foreach (ImpactEffect impactEffect in damagable2.surface.ImpactEffects)
             {
                 if (ImpactType == impactEffect.ImpactType)
                 {
@@ -163,28 +160,18 @@ public class ProjectileStandard : MonoBehaviour
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);
             }
-        }
-
-        /*Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
-
-        if (ShowSoundRadius)
+        } else
         {
-            DebugTools.Draw.DrawTimedCircle(point, SoundRadius, Color.blue);
+            Instantiate(GameAssets.Instance.Defaults.ImpactEffect.SurfaceVFX, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
+            RuntimeManager.PlayOneShot(GameAssets.Instance.Defaults.ImpactEffect.SurfaceSFX, transform.position);
         }
-
-        foreach (Collider soundCollider in hitBySoundColliders)
-        {
-            EnemyDetector enemyDetector = soundCollider.GetComponent<EnemyDetector>();
-
-            if (enemyDetector)
-                enemyDetector.EnemyInLineOfSight = true;
-        } */
 
         Vector3 inFrontPosition = point + normal;
+
         if (IsExplosive)
         {
             Collider[] hitByExplosionColliders = Physics.OverlapSphere(inFrontPosition, ExplosionRange, HittableLayers);
-            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<IDamagable>()));
+            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<Damagable>()));
 
             if (ShowExplosionRadius)
             {

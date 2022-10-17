@@ -19,7 +19,7 @@ using Object = System.Object;
 
 public class StateMachine
 {
-    private IState _currentState;
+    public IState CurrentState;
 
     private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
     private List<Transition> _currentTransitions = new List<Transition>();
@@ -33,22 +33,22 @@ public class StateMachine
         if (transition != null)
             SetState(transition.To);
 
-        _currentState?.Tick();
+        CurrentState?.Tick();
     }
 
     public void SetState(IState state)
     {
-        if (state == _currentState)
+        if (state == CurrentState)
             return;
 
-        _currentState?.OnExit();
-        _currentState = state;
+        CurrentState?.OnExit();
+        CurrentState = state;
 
-        _transitions.TryGetValue(_currentState.GetType(), out _currentTransitions);
+        _transitions.TryGetValue(CurrentState.GetType(), out _currentTransitions);
         if (_currentTransitions == null)
             _currentTransitions = EmptyTransitions;
 
-        _currentState.OnEnter();
+        CurrentState.OnEnter();
     }
 
     public void AddTransition(IState from, IState to, Func<bool> predicate)

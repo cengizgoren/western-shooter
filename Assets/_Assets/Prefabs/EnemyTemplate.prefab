@@ -128,6 +128,37 @@ Transform:
   m_Father: {fileID: 6191746877538277952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2973875118074068466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1577515978293641278}
+  m_Layer: 0
+  m_Name: DefaultTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1577515978293641278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973875118074068466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8143561313886008644}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4723008689364115923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,7 +2418,6 @@ GameObject:
   - component: {fileID: 5006507270630911467}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 56147942124067346}
-  - component: {fileID: 1113741816659177493}
   - component: {fileID: 8555749047885385819}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
@@ -2436,6 +2466,7 @@ Transform:
   - {fileID: 2910459726844810727}
   - {fileID: 7927277942824863464}
   - {fileID: 6431496564097576865}
+  - {fileID: 1577515978293641278}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2485,7 +2516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35df6ebbd94f2946ac45035e88261da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 0}
+  PlayerController: {fileID: 0}
+  State: 
 --- !u!114 &5285032409765989732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2499,19 +2531,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetSighted: 0
-  TargetHeard: 0
   TargetObstructed: 0
   Alerted: 0
-  _playerController: {fileID: 0}
+  SightDetectionAngle: 180
+  SightDetectionRadius: 50
+  HearingDetectionRadius: 5
+  CanBeSeen:
+    serializedVersion: 2
+    m_Bits: 0
+  PlayerController: {fileID: 0}
+  isThereLastKnownPos: 0
   LastKnownPosition: {x: 0, y: 0, z: 0}
   LastKnownDirection: {x: 0, y: 0, z: 0}
   LastKnownVeloctity: {x: 0, y: 0, z: 0}
-  _showFieldOfView: 1
-  _showHearingRadius: 0
-  _showLineToPlayer: 0
-  _sightDetectionAngle: 180
-  _sightDetectionRadius: 60
-  _hearingDetectionRadius: 20
+  ShowFieldOfView: 0
+  ShowHearingRadius: 0
+  ShowLineToPlayer: 0
+  ShowVisionRaycasts: 0
 --- !u!114 &6999111639316909953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2538,7 +2574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774d3421ef8e4c34ea8491caa3df3b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  DefaultTarget: {fileID: 1577515978293641278}
+  Target: {fileID: 1577515978293641278}
   AimPoint: {fileID: 7927277942824863464}
   RotationSpeed: 360
 --- !u!195 &5006507270630911467
@@ -2590,21 +2627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cad213bf8fecb43aa50339e92a1279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
+  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
   MaxHP: {fileID: 11400000, guid: dbd5ddb52adb5a44eaf43c024402ac8c, type: 2}
   CurrentHP: 0
---- !u!114 &1113741816659177493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
 --- !u!114 &8555749047885385819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3234,7 +3260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8143629243339227656
 Transform:
   m_ObjectHideFlags: 0
@@ -4902,13 +4928,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8143533822855171454}
   - component: {fileID: 8141179073955832212}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Character_Cop_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8143533822855171454
 Transform:
   m_ObjectHideFlags: 0

@@ -2,20 +2,17 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class Destructable : MonoBehaviour, IDamagable
+[RequireComponent(typeof(NavMeshObstacle))]
+public class Destructable : Damagable
 {
     public UnityAction OnHealthDepleted;
 
-    [SerializeField] private IntVariable MaxHPSetting;
-    [SerializeField] private DestructionEffect DestructionEffect;
-    [SerializeField] private float DeathVfxSpawnOffset = 0f;
-    [SerializeField] private float DeathVfxLifetime = 5f;
-    // Is this setting meaningful? If so which rotation to choose?
-    [SerializeField] private Quaternion DeathVfxRotation;
-
-    [SerializeField] private int currentHealthPoints;
+    public bool Invincible = true;
+    public IntVariable MaxHPSetting;
+    public int currentHealthPoints;
 
     private Renderer _renderer;
     private Dictionary<int, Color> originalColors;
@@ -37,37 +34,36 @@ public class Destructable : MonoBehaviour, IDamagable
         }
     }
 
-    public int GetCurrentHP()
+    public override int GetCurrentHP()
     {
         return currentHealthPoints;
     }
 
-    public void DealDamage(int amount)
+    public override void DealDamage(int amount)
     {
-        currentHealthPoints -= amount;
-        if (currentHealthPoints <= 0) 
+        if (!Invincible)
         {
-            OnHealthDepleted?.Invoke();
-            if (DestructionEffect)
+            currentHealthPoints -= amount;
+            if (currentHealthPoints <= 0)
             {
-                GameObject impactVfxInstance = Instantiate(DestructionEffect.DestructionVFX, transform.position + (transform.forward * DeathVfxSpawnOffset), DeathVfxRotation);
-                RuntimeManager.PlayOneShot(DestructionEffect.DestructionSFX, transform.position);
-                if (DeathVfxLifetime > 0)
+                OnHealthDepleted?.Invoke();
+                if (DestructionEffect)
                 {
-                    Destroy(impactVfxInstance, DeathVfxLifetime);
+                    Instantiate(DestructionEffect.DestructionVFX, transform.position, transform.rotation);
+                    RuntimeManager.PlayOneShot(DestructionEffect.DestructionSFX, transform.position);
                 }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
-        }
 
-        if (_renderer) 
-        {
-            float colorPhaseFactor = 1f - ((float)currentHealthPoints / (float)maxHealthPoints);
-            foreach (Material mat in _renderer.materials)
+            if (_renderer)
             {
-                // TODO: test color change curve
-                // mat.color = Color.Lerp(mat.color, Color.red, colorPhaseCurve.Evaluate(colorPhaseFactor));
-                mat.color = Color.Lerp(originalColors[mat.GetInstanceID()], Color.red, colorPhaseFactor);
+                float colorPhaseFactor = 1f - ((float)currentHealthPoints / (float)maxHealthPoints);
+                foreach (Material mat in _renderer.materials)
+                {
+                    // TODO: test color change curve
+                    // mat.color = Color.Lerp(mat.color, Color.red, colorPhaseCurve.Evaluate(colorPhaseFactor));
+                    mat.color = Color.Lerp(originalColors[mat.GetInstanceID()], Color.red, colorPhaseFactor);
+                }
             }
         }
     }
