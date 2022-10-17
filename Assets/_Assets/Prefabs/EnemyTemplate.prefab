@@ -2418,7 +2418,6 @@ GameObject:
   - component: {fileID: 5006507270630911467}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 56147942124067346}
-  - component: {fileID: 1113741816659177493}
   - component: {fileID: 8555749047885385819}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
@@ -2628,21 +2627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cad213bf8fecb43aa50339e92a1279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
+  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
   MaxHP: {fileID: 11400000, guid: dbd5ddb52adb5a44eaf43c024402ac8c, type: 2}
   CurrentHP: 0
---- !u!114 &1113741816659177493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
 --- !u!114 &8555749047885385819
 MonoBehaviour:
   m_ObjectHideFlags: 0

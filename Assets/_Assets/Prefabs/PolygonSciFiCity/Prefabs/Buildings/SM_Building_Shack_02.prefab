@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 23955807486601478}
   - component: {fileID: 64588304024820932}
   - component: {fileID: 2343576191874799356}
-  - component: {fileID: 4105211564659533300}
   - component: {fileID: 7387046910401082631}
   m_Layer: 6
   m_Name: SM_Building_Shack_02
@@ -117,19 +116,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.133, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &4105211564659533300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437430036701050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c9207e8644a97c249a5a8cda675050a4, type: 2}
 --- !u!114 &7387046910401082631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,9 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHPSetting: {fileID: 11400000, guid: f356461f875815440b26192095af53ed, type: 2}
+  surface: {fileID: 11400000, guid: c9207e8644a97c249a5a8cda675050a4, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
-  DeathVfxSpawnOffset: 0
-  DeathVfxLifetime: 5
-  DeathVfxRotation: {x: 0, y: 0, z: 0, w: 0}
+  Invincible: 0
+  MaxHPSetting: {fileID: 11400000, guid: f356461f875815440b26192095af53ed, type: 2}
   currentHealthPoints: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerHealth : MonoBehaviour, IDamagable
+public class PlayerHealth : Damagable
 {
     public IntVariable MaxHP;
     public IntVariable CurrentHP;
@@ -17,12 +17,12 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         CurrentHP.RuntimeValue = CurrentHP.InitialValue;
     }
 
-    public int GetCurrentHP()
+    public override int GetCurrentHP()
     {
         return CurrentHP.RuntimeValue;
     }
 
-    public void DealDamage(int amount)
+    public override void DealDamage(int amount)
     {
         if (!Invincible)
         {

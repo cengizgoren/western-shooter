@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 23001256040256798}
   - component: {fileID: 64472554668277586}
   - component: {fileID: 5136031590408074099}
-  - component: {fileID: 9188771764837683901}
   - component: {fileID: 8942411479783015190}
   m_Layer: 6
   m_Name: SM_Prop_Advertisement_Pillar_01
@@ -117,19 +116,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.2850001, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &9188771764837683901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661159153272266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c9207e8644a97c249a5a8cda675050a4, type: 2}
 --- !u!114 &8942411479783015190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,9 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 11400000, guid: ee7921bbddf02004eaf5598b014f978c, type: 2}
+  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  Invincible: 1
   MaxHPSetting: {fileID: 11400000, guid: cccf02fcb53e50544bcdc4e719d638ab, type: 2}
-  DestructionEffect: {fileID: 0}
-  DeathVfxSpawnOffset: 0
-  DeathVfxLifetime: 5
-  DeathVfxRotation: {x: 0, y: 0, z: 0, w: 0}
   currentHealthPoints: 0

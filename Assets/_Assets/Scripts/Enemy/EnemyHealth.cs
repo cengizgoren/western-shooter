@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyHealth: MonoBehaviour, IDamagable
+public class EnemyHealth : Damagable
 {
     public IntVariable MaxHP;
     public int CurrentHP;
@@ -16,18 +16,18 @@ public class EnemyHealth: MonoBehaviour, IDamagable
         OnHpChanged?.Invoke(CurrentHP);
     }
 
-    public int GetCurrentHP()
+    public override int GetCurrentHP()
     {
         return CurrentHP;
     }
 
-    public void DealDamage(int amount)
+    public override void DealDamage(int amount)
     {
         CurrentHP -= amount;
         OnHpChanged?.Invoke(CurrentHP);
         OnHpLost?.Invoke();
-        if (CurrentHP <= 0) 
-        { 
+        if (CurrentHP <= 0)
+        {
             OnHpDepleted?.Invoke();
         }
     }

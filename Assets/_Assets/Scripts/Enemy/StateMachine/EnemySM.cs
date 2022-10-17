@@ -26,9 +26,10 @@ public class EnemySM : MonoBehaviour
         At(idle, chase, TargetDetected());
         At(idle, attack, TargetContact());
         At(chase, attack, TargetContact());
-        At(chase, search, TargetObstructed());
-        At(attack, search, TargetObstructed());
-        At(search, attack, TargetContact());
+        At(attack, chase, TargetObstructed());
+        //At(chase, search, TargetObstructed());
+        //At(attack, search, TargetObstructed());
+        //At(search, attack, TargetContact());
 
         void At(IState to, IState from, Func<bool> condition) => StateMachine.AddTransition(to, from, condition);
 

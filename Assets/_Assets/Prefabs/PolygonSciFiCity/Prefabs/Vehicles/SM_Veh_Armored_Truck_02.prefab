@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64979478328568154}
   - component: {fileID: 4925025743164961301}
   - component: {fileID: 664206114958702610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Veh_Armored_Truck_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,11 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHPSetting: {fileID: 11400000, guid: bdb33807db49b9e4b90c879beabf8efd, type: 2}
+  surface: {fileID: 11400000, guid: c9207e8644a97c249a5a8cda675050a4, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
-  DeathVfxSpawnOffset: 0
-  DeathVfxLifetime: 5
-  DeathVfxRotation: {x: 0, y: 0, z: 0, w: 0}
+  Invincible: 0
+  MaxHPSetting: {fileID: 11400000, guid: bdb33807db49b9e4b90c879beabf8efd, type: 2}
   currentHealthPoints: 0
 --- !u!208 &664206114958702610
 NavMeshObstacle:

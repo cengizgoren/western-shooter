@@ -10,9 +10,9 @@ public class ProjectileStandard : MonoBehaviour
     {
         public Collider Collider;
         public int Damage;
-        public IDamagable Damagable = null;
+        public Damagable Damagable = null;
 
-        public DamagableObject(Collider collider, int damage, IDamagable damagable)
+        public DamagableObject(Collider collider, int damage, Damagable damagable)
         {
             Collider = collider;
             Damage = damage;
@@ -137,16 +137,15 @@ public class ProjectileStandard : MonoBehaviour
 
     private void OnHit(Vector3 point, Vector3 normal, Collider collider)
     {
-        IDamagable damagable = collider.GetComponent<IDamagable>();
+        Damagable damagable = collider.GetComponent<Damagable>();
         damagable?.DealDamage(ImpactDamage);
 
-        if (collider.TryGetComponent(out IHittable hittable))
+        if (collider.TryGetComponent(out Damagable damagable2))
         {
-            Surface surface = hittable.GetSurface();
             GameObject vfx = FallbackImpactEffect.SurfaceVFX;
             EventReference sfx = FallbackImpactEffect.SurfaceSFX;
 
-            foreach (ImpactEffect impactEffect in surface.ImpactEffects)
+            foreach (ImpactEffect impactEffect in damagable2.surface.ImpactEffects)
             {
                 if (ImpactType == impactEffect.ImpactType)
                 {
@@ -184,7 +183,7 @@ public class ProjectileStandard : MonoBehaviour
         if (IsExplosive)
         {
             Collider[] hitByExplosionColliders = Physics.OverlapSphere(inFrontPosition, ExplosionRange, HittableLayers);
-            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<IDamagable>()));
+            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<Damagable>()));
 
             if (ShowExplosionRadius)
             {

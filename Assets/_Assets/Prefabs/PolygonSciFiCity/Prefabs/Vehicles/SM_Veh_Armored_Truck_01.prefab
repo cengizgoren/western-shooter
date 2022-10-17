@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 33608556367292236}
   - component: {fileID: 23891053813839084}
   - component: {fileID: 64077431275761140}
-  - component: {fileID: 1369038564264612407}
   - component: {fileID: 4404969646247826257}
   - component: {fileID: 2568747905630380577}
   m_Layer: 6
@@ -109,19 +108,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43561886079945936, guid: 27b4effadc6792f4aa49cea7c00d9f63, type: 2}
---- !u!114 &1369038564264612407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254837790230190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c9207e8644a97c249a5a8cda675050a4, type: 2}
 --- !u!208 &4404969646247826257
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -150,11 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39503a9739da9f945953f2f01a1792cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHPSetting: {fileID: 11400000, guid: bdb33807db49b9e4b90c879beabf8efd, type: 2}
+  surface: {fileID: 11400000, guid: c9207e8644a97c249a5a8cda675050a4, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
-  DeathVfxSpawnOffset: 0
-  DeathVfxLifetime: 5
-  DeathVfxRotation: {x: 0, y: 0, z: 0, w: 0}
+  MaxHPSetting: {fileID: 11400000, guid: bdb33807db49b9e4b90c879beabf8efd, type: 2}
   currentHealthPoints: 0
 --- !u!1 &1276135502623302
 GameObject:
