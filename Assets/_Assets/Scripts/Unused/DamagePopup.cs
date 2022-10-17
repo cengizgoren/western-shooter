@@ -7,7 +7,7 @@ public class DamagePopup : MonoBehaviour
 {
     public static DamagePopup Create(Vector3 position, int damageAmount)
     {
-        Transform damagePopupTransform = Instantiate(GameAssets.i.pfDamagePopup, position + new Vector3(0, 2f, 0), Camera.main.transform.rotation);
+        Transform damagePopupTransform = null;//Instantiate(GameAssets.Instance.pfDamagePopup, position + new Vector3(0, 2f, 0), Camera.main.transform.rotation);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.Setup(damageAmount);
 

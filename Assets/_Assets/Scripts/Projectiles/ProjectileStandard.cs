@@ -137,11 +137,9 @@ public class ProjectileStandard : MonoBehaviour
 
     private void OnHit(Vector3 point, Vector3 normal, Collider collider)
     {
-        Damagable damagable = collider.GetComponent<Damagable>();
-        damagable?.DealDamage(ImpactDamage);
-
         if (collider.TryGetComponent(out Damagable damagable2))
         {
+            damagable2?.DealDamage(ImpactDamage);
             GameObject vfx = FallbackImpactEffect.SurfaceVFX;
             EventReference sfx = FallbackImpactEffect.SurfaceSFX;
 
@@ -162,24 +160,14 @@ public class ProjectileStandard : MonoBehaviour
             {
                 Destroy(impactVfxInstance, ImpactVfxLifetime);
             }
-        }
-
-        /*Collider[] hitBySoundColliders = Physics.OverlapSphere(inFrontPosition, SoundRadius, AffectedLayers);
-
-        if (ShowSoundRadius)
+        } else
         {
-            DebugTools.Draw.DrawTimedCircle(point, SoundRadius, Color.blue);
+            Instantiate(GameAssets.Instance.Defaults.ImpactEffect.SurfaceVFX, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
+            RuntimeManager.PlayOneShot(GameAssets.Instance.Defaults.ImpactEffect.SurfaceSFX, transform.position);
         }
-
-        foreach (Collider soundCollider in hitBySoundColliders)
-        {
-            EnemyDetector enemyDetector = soundCollider.GetComponent<EnemyDetector>();
-
-            if (enemyDetector)
-                enemyDetector.EnemyInLineOfSight = true;
-        } */
 
         Vector3 inFrontPosition = point + normal;
+
         if (IsExplosive)
         {
             Collider[] hitByExplosionColliders = Physics.OverlapSphere(inFrontPosition, ExplosionRange, HittableLayers);
