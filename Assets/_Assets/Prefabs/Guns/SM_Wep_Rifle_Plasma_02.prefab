@@ -248,7 +248,7 @@ MonoBehaviour:
   TriggerSqueezed: 0
   ShootType: 1
   DelayBetweenShots: 0.1
-  BulletSpreadAngle: 0
+  BulletSpreadAngle: 1
   ProjectilePrefab: {fileID: 2676942871222497078, guid: 92d2540adc382394899c44fe7eaaab47, type: 3}
   projectileStats: {fileID: 11400000, guid: f9449ea7b204e5d48b26868d136120e9, type: 2}
   FallbackMuzzleFlashEffect: {fileID: 11400000, guid: 4cf646716c4054d49859434d88e88e61, type: 2}
