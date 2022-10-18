@@ -1,6 +1,8 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class TargetDetector : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class TargetDetector : MonoBehaviour
     public float SightDetectionAngle = 90f;
     public float SightDetectionRadius = 10f;
     public float HearingDetectionRadius = 5f;
+    public float FriendlySphereCastThickness = 0.5f;
     public LayerMask ObstructsVision;
     public LayerMask PreventsWeaponFire;
 
@@ -25,10 +28,12 @@ public class TargetDetector : MonoBehaviour
     public Vector3 LastKnownVeloctity;
 
     [Header("Debug")]
-    public bool ShowFieldOfView = true;
-    public bool ShowHearingRadius = true;
-    public bool ShowLineToPlayer = true;
-    public bool ShowVisionRaycasts = true;
+    public DebugItem FieldOfView;
+    public DebugItem HearingRadius;
+    public DebugItem LineToPlayer;
+    public DebugItem VisionRaycasts;
+    public DebugItem WeaponCone;
+    public DebugItem FriendlyRaycasts;
 
     private NavMeshAgent navMeshAgent;
     private Messager messager;
@@ -54,8 +59,6 @@ public class TargetDetector : MonoBehaviour
 
         time += Time.deltaTime;
     }
-
-
 
     public Vector3 GetNextPositionToSearch()
     {
@@ -103,9 +106,9 @@ public class TargetDetector : MonoBehaviour
 
         if (Physics.Raycast(position, toPlayer, out RaycastHit hit, Mathf.Infinity, ObstructsVision))
         {
-            if (ShowVisionRaycasts)
+            if (VisionRaycasts.Show)
             {
-                Debug.DrawRay(position, hit.point - position, Color.yellow, 1.0f);
+                Debug.DrawRay(position, hit.point - position, VisionRaycasts.Color, 1.0f);
                 Debug.LogWarningFormat("Enemy {0} direct line of sight check: {1}", transform.name, hit.collider.name);
             }
             if (hit.collider.gameObject.CompareTag("Player"))
@@ -128,9 +131,12 @@ public class TargetDetector : MonoBehaviour
     {
         Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
 
-        if (Physics.SphereCast(position, 1f, transform.forward, out RaycastHit hit, Mathf.Infinity, PreventsWeaponFire))
+        if (Physics.SphereCast(position, FriendlySphereCastThickness, transform.forward, out RaycastHit hit, Mathf.Infinity, PreventsWeaponFire))
         {
-            Debug.DrawRay(position, transform.forward * hit.distance, Color.yellow, 1.0f);
+            if (FriendlyRaycasts.Show)
+            {
+                Debug.DrawRay(position, transform.forward * hit.distance, FriendlyRaycasts.Color, 1.0f);
+            }
             return true;
         }
         return false;
@@ -144,38 +150,76 @@ public class TargetDetector : MonoBehaviour
         isThereLastKnownPos = true;
     }
 
+    [Serializable]
+    public class DebugItem
+    {
+        public bool Show = false;
+        public Color Color = Color.cyan;
+    }
+
+    [CustomPropertyDrawer(typeof(DebugItem))]
+    public class IngredientDrawerUIE : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            // Using BeginProperty / EndProperty on the parent property means that
+            // prefab override logic works on the entire property.
+            EditorGUI.BeginProperty(position, label, property);
+
+            // Draw label
+            position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+
+            // Don't make child fields be indented
+            var indent = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
+
+            // Calculate rects
+            var amountRect = new Rect(position.x, position.y, 30, position.height);
+            var unitRect = new Rect(position.x + 35, position.y, 50, position.height);
+
+            // Draw fields - pass GUIContent.none to each so they are drawn without labels
+            EditorGUI.PropertyField(amountRect, property.FindPropertyRelative("Show"), GUIContent.none);
+            EditorGUI.PropertyField(unitRect, property.FindPropertyRelative("Color"), GUIContent.none);
+
+            // Set indent back to what it was
+            EditorGUI.indentLevel = indent;
+
+            EditorGUI.EndProperty();
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        if (isThereLastKnownPos)
-        {
-            Gizmos.color = Color.cyan;
-            DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownDirection);
+        //if (isThereLastKnownPos)
+        //{
+        //    Gizmos.color = Color.cyan;
+        //    DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownDirection);
 
-            Gizmos.color = Color.magenta;
-            DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownVeloctity);
-        }
+        //    Gizmos.color = Color.magenta;
+        //    DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownVeloctity);
+        //}
 
-        if (ShowFieldOfView)
+        if (FieldOfView.Show)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = FieldOfView.Color;
             DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius);
         }
 
-        if (true)
+        if (WeaponCone.Show)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = WeaponCone.Color;
             DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 2f, 100f);
         }
 
-        if (ShowHearingRadius)
+        if (HearingRadius.Show)
         {
-            Gizmos.color = Color.blue;
+            Gizmos.color = HearingRadius.Color;
             DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, HearingDetectionRadius);
         }
 
-        if (ShowLineToPlayer)
+        if (LineToPlayer.Show)
         {
-            Gizmos.color = Color.yellow;
+            Gizmos.color = LineToPlayer.Color;
             Vector3 toPlayer = PlayerController.transform.position - transform.position;
             Gizmos.DrawLine(transform.position, transform.position + toPlayer);
         }
