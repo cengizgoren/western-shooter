@@ -62,7 +62,7 @@ MonoBehaviour:
   Radius: 0.01
   HittableLayers:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 4544
   ImpactVfxLifetime: 5
   AffectedLayers:
     serializedVersion: 2

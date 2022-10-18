@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemySM : MonoBehaviour
 {
     public CharacterController PlayerController;
-    public string State;
-
     private StateMachine StateMachine;
 
     public void Awake()
@@ -42,10 +41,9 @@ public class EnemySM : MonoBehaviour
         Func<bool> TargetObstructed() => () => targetDetector.TargetObstructed;
     }
 
-    private void Update()
+    public void Tick()
     {
         StateMachine.Tick();
-        State = StateMachine.CurrentState.GetType().Name;
     }
 
 }

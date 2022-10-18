@@ -8,8 +8,8 @@ public class Attack : IState
     private Transform _playerTransform;
     private Transform _transform;
     private NavMeshAgent _navMeshAgent;
-    private TargetDetector _enemyDetector;
-    private EnemyController _enemyController;
+    private TargetDetector targetDetector;
+    private EnemyController enemyController;
 
     private float time;
     private int directionFactor = 1;
@@ -19,18 +19,25 @@ public class Attack : IState
         _transform = transform;
         _playerTransform = playerTransform;
         _navMeshAgent = navMeshAgent;
-        _enemyDetector = enemyDetector;
-        _enemyController = enemyController;
+        targetDetector = enemyDetector;
+        this.enemyController = enemyController;
     }
 
     public void Tick()
     {
-        Quaternion targetRotation = Quaternion.LookRotation(_playerTransform.position - _transform.position);
-        _transform.rotation = Quaternion.RotateTowards(_transform.rotation, targetRotation, Time.deltaTime * 180f);
 
         Vector3 toPlayerDir = _playerTransform.position - _transform.position;
         Vector3 toSide = Vector3.Cross(toPlayerDir, Vector3.up).normalized;
         DebugTools.Draw.DebugArrow(_transform.position, toSide * 3);
+
+        if (targetDetector.IsPlayerInSights() && !targetDetector.IsFriendlyInSights())
+        {
+            enemyController.OnAttack?.Invoke(true);
+        } 
+        else
+        {
+            enemyController.OnAttack?.Invoke(false);
+        }
 
         bool success;
         if (time > 2f)
@@ -53,20 +60,19 @@ public class Attack : IState
     public void OnEnter()
     {
         time = 0;
-        _enemyController.OnAttack?.Invoke(true);
         _navMeshAgent.ResetPath();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.speed = 2f;
-        _enemyController.SetTargetTransform(_playerTransform);
+        enemyController.SetTargetTransform(_playerTransform);
     }
 
     public void OnExit()
     {
-        _enemyDetector.SaveLastKnownPosAndDir();
-        _enemyController.OnAttack?.Invoke(false);
+        targetDetector.SaveLastKnownPosAndDir();
+        enemyController.OnAttack?.Invoke(false);
         _navMeshAgent.updateRotation = true;
         _navMeshAgent.speed = 4f;
-        _enemyController.ResetTargetTransform();
+        enemyController.ResetTargetTransform();
     }
 
     private void LookAt(Vector3 lookPoint)
@@ -94,5 +100,4 @@ public class Attack : IState
         result = Vector3.zero;
         return false;
     }
-
 }

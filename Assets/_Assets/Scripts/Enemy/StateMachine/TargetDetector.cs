@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class TargetDetector : MonoBehaviour
 {
     public bool TargetSighted = false;
-    //public bool TargetHeard = false;
     public bool TargetObstructed = false;
     public bool Alerted = false;
 
@@ -13,7 +13,8 @@ public class TargetDetector : MonoBehaviour
     public float SightDetectionAngle = 90f;
     public float SightDetectionRadius = 10f;
     public float HearingDetectionRadius = 5f;
-    public LayerMask CanBeSeen;
+    public LayerMask ObstructsVision;
+    public LayerMask PreventsWeaponFire;
 
     // Make it a struct or class Maybe?
     [Header("Last known Position")]
@@ -47,13 +48,14 @@ public class TargetDetector : MonoBehaviour
         if (time > 0.1f)
         {
             TargetSighted = IsPlayerInSightRange();
-            //TargetHeard = IsPlayerHearingRange();
             TargetObstructed = IsPlayerObstructed();
             time = 0;
         }
 
         time += Time.deltaTime;
     }
+
+
 
     public Vector3 GetNextPositionToSearch()
     {
@@ -93,17 +95,13 @@ public class TargetDetector : MonoBehaviour
         return false;
     }
 
-    //private bool IsPlayerHearingRange()
-    //{
-    //    return HearingDetectionRadius > Vector3.Distance(transform.position, PlayerController.transform.position);
-    //}
 
     private bool IsPlayerObstructed()
     {
         Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
         Vector3 toPlayer = PlayerController.transform.position - transform.position;
 
-        if (Physics.Raycast(position, toPlayer, out RaycastHit hit))
+        if (Physics.Raycast(position, toPlayer, out RaycastHit hit, Mathf.Infinity, ObstructsVision))
         {
             if (ShowVisionRaycasts)
             {
@@ -116,6 +114,26 @@ public class TargetDetector : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public bool IsPlayerInSights()
+    {
+        float WeaponAimedAtPlayerAngle = 2f;
+        Vector3 toPlayer = PlayerController.transform.position - transform.position;
+
+        return Vector3.Angle(toPlayer, transform.forward) < WeaponAimedAtPlayerAngle / 2f;
+    }
+
+    public bool IsFriendlyInSights()
+    {
+        Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+
+        if (Physics.SphereCast(position, 1f, transform.forward, out RaycastHit hit, Mathf.Infinity, PreventsWeaponFire))
+        {
+            Debug.DrawRay(position, transform.forward * hit.distance, Color.yellow, 1.0f);
+            return true;
+        }
+        return false;
     }
 
     public void SaveLastKnownPosAndDir()
@@ -141,6 +159,12 @@ public class TargetDetector : MonoBehaviour
         {
             Gizmos.color = Color.red;
             DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius);
+        }
+
+        if (true)
+        {
+            Gizmos.color = Color.red;
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 2f, 100f);
         }
 
         if (ShowHearingRadius)
