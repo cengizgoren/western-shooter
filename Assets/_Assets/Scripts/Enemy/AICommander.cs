@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class AICommander : MonoBehaviour
 {
-    public List<EnemySM> enemyStateMachines;
+    public List<EnemyStateMachine> enemyStateMachines;
 
     private int i = -1;
 
     private void Awake()
     {
-        enemyStateMachines = new List<EnemySM>(FindObjectsOfType<EnemySM>());
+        enemyStateMachines = new List<EnemyStateMachine>(FindObjectsOfType<EnemyStateMachine>());
     }
 
     private void Update()

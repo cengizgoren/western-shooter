@@ -10,7 +10,7 @@ public class Destructable : Damagable
 {
     public UnityAction OnHealthDepleted;
 
-    public bool Invincible = true;
+    public bool GodMode = true;
     public IntVariable MaxHPSetting;
     public int currentHealthPoints;
 
@@ -41,7 +41,7 @@ public class Destructable : Damagable
 
     public override void DealDamage(int amount)
     {
-        if (!Invincible)
+        if (!GodMode)
         {
             currentHealthPoints -= amount;
             if (currentHealthPoints <= 0)

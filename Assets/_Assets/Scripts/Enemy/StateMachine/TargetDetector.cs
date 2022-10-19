@@ -1,16 +1,15 @@
 using System;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 public class TargetDetector : MonoBehaviour
 {
     public bool TargetSighted = false;
     public bool TargetObstructed = false;
     public bool Alerted = false;
+    public bool TooFarAway = false;
 
-    [Header("Senses Range")]
+    [Space(10)]
     [Tooltip("Cone of player detection in from of an enemy agent. The value is doubled.")]
     public float SightDetectionAngle = 90f;
     public float SightDetectionRadius = 10f;
@@ -18,14 +17,6 @@ public class TargetDetector : MonoBehaviour
     public float FriendlySphereCastThickness = 0.5f;
     public LayerMask ObstructsVision;
     public LayerMask PreventsWeaponFire;
-
-    // Make it a struct or class Maybe?
-    [Header("Last known Position")]
-    public CharacterController PlayerController;
-    public bool isThereLastKnownPos = false;
-    public Vector3 LastKnownPosition;
-    public Vector3 LastKnownDirection;
-    public Vector3 LastKnownVeloctity;
 
     [Header("Debug")]
     public DebugItem FieldOfView;
@@ -35,74 +26,40 @@ public class TargetDetector : MonoBehaviour
     public DebugItem WeaponCone;
     public DebugItem FriendlyRaycasts;
 
-    private NavMeshAgent navMeshAgent;
+    private Transform playerTransform;
     private Messager messager;
-    private float time = 0;
 
     public void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        playerTransform = GetComponent<EnemyStateMachine>().PlayerController.transform;
         messager = GetComponent<Messager>();
 
         messager.OnAlert += () => Alerted = true;
         GetComponent<EnemyHealth>().OnHpLost += () => Alerted = true;
     }
 
-    private void Update() 
+    public void Tick()
     {
-        if (time > 0.1f)
-        {
-            TargetSighted = IsPlayerInSightRange();
-            TargetObstructed = IsPlayerObstructed();
-            time = 0;
-        }
-
-        time += Time.deltaTime;
-    }
-
-    public Vector3 GetNextPositionToSearch()
-    {
-        // Make it less obvious by randomizing or by having a dedicated algo
-        RandomPointOnCircle(transform.position, 10f, out Vector3 result);
-        return result;
-    }
-
-    private bool RandomPointOnCircle(Vector3 center, float range, out Vector3 result)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized;
-            Vector3 randomPoint = center + new Vector3(randomPointOnCircle.x, 0f, randomPointOnCircle.y) * range;
-            NavMeshHit hit;
-            // Also check if line of sight is going to be maintained
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) && !navMeshAgent.Raycast(hit.position, out _))
-            {
-                Debug.DrawRay(hit.position, Vector3.up, Color.blue, 3f);
-                result = hit.position;
-                return true;
-            }
-        }
-        Debug.LogWarning("Could not find viable random point!");
-        result = Vector3.zero;
-        return false;
+        TargetSighted = IsPlayerInSightRange();
+        TargetObstructed = IsPlayerObstructed();
+        TooFarAway = Vector3.Distance(transform.position, playerTransform.position) > 20f;
     }
 
     private bool IsPlayerInSightRange()
     {
-        float distance = Vector3.Distance(transform.position, PlayerController.transform.position);
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
         if (distance < SightDetectionRadius)
         {
-            Vector3 toPlayer = PlayerController.transform.position - transform.position;
+            Vector3 toPlayer = playerTransform.position - transform.position;
             return Vector3.Angle(toPlayer, transform.forward) < SightDetectionAngle / 2f;
         }
         return false;
     }
 
-
     private bool IsPlayerObstructed()
     {
         Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
-        Vector3 toPlayer = PlayerController.transform.position - transform.position;
+        Vector3 toPlayer = playerTransform.position - transform.position;
 
         if (Physics.Raycast(position, toPlayer, out RaycastHit hit, Mathf.Infinity, ObstructsVision))
         {
@@ -122,7 +79,7 @@ public class TargetDetector : MonoBehaviour
     public bool IsPlayerInSights()
     {
         float WeaponAimedAtPlayerAngle = 2f;
-        Vector3 toPlayer = PlayerController.transform.position - transform.position;
+        Vector3 toPlayer = playerTransform.position - transform.position;
 
         return Vector3.Angle(toPlayer, transform.forward) < WeaponAimedAtPlayerAngle / 2f;
     }
@@ -131,7 +88,7 @@ public class TargetDetector : MonoBehaviour
     {
         Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
 
-        if (Physics.SphereCast(position, FriendlySphereCastThickness, transform.forward, out RaycastHit hit, Mathf.Infinity, PreventsWeaponFire))
+        if (Physics.SphereCast(position, FriendlySphereCastThickness, transform.forward, out RaycastHit hit, Vector3.Distance(transform.position, playerTransform.position), PreventsWeaponFire))
         {
             if (FriendlyRaycasts.Show)
             {
@@ -140,14 +97,6 @@ public class TargetDetector : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    public void SaveLastKnownPosAndDir()
-    {
-        LastKnownPosition = PlayerController.transform.position;
-        LastKnownDirection = PlayerController.transform.forward.normalized;
-        LastKnownVeloctity = PlayerController.velocity;
-        isThereLastKnownPos = true;
     }
 
     [Serializable]
@@ -220,8 +169,10 @@ public class TargetDetector : MonoBehaviour
         if (LineToPlayer.Show)
         {
             Gizmos.color = LineToPlayer.Color;
-            Vector3 toPlayer = PlayerController.transform.position - transform.position;
+            Vector3 toPlayer = playerTransform.position - transform.position;
             Gizmos.DrawLine(transform.position, transform.position + toPlayer);
         }
     }
+
+
 }

@@ -2413,9 +2413,10 @@ GameObject:
   - component: {fileID: 1545839327076763308}
   - component: {fileID: 6220337005894232667}
   - component: {fileID: 5285032409765989732}
+  - component: {fileID: 1135186147338160282}
+  - component: {fileID: 5006507270630911467}
   - component: {fileID: 6999111639316909953}
   - component: {fileID: 7529303639434750992}
-  - component: {fileID: 5006507270630911467}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 56147942124067346}
   - component: {fileID: 8555749047885385819}
@@ -2517,7 +2518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 0}
-  State: 
 --- !u!114 &5285032409765989732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2533,21 +2533,71 @@ MonoBehaviour:
   TargetSighted: 0
   TargetObstructed: 0
   Alerted: 0
+  TooFarAway: 0
   SightDetectionAngle: 180
   SightDetectionRadius: 50
   HearingDetectionRadius: 5
-  CanBeSeen:
+  FriendlySphereCastThickness: 0.5
+  ObstructsVision:
     serializedVersion: 2
-    m_Bits: 0
-  PlayerController: {fileID: 0}
-  isThereLastKnownPos: 0
-  LastKnownPosition: {x: 0, y: 0, z: 0}
-  LastKnownDirection: {x: 0, y: 0, z: 0}
-  LastKnownVeloctity: {x: 0, y: 0, z: 0}
-  ShowFieldOfView: 0
-  ShowHearingRadius: 0
-  ShowLineToPlayer: 0
-  ShowVisionRaycasts: 0
+    m_Bits: 12352
+  PreventsWeaponFire:
+    serializedVersion: 2
+    m_Bits: 320
+  FieldOfView:
+    Show: 0
+    Color: {r: 1, g: 0, b: 0, a: 1}
+  HearingRadius:
+    Show: 0
+    Color: {r: 0, g: 1, b: 1, a: 1}
+  LineToPlayer:
+    Show: 0
+    Color: {r: 0, g: 0, b: 0, a: 1}
+  VisionRaycasts:
+    Show: 0
+    Color: {r: 0.9926069, g: 1, b: 0, a: 1}
+  WeaponCone:
+    Show: 0
+    Color: {r: 0, g: 1, b: 0, a: 1}
+  FriendlyRaycasts:
+    Show: 0
+    Color: {r: 1, g: 0, b: 0.87176275, a: 1}
+--- !u!114 &1135186147338160282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd89436655d39404e9551f81c0f9c638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomPointsCount: 10
+  RandomCircleSize: 10
+--- !u!195 &5006507270630911467
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 4
+  m_Acceleration: 10
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0.4
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &6999111639316909953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,28 +2628,6 @@ MonoBehaviour:
   Target: {fileID: 1577515978293641278}
   AimPoint: {fileID: 7927277942824863464}
   RotationSpeed: 360
---- !u!195 &5006507270630911467
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 4
-  m_Acceleration: 10
-  avoidancePriority: 50
-  m_AngularSpeed: 360
-  m_StoppingDistance: 1
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0

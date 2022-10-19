@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AK47
   m_EditorClassIdentifier: 
   ImpactDamage: 10
-  Velocity: 85
+  Velocity: 170
