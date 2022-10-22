@@ -151,19 +151,19 @@ public class TargetDetector : MonoBehaviour
         if (FieldOfView.Show)
         {
             Gizmos.color = FieldOfView.Color;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius, FieldOfView.Color);
         }
 
         if (WeaponCone.Show)
         {
             Gizmos.color = WeaponCone.Color;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 2f, 100f);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 2f, 100f, WeaponCone.Color);
         }
 
         if (HearingRadius.Show)
         {
             Gizmos.color = HearingRadius.Color;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, HearingDetectionRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, HearingDetectionRadius, HearingRadius.Color);
         }
 
         if (LineToPlayer.Show)

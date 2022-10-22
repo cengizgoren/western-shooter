@@ -288,11 +288,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
---- !u!1 &23727182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8886707959023623625, guid: 2184b363270d8bb418db59524fb108c8, type: 3}
-  m_PrefabInstance: {fileID: 237188260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &52613504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8143629216565336402, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -952,18 +947,6 @@ PrefabInstance:
       objectReference: {fileID: 580246863}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2184b363270d8bb418db59524fb108c8, type: 3}
---- !u!114 &237188267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23727182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &237188273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8886707959023623619, guid: 2184b363270d8bb418db59524fb108c8, type: 3}
@@ -1564,7 +1547,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31006
+  m_Name: pb_Mesh201486
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1808,7 +1791,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3164
+  m_Name: pb_Mesh-95902
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2360,7 +2343,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.038961, y: 1}
+    m_SensorSize: {x: 0.99527746, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3823,7 +3806,7 @@ PrefabInstance:
       objectReference: {fileID: 629923660}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8236
+      value: 8272
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576894, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3844,6 +3827,30 @@ PrefabInstance:
     - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: MoveSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: MaxVelocity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: ShowDebugVectors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: friction_multiplier
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: AccelerationMultiplier
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: acceleration_multiplier
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089292328698757584, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: DeaccelerationMultiplier
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8089292328698757589, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: AimArrow
@@ -5594,7 +5601,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.038961, y: 1}
+    m_SensorSize: {x: 0.99527746, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

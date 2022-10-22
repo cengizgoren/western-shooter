@@ -2569,7 +2569,6 @@ GameObject:
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
   - component: {fileID: 3928391025034219905}
-  - component: {fileID: 880282390615595008}
   m_Layer: 0
   m_Name: PlayerTemplate
   m_TagString: Player
@@ -2662,10 +2661,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94fe9bd67ee6d445beae12cc422871b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
-  SprintSpeed: 5.335
-  SpeedChangeRate: 10
-  CameraYRotationDeg: 45
+  velocity: {x: 0, y: 0, z: 0}
+  target_velocity: {x: 0, y: 0, z: 0}
+  acceleration: 0
+  max_velocity: 8
+  acceleration_multiplier: 4
+  friction_multiplier: 6
 --- !u!114 &8089292328698757589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2753,22 +2754,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda4f1fe184529d4aa0b12ecb8a2d6dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 0}
+  DestructionEffect: {fileID: 0}
   MaxHP: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
   CurrentHP: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
   Invincible: 0
---- !u!114 &880282390615595008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee08ac61fbc6cf40a768c1f31e482d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
 --- !u!1 &8148628684651371972
 GameObject:
   m_ObjectHideFlags: 0

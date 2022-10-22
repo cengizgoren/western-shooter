@@ -14,7 +14,7 @@ namespace DebugTools
         /// <param name="anglesRange">The angle range, in degrees.</param>
         /// <param name="radius"></param>
         /// <param name="maxSteps">How many steps to use to draw the arc.</param>
-        public static void DrawWireArc(Vector3 position, Vector3 dir, float anglesRange, float radius, float maxSteps = 20)
+        public static void DrawWireArc(Vector3 position, Vector3 dir, float anglesRange, float radius, Color color, float maxSteps = 20)
         {
             var srcAngles = GetAnglesFromDir(position, dir);
             var initialPos = position;
@@ -27,12 +27,12 @@ namespace DebugTools
                 var posB = initialPos;
                 posB += new Vector3(radius * Mathf.Cos(rad), 0, radius * Mathf.Sin(rad));
 
-                Gizmos.DrawLine(posA, posB);
+                Debug.DrawLine(posA, posB, color);
 
                 angle += stepAngles;
                 posA = posB;
             }
-            Gizmos.DrawLine(posA, initialPos);
+            Debug.DrawLine(posA, initialPos, color);
         }
 
 
