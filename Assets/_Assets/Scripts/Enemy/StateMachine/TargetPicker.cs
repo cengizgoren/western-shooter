@@ -50,7 +50,7 @@ public class TargetPicker : MonoBehaviour
             Vector3 randomPoint = center + randomPointOnSphereBelt * (distance + Random.Range(-range, +range));
             Debug.DrawRay(randomPoint, Vector3.up, Color.blue, 0.5f);
 
-            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1.5f, NavMesh.AllAreas) && !navMeshAgent.Raycast(hit.position, out _))
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1.5f, NavMesh.AllAreas))
             {
                 result = hit.position;
                 return true;
