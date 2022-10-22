@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float CameraYRotationDeg = 45f;
-    public float MaxVelocity;
+    public float MoveVelocity;
+    public float SprintVelocity;
     public float AccelerationMultiplier;
     public float DeaccelerationMultiplier;
 
@@ -33,7 +34,7 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 move = Controls.InputActions.Player.Move.ReadValue<Vector2>().normalized;
 
-        TargetVelocity = Quaternion.AngleAxis(CameraYRotationDeg, Vector3.up) * new Vector3(move.x, 0f, move.y) * MaxVelocity;
+        TargetVelocity = Quaternion.AngleAxis(CameraYRotationDeg, Vector3.up) * new Vector3(move.x, 0f, move.y) * (Controls.InputActions.Player.Sprint.IsPressed() ? SprintVelocity : MoveVelocity);
         Velocity = controller.velocity;
         Vector3 velocityDelta = TargetVelocity - Velocity;
 
