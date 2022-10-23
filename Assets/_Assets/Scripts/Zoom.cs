@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Zoom : MonoBehaviour
 {
-    public float DefaultOrthoSize = 17f;
     public float MinOrthoSize = 1f;
     public float MaxOrthoSize = 100f;
     [Range(0f, 10f)]
