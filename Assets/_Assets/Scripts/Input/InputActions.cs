@@ -107,6 +107,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Help"",
+                    ""type"": ""Button"",
+                    ""id"": ""68b37c5b-1d32-464d-85be-3e7cb6520a3d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -307,6 +316,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8393c886-5362-4aa1-8002-c937e11054bf"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -352,6 +372,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_SwitchCamera = m_Player.FindAction("SwitchCamera", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Help = m_Player.FindAction("Help", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -423,6 +444,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_SwitchCamera;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Help;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -436,6 +458,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @SwitchCamera => m_Wrapper.m_Player_SwitchCamera;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Help => m_Wrapper.m_Player_Help;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -472,6 +495,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Help.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHelp;
+                @Help.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHelp;
+                @Help.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHelp;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -503,6 +529,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Help.started += instance.OnHelp;
+                @Help.performed += instance.OnHelp;
+                @Help.canceled += instance.OnHelp;
             }
         }
     }
@@ -551,6 +580,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnSwitchCamera(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnHelp(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
