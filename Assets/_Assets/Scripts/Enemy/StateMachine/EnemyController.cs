@@ -22,19 +22,18 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Quaternion DeathVfxRotation;
 
     private EnemyAim enemyAim;
+    private EnemyHealth enemyHealth;
 
     public void Awake()
     {
-        GetComponent<EnemyHealth>().OnHpDepleted += Die;
+        enemyHealth = GetComponent<EnemyHealth>();
+        enemyHealth.OnHpDepleted += Die;
         enemyAim = GetComponent<EnemyAim>();
     }
 
-    public void Rotate()
+    private void OnDestroy()
     {
-        _startingRotation = transform.rotation;
-        _finalRotation = Quaternion.Euler(0, 90f, 0) * _startingRotation;
-        _rotationOrdered = true;
-        timeStartedWeaponSwitch = Time.time;
+        enemyHealth.OnHpDepleted -= Die;
     }
 
     void Update()
@@ -43,6 +42,14 @@ public class EnemyController : MonoBehaviour
         {
             HandleRotation();
         }
+    }
+
+    public void Rotate()
+    {
+        _startingRotation = transform.rotation;
+        _finalRotation = Quaternion.Euler(0, 90f, 0) * _startingRotation;
+        _rotationOrdered = true;
+        timeStartedWeaponSwitch = Time.time;
     }
 
     public void SetTargetTransform(Transform target)

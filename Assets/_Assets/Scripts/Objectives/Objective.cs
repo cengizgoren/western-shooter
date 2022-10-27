@@ -11,6 +11,11 @@ public class Objective : MonoBehaviour
         task = GetComponent<Task>();
     }
 
+    private void OnDestroy()
+    {
+        task.OnCompletion -= Complete;
+    }
+
     public ObjectiveUI Activate()
     {
         task.OnCompletion += Complete;

@@ -86,13 +86,27 @@ public class WeaponShooting : MonoBehaviour
         }
 
         weaponFireSfxInstance = FMODUnity.RuntimeManager.CreateInstance(WeaponFireSFX);
-        weaponController.OnTriggerPressed += () => { TriggerSqueezed = true; };
-        weaponController.OnTriggerReleased += () => { TriggerSqueezed = false; };
-        weaponController.OnShootingAllowed += () => SafetyOn = false;
-        weaponController.OnShootingForbidden += () => SafetyOn = true;
+        weaponController.OnTriggerPressed += SqueezeTrigger;
+        weaponController.OnTriggerReleased += ReleaseTrigger;
+        weaponController.OnShootingAllowed += PutSafetyOff;
+        weaponController.OnShootingForbidden += PutSafetyOn;
         TriggerSqueezed = false;
         SafetyOn = false; // If not controlled by superior object, always allow to shoot
     }
+
+    private void OnDestroy()
+    {
+        weaponController.OnTriggerPressed -= SqueezeTrigger;
+        weaponController.OnTriggerReleased -= ReleaseTrigger;
+        weaponController.OnShootingAllowed -= PutSafetyOff;
+        weaponController.OnShootingForbidden -= PutSafetyOn;
+        weaponFireSfxInstance.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    private void PutSafetyOn() => SafetyOn = true;
+    private void PutSafetyOff() => SafetyOn = false;
+    private void SqueezeTrigger() => TriggerSqueezed = true;
+    private void ReleaseTrigger() => TriggerSqueezed = false;
 
     public void Update()
     {
@@ -186,10 +200,5 @@ public class WeaponShooting : MonoBehaviour
     private void OnDisable()
     {
         StopSoundLoopIfPlaying();
-    }
-
-    private void OnDestroy()
-    {
-        weaponFireSfxInstance.stop(STOP_MODE.ALLOWFADEOUT);
     }
 }

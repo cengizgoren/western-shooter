@@ -11,6 +11,14 @@ public class ExitTask : Task
 
     private ObjectiveUI objectiveUIInstance;
 
+    private void OnDestroy()
+    {
+        if (exit != null)
+        {
+            exit.OnPlayerInExitZone -= ExitReached;
+        }
+    }
+
     public override ObjectiveUI Activate()
     {
         exit.gameObject.SetActive(true);

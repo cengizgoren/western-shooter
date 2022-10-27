@@ -1,29 +1,39 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PlayerWeaponController : WeaponController
 {
-    //[SerializeField]  // Debug trick, good to remember
     private Weapon playerWeapon;
-    //[SerializeField]
     private WeaponSwitcher weaponSwitcher;
+
+    private Action ReleaseTrigger() => () => OnTriggerReleased?.Invoke();
 
     private void Start()
     {
         playerWeapon = GetComponent<Weapon>();
-        //weaponSwitcher = playerWeapon.GetOwner().GetComponent<WeaponSwitcher>();
-
-        Controls.InputActions.Player.Shoot.performed += _ => base.OnTriggerPressed?.Invoke();
-        Controls.InputActions.Player.Shoot.canceled += _ => base.OnTriggerReleased?.Invoke();
+        Controls.InputActions.Player.Shoot.performed += PressTrigger;
+        Controls.InputActions.Player.Shoot.canceled += ReleaseTrigger;
 
         if (weaponSwitcher)
         {
-            weaponSwitcher.OnWeaponReady += isReady => CheckReadiness(isReady);
+            weaponSwitcher.OnWeaponReady += CheckReadiness;
         }
     }
+
+    private void OnDestroy()
+    {
+        Controls.InputActions.Player.Shoot.performed -= PressTrigger;
+        Controls.InputActions.Player.Shoot.canceled -= ReleaseTrigger;
+
+        if (weaponSwitcher)
+        {
+            weaponSwitcher.OnWeaponReady -= CheckReadiness;
+        }
+    }
+
+    private void PressTrigger(InputAction.CallbackContext _) => OnTriggerPressed?.Invoke();
+
+    private void ReleaseTrigger(InputAction.CallbackContext _) => OnTriggerReleased?.Invoke();
 
     private void CheckReadiness(bool isReady)
     {

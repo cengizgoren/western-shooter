@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
     public UnityAction OnUnpause;
     public UnityAction OnRestart;
 
+    private Player p;
+    private PlayerHealth c;
+
     void Awake()
     {
         if (!Instance)
@@ -26,9 +30,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
             if (GameState == GameState.Active)
             {
-                var p = FindObjectOfType<Player>();
-                var c = p.GetComponent<PlayerHealth>();
-                c.OnHpDepleted += () => UpdateVictoryCondition(VictoryState.Lost);
+                p = FindObjectOfType<Player>();
+                c = p.GetComponent<PlayerHealth>();
+                c.OnHpDepleted += Lose;
             }
             DontDestroyOnLoad(gameObject);
         }
@@ -41,8 +45,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Controls.InputActions.UI.Escape.started += _ => OnEscape();
+        Controls.InputActions.UI.Escape.started += OnEscape;
     }
+
+    private void OnDestroy()
+    {
+        if (c != null)
+        {
+            c.OnHpDepleted -= Lose;
+        }
+        Controls.InputActions.UI.Escape.started -= OnEscape;
+    }
+
+    private void Lose() => UpdateVictoryCondition(VictoryState.Lost);
+
 
     public void Pause()
     {
@@ -84,9 +100,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         
         CurrentLevelID = level;
-        var p = FindObjectOfType<Player>();
-        var c = p.GetComponent<PlayerHealth>();
-        c.OnHpDepleted += () => UpdateVictoryCondition(VictoryState.Lost);
+        p = FindObjectOfType<Player>();
+        c = p.GetComponent<PlayerHealth>();
+        c.OnHpDepleted += Lose;
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
@@ -160,7 +176,7 @@ public class GameManager : MonoBehaviour
         GameState = newState;
     }
 
-    private void OnEscape()
+    private void OnEscape(InputAction.CallbackContext context)
     {
         if (GameState == GameState.Paused)
         {

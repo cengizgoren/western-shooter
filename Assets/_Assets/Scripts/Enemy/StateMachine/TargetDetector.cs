@@ -28,16 +28,26 @@ public class TargetDetector : MonoBehaviour
 
     private Transform playerTransform;
     private Messager messager;
+    private EnemyHealth enemyHealth;
 
     public void Awake()
     {
         playerTransform = GetComponent<EnemyStateMachine>().PlayerController.transform;
+        enemyHealth = GetComponent<EnemyHealth>();
         messager = GetComponent<Messager>();
 
-        messager.OnAlert += () => Alerted = true;
-        GetComponent<EnemyHealth>().OnHpLost += () => Alerted = true;
+        enemyHealth.OnHpLost += Alert;
+        messager.OnAlert += Alert;
     }
 
+    private void OnDestroy()
+    {
+        enemyHealth.OnHpLost -= Alert;
+        messager.OnAlert -= Alert;
+    }
+
+    private void Alert() => Alerted = true;
+ 
     public void Tick()
     {
         TargetSighted = IsPlayerInSightRange();

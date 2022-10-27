@@ -2,7 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 public class Zoom : MonoBehaviour
 {
@@ -20,12 +20,20 @@ public class Zoom : MonoBehaviour
 
     private void Start()
     {
-        Controls.InputActions.Player.Zoom.performed += ctx => ChangeZoom(ctx.ReadValue<float>());
-        Controls.InputActions.Player.SwitchCamera.performed += _ => SwitchCameraTarget();
+        Controls.InputActions.Player.Zoom.performed += ChangeZoom;
+        Controls.InputActions.Player.SwitchCamera.performed += SwitchCameraTarget;
     }
 
-    private void ChangeZoom(float y)
+    private void OnDestroy()
     {
+        Controls.InputActions.Player.Zoom.performed -= ChangeZoom;
+        Controls.InputActions.Player.SwitchCamera.performed -= SwitchCameraTarget;
+    }
+
+    private void ChangeZoom(InputAction.CallbackContext context)
+    {
+        float y = context.ReadValue<float>();
+
         if (y >= 1)
         {
             foreach(var vcam in vcams)
@@ -42,7 +50,7 @@ public class Zoom : MonoBehaviour
         }
     }
 
-    private void SwitchCameraTarget()
+    private void SwitchCameraTarget(InputAction.CallbackContext _)
     {
         int temp = vcams[0].Priority;
         vcams[0].Priority = vcams[1].Priority;
