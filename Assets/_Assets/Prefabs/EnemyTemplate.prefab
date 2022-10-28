@@ -2577,6 +2577,7 @@ GameObject:
   - component: {fileID: 1545839327076763308}
   - component: {fileID: 6220337005894232667}
   - component: {fileID: 5285032409765989732}
+  - component: {fileID: 7111894762845265963}
   - component: {fileID: 1135186147338160282}
   - component: {fileID: 5006507270630911467}
   - component: {fileID: 6999111639316909953}
@@ -2726,6 +2727,18 @@ MonoBehaviour:
   FriendlyRaycasts:
     Show: 0
     Color: {r: 1, g: 0, b: 0.87176275, a: 1}
+--- !u!114 &7111894762845265963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3810217d5e61bec479ec2a9a6860bf53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1135186147338160282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,6 +2753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RandomPointsCount: 10
   RandomCircleSize: 10
+  RandomRangeFromCircle: 2
 --- !u!195 &5006507270630911467
 NavMeshAgent:
   m_ObjectHideFlags: 0

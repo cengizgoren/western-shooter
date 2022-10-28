@@ -3,13 +3,15 @@ using UnityEngine.AI;
 
 public class Attack : IState
 {
+    private readonly DebugAI debug;
     private readonly Transform playerTransform;
     private readonly NavMeshAgent navMeshAgent;
     private readonly TargetDetector targetDetector;
     private readonly EnemyController enemyController;
 
-    public Attack(TargetDetector targetDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
+    public Attack(DebugAI debug, TargetDetector targetDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
     {
+        this.debug = debug;
         this.playerTransform = playerTransform;
         this.navMeshAgent = navMeshAgent;
         this.targetDetector = targetDetector;

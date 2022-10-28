@@ -8,21 +8,41 @@ public class Chase : IState
     public float TimeTargetLost;
 
     private NavMeshAgent navMeshAgent;
+    private DebugAI debug;
     private Transform playerTransform;
+    private TargetPicker targetPicker;
 
-    public Chase(Transform playerTransform, NavMeshAgent navMeshAgent)
+    private float time;
+    private float setDestinationInterval = 0.5f;
+    private Vector3 destination;
+
+    public Chase(DebugAI debug, Transform playerTransform, NavMeshAgent navMeshAgent, TargetPicker targetPicker)
     {
+        this.debug = debug;
         this.playerTransform = playerTransform;
         this.navMeshAgent = navMeshAgent;
+        this.targetPicker = targetPicker;
     }
 
     public void Tick()
     {
-        navMeshAgent.SetDestination(playerTransform.position);
+        if (time > setDestinationInterval)
+        {
+            //if (targetPicker.GetClosestRandomPositionAroundPlayer(out destination))
+            //{
+                navMeshAgent.SetDestination(playerTransform.position);
+                time = 0f;
+            //}
+        }
+        else
+        {
+            time += Time.deltaTime;
+        }
     }
 
     public void OnEnter()
     {
+        time = Mathf.Infinity;
         navMeshAgent.speed = 4f;
         navMeshAgent.updateRotation = true;
     }

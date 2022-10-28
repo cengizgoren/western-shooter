@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,13 +22,14 @@ public class EnemyStateMachine : MonoBehaviour
         var targetPicker = GetComponent<TargetPicker>();
         var enemyController = GetComponent<EnemyController>();
         var messager = GetComponent<Messager>();
+        var debug = GetComponent<DebugAI>();
 
         stateMachine = new StateMachine();
 
-        var idle = new Idle(messager);
-        var chase = new Chase(PlayerController.transform, navMeshAgent);
-        var attack = new Attack(targetDetector, enemyController, PlayerController.transform, navMeshAgent);
-        var attackReposition = new AttackReposition(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent);
+        var idle = new Idle(debug, messager);
+        var chase = new Chase(debug, PlayerController.transform, navMeshAgent, targetPicker);
+        var attack = new Attack(debug, targetDetector, enemyController, PlayerController.transform, navMeshAgent);
+        var attackReposition = new AttackReposition(debug, targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent);
 
         At(idle, chase, TargetDetected());
         At(idle, attackReposition, TargetContact());
@@ -51,5 +53,13 @@ public class EnemyStateMachine : MonoBehaviour
     {
         targetDetector.Tick();
         stateMachine.Tick();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying)
+            Handles.Label(transform.position + Vector3.up, stateMachine.CurrentState.GetType().Name);
+
+        
     }
 }

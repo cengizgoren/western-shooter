@@ -230,6 +230,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -240,11 +260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -253,6 +273,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -291,8 +315,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -1375,6 +1407,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -1385,11 +1437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -1398,6 +1450,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -1436,8 +1492,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -1485,7 +1549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.5
+      value: -29.5
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2132,6 +2196,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -2142,11 +2226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -2155,6 +2239,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -2193,8 +2281,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -3051,170 +3147,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
   m_TimeToStationary: 0.5
---- !u!43 &629923660
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5110
-  serializedVersion: 10
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 24
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 18
-    localAABB:
-      m_Center: {x: 0, y: -1.7356646, z: 0}
-      m_Extent: {x: 0.25, y: 0.125, z: 0.5}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 0200010000000500040003000500060004000900080007000c000b000a000c000d000b000e000f0010000f0011001000
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 18
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 24
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 40
-      format: 0
-      dimension: 2
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 864
-    _typelessdata: 000080be422acebf000000bf000000000000803f000000000000803f0000000000000000000080bf000080be000000bf0000803e422acebf000000bf000000000000803f000000000000803f0000000000000000000080bf0000803e000000bf00000000422acebff7ffff3e000000000000803f000000000000803f0000000000000000000080bf00000000f7ffff3e0000803e422acebf000000bf435b783f0c399b34465b783e465b78be0d399b27435b783f000080bf56b30bbf422acebf0000803e422aeebff7ffffbe435b783f32769334465b783e465b78be33769327435b783f000080bf52b30bbf422aeebf00000000422acebff7ffff3e435b783f32769334465b783e465b78be33769327435b783f000080bf3a5bf83e422acebf00000000422aeebf0000003f435b783f58b38b34465b783e465b78be59b38b27435b783f000080bf435bf83e422aeebf0000803e422aeebff7ffffbe00000000000080bf00000000000080bf0000000000000000000080bf000080bef7ffffbe000080be422aeebff7ffffbe00000000000080bf00000000000080bf0000000000000000000080bf0000803ef7ffffbe00000000422aeebf0000003f00000000000080bf00000000000080bf0000000000000000000080bf000000000000003f000080be422aeebff7ffffbe435b78bf465b7834465b783e465b78be475b78a7435b78bf000080bf52b30b3f422aeebf000080be422acebf000000bf435b78bf7ef08334465b783e465b78be7ff083a7435b78bf000080bf56b30b3f422acebf00000000422aeebf0000003f435b78bf7ef08334465b783e465b78be7ff083a7435b78bf000080bf435bf8be422aeebf00000000422acebff7ffff3e435b78bf58b38b34465b783e465b78be59b38ba7435b78bf000080bf3a5bf8be422acebf000080be422acebf000000bf00000000000090b5000080bf0000803f0000000000000000000080bf000080be3e2acebf0000803e422acebf000000bf00000000000090b5000080bf0000803f0000000000000000000080bf0000803e3e2acebf000080be422aeebff7ffffbe00000000000090b5000080bf0000803f0000000000000000000080bf000080be3e2aeebf0000803e422aeebff7ffffbe00000000000090b5000080bf0000803f0000000000000000000080bf0000803e3e2aeebf
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0, y: -1.7356646, z: 0}
-    m_Extent: {x: 0.25, y: 0.125, z: 0.5}
-  m_MeshUsageFlags: 0
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &657296915 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1570628789228942, guid: baebdd3b26f756b4c8f1b2d2efe1cf42, type: 3}
@@ -3672,6 +3604,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -3682,11 +3634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -3695,6 +3647,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -3733,8 +3689,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -3925,7 +3889,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.0036057, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4005,6 +3969,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -4015,19 +3999,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: avoidancePriority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -4066,8 +4058,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -4123,7 +4123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14
+      value: -24.5
       objectReference: {fileID: 0}
     - target: {fileID: 8143561313886008644, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4187,6 +4187,170 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+--- !u!43 &928194555
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: pb_Mesh-6152
+  serializedVersion: 10
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 24
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 18
+    localAABB:
+      m_Center: {x: 0, y: -1.7356646, z: 0}
+      m_Extent: {x: 0.25, y: 0.125, z: 0.5}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 0200010000000500040003000500060004000900080007000c000b000a000c000d000b000e000f0010000f0011001000
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 18
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 40
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 864
+    _typelessdata: 000080be422acebf000000bf000000000000803f000000000000803f0000000000000000000080bf000080be000000bf0000803e422acebf000000bf000000000000803f000000000000803f0000000000000000000080bf0000803e000000bf00000000422acebff7ffff3e000000000000803f000000000000803f0000000000000000000080bf00000000f7ffff3e0000803e422acebf000000bf435b783f0c399b34465b783e465b78be0d399b27435b783f000080bf56b30bbf422acebf0000803e422aeebff7ffffbe435b783f32769334465b783e465b78be33769327435b783f000080bf52b30bbf422aeebf00000000422acebff7ffff3e435b783f32769334465b783e465b78be33769327435b783f000080bf3a5bf83e422acebf00000000422aeebf0000003f435b783f58b38b34465b783e465b78be59b38b27435b783f000080bf435bf83e422aeebf0000803e422aeebff7ffffbe00000000000080bf00000000000080bf0000000000000000000080bf000080bef7ffffbe000080be422aeebff7ffffbe00000000000080bf00000000000080bf0000000000000000000080bf0000803ef7ffffbe00000000422aeebf0000003f00000000000080bf00000000000080bf0000000000000000000080bf000000000000003f000080be422aeebff7ffffbe435b78bf465b7834465b783e465b78be475b78a7435b78bf000080bf52b30b3f422aeebf000080be422acebf000000bf435b78bf7ef08334465b783e465b78be7ff083a7435b78bf000080bf56b30b3f422acebf00000000422aeebf0000003f435b78bf7ef08334465b783e465b78be7ff083a7435b78bf000080bf435bf8be422aeebf00000000422acebff7ffff3e435b78bf58b38b34465b783e465b78be59b38ba7435b78bf000080bf3a5bf8be422acebf000080be422acebf000000bf00000000000090b5000080bf0000803f0000000000000000000080bf000080be3e2acebf0000803e422acebf000000bf00000000000090b5000080bf0000803f0000000000000000000080bf0000803e3e2acebf000080be422aeebff7ffffbe00000000000090b5000080bf0000803f0000000000000000000080bf000080be3e2aeebf0000803e422aeebff7ffffbe00000000000090b5000080bf0000803f0000000000000000000080bf0000803e3e2aeebf
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: -1.7356646, z: 0}
+    m_Extent: {x: 0.25, y: 0.125, z: 0.5}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!108 &957785033 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 1001386362681380686, guid: 92fa2a968328290468b6226f4d5f489d, type: 3}
@@ -5098,6 +5262,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -5108,11 +5292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -5121,6 +5305,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -5159,8 +5347,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -5782,6 +5978,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -5792,11 +6008,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -5805,6 +6021,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -5843,8 +6063,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -6022,7 +6250,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
     - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: Invincible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: DestructionEffect
@@ -6087,7 +6315,7 @@ PrefabInstance:
     - target: {fileID: 6431496564097576864, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 629923660}
+      objectReference: {fileID: 928194555}
     - target: {fileID: 6431496564097576865, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6099,10 +6327,10 @@ PrefabInstance:
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 629923660}
+      objectReference: {fileID: 928194555}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8317
+      value: 8320
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576894, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6111,7 +6339,7 @@ PrefabInstance:
     - target: {fileID: 6431496564097576895, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 629923660}
+      objectReference: {fileID: 928194555}
     - target: {fileID: 7242006769812206958, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: mesh
       value: 
@@ -6449,6 +6677,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -6459,11 +6707,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -6472,6 +6720,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -6510,8 +6762,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -8018,6 +8278,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LayerMask.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomCircleSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomPointsCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: RandomRangeFromCircle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135186147338160282, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: ObstructsDirectPathClearCheck.m_Bits
+      value: 8256
+      objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -8028,11 +8308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Acceleration
@@ -8041,6 +8321,10 @@ PrefabInstance:
     - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_StoppingDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006507270630911467, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: ShowFieldOfView
@@ -8079,8 +8363,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlyRaycasts.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FriendlySphereCastThickness
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -8644,7 +8936,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.0036057, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
