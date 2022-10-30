@@ -283,8 +283,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -303,6 +311,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -315,8 +327,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -327,6 +347,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -334,6 +362,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -422,7 +466,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!1 &47166996
 GameObject:
@@ -1460,8 +1505,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -1480,6 +1533,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -1492,8 +1549,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -1504,6 +1569,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -1511,6 +1584,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1599,7 +1688,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!1001 &270587363
 PrefabInstance:
@@ -2249,8 +2339,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -2269,6 +2367,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -2281,8 +2383,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -2293,6 +2403,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -2300,6 +2418,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2388,7 +2522,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!1001 &427466728
 PrefabInstance:
@@ -2874,7 +3009,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1788
+  m_Name: pb_Mesh-2866
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3657,8 +3792,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -3677,6 +3820,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -3689,8 +3836,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -3701,6 +3856,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -3708,6 +3871,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3796,7 +3975,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!4 &813034998 stripped
 Transform:
@@ -4026,8 +4206,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -4046,6 +4234,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -4058,8 +4250,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -4070,6 +4270,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -4077,6 +4285,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4185,7 +4409,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!43 &928194555
 Mesh:
@@ -5315,8 +5540,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -5335,6 +5568,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -5347,8 +5584,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -5359,6 +5604,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -5366,6 +5619,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5454,7 +5723,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!1001 &1152609009
 PrefabInstance:
@@ -6031,8 +6301,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -6051,6 +6329,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -6063,8 +6345,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -6075,6 +6365,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -6082,6 +6380,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6170,7 +6484,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!114 &1363837309 stripped
 MonoBehaviour:
@@ -6250,7 +6565,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
     - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: Invincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: DestructionEffect
@@ -6730,8 +7045,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -6750,6 +7073,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -6762,8 +7089,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -6774,6 +7109,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -6781,6 +7124,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6869,7 +7228,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!4 &1481385887 stripped
 Transform:
@@ -8331,8 +8691,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: WeaponCone.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: CanBeSeen.m_Bits
       value: 4160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: FieldOfView.Show
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
@@ -8351,6 +8719,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: LineToPlayer.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: RandomPointsCount
       value: 4
       objectReference: {fileID: 0}
@@ -8363,8 +8735,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1840841528}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: HearingRadius.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: VisionRaycasts.Show
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: FriendlyRaycasts.Show
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285032409765989732, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PreventsWeaponFire.m_Bits
@@ -8375,6 +8755,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: StateLabel.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1840841528}
@@ -8382,6 +8770,22 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1840841528}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Show
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.b
+      value: 0.9690397
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220337005894232667, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
+      propertyPath: NavMeshAgentPath.Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576864, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8470,7 +8874,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
 --- !u!1001 &2059441662
 PrefabInstance:

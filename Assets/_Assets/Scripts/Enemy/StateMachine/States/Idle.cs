@@ -5,12 +5,10 @@ using UnityEngine.AI;
 
 public class Idle : IState
 {
-    private readonly DebugAI debug;
     private readonly Messager messager;
 
-    public Idle(DebugAI debug, Messager messager)
+    public Idle(Messager messager)
     {
-        this.debug = debug;
         this.messager = messager;
     }
 

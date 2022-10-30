@@ -14,22 +14,26 @@ public class EnemyStateMachine : MonoBehaviour
 
     private StateMachine stateMachine;
     private TargetDetector targetDetector;
+    private NavMeshAgent navMeshAgent;
+
+    [Header("Debug")]
+    public DebugItem NavMeshAgentPath;
+    public bool StateLabel;
 
     public void Awake()
     {
         targetDetector = GetComponent<TargetDetector>();
-        var navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         var targetPicker = GetComponent<TargetPicker>();
         var enemyController = GetComponent<EnemyController>();
         var messager = GetComponent<Messager>();
-        var debug = GetComponent<DebugAI>();
 
         stateMachine = new StateMachine();
 
-        var idle = new Idle(debug, messager);
-        var chase = new Chase(debug, PlayerController.transform, navMeshAgent, targetPicker);
-        var attack = new Attack(debug, targetDetector, enemyController, PlayerController.transform, navMeshAgent);
-        var attackReposition = new AttackReposition(debug, targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent);
+        var idle = new Idle(messager);
+        var chase = new Chase(PlayerController.transform, navMeshAgent, targetPicker);
+        var attack = new Attack(targetDetector, enemyController, PlayerController.transform, navMeshAgent);
+        var attackReposition = new AttackReposition(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent);
 
         At(idle, chase, TargetDetected());
         At(idle, attackReposition, TargetContact());
@@ -55,11 +59,32 @@ public class EnemyStateMachine : MonoBehaviour
         stateMachine.Tick();
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        if(Application.isPlaying)
-            Handles.Label(transform.position + Vector3.up, stateMachine.CurrentState.GetType().Name);
+        if (Application.isPlaying)
+        {
+            if (StateLabel)
+            {
+                Handles.Label(transform.position + Vector3.up, stateMachine.CurrentState.GetType().Name);
+            }
 
-        
+            if (NavMeshAgentPath.Show)
+            {
+                if (navMeshAgent.hasPath)
+                {
+                    NavMeshPath path = navMeshAgent.path;
+
+                    if (path.corners.Length >= 2)
+                    {
+                        Debug.DrawLine(path.corners[0], path.corners[1], NavMeshAgentPath.Color);
+                    }
+
+                    for (int i = 1; i < path.corners.Length - 1; i++)
+                    {
+                        Debug.DrawLine(path.corners[i], path.corners[i + 1], NavMeshAgentPath.Color);
+                    }
+                }
+            }
+        }
     }
 }

@@ -8,7 +8,6 @@ public class Chase : IState
     public float TimeTargetLost;
 
     private NavMeshAgent navMeshAgent;
-    private DebugAI debug;
     private Transform playerTransform;
     private TargetPicker targetPicker;
 
@@ -16,9 +15,8 @@ public class Chase : IState
     private float setDestinationInterval = 0.5f;
     private Vector3 destination;
 
-    public Chase(DebugAI debug, Transform playerTransform, NavMeshAgent navMeshAgent, TargetPicker targetPicker)
+    public Chase(Transform playerTransform, NavMeshAgent navMeshAgent, TargetPicker targetPicker)
     {
-        this.debug = debug;
         this.playerTransform = playerTransform;
         this.navMeshAgent = navMeshAgent;
         this.targetPicker = targetPicker;

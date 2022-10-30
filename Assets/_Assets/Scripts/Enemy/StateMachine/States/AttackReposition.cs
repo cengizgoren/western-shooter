@@ -6,16 +6,14 @@ using UnityEngine.AI;
 
 public class AttackReposition : IState
 {
-    private readonly DebugAI debug;
     private Transform playerTransform;
     private NavMeshAgent navMeshAgent;
     private TargetDetector targetDetector;
     private TargetPicker targetPicker;
     private EnemyController enemyController;
 
-    public AttackReposition(DebugAI debug, TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
+    public AttackReposition(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent)
     {
-        this.debug = debug;
         this.playerTransform = playerTransform;
         this.targetPicker = targetPicker;
         this.navMeshAgent = navMeshAgent;
