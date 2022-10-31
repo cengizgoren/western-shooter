@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421da99bc1197894b980a7858af26719, type: 3}
-  m_Name: Revolver
+  m_Script: {fileID: 11500000, guid: 5244d7f3b0023c44ab916879a9440f41, type: 3}
+  m_Name: Projectile
   m_EditorClassIdentifier: 
-  ImpactDamage: 50
-  Velocity: 100
+  Prefab: {fileID: 2676942871222497078, guid: 92d2540adc382394899c44fe7eaaab47, type: 3}
+  ImpactDamage: 10
+  Velocity: 170

@@ -111,11 +111,11 @@ public class ProjectileStandard : MonoBehaviour
 
     }
 
-    public void Setup(GameObject owner, ProjectileStats projectileStats)
+    public void Setup(GameObject owner, Projectile projectile)
     {
         Owner = owner;
-        Velocity = projectileStats.Velocity;
-        ImpactDamage = projectileStats.ImpactDamage;
+        Velocity = projectile.Velocity;
+        ImpactDamage = projectile.ImpactDamage;
     }
 
     public void Shoot()

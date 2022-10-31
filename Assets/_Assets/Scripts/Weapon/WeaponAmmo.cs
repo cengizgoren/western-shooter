@@ -1,17 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(WeaponShooting))]
 public class WeaponAmmo : MonoBehaviour
 {
     public UnityAction<int> OnAmmoChange;
 
-    public int ClipSize;
-    public float AmmoReloadTime;
-
-    private AudioSource audioSource;
+    private WeaponStats weaponStats;
     private float reloadStartedTime;
 
     public bool IsReloading { get; private set; }
@@ -19,9 +14,9 @@ public class WeaponAmmo : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        weaponStats = GetComponent<WeaponShooting>().WeaponStats;
         IsReloading = false;
-        UpdateAmmo(ClipSize);
+        UpdateAmmo(weaponStats.ClipSize);
     }
 
     private void Update()
@@ -41,16 +36,14 @@ public class WeaponAmmo : MonoBehaviour
         {
             reloadStartedTime = Time.time;
             IsReloading = true;
-
-
         }
     }
 
     private void CheckIfReloadEnded()
     {
-        if (IsReloading && reloadStartedTime + AmmoReloadTime < Time.time)
+        if (IsReloading && reloadStartedTime + weaponStats.ReloadTime < Time.time)
         {
-            UpdateAmmo(ClipSize);
+            UpdateAmmo(weaponStats.ClipSize);
             IsReloading = false;
         }
     }

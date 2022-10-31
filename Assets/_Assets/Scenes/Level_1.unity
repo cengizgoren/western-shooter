@@ -464,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -1686,7 +1686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -2520,7 +2520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -3009,7 +3009,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2866
+  m_Name: pb_Mesh-2858
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3973,7 +3973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -4407,7 +4407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -4418,7 +4418,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6152
+  m_Name: pb_Mesh-6144
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5721,7 +5721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -6482,7 +6482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -6645,7 +6645,7 @@ PrefabInstance:
       objectReference: {fileID: 928194555}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8320
+      value: 8323
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576894, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7226,7 +7226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
@@ -8872,7 +8872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148622678007600720, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7111894762845265963, guid: 5804f2bfc835a1c42ab817ae410dc151, type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2428039282849229386}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5784177205512073784}
   - component: {fileID: 5784177205512073766}
   - component: {fileID: 5784177205512073767}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: SM_Wep_Rifle_Plasma_Trigger_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,12 +126,11 @@ GameObject:
   - component: {fileID: 5784177205657299600}
   - component: {fileID: 5784177205657299601}
   - component: {fileID: 6318658315848839874}
-  - component: {fileID: 5426679238416440577}
+  - component: {fileID: -6185598099426855789}
   - component: {fileID: 8037298762404811379}
   - component: {fileID: 4743411949970046768}
-  - component: {fileID: -3876812243514248208}
-  m_Layer: 9
-  m_Name: SM_Wep_Rifle_Plasma_02
+  m_Layer: 11
+  m_Name: EnemyAK47Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponIconSprite: {fileID: 21300046, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
---- !u!114 &5426679238416440577
+--- !u!114 &-6185598099426855789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,7 +225,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5784177205657299604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d836b5d6209b11a49a9b83168dcd1567, type: 3}
+  m_Script: {fileID: 11500000, guid: d2db24c182b515e4faa3f953c53a99ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8037298762404811379
@@ -241,25 +240,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f1775b65665294ca5dae6cb2b7c996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileOwner: {fileID: 0}
+  WeaponStats: {fileID: 11400000, guid: a7942d3a23357594abc65937b6150fad, type: 2}
+  ProjectileOwner: {fileID: 0}
   WeaponRoot: {fileID: 5784177205657299604}
   WeaponMuzzle: {fileID: 2428039282849229386}
   SafetyOn: 0
   TriggerSqueezed: 0
-  ShootType: 1
-  TimeBetweenShots: 0.1
-  BulletSpreadAngle: 1
-  ProjectilePrefab: {fileID: 2676942871222497078, guid: 92d2540adc382394899c44fe7eaaab47, type: 3}
-  projectileStats: {fileID: 11400000, guid: f9449ea7b204e5d48b26868d136120e9, type: 2}
-  FallbackMuzzleFlashEffect: {fileID: 11400000, guid: 4cf646716c4054d49859434d88e88e61, type: 2}
-  MuzzleFlashEffect: {fileID: 0}
-  WeaponFireSFX:
-    Guid:
-      Data1: 631548913
-      Data2: 1186606418
-      Data3: 2139971260
-      Data4: -1625054553
-    Path: event:/SFX/Mg_aux
 --- !u!114 &4743411949970046768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,19 +258,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b40e30ff01410439f8a1ab768d20d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClipSize: 45
-  AmmoReloadTime: 0
---- !u!114 &-3876812243514248208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5784177205657299604}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f35dd5c32e95044c83700945a7384b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LaserSightEffectPrefab: {fileID: 6237820242584301931, guid: 7450d4231a7def6419084f2847a898ed, type: 3}
-  Origin: {fileID: 2428039282849229386}
