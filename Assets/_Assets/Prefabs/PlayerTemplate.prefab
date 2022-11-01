@@ -2685,7 +2685,6 @@ GameObject:
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
   - component: {fileID: 3928391025034219905}
-  - component: {fileID: 305066578877415174}
   m_Layer: 0
   m_Name: PlayerTemplate
   m_TagString: Player
@@ -2879,19 +2878,6 @@ MonoBehaviour:
   MaxHP: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
   CurrentHP: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
   Invincible: 0
---- !u!114 &305066578877415174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
 --- !u!1 &8148628684651371972
 GameObject:
   m_ObjectHideFlags: 0
