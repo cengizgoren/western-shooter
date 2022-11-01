@@ -12,6 +12,12 @@
 		</relationship>
 	</object>
 	<object class="SpatialiserEffect" id="{38df7f31-604e-4ec0-8d23-bbfd09eba8ba}">
+		<property name="minimumDistance">
+			<value>35</value>
+		</property>
+		<property name="maximumDistance">
+			<value>70</value>
+		</property>
 		<property name="overrideRange">
 			<value>true</value>
 		</property>

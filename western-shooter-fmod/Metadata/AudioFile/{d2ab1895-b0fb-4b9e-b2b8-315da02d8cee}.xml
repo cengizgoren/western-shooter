@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d2ab1895-b0fb-4b9e-b2b8-315da02d8cee}">
+		<property name="assetPath">
+			<value>weapons/firing/mg_aux_fire_01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>2.759183673469388</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{85328c07-4868-452c-b252-824036edaaeb}</destination>
+		</relationship>
+	</object>
+</objects>
