@@ -82,7 +82,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 64503
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -2798,9 +2798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2044d81e1c21e240b595942f67758ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 0, y: 0}
+  AngularSpeed: 720
   CameraRoot: {fileID: 8147984661329040604}
-  RotationSpeed: 720
   AimPoint: {fileID: 0}
   DirectionArrow: {fileID: 6431496564097576865}
   OveraimFactor: 1.6

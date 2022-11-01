@@ -276,7 +276,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 30711
+    m_Bits: 29687
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -2682,6 +2682,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 0}
+  NavMeshAgentPath:
+    Show: 0
+    Color: {r: 0, g: 1, b: 1, a: 1}
+  StateLabel: 0
 --- !u!114 &5285032409765989732
 MonoBehaviour:
   m_ObjectHideFlags: 0
