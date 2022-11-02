@@ -21,9 +21,9 @@ MonoBehaviour:
   MuzzleFlash: {fileID: 11400000, guid: 9a24f2b50533033468cfb7c71d6bb909, type: 2}
   WeaponFireSFX:
     Guid:
-      Data1: 631548913
-      Data2: 1186606418
-      Data3: 2139971260
-      Data4: -1625054553
-    Path: event:/Weapons/Mg_aux
+      Data1: 1501238033
+      Data2: 1101074740
+      Data3: -2083327322
+      Data4: -323644455
+    Path: event:/Weapons/Enemies/weapon_enemy_mg_aux
   Looping: 0
