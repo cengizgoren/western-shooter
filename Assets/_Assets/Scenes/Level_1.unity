@@ -847,8 +847,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: ee7921bbddf02004eaf5598b014f978c, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 0}
   GodMode: 1
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &181403976
 NavMeshObstacle:
@@ -4418,7 +4418,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-802718
+  m_Name: pb_Mesh-5072
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5202,8 +5202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: ee7921bbddf02004eaf5598b014f978c, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 0}
   GodMode: 1
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &1075319275
 NavMeshObstacle:
@@ -5823,8 +5823,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: ee7921bbddf02004eaf5598b014f978c, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 0}
   GodMode: 1
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &1152609013
 NavMeshObstacle:
@@ -6645,7 +6645,7 @@ PrefabInstance:
       objectReference: {fileID: 928194555}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8332
+      value: 8338
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576894, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_CastShadows
@@ -8157,8 +8157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: 1e44572f1593ec54d8f605354753fe6e, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 11400000, guid: cba71d592fe8ce34f8a5daf93c38692a, type: 2}
   GodMode: 0
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &1827516066
 NavMeshObstacle:
@@ -8581,8 +8581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: 1e44572f1593ec54d8f605354753fe6e, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 11400000, guid: cba71d592fe8ce34f8a5daf93c38692a, type: 2}
   GodMode: 0
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &2008911789
 NavMeshObstacle:
@@ -8624,8 +8624,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: 1e44572f1593ec54d8f605354753fe6e, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 11400000, guid: cba71d592fe8ce34f8a5daf93c38692a, type: 2}
   GodMode: 0
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &2020657440
 NavMeshObstacle:
@@ -9051,8 +9051,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: ee7921bbddf02004eaf5598b014f978c, type: 2}
   DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHP: {fileID: 0}
   GodMode: 1
-  MaxHPSetting: {fileID: 11400000, guid: 5b7c4006be4a18e4fb7cb8d1b2198ee7, type: 2}
   currentHealthPoints: 0
 --- !u!208 &2076781721
 NavMeshObstacle:
@@ -9576,8 +9576,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2893999}
-  Variable: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
-  Max: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
 --- !u!1001 &2565992827297658177
 PrefabInstance:
   m_ObjectHideFlags: 0

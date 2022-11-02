@@ -10,8 +10,8 @@ public class Destructable : Damagable
 {
     public UnityAction OnHealthDepleted;
 
+    public MaxHP MaxHP;
     public bool GodMode = true;
-    public IntVariable MaxHPSetting;
     public int currentHealthPoints;
 
     private Renderer _renderer;
@@ -20,8 +20,8 @@ public class Destructable : Damagable
 
     private void Start()
     {
-        maxHealthPoints = MaxHPSetting.InitialValue;
-        currentHealthPoints = MaxHPSetting.InitialValue;
+        maxHealthPoints = MaxHP.Value;
+        currentHealthPoints = MaxHP.Value;
         _renderer = GetComponent<Renderer>();
 
         if (_renderer) 

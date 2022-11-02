@@ -1,15 +1,28 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
     public Slider healthBar;
-    public IntVariable Variable;
-    public IntVariable Max;
 
-    private void Update()
+    private PlayerHealth playerHealth;
+
+    private void Start()
     {
-        healthBar.value = Variable.RuntimeValue;
-        healthBar.maxValue = Max.RuntimeValue;
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        UpdateHealthBar();
+        playerHealth.OnHpLost += UpdateHealthBar;
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBar.maxValue = playerHealth.MaxHP.Value;
+        healthBar.value = playerHealth.HP;
+    }
+
+    private void OnDestroy()
+    {
+        playerHealth.OnHpLost -= UpdateHealthBar;
     }
 }
