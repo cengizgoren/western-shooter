@@ -9,8 +9,8 @@ public class PostProcessing : MonoBehaviour
     public Volume volume;
 
     [Header("Vignette")]
-    [Range(0f, 1f)] public float VignettePeakIntensity;
-    [Range(0f, 2f)] public float VignetteAttackTime;
+    [Range(0f, 1f)] public float VignettePeakIntensity = 0.25f;
+    [Range(0f, 2f)] public float VignetteAttackTime = 0.1f;
 
     public Color VignetteColor;
 
@@ -28,6 +28,7 @@ public class PostProcessing : MonoBehaviour
             vignette.intensity.value = 0f;
             vignette.color.value = VignetteColor;
 
+            // Cannot easly change values from this premade tween, it works, but maybe I should make this tween at runtime
             attack = DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, VignettePeakIntensity, VignetteAttackTime)
                 .SetEase(Ease.InOutCubic)
                 .SetAutoKill(false)

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameState GameState = GameState.MainMenu;
     public VictoryState VictoryState;
     public int CurrentLevelID;
+    public MenuNavigator menuNavigator;
 
     public UnityAction OnLaunch;
     public UnityAction OnLost;
@@ -67,15 +69,41 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         OnPause?.Invoke();
+        if (menuNavigator)
+        {
+            menuNavigator.FadeInToPause(() =>
+            {
+                UnfreezeTime();
+                UpdateGameState(GameState.Active);
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = false;
+                OnUnpause?.Invoke();
+            });
+        }
     }
 
     public void Unpause()
     {
-        UnfreezeTime();
-        UpdateGameState(GameState.Active);
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-        OnUnpause?.Invoke();
+
+        if (menuNavigator)
+        {
+            menuNavigator.FadeOutToGameplay(() =>
+            {
+                UnfreezeTime();
+                UpdateGameState(GameState.Active);
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = false;
+                OnUnpause?.Invoke();
+            });
+        }
+        else
+        {
+            UnfreezeTime();
+            UpdateGameState(GameState.Active);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+            OnUnpause?.Invoke();
+        }
     }
 
     public void LoadLevel(int level)
@@ -98,7 +126,7 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         yield return new WaitForEndOfFrame();
-        
+
         CurrentLevelID = level;
         p = FindObjectOfType<Player>();
         c = p.GetComponent<PlayerHealth>();

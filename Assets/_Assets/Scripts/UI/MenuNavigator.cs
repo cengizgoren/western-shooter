@@ -1,9 +1,14 @@
+using DG.Tweening;
 using FMODUnity;
+using System;
 using TMPro;
 using UnityEngine;
 
 public class MenuNavigator : MonoBehaviour
 {
+    [Range(0f, 1f)]
+    public float PauseMenuFadeTime;
+
     public GameObject MainMenuCanvas;
     public GameObject LevelSelectionCanvas;
     public GameObject PauseMenuCanvas;
@@ -16,6 +21,65 @@ public class MenuNavigator : MonoBehaviour
     public EventReference BeginGame;
     public EventReference MenuUp;
     public EventReference MenuAway;
+
+    private CanvasGroup PauseMenuCanvasGroup;
+    private Tween PauseTween;
+
+    private void Awake()
+    {
+        PauseMenuCanvasGroup = PauseMenuCanvas.GetComponent<CanvasGroup>();
+        PauseMenuCanvasGroup.alpha = 0f;
+    }
+    private void Start()
+    {
+        GameManager.Instance.menuNavigator = this;
+        GameManager.Instance.OnRestart += HideGameEndedMenu;
+        GameManager.Instance.OnLost += ShowGameEndedFailureScreen;
+        GameManager.Instance.OnWon += ShowGameEndedVictoryScreen;
+    }
+
+    public void FadeInToPause(Action resume)
+    {
+        if (PauseTween.IsActive())
+        {
+            PauseTween.Flip();
+        }
+        else
+        {
+            PauseTween = DOTween.To(() => PauseMenuCanvasGroup.alpha, x => PauseMenuCanvasGroup.alpha = x, 1f, PauseMenuFadeTime)
+                .SetEase(Ease.Linear)
+                .SetUpdate(true)
+                .OnStart(() => PauseMenuCanvas.SetActive(true))
+                .OnRewind(() =>
+                {
+                    resume(); 
+                    PauseTween.Kill();
+                });
+        }
+    }
+
+    public void FadeOutToGameplay(Action resume)
+    {
+        if (PauseTween.IsActive())
+        {
+            PauseTween.Flip();
+        }
+        else
+        {
+            PauseTween = DOTween.To(() => PauseMenuCanvasGroup.alpha, x => PauseMenuCanvasGroup.alpha = x, 0f, PauseMenuFadeTime)
+                .SetEase(Ease.Linear)
+                .SetUpdate(true)
+                .OnRewind(() =>
+                {
+                    PauseTween.Kill();
+                })
+                .OnComplete(() =>
+                {
+                    PauseMenuCanvas.SetActive(false);
+                    resume();
+                });
+        }
+    }
 
     public void LevelSelectionPressed(int level)
     {
@@ -96,7 +160,7 @@ public class MenuNavigator : MonoBehaviour
 
     private void ShowPauseMenu()
     {
-        if(PauseMenuCanvas)
+        if (PauseMenuCanvas)
         {
             RuntimeManager.PlayOneShot(MenuUp);
             PauseMenuCanvas.SetActive(true);
@@ -112,19 +176,9 @@ public class MenuNavigator : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        GameManager.Instance.OnPause += ShowPauseMenu;
-        GameManager.Instance.OnUnpause += HidePauseMenu;
-        GameManager.Instance.OnRestart += HideGameEndedMenu;
-        GameManager.Instance.OnLost += ShowGameEndedFailureScreen;
-        GameManager.Instance.OnWon += ShowGameEndedVictoryScreen;
-    }
-
     void OnDestroy()
     {
-        GameManager.Instance.OnPause -= ShowPauseMenu;
-        GameManager.Instance.OnUnpause -= HidePauseMenu;
+        GameManager.Instance.menuNavigator = null;
         GameManager.Instance.OnRestart -= HideGameEndedMenu;
         GameManager.Instance.OnLost -= ShowGameEndedFailureScreen;
         GameManager.Instance.OnWon -= ShowGameEndedVictoryScreen;
