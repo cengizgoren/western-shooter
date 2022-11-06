@@ -9,6 +9,9 @@ public class MenuNavigator : MonoBehaviour
     [Range(0f, 1f)]
     public float PauseMenuFadeTime;
 
+    [Range(0f, 1f)]
+    public float GameEndMenuFadeTime;
+
     public GameObject MainMenuCanvas;
     public GameObject LevelSelectionCanvas;
     public GameObject PauseMenuCanvas;
@@ -23,19 +26,22 @@ public class MenuNavigator : MonoBehaviour
     public EventReference MenuAway;
 
     private CanvasGroup PauseMenuCanvasGroup;
+    private CanvasGroup GameEndedCanvasGroup;
     private Tween PauseTween;
+    private Tween GameEndTween;
 
     private void Awake()
     {
         PauseMenuCanvasGroup = PauseMenuCanvas.GetComponent<CanvasGroup>();
+        GameEndedCanvasGroup = GameEndedMenuCanvas.GetComponent<CanvasGroup>();
+
         PauseMenuCanvasGroup.alpha = 0f;
+        GameEndedCanvasGroup.alpha = 0f;
     }
     private void Start()
     {
         GameManager.Instance.menuNavigator = this;
         GameManager.Instance.OnRestart += HideGameEndedMenu;
-        GameManager.Instance.OnLost += ShowGameEndedFailureScreen;
-        GameManager.Instance.OnWon += ShowGameEndedVictoryScreen;
     }
 
     public void FadeInToPause(Action resume)
@@ -81,6 +87,14 @@ public class MenuNavigator : MonoBehaviour
         }
     }
 
+    public void FadeInToGameEnd()
+    {
+        GameEndTween = DOTween.To(() => GameEndedCanvasGroup.alpha, x => GameEndedCanvasGroup.alpha = x, 1f, GameEndMenuFadeTime)
+            .SetEase(Ease.Linear)
+            .SetUpdate(true)
+            .OnStart(() => GameEndedMenuCanvas.SetActive(true));
+    }
+
     public void LevelSelectionPressed(int level)
     {
         RuntimeManager.PlayOneShot(BeginGame);
@@ -105,14 +119,14 @@ public class MenuNavigator : MonoBehaviour
     public void RestartPressed()
     {
         RuntimeManager.PlayOneShot(Click);
-        GameManager.Instance.Restart();
+        GameManager.Instance.RestartLevel();
         gameObject.SetActive(false);
     }
 
     public void ContinuePressed()
     {
         RuntimeManager.PlayOneShot(Click);
-        GameManager.Instance.Unpause();
+        GameManager.Instance.UnpauseGame();
     }
 
     public void OptionsPressed()
@@ -132,7 +146,7 @@ public class MenuNavigator : MonoBehaviour
     public void MainMenuPressed()
     {
         RuntimeManager.PlayOneShot(Click);
-        GameManager.Instance.MainMenu();
+        GameManager.Instance.LoadMainMenu();
     }
 
     public void QuitPressed()
@@ -180,7 +194,5 @@ public class MenuNavigator : MonoBehaviour
     {
         GameManager.Instance.menuNavigator = null;
         GameManager.Instance.OnRestart -= HideGameEndedMenu;
-        GameManager.Instance.OnLost -= ShowGameEndedFailureScreen;
-        GameManager.Instance.OnWon -= ShowGameEndedVictoryScreen;
     }
 }

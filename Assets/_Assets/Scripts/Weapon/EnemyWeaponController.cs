@@ -14,19 +14,15 @@ public class EnemyWeaponController : WeaponController
         enemyController = enemyWeapon.GetOwner().GetComponent<EnemyController>();
 
         enemyController.OnAttack += CheckAttack;
-        GameManager.Instance.OnPause += Forbid;
-        GameManager.Instance.OnWon += Forbid;
-        GameManager.Instance.OnLost += Forbid;
-        GameManager.Instance.OnUnpause += Allow;
+        GameManager.Instance.OnFreeze += Forbid;
+        GameManager.Instance.OnUnfreeze += Allow;
     }
 
     private void OnDestroy()
     {
         enemyController.OnAttack -= CheckAttack;
-        GameManager.Instance.OnPause -= Forbid;
-        GameManager.Instance.OnWon -= Forbid;
-        GameManager.Instance.OnLost -= Forbid;
-        GameManager.Instance.OnUnpause -= Allow;
+        GameManager.Instance.OnFreeze -= Forbid;
+        GameManager.Instance.OnUnfreeze -= Allow;
     }
 
     private void Forbid() => OnShootingForbidden?.Invoke();
