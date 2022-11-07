@@ -10020,6 +10020,46 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Win.Path
+      value: event:/UI/Win
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Death.Path
+      value: event:/UI/Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Win.Guid.Data1
+      value: -206581630
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Win.Guid.Data2
+      value: 1308766499
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Win.Guid.Data3
+      value: 405614227
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Win.Guid.Data4
+      value: -1108848512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Death.Guid.Data1
+      value: 953181905
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Death.Guid.Data2
+      value: 1106563892
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Death.Guid.Data3
+      value: -671478639
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
+      propertyPath: Death.Guid.Data4
+      value: 1585389570
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403529547327137280, guid: 9416d314f4ad5cd4bb8fbb51a2088c13, type: 3}
       propertyPath: PauseMenuFadeTime
       value: 0.4
       objectReference: {fileID: 0}

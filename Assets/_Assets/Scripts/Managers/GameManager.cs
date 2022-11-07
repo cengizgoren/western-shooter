@@ -151,12 +151,12 @@ public class GameManager : MonoBehaviour
             case VictoryState.Won:
                 UpdateGameState(GameState.Ended, true);
                 if (menuNavigator)
-                    menuNavigator.FadeInToGameEnd();
+                    menuNavigator.FadeInToGameEnd(true);
                 break;
             case VictoryState.Lost:
                 UpdateGameState(GameState.Ended, true);
                 if (menuNavigator)
-                    menuNavigator.FadeInToGameEnd();
+                    menuNavigator.FadeInToGameEnd(false);
                 break;
             default:
                 break;

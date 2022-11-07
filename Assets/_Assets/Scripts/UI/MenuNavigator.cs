@@ -24,6 +24,8 @@ public class MenuNavigator : MonoBehaviour
     public EventReference BeginGame;
     public EventReference MenuUp;
     public EventReference MenuAway;
+    public EventReference Win;
+    public EventReference Death;
 
     private CanvasGroup PauseMenuCanvasGroup;
     private CanvasGroup GameEndedCanvasGroup;
@@ -32,12 +34,19 @@ public class MenuNavigator : MonoBehaviour
 
     private void Awake()
     {
-        PauseMenuCanvasGroup = PauseMenuCanvas.GetComponent<CanvasGroup>();
-        GameEndedCanvasGroup = GameEndedMenuCanvas.GetComponent<CanvasGroup>();
+        if (PauseMenuCanvas)
+        {
+            PauseMenuCanvasGroup = PauseMenuCanvas.GetComponent<CanvasGroup>();
+            PauseMenuCanvasGroup.alpha = 0f;
+        }
 
-        PauseMenuCanvasGroup.alpha = 0f;
-        GameEndedCanvasGroup.alpha = 0f;
+        if (GameEndedMenuCanvas)
+        {
+            GameEndedCanvasGroup = GameEndedMenuCanvas.GetComponent<CanvasGroup>();
+            GameEndedCanvasGroup.alpha = 0f;
+        }
     }
+
     private void Start()
     {
         GameManager.Instance.menuNavigator = this;
@@ -58,7 +67,7 @@ public class MenuNavigator : MonoBehaviour
                 .OnStart(() => PauseMenuCanvas.SetActive(true))
                 .OnRewind(() =>
                 {
-                    resume(); 
+                    resume();
                     PauseTween.Kill();
                 });
         }
@@ -87,8 +96,13 @@ public class MenuNavigator : MonoBehaviour
         }
     }
 
-    public void FadeInToGameEnd()
+    public void FadeInToGameEnd(bool win)
     {
+        if (win)
+            RuntimeManager.PlayOneShot(Win);
+        else
+            RuntimeManager.PlayOneShot(Death);
+
         GameEndTween = DOTween.To(() => GameEndedCanvasGroup.alpha, x => GameEndedCanvasGroup.alpha = x, 1f, GameEndMenuFadeTime)
             .SetEase(Ease.Linear)
             .SetUpdate(true)
@@ -118,7 +132,8 @@ public class MenuNavigator : MonoBehaviour
 
     public void RestartPressed()
     {
-        RuntimeManager.PlayOneShot(Click);
+        RuntimeManager.PlayOneShot(BeginGame);
+        //RuntimeManager.PlayOneShot(Click);
         GameManager.Instance.RestartLevel();
         gameObject.SetActive(false);
     }
