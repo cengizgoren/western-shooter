@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class PlayerHealth : Damagable
 {
-    public IntVariable MaxHP;
-    public IntVariable CurrentHP;
+    public MaxHP MaxHP;
+    public int HP;
     public bool Invincible = false;
 
     public UnityAction OnHpLost;
@@ -14,21 +14,21 @@ public class PlayerHealth : Damagable
 
     private void Start()
     {
-        CurrentHP.RuntimeValue = CurrentHP.InitialValue;
+        HP = MaxHP.Value;
     }
 
     public override int GetCurrentHP()
     {
-        return CurrentHP.RuntimeValue;
+        return HP;
     }
 
     public override void DealDamage(int amount)
     {
         if (!Invincible)
         {
-            CurrentHP.RuntimeValue -= amount;
+            HP -= amount;
             OnHpLost?.Invoke();
-            if (CurrentHP.RuntimeValue <= 0)
+            if (HP <= 0)
             {
                 OnHpDepleted?.Invoke();
             }

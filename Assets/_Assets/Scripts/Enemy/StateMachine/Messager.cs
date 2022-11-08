@@ -45,7 +45,7 @@ public class Messager : MonoBehaviour
         if (ShowMessageRadius)
         {
             Gizmos.color = Color.yellow;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, message.BroadCastRadius);
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, message.BroadCastRadius, Color.yellow);
         }
     }
 }

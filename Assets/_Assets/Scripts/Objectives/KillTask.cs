@@ -21,12 +21,24 @@ public class KillTask : Task
         }
     }
 
+    private void OnDestroy()
+    {
+        foreach (EnemyHealth target in KillList)
+        {
+            if (target != null)
+            {
+                target.OnHpDepleted -= TargetKilled;
+            }
+        }
+    }
+
     public override ObjectiveUI Activate()
     {
         foreach (EnemyHealth target in KillList)
         {
             target.OnHpDepleted += TargetKilled;
         }
+
         killsCurrent = 0;
         killsTotal = KillList.Capacity;
         objectiveUIInstance = Instantiate(ObjectiveUIPrefab);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(WeaponArsenal))]
 public class WeaponSwitcher : MonoBehaviour
@@ -37,12 +38,30 @@ public class WeaponSwitcher : MonoBehaviour
         weaponMainLocalRotation = DefaultWeaponPosition.localRotation;
         OnSwitchedToWeapon += OnWeaponSwitched;
 
-        Controls.InputActions.Player.Weapon.performed += ctx =>
-        {
-            SwitchWeaponByNumber(ctx.ReadValue<float>());
-        };
+        Controls.InputActions.Player.Weapon.performed += SwitchWeaponByNumber;
 
         SwitchWeaponAscending(true);
+    }
+
+    private void OnDestroy()
+    {
+        Controls.InputActions.Player.Weapon.performed -= SwitchWeaponByNumber;
+    }
+
+    private void SwitchWeaponByNumber(InputAction.CallbackContext context)
+    {
+        float weaponNumber = context.ReadValue<float>();
+        if (switchState == WeaponSwitchState.Up || switchState == WeaponSwitchState.Down)
+        {
+            int switchWeaponInput = (int)weaponNumber;
+            if (switchWeaponInput != 0)
+            {
+                if (playerWeaponArsenal.GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
+                {
+                    SwitchToWeaponIndex(switchWeaponInput - 1);
+                }
+            }
+        }
     }
 
     public Weapon GetActiveWeapon()
@@ -86,21 +105,6 @@ public class WeaponSwitcher : MonoBehaviour
         {
             newWeapon.gameObject.SetActive(true);
             activeWeapon = newWeapon;
-        }
-    }
-
-    private void SwitchWeaponByNumber(float weaponNumber)
-    {
-        if (switchState == WeaponSwitchState.Up || switchState == WeaponSwitchState.Down)
-        {
-            int switchWeaponInput = (int)weaponNumber;
-            if (switchWeaponInput != 0)
-            {
-                if (playerWeaponArsenal.GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
-                {
-                    SwitchToWeaponIndex(switchWeaponInput - 1);
-                }
-            }
         }
     }
 

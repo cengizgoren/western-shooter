@@ -2,7 +2,43 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+
+public enum GameState
+{
+    MainMenu,
+    Active,
+    Paused,
+    Ended,
+}
+
+public enum VictoryState
+{
+    ObjectiveInProgress,
+    ObjectiveCompleted,
+    Won,
+    Lost
+}
+
+public static class TimeFlow
+{
+    public static void FreezeTime()
+    {
+        Time.timeScale = 0f;
+        Controls.InputActions.Player.Disable();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public static void UnfreezeTime()
+    {
+        Time.timeScale = 1f;
+        Controls.InputActions.Player.Enable();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -11,24 +47,25 @@ public class GameManager : MonoBehaviour
     public GameState GameState = GameState.MainMenu;
     public VictoryState VictoryState;
     public int CurrentLevelID;
+    public MenuNavigator menuNavigator;
 
-    public UnityAction OnLaunch;
-    public UnityAction OnLost;
-    public UnityAction OnWon;
-    public UnityAction OnPause;
-    public UnityAction OnUnpause;
+    public UnityAction OnFreeze;
+    public UnityAction OnUnfreeze;
     public UnityAction OnRestart;
 
-    void Awake()
+    private Player p;
+    private PlayerHealth c;
+
+    private void Awake()
     {
         if (!Instance)
         {
             Instance = this;
             if (GameState == GameState.Active)
             {
-                var p = FindObjectOfType<Player>();
-                var c = p.GetComponent<PlayerHealth>();
-                c.OnHpDepleted += () => UpdateVictoryCondition(VictoryState.Lost);
+                p = FindObjectOfType<Player>();
+                c = p.GetComponent<PlayerHealth>();
+                c.OnHpDepleted += Lose;
             }
             DontDestroyOnLoad(gameObject);
         }
@@ -39,33 +76,96 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        Controls.InputActions.UI.Escape.started += _ => OnEscape();
+        Controls.InputActions.UI.Escape.started += Escape;
     }
 
-    public void Pause()
+    //
+    // Subscribed to events
+    //
+
+    private void Lose()
     {
-        FreezeTime();
-        UpdateGameState(GameState.Paused);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        OnPause?.Invoke();
+        UpdateVictoryCondition(VictoryState.Lost);
     }
 
-    public void Unpause()
+    private void Escape(InputAction.CallbackContext context)
     {
-        UnfreezeTime();
-        UpdateGameState(GameState.Active);
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-        OnUnpause?.Invoke();
+        if (GameState == GameState.Paused)
+        {
+            if (menuNavigator)
+            {
+                menuNavigator.FadeOutToGameplay(() => UpdateGameState(GameState.Active, false));
+            }
+            else
+            {
+                UpdateGameState(GameState.Active, false);
+            }
+        }
+        else if (GameState == GameState.Active)
+        {
+            UpdateGameState(GameState.Paused, true);
+            if (menuNavigator)
+            {
+                menuNavigator.FadeInToPause(() => UpdateGameState(GameState.Active, false));
+            }
+        }
     }
 
-    public void LoadLevel(int level)
+    //
+    // Update states
+    //
+
+    public void UpdateGameState(GameState newState)
     {
-        StartCoroutine(LoadSceneAsync(level));
+        GameState = newState;
     }
+
+    public void UpdateGameState(GameState newState, bool freezeTime)
+    {
+        GameState = newState;
+
+        if (freezeTime)
+        {
+            TimeFlow.FreezeTime();
+            OnFreeze?.Invoke();
+        }
+        else
+        {
+            TimeFlow.UnfreezeTime();
+            OnUnfreeze?.Invoke();
+        }
+    }
+
+    public void UpdateVictoryCondition(VictoryState newState)
+    {
+        VictoryState = newState;
+
+        switch (VictoryState)
+        {
+            case VictoryState.ObjectiveInProgress:
+                break;
+            case VictoryState.ObjectiveCompleted:
+                break;
+            case VictoryState.Won:
+                UpdateGameState(GameState.Ended, true);
+                if (menuNavigator)
+                    menuNavigator.FadeInToGameEnd(true);
+                break;
+            case VictoryState.Lost:
+                UpdateGameState(GameState.Ended, true);
+                if (menuNavigator)
+                    menuNavigator.FadeInToGameEnd(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    //
+    // Load a scene
+    //
 
     private IEnumerator LoadSceneAsync(int level)
     {
@@ -82,55 +182,51 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         yield return new WaitForEndOfFrame();
-        
+
         CurrentLevelID = level;
-        var p = FindObjectOfType<Player>();
-        var c = p.GetComponent<PlayerHealth>();
-        c.OnHpDepleted += () => UpdateVictoryCondition(VictoryState.Lost);
+        p = FindObjectOfType<Player>();
+        c = p.GetComponent<PlayerHealth>();
+        c.OnHpDepleted += Lose;
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
-        UnfreezeTime();
+        TimeFlow.UnfreezeTime();
         UpdateGameState(GameState.Active);
     }
 
-    public void Restart()
+    //
+    // Called in buttons
+    //
+
+    // Has duplicated code
+    public void UnpauseGame()
+    {
+        if (menuNavigator)
+        {
+            menuNavigator.FadeOutToGameplay(() => UpdateGameState(GameState.Active, false));
+        }
+        else
+        {
+            UpdateGameState(GameState.Active, false);
+        }
+    }
+
+    public void LoadLevel(int level)
+    {
+        StartCoroutine(LoadSceneAsync(level));
+    }
+
+    public void RestartLevel()
     {
         StartCoroutine(LoadSceneAsync(CurrentLevelID));
     }
 
-    //private IEnumerator FadeThenDoAction(float seconds, Action action)
-    //{
-    //    var f = FindObjectOfType<Fader>();
-    //    if (f)
-    //    {
-    //        f.FadeOut();
-    //    }
-    //    yield return new WaitForSeconds(seconds);
-    //}
-
-    //private IEnumerator WaitCoroutine(int seconds)
-    //{
-    //    Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-    //    //yield on a new YieldInstruction that waits for 5 seconds.
-    //    yield return new WaitForSeconds(seconds);
-
-    //    //After we have waited 5 seconds print the time again.
-    //    Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-    //}
-
-    public void MainMenu()
+    public void LoadMainMenu()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         UpdateGameState(GameState.MainMenu);
-    }
-
-    public void PlayerHasDied()
-    {
-        UpdateVictoryCondition(VictoryState.Lost);
     }
 
     public void Quit()
@@ -139,63 +235,9 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void FreezeTime()
-    {
-        Time.timeScale = 0f;
-        Controls.InputActions.Player.Disable();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    private void UnfreezeTime()
-    {
-        Time.timeScale = 1f;
-        Controls.InputActions.Player.Enable();
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-    }
-
-    public void UpdateGameState(GameState newState)
-    {
-        GameState = newState;
-    }
-
-    private void OnEscape()
-    {
-        if (GameState == GameState.Paused)
-        {
-            Unpause();
-        }
-        else if (GameState == GameState.Active)
-        {
-            Pause();
-        }
-    }
-
-    public void UpdateVictoryCondition(VictoryState newState)
-    {
-        VictoryState = newState;
-
-        switch (VictoryState)
-        {
-            case VictoryState.ObjectiveInProgress:
-                break;
-            case VictoryState.ObjectiveCompleted:
-                break;
-            case VictoryState.Won:
-                FreezeTime();
-                UpdateGameState(GameState.Ended);
-                OnWon?.Invoke();
-                break;
-            case VictoryState.Lost:
-                FreezeTime();
-                UpdateGameState(GameState.Ended);
-                OnLost?.Invoke();
-                break;
-            default:
-                break;
-        }
-    }
+    //
+    // Unity specific
+    //
 
     void OnApplicationFocus(bool hasFocus)
     {
@@ -228,20 +270,13 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
         }
     }
-}
 
-public enum GameState
-{
-    MainMenu,
-    Active,
-    Paused,
-    Ended,
-}
-
-public enum VictoryState
-{
-    ObjectiveInProgress,
-    ObjectiveCompleted,
-    Won,
-    Lost
+    private void OnDestroy()
+    {
+        if (c != null)
+        {
+            c.OnHpDepleted -= Lose;
+        }
+        Controls.InputActions.UI.Escape.started -= Escape;
+    }
 }

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class WeaponArsenal : MonoBehaviour
 {
@@ -41,19 +43,26 @@ public class WeaponArsenal : MonoBehaviour
             i++;
         }
 
-        Controls.InputActions.Player.Weapon.performed += ctx =>
+        Controls.InputActions.Player.Weapon.performed += PerformWeaponSwitchinng;
+    }
+
+    private void OnDestroy()
+    {
+        Controls.InputActions.Player.Weapon.performed -= PerformWeaponSwitchinng;
+    }
+
+    private void PerformWeaponSwitchinng(InputAction.CallbackContext context)
+    {
+        int weaponNumber = (int)context.ReadValue<float>();
+        weaponNumber -= 1;
+        if (weaponNumber >= 0 && weaponNumber <= 8 && weaponNumber != activeWeaponIndex && weaponSlots[weaponNumber] != null)
         {
-            int weaponNumber = (int)ctx.ReadValue<float>();
-            weaponNumber -= 1;
-            if (weaponNumber >= 0 && weaponNumber <= 8 && weaponNumber != activeWeaponIndex && weaponSlots[weaponNumber] != null)
-            {
-                activeWeapon.gameObject.SetActive(false);
-                activeWeapon = weaponSlots[weaponNumber];
-                activeWeaponIndex = weaponNumber;
-                activeWeapon.gameObject.SetActive(true);
-                OnSwitchedToWeapon?.Invoke(activeWeapon);
-            }
-        };
+            activeWeapon.gameObject.SetActive(false);
+            activeWeapon = weaponSlots[weaponNumber];
+            activeWeaponIndex = weaponNumber;
+            activeWeapon.gameObject.SetActive(true);
+            OnSwitchedToWeapon?.Invoke(activeWeapon);
+        }
     }
 
     public void AddWeapon(Weapon weaponPrefab)

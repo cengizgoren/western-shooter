@@ -12,7 +12,6 @@ public class Idle : IState
         this.messager = messager;
     }
 
-
     public void Tick()
     {
 

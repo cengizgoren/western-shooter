@@ -1,195 +1,109 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
-using FMOD.Studio;
-using Unity.VisualScripting;
 
 public class WeaponShooting : MonoBehaviour
 {
-    public enum WeaponShootType
-    {
-        Manual,
-        Automatic,
-    }
-
-    public GameObject projectileOwner;
+    public WeaponStats WeaponStats;
+    public GameObject ProjectileOwner;
     public GameObject WeaponRoot;
     public Transform WeaponMuzzle;
 
-    [Space(10)]
+    [Header("Debug")]
     public bool SafetyOn;
     public bool TriggerSqueezed;
-    [Space(10)]
-    public WeaponShootType ShootType;
-    public float DelayBetweenShots = 0.5f;
-    public float BulletSpreadAngle = 1f;
-    [Space(10)]
-    public ProjectileStandard ProjectilePrefab;
-    public ProjectileStats projectileStats;
-    [Space(10)]
-    public MuzzleFlashEffect FallbackMuzzleFlashEffect;
-    public MuzzleFlashEffect MuzzleFlashEffect;
-    [Space(10)]
-    public FMODUnity.EventReference WeaponFireSFX;
 
     private Weapon weapon;
     private WeaponAmmo weaponAmmo;
     private WeaponController weaponController;
-    private EventInstance weaponFireSfxInstance;
-    private Animator animator;
 
-    private float lastTimeShot = Mathf.NegativeInfinity;
+    private GameObject muzzleFlashPrefab;
+    private ParticleSystem muzzleFlashParticles;
 
-    private GameObject muzzleFlashInstance;
-    private GameObject singleMuzzleFlashInstance;
-
-    private ParticleSystem gunshot;
+    private float shotTimer;
+    private bool isfirstShotInSeries = true;
 
     private void Awake()
     {
         weapon = GetComponent<Weapon>();
         weaponController = GetComponent<WeaponController>();
         weaponAmmo = GetComponent<WeaponAmmo>();
-        animator = transform.root.GetComponent<Animator>();
 
-        if (ShootType == WeaponShootType.Automatic)
+        if (WeaponStats.MuzzleFlash)
         {
-            if (MuzzleFlashEffect)
-            {
-                muzzleFlashInstance = Instantiate(MuzzleFlashEffect.ContiniousFire, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
-            }
-            else
-            {
-                muzzleFlashInstance = Instantiate(FallbackMuzzleFlashEffect.ContiniousFire, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
-            }
-            gunshot = muzzleFlashInstance.GetComponent<ParticleSystem>();
-        }
-
-        if (ShootType == WeaponShootType.Manual)
-        {
-            if (MuzzleFlashEffect)
-            {
-                singleMuzzleFlashInstance = MuzzleFlashEffect.SingleShot;
-            }
-            else
-            {
-                singleMuzzleFlashInstance = FallbackMuzzleFlashEffect.SingleShot;
-            }
+            muzzleFlashPrefab = Instantiate(WeaponStats.MuzzleFlash.Prefab, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
+            muzzleFlashParticles = muzzleFlashPrefab.GetComponent<ParticleSystem>();
         }
     }
 
     private void Start()
     {
-        if (projectileOwner == null)
+        if (ProjectileOwner == null)
         {
-            projectileOwner = weapon.GetOwner();
+            ProjectileOwner = weapon.GetOwner();
         }
 
-        weaponFireSfxInstance = FMODUnity.RuntimeManager.CreateInstance(WeaponFireSFX);
-        weaponController.OnTriggerPressed += () => { TriggerSqueezed = true; };
-        weaponController.OnTriggerReleased += () => { TriggerSqueezed = false; };
-        weaponController.OnShootingAllowed += () => SafetyOn = false;
-        weaponController.OnShootingForbidden += () => SafetyOn = true;
+        weaponController.OnTriggerPressed += SqueezeTrigger;
+        weaponController.OnTriggerReleased += ReleaseTrigger;
+        weaponController.OnShootingAllowed += PutSafetyOff;
+        weaponController.OnShootingForbidden += PutSafetyOn;
         TriggerSqueezed = false;
         SafetyOn = false; // If not controlled by superior object, always allow to shoot
     }
 
+    private void OnDestroy()
+    {
+        weaponController.OnTriggerPressed -= SqueezeTrigger;
+        weaponController.OnTriggerReleased -= ReleaseTrigger;
+        weaponController.OnShootingAllowed -= PutSafetyOff;
+        weaponController.OnShootingForbidden -= PutSafetyOn;
+    }
+
+    private void PutSafetyOn() => SafetyOn = true;
+    private void PutSafetyOff() => SafetyOn = false;
+    private void SqueezeTrigger() => TriggerSqueezed = true;
+    private void ReleaseTrigger() => TriggerSqueezed = false;
+
     public void Update()
     {
-        switch (ShootType)
+        shotTimer += Time.deltaTime;
+        if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
         {
-            case WeaponShootType.Manual:
-                if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
+            if (shotTimer > WeaponStats.TimeBetweenShots)
+            {
+                if (isfirstShotInSeries)
                 {
-                    TryToSemiFire();
-                    TriggerSqueezed = false;
-                }
-                break;
-
-            case WeaponShootType.Automatic:
-                if (TriggerSqueezed && !SafetyOn && !weaponAmmo.IsReloading)
-                {
-                    TryToAutoFire();
+                    shotTimer = 0f;
+                    isfirstShotInSeries = false;
                 }
                 else
                 {
-                    StopSoundLoopIfPlaying();
-                    animator.SetBool("IsShooting", false);
-                    gunshot.Stop();
+                    shotTimer = shotTimer % WeaponStats.TimeBetweenShots;
                 }
-                break;
-        }
-    }
 
-    private void TryToSemiFire()
-    {
-        if (lastTimeShot + DelayBetweenShots < Time.time)
+                Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
+                ProjectileStandard newProjectile = Instantiate(WeaponStats.Projectile.Prefab, WeaponMuzzle.position + WeaponStats.Projectile.Velocity * shotTimer * WeaponMuzzle.forward, Quaternion.LookRotation(shotDirection));
+                newProjectile.Setup(ProjectileOwner, WeaponStats.Projectile);
+                newProjectile.Shoot();
+
+                muzzleFlashParticles.Play();
+                FMODUnity.RuntimeManager.PlayOneShot(WeaponStats.WeaponFireSFX, WeaponMuzzle.position);
+                weaponAmmo.Spend(1);
+            }
+
+            if (WeaponStats.ShootType == WeaponShootType.Manual)
+            {
+                TriggerSqueezed = false;
+            }
+        }
+        else if (!isfirstShotInSeries && shotTimer > WeaponStats.TimeBetweenShots)
         {
-            weaponFireSfxInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(WeaponMuzzle));
-            ShootProjectile();
-            Instantiate(singleMuzzleFlashInstance, WeaponMuzzle.position, WeaponMuzzle.rotation, WeaponMuzzle.transform);
-
-            FMODUnity.RuntimeManager.PlayOneShot(WeaponFireSFX, WeaponMuzzle.position);
-            weaponAmmo.Spend(1);
+            isfirstShotInSeries = true;
         }
-    }
-
-    // This class is a candidate for spliting into base class and inheriting classes.
-    private void TryToAutoFire()
-    {
-        if (lastTimeShot + DelayBetweenShots < Time.time)
-        {
-            weaponFireSfxInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(WeaponMuzzle)); // The sound doesn't follow its source every update, so far it hasn't been a problem.
-            ShootProjectile();
-
-            gunshot.Play();
-            StartSoundLoopIfSilent();
-            weaponAmmo.Spend(1);
-            animator.SetBool("IsShooting", true);
-        }
-    }
-
-    private void StartSoundLoopIfSilent()
-    {
-        weaponFireSfxInstance.getPlaybackState(out PLAYBACK_STATE playbackState);
-        if (playbackState == PLAYBACK_STATE.STOPPED || playbackState == PLAYBACK_STATE.STOPPING)
-        {
-            weaponFireSfxInstance.start();
-        }
-    }
-
-    private void StopSoundLoopIfPlaying()
-    {
-        weaponFireSfxInstance.getPlaybackState(out PLAYBACK_STATE playbackState);
-        if (playbackState == PLAYBACK_STATE.PLAYING)
-        {
-            weaponFireSfxInstance.stop(STOP_MODE.ALLOWFADEOUT);
-        }
-    }
-
-    private void ShootProjectile()
-    {
-        lastTimeShot = Time.time;
-        Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle.transform.forward);
-        ProjectileStandard newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position, Quaternion.LookRotation(shotDirection));
-        newProjectile.Setup(projectileOwner, projectileStats);
-        newProjectile.Shoot();
     }
 
     private Vector3 GetShotDirectionWithinSpread(Vector3 aimDirection)
     {
-        float spreadAngleRatio = BulletSpreadAngle / 180f;
+        float spreadAngleRatio = WeaponStats.BulletSpreadAngle / 180f;
         Vector3 spreadWorldDirection = Vector3.Slerp(aimDirection.normalized, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
         return spreadWorldDirection;
-    }
-
-    private void OnDisable()
-    {
-        StopSoundLoopIfPlaying();
-    }
-
-    private void OnDestroy()
-    {
-        weaponFireSfxInstance.stop(STOP_MODE.ALLOWFADEOUT);
     }
 }

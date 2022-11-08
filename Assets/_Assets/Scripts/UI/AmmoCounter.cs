@@ -16,6 +16,12 @@ public class AmmoCounter : MonoBehaviour
         playersWeaponsManager.OnSwitchedToWeapon += UpdateActiveWeapon;
     }
 
+    private void OnDestroy()
+    {
+        playersWeaponsManager.OnSwitchedToWeapon -= UpdateActiveWeapon;
+        activeWeaponAmmo.OnAmmoChange -= UpdateAmmoText;
+    }
+
     private void UpdateAmmoText(int number)
     {
         ammoCount.SetText(number.ToString());

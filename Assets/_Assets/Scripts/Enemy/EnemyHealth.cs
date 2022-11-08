@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class EnemyHealth : Damagable
 {
-    public IntVariable MaxHP;
+    public MaxHP MaxHP;
     public int CurrentHP;
 
     public UnityAction<int> OnHpChanged;
@@ -12,7 +12,7 @@ public class EnemyHealth : Damagable
 
     private void Start()
     {
-        CurrentHP = MaxHP.InitialValue;
+        CurrentHP = MaxHP.Value;
         OnHpChanged?.Invoke(CurrentHP);
     }
 

@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyWeaponController : WeaponController
 {
-    //[SerializeField]  // Debug trick, good to remember
     private Weapon enemyWeapon;
-    //[SerializeField]
     private EnemyController enemyController;
 
     private void Start()
@@ -14,12 +13,20 @@ public class EnemyWeaponController : WeaponController
         enemyWeapon = GetComponent<Weapon>();
         enemyController = enemyWeapon.GetOwner().GetComponent<EnemyController>();
 
-        enemyController.OnAttack += isAttacking => CheckAttack(isAttacking);
-        GameManager.Instance.OnPause += () => { base.OnShootingForbidden?.Invoke(); };
-        GameManager.Instance.OnWon += () => { base.OnShootingForbidden?.Invoke(); };
-        GameManager.Instance.OnLost += () => { base.OnShootingForbidden?.Invoke(); };
-        GameManager.Instance.OnUnpause += () => { base.OnShootingAllowed?.Invoke(); };
+        enemyController.OnAttack += CheckAttack;
+        GameManager.Instance.OnFreeze += Forbid;
+        GameManager.Instance.OnUnfreeze += Allow;
     }
+
+    private void OnDestroy()
+    {
+        enemyController.OnAttack -= CheckAttack;
+        GameManager.Instance.OnFreeze -= Forbid;
+        GameManager.Instance.OnUnfreeze -= Allow;
+    }
+
+    private void Forbid() => OnShootingForbidden?.Invoke();
+    private void Allow() => OnShootingAllowed?.Invoke();
 
     private void CheckAttack(bool isAttacking)
     {

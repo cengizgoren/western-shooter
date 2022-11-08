@@ -22,6 +22,17 @@ public class VictoryConditions : MonoBehaviour
         ActivateFirstObjective();
     }
 
+    private void OnDestroy()
+    {
+        foreach(Objective o in objectivesChain)
+        {
+            if (o != null)
+            {
+                o.OnCompletion -= ProgressToNextObjective;
+            }
+        }
+    }
+
     private void ActivateFirstObjective()
     {
         ObjectiveUI objectiveUI = iterator.Current.Activate();

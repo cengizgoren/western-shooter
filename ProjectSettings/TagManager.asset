@@ -17,12 +17,12 @@ TagManager:
   - Ground
   - Agent
   - RenderOnTop1
-  - RenderOnTop2
+  - Arrow
   - RenderOnTop3
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - LightCover
+  - RenderOnTop4
+  - Reticle
   - 
   - 
   - 

@@ -1,113 +1,79 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class TargetDetector : MonoBehaviour
+public partial class TargetDetector : MonoBehaviour
 {
     public bool TargetSighted = false;
-    //public bool TargetHeard = false;
     public bool TargetObstructed = false;
     public bool Alerted = false;
+    public bool TooFarAway = false;
 
-    [Header("Senses Range")]
+    [Space(10)]
     [Tooltip("Cone of player detection in from of an enemy agent. The value is doubled.")]
     public float SightDetectionAngle = 90f;
     public float SightDetectionRadius = 10f;
     public float HearingDetectionRadius = 5f;
-    public LayerMask CanBeSeen;
-
-    // Make it a struct or class Maybe?
-    [Header("Last known Position")]
-    public CharacterController PlayerController;
-    public bool isThereLastKnownPos = false;
-    public Vector3 LastKnownPosition;
-    public Vector3 LastKnownDirection;
-    public Vector3 LastKnownVeloctity;
+    public float FriendlySphereCastThickness = 0.5f;
+    public LayerMask ObstructsVision;
+    public LayerMask PreventsWeaponFire;
 
     [Header("Debug")]
-    public bool ShowFieldOfView = true;
-    public bool ShowHearingRadius = true;
-    public bool ShowLineToPlayer = true;
-    public bool ShowVisionRaycasts = true;
+    public DebugItem FieldOfView;
+    public DebugItem HearingRadius;
+    public DebugItem LineToPlayer;
+    public DebugItem VisionRaycasts;
+    public DebugItem WeaponCone;
+    public DebugItem FriendlyRaycasts;
 
-    private NavMeshAgent navMeshAgent;
+    private Transform playerTransform;
     private Messager messager;
-    private float time = 0;
+    private EnemyHealth enemyHealth;
 
     public void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        playerTransform = GetComponent<EnemyStateMachine>().PlayerController.transform;
+        enemyHealth = GetComponent<EnemyHealth>();
         messager = GetComponent<Messager>();
 
-        messager.OnAlert += () => Alerted = true;
-        GetComponent<EnemyHealth>().OnHpLost += () => Alerted = true;
+        enemyHealth.OnHpLost += Alert;
+        messager.OnAlert += Alert;
     }
 
-    private void Update() 
+    private void OnDestroy()
     {
-        if (time > 0.1f)
-        {
-            TargetSighted = IsPlayerInSightRange();
-            //TargetHeard = IsPlayerHearingRange();
-            TargetObstructed = IsPlayerObstructed();
-            time = 0;
-        }
-
-        time += Time.deltaTime;
+        enemyHealth.OnHpLost -= Alert;
+        messager.OnAlert -= Alert;
     }
 
-    public Vector3 GetNextPositionToSearch()
+    private void Alert() => Alerted = true;
+ 
+    public void Tick()
     {
-        // Make it less obvious by randomizing or by having a dedicated algo
-        RandomPointOnCircle(transform.position, 10f, out Vector3 result);
-        return result;
-    }
-
-    private bool RandomPointOnCircle(Vector3 center, float range, out Vector3 result)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized;
-            Vector3 randomPoint = center + new Vector3(randomPointOnCircle.x, 0f, randomPointOnCircle.y) * range;
-            NavMeshHit hit;
-            // Also check if line of sight is going to be maintained
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) && !navMeshAgent.Raycast(hit.position, out _))
-            {
-                Debug.DrawRay(hit.position, Vector3.up, Color.blue, 3f);
-                result = hit.position;
-                return true;
-            }
-        }
-        Debug.LogWarning("Could not find viable random point!");
-        result = Vector3.zero;
-        return false;
+        TargetSighted = IsPlayerInSightRange();
+        TargetObstructed = IsPlayerObstructed();
+        TooFarAway = Vector3.Distance(transform.position, playerTransform.position) > 20f;
     }
 
     private bool IsPlayerInSightRange()
     {
-        float distance = Vector3.Distance(transform.position, PlayerController.transform.position);
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
         if (distance < SightDetectionRadius)
         {
-            Vector3 toPlayer = PlayerController.transform.position - transform.position;
+            Vector3 toPlayer = playerTransform.position - transform.position;
             return Vector3.Angle(toPlayer, transform.forward) < SightDetectionAngle / 2f;
         }
         return false;
     }
 
-    //private bool IsPlayerHearingRange()
-    //{
-    //    return HearingDetectionRadius > Vector3.Distance(transform.position, PlayerController.transform.position);
-    //}
-
     private bool IsPlayerObstructed()
     {
         Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
-        Vector3 toPlayer = PlayerController.transform.position - transform.position;
+        Vector3 toPlayer = playerTransform.position - transform.position;
 
-        if (Physics.Raycast(position, toPlayer, out RaycastHit hit))
+        if (Physics.Raycast(position, toPlayer, out RaycastHit hit, Mathf.Infinity, ObstructsVision))
         {
-            if (ShowVisionRaycasts)
+            if (VisionRaycasts.Show)
             {
-                Debug.DrawRay(position, hit.point - position, Color.yellow, 1.0f);
+                Debug.DrawRay(position, hit.point - position, VisionRaycasts.Color, 1.0f);
                 Debug.LogWarningFormat("Enemy {0} direct line of sight check: {1}", transform.name, hit.collider.name);
             }
             if (hit.collider.gameObject.CompareTag("Player"))
@@ -118,41 +84,62 @@ public class TargetDetector : MonoBehaviour
         return true;
     }
 
-    public void SaveLastKnownPosAndDir()
+    public bool IsPlayerInSights()
     {
-        LastKnownPosition = PlayerController.transform.position;
-        LastKnownDirection = PlayerController.transform.forward.normalized;
-        LastKnownVeloctity = PlayerController.velocity;
-        isThereLastKnownPos = true;
+        float WeaponAimedAtPlayerAngle = 2f;
+        Vector3 toPlayer = playerTransform.position - transform.position;
+
+        return Vector3.Angle(toPlayer, transform.forward) < WeaponAimedAtPlayerAngle / 2f;
+    }
+
+    public bool IsFriendlyInSights()
+    {
+        Vector3 position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+
+        if (Physics.SphereCast(position, FriendlySphereCastThickness, transform.forward, out RaycastHit hit, Vector3.Distance(transform.position, playerTransform.position), PreventsWeaponFire))
+        {
+            if (FriendlyRaycasts.Show)
+            {
+                Debug.DrawRay(position, transform.forward * hit.distance, FriendlyRaycasts.Color, 1.0f);
+            }
+            return true;
+        }
+        return false;
     }
 
     private void OnDrawGizmos()
     {
-        if (isThereLastKnownPos)
-        {
-            Gizmos.color = Color.cyan;
-            DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownDirection);
+        //if (isThereLastKnownPos)
+        //{
+        //    Gizmos.color = Color.cyan;
+        //    DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownDirection);
 
-            Gizmos.color = Color.magenta;
-            DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownVeloctity);
+        //    Gizmos.color = Color.magenta;
+        //    DebugTools.Draw.GizmoArrow(LastKnownPosition, LastKnownVeloctity);
+        //}
+
+        if (FieldOfView.Show)
+        {
+            Gizmos.color = FieldOfView.Color;
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius, FieldOfView.Color);
         }
 
-        if (ShowFieldOfView)
+        if (WeaponCone.Show)
         {
-            Gizmos.color = Color.red;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, SightDetectionAngle, SightDetectionRadius);
+            Gizmos.color = WeaponCone.Color;
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 2f, 100f, WeaponCone.Color);
         }
 
-        if (ShowHearingRadius)
+        if (HearingRadius.Show)
         {
-            Gizmos.color = Color.blue;
-            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, HearingDetectionRadius);
+            Gizmos.color = HearingRadius.Color;
+            DebugTools.Draw.DrawWireArc(transform.position, transform.forward.normalized, 360f, HearingDetectionRadius, HearingRadius.Color);
         }
 
-        if (ShowLineToPlayer)
+        if (LineToPlayer.Show)
         {
-            Gizmos.color = Color.yellow;
-            Vector3 toPlayer = PlayerController.transform.position - transform.position;
+            Gizmos.color = LineToPlayer.Color;
+            Vector3 toPlayer = playerTransform.position - transform.position;
             Gizmos.DrawLine(transform.position, transform.position + toPlayer);
         }
     }
