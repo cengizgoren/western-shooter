@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class Attack : IState
 {
-    private readonly EnemyStateMachineEditor debug;
     private readonly Transform playerTransform;
     private readonly NavMeshAgent navMeshAgent;
     private readonly TargetDetector targetDetector;

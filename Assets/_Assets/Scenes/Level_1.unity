@@ -3276,7 +3276,7 @@ MonoBehaviour:
   - {fileID: 1817962346}
   - {fileID: 1365403265}
   - {fileID: 1363837309}
-  ObjectiveText: Eliminate Targets
+  ObjectiveText: Eliminate targets
 --- !u!1001 &558353952
 PrefabInstance:
   m_ObjectHideFlags: 0

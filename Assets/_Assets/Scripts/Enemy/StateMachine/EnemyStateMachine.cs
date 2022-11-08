@@ -1,7 +1,9 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [RequireComponent(typeof(TargetDetector))]
 [RequireComponent(typeof(TargetPicker))]
@@ -59,6 +61,7 @@ public class EnemyStateMachine : MonoBehaviour
         stateMachine.Tick();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (Application.isPlaying)
@@ -87,4 +90,5 @@ public class EnemyStateMachine : MonoBehaviour
             }
         }
     }
+#endif
 }

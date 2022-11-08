@@ -8,10 +8,15 @@ public class HealthBar : MonoBehaviour
 
     private PlayerHealth playerHealth;
 
-    private void Start()
+    private void Awake()
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
-        UpdateHealthBar();
+    }
+
+    private void Start()
+    {
+        healthBar.maxValue = playerHealth.MaxHP.Value;
+        healthBar.value = playerHealth.MaxHP.Value;
         playerHealth.OnHpLost += UpdateHealthBar;
     }
 
