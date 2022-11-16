@@ -11,7 +11,7 @@ public class EnemyWeaponController : WeaponController
     private void Start()
     {
         enemyWeapon = GetComponent<Weapon>();
-        enemyController = enemyWeapon.GetOwner().GetComponent<EnemyController>();
+        enemyController = enemyWeapon.Owner.GetComponent<EnemyController>();
 
         enemyController.OnAttack += CheckAttack;
         GameManager.Instance.OnFreeze += Forbid;

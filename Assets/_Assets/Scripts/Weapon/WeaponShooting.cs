@@ -38,7 +38,7 @@ public class WeaponShooting : MonoBehaviour
     {
         if (ProjectileOwner == null)
         {
-            ProjectileOwner = weapon.GetOwner();
+            ProjectileOwner = weapon.Owner;
         }
 
         weaponController.OnTriggerPressed += SqueezeTrigger;

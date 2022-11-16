@@ -2681,7 +2681,10 @@ GameObject:
   - component: {fileID: 1558666947524953042}
   - component: {fileID: 4426416452886711973}
   - component: {fileID: 8089292328698757584}
+  - component: {fileID: 3418738055795394756}
   - component: {fileID: 8089292328698757589}
+  - component: {fileID: 3165880583666161931}
+  - component: {fileID: 4793395553134929282}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
@@ -2800,6 +2803,18 @@ MonoBehaviour:
   AccelerationMultiplier: 0
   DeaccelerationMultiplier: 0
   ShowDebugVectors: 0
+--- !u!114 &3418738055795394756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a2b3e1ae7ac1488745f658ed36f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8089292328698757589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2813,12 +2828,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AngularSpeed: 720
-  CameraRoot: {fileID: 8147984661329040604}
   AimPoint: {fileID: 0}
-  DirectionArrow: {fileID: 6431496564097576865}
   OveraimFactor: 1.6
-  MouseWeight: 0.5
-  MaxCameraOffset: 20
+--- !u!114 &3165880583666161931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c03a892648281540a243518a7a22d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraRoot: {fileID: 8147984661329040604}
+  MouseWeight: 0.6
+  MaxCameraOffset: 25
+--- !u!114 &4793395553134929282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865fd1c847658d94c964d997e94d7b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DirectionArrow: {fileID: 6431496564097576865}
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0

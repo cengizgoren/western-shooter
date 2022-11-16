@@ -4,7 +4,6 @@ using TMPro;
 
 public class AmmoCounter : MonoBehaviour
 {
-    public Image weaponImage;
     public TextMeshProUGUI ammoCount;
 
     private WeaponArsenal playersWeaponsManager;
@@ -32,6 +31,5 @@ public class AmmoCounter : MonoBehaviour
         activeWeaponAmmo = weapon.GetComponent<WeaponAmmo>();
         UpdateAmmoText(activeWeaponAmmo.CurrentAmmo);
         activeWeaponAmmo.OnAmmoChange += UpdateAmmoText;
-        weaponImage.sprite = weapon.WeaponIconSprite;
     }
 }
