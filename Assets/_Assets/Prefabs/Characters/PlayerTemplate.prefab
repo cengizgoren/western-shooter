@@ -2677,14 +2677,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8143561313886008644}
-  - component: {fileID: 1558666947524953042}
   - component: {fileID: 8089292328698757585}
+  - component: {fileID: 1558666947524953042}
   - component: {fileID: 8089292328698757584}
   - component: {fileID: 8089292328698757589}
+  - component: {fileID: 3928391025034219905}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
-  - component: {fileID: 3928391025034219905}
   m_Layer: 0
   m_Name: PlayerTemplate
   m_TagString: Player
@@ -2735,18 +2735,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1558666947524953042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7b5f52b154bc8468f3f1c486c1ebdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &8089292328698757585
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2765,6 +2753,18 @@ CharacterController:
   m_SkinWidth: 0.04
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1558666947524953042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7b5f52b154bc8468f3f1c486c1ebdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8089292328698757584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2805,6 +2805,22 @@ MonoBehaviour:
   OveraimFactor: 1.6
   MouseWeight: 0.5
   MaxCameraOffset: 20
+--- !u!114 &3928391025034219905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda4f1fe184529d4aa0b12ecb8a2d6dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
+  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  MaxHpAsset: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
+  Invincible: 0
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2860,23 +2876,6 @@ MonoBehaviour:
   - m_Rig: {fileID: 8147984661816632822}
     m_Active: 1
   m_Effectors: []
---- !u!114 &3928391025034219905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda4f1fe184529d4aa0b12ecb8a2d6dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 0}
-  DestructionEffect: {fileID: 0}
-  MaxHP: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
-  HP: 0
-  Invincible: 0
 --- !u!1 &8148628684651371972
 GameObject:
   m_ObjectHideFlags: 0

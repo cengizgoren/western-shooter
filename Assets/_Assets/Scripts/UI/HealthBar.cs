@@ -15,14 +15,14 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        healthBar.maxValue = playerHealth.MaxHP.Value;
-        healthBar.value = playerHealth.MaxHP.Value;
+        healthBar.maxValue = playerHealth.MaxHP;
+        healthBar.value = playerHealth.MaxHP;
         playerHealth.OnHpLost += UpdateHealthBar;
     }
 
     private void UpdateHealthBar()
     {
-        healthBar.maxValue = playerHealth.MaxHP.Value;
+        healthBar.maxValue = playerHealth.MaxHP;
         healthBar.value = playerHealth.HP;
     }
 

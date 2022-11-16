@@ -5319,7 +5319,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-557774
+  m_Name: pb_Mesh-5060
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8608,6 +8608,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: MaxHpAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
+    - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: DestructionEffect
       value: 
       objectReference: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
@@ -8681,7 +8685,7 @@ PrefabInstance:
       objectReference: {fileID: 928194555}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8347
+      value: 8356
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576895, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Mesh
@@ -8743,6 +8747,10 @@ PrefabInstance:
       propertyPath: AimPoint
       value: 
       objectReference: {fileID: 135888646}
+    - target: {fileID: 8089292328698757589, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8089292328698757589, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: MouseWeight
       value: 0.6
