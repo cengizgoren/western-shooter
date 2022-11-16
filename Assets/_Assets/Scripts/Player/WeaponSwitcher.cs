@@ -172,8 +172,8 @@ public class WeaponSwitcher : MonoBehaviour
     public void SwitchWeaponAscending(bool ascendingOrder)
     {
         int newWeaponIndex = -1;
-        int closestSlotDistance = WeaponArsenal.WEAPON_SLOTS_NUMBER;
-        for (int i = 0; i < WeaponArsenal.WEAPON_SLOTS_NUMBER; i++)
+        int closestSlotDistance = WeaponArsenal.WeaponSlotsNumber;
+        for (int i = 0; i < WeaponArsenal.WeaponSlotsNumber; i++)
         {
             if (i != ActiveWeaponIndex && playerWeaponArsenal.GetWeaponAtSlotIndex(i) != null)
             {
@@ -227,7 +227,7 @@ public class WeaponSwitcher : MonoBehaviour
             distanceBetweenSlots = -1 * (toSlotIndex - fromSlotIndex);
 
         if (distanceBetweenSlots < 0)
-            distanceBetweenSlots = WeaponArsenal.WEAPON_SLOTS_NUMBER + distanceBetweenSlots;
+            distanceBetweenSlots = WeaponArsenal.WeaponSlotsNumber + distanceBetweenSlots;
 
         return distanceBetweenSlots;
     }

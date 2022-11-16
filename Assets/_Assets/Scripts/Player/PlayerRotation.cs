@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
-    public float AngularSpeed = 720f;
-    public Transform CameraRoot;
-    public Transform AimPoint;
-    public Transform DirectionArrow;
+    [SerializeField] private float AngularSpeed = 720f;
+    [SerializeField] private Transform CameraRoot;
+    [SerializeField] private Transform AimPoint;
+    [SerializeField] private Transform DirectionArrow;
 
-    [Space(10)]
-    [Range(1.0f, 5.0f)] public float OveraimFactor = 1.25f;
-    [Range(0.0f, 1.0f)] public float MouseWeight = 0.6f;
-    [Range(0.0f, 100.0f)] public float MaxCameraOffset = 25f;
+    [Range(1.0f, 5.0f)]
+    [SerializeField] private float OveraimFactor = 1.25f;
+
+    [Range(0.0f, 1.0f)]
+    [SerializeField] private float MouseWeight = 0.6f;
+
+    [Range(0.0f, 100.0f)]
+    [SerializeField] private float MaxCameraOffset = 25f;
 
     private Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
     private Vector3 forwardAim = new Vector3(0f, 0f, 0f);
-    private Vector2 pos;
-    private Vector3 MousePoint;
+    private Vector2 mouseScreenPosition;
+    private Vector3 mouseWorldPosition;
 
     private void Update()
     {
@@ -29,12 +33,12 @@ public class PlayerRotation : MonoBehaviour
 
     private void Rotation()
     {
-        pos = Controls.InputActions.Player.Look.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(pos);
+        mouseScreenPosition = Controls.InputActions.Player.Look.ReadValue<Vector2>();
+        Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
-            MousePoint = ray.GetPoint(rayDistance);
-            Vector3 playersDirectionToMouse = MousePoint - transform.position;
+            mouseWorldPosition = ray.GetPoint(rayDistance);
+            Vector3 playersDirectionToMouse = mouseWorldPosition - transform.position;
 
             if (Controls.InputActions.Player.enabled)
             {
@@ -50,8 +54,7 @@ public class PlayerRotation : MonoBehaviour
                 AimPoint.localPosition = forwardAim;
 
                 // Direction Arrow
-                DirectionArrow.position = new Vector3(MousePoint.x, DirectionArrow.position.y, MousePoint.z);
-                DirectionArrow.rotation = Quaternion.LookRotation(playersDirectionToMouse);
+                DirectionArrow.SetPositionAndRotation(new Vector3(mouseWorldPosition.x, DirectionArrow.position.y, mouseWorldPosition.z), Quaternion.LookRotation(playersDirectionToMouse));
             }
         }
     }

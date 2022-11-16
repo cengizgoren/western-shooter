@@ -7,16 +7,15 @@ using UnityEngine.InputSystem;
 
 public class WeaponArsenal : MonoBehaviour
 {
-
-    public UnityAction<Weapon> OnSwitchedToWeapon;
-    public static readonly int WEAPON_SLOTS_NUMBER = 9;
-
-    public Transform WeaponParent;
-    public List<Weapon> StartingWeapons = new List<Weapon>();
+    [SerializeField] private Transform WeaponParent;
+    [SerializeField] private List<Weapon> StartingWeapons = new List<Weapon>();
 
     private readonly Weapon[] weaponSlots = new Weapon[9];
     private Weapon activeWeapon;
     private int activeWeaponIndex = 0;
+
+    public static readonly int WeaponSlotsNumber = 9;
+    public UnityAction<Weapon> OnSwitchedToWeapon;
 
     private void Awake()
     {
@@ -67,7 +66,7 @@ public class WeaponArsenal : MonoBehaviour
 
     public void AddWeapon(Weapon weaponPrefab)
     {
-        for (int i = 0; i < WEAPON_SLOTS_NUMBER; i++)
+        for (int i = 0; i < WeaponSlotsNumber; i++)
         {
             if (weaponSlots[i] == null)
             {
