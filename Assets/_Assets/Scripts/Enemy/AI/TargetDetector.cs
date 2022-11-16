@@ -26,12 +26,12 @@ public partial class TargetDetector : MonoBehaviour
 
     private Transform playerTransform;
     private Messager messager;
-    private EnemyHealth enemyHealth;
+    private Health enemyHealth;
 
     public void Awake()
     {
         playerTransform = GetComponent<EnemyStateMachine>().PlayerController.transform;
-        enemyHealth = GetComponent<EnemyHealth>();
+        enemyHealth = GetComponent<Health>();
         messager = GetComponent<Messager>();
 
         enemyHealth.OnHpLost += Alert;

@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Task))]
 public class KillTask : Task
 {
-    public List<EnemyHealth> KillList;
+    public List<Health> KillList;
     public string ObjectiveText;
 
     private int killsCurrent;
@@ -23,7 +23,7 @@ public class KillTask : Task
 
     private void OnDestroy()
     {
-        foreach (EnemyHealth target in KillList)
+        foreach (Health target in KillList)
         {
             if (target != null)
             {
@@ -34,7 +34,7 @@ public class KillTask : Task
 
     public override ObjectiveUI Activate()
     {
-        foreach (EnemyHealth target in KillList)
+        foreach (Health target in KillList)
         {
             target.OnHpDepleted += TargetKilled;
         }

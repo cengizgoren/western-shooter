@@ -2679,9 +2679,9 @@ GameObject:
   - component: {fileID: 8143561313886008644}
   - component: {fileID: 8089292328698757585}
   - component: {fileID: 1558666947524953042}
+  - component: {fileID: 4426416452886711973}
   - component: {fileID: 8089292328698757584}
   - component: {fileID: 8089292328698757589}
-  - component: {fileID: 3928391025034219905}
   - component: {fileID: 1583787653248412801}
   - component: {fileID: 8089292328698757614}
   - component: {fileID: 8089292328698757615}
@@ -2765,6 +2765,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7b5f52b154bc8468f3f1c486c1ebdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4426416452886711973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed471ac237998241805768f927c1789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHpAsset: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
+  Invincible: 0
+  DoNotDestroy: 1
+  ImpactEffectAsset: {fileID: 11400000, guid: b149a7a8fbbcc134aa9101fb391b3f1e, type: 2}
+  DestructionEffectAsset: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
 --- !u!114 &8089292328698757584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,9 +2800,6 @@ MonoBehaviour:
   AccelerationMultiplier: 0
   DeaccelerationMultiplier: 0
   ShowDebugVectors: 0
-  Velocity: {x: 0, y: 0, z: 0}
-  TargetVelocity: {x: 0, y: 0, z: 0}
-  Acceleration: 0
 --- !u!114 &8089292328698757589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2805,22 +2819,6 @@ MonoBehaviour:
   OveraimFactor: 1.6
   MouseWeight: 0.5
   MaxCameraOffset: 20
---- !u!114 &3928391025034219905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148622678007600720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda4f1fe184529d4aa0b12ecb8a2d6dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
-  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
-  MaxHpAsset: {fileID: 11400000, guid: 29419648a0d0aa44093af656267d4a3e, type: 2}
-  Invincible: 0
 --- !u!114 &1583787653248412801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,7 +3285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8150701469316757432
 Transform:
   m_ObjectHideFlags: 0
@@ -5127,7 +5125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8143533822855171454
 Transform:
   m_ObjectHideFlags: 0

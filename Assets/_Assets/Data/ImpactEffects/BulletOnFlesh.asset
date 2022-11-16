@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8fa2287552436c448d58f51b9d55076, type: 3}
-  m_Name: BulletOnDirt
+  m_Name: BulletOnFlesh
   m_EditorClassIdentifier: 
-  ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
-  SurfaceVFX: {fileID: 1643851402782444, guid: 4f703a1da613efc43b08b1d2bdcfd49f, type: 3}
-  SurfaceSFX:
+  VFX: {fileID: 1026642433091512, guid: ed67c2cb8e3a7fb418c6fbb1b001dce2, type: 3}
+  SFX:
     Guid:
-      Data1: 1022849010
-      Data2: 1132644425
-      Data3: -559524713
-      Data4: 597436626
-    Path: event:/Impacts/Stone Impact
+      Data1: -2071995192
+      Data2: 1287199111
+      Data3: 442495923
+      Data4: 1229083977
+    Path: event:/Impacts/Flesh Impact

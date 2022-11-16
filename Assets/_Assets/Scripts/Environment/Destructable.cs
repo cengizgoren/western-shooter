@@ -6,9 +6,11 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshObstacle))]
-public class Destructable : Damagable
+public class Destructable : MonoBehaviour
 {
     public UnityAction OnHealthDepleted;
+
+    public DestructionEffect DestructionEffect;
 
     public MaxHP MaxHP;
     public bool GodMode = true;
@@ -34,12 +36,12 @@ public class Destructable : Damagable
         }
     }
 
-    public override int GetCurrentHP()
+    public  int GetCurrentHP()
     {
         return currentHealthPoints;
     }
 
-    public override void DealDamage(int amount)
+    public  void DealDamage(int amount)
     {
         if (!GodMode)
         {

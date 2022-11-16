@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     public UnityAction OnRestart;
 
     private Player p;
-    private PlayerHealth c;
+    private Health c;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             if (GameState == GameState.Active)
             {
                 p = FindObjectOfType<Player>();
-                c = p.GetComponent<PlayerHealth>();
+                c = p.GetComponent<Health>();
                 c.OnHpDepleted += Lose;
             }
             DontDestroyOnLoad(gameObject);
@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour
 
         CurrentLevelID = level;
         p = FindObjectOfType<Player>();
-        c = p.GetComponent<PlayerHealth>();
+        c = p.GetComponent<Health>();
         c.OnHpDepleted += Lose;
 
         Cursor.lockState = CursorLockMode.Confined;

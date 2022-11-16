@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fa2287552436c448d58f51b9d55076, type: 3}
   m_Name: DefaultImpactEffect
   m_EditorClassIdentifier: 
-  ImpactType: {fileID: 11400000, guid: a87f9f5ab564b0d4f85af67e0f885011, type: 2}
-  SurfaceVFX: {fileID: 1067536016464596, guid: 57e18706e2792ff4bb5561ed74b796e2, type: 3}
-  SurfaceSFX:
+  VFX: {fileID: 1450638143650814, guid: 9fe1ddc0da27cb44ebeeb8c2befa68bd, type: 3}
+  SFX:
     Guid:
-      Data1: -1088727964
-      Data2: 1293853852
-      Data3: -502771292
-      Data4: 1722123226
-    Path: event:/Impacts/Metal Impact
+      Data1: 1022849010
+      Data2: 1132644425
+      Data3: -559524713
+      Data4: 597436626
+    Path: event:/Impacts/Stone Impact

@@ -6,5 +6,4 @@ using UnityEngine;
 public class Defaults : ScriptableObject
 {
     public ImpactEffect ImpactEffect;
-    public ImpactType ImpactType;
 }

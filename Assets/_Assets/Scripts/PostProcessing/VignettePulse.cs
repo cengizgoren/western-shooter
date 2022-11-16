@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 public class VignettePulse : MonoBehaviour
 {
     [SerializeField] private Volume GlobalVolume;
-    [SerializeField] private PlayerHealth playerHP;
+    [SerializeField] private Health playerHP;
     [SerializeField] private Color VignetteColor;
     [SerializeField][Range(0f, 1f)] private float VignettePeakIntensity = 0.25f;
     [SerializeField][Range(0f, 2f)] private float VignetteAttackTime = 0.1f;

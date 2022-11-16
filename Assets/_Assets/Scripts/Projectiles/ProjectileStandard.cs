@@ -10,9 +10,9 @@ public class ProjectileStandard : MonoBehaviour
     {
         public Collider Collider;
         public int Damage;
-        public Damagable Damagable = null;
+        public Health Damagable = null;
 
-        public DamagableObject(Collider collider, int damage, Damagable damagable)
+        public DamagableObject(Collider collider, int damage, Health damagable)
         {
             Collider = collider;
             Damage = damage;
@@ -23,14 +23,13 @@ public class ProjectileStandard : MonoBehaviour
         {
             if (Damagable != null && Damage > 0)
             {
-                Damagable.DealDamage(Damage);
+                Damagable.Damage(Damage);
             }
         }
     }
 
     [SerializeField] private Transform Root;
     [SerializeField] private Transform Tip;
-    [SerializeField] private ImpactType ImpactType;
     [SerializeField] private ImpactEffect FallbackImpactEffect;
 
     [Space(10)]
@@ -137,22 +136,15 @@ public class ProjectileStandard : MonoBehaviour
 
     private void OnHit(Vector3 point, Vector3 normal, Collider collider)
     {
-        if (collider.TryGetComponent(out Damagable damagable2))
+        if (collider.TryGetComponent(out Health damagable2))
         {
-            damagable2?.DealDamage(ImpactDamage);
-            GameObject vfx = FallbackImpactEffect.SurfaceVFX;
-            EventReference sfx = FallbackImpactEffect.SurfaceSFX;
+            damagable2?.Damage(ImpactDamage);
+            GameObject vfx = FallbackImpactEffect.VFX;
+            EventReference sfx = FallbackImpactEffect.SFX;
 
-            foreach (ImpactEffect impactEffect in damagable2.surface.ImpactEffects)
-            {
-                if (ImpactType == impactEffect.ImpactType)
-                {
-                    vfx = impactEffect.SurfaceVFX;
-                    sfx = impactEffect.SurfaceSFX;
-                }
-                break;
-            }
-
+            vfx = damagable2.ImpactEffect.VFX;
+            sfx = damagable2.ImpactEffect.SFX;
+                
             GameObject impactVfxInstance = Instantiate(vfx, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
             RuntimeManager.PlayOneShot(sfx, transform.position);
             
@@ -162,8 +154,8 @@ public class ProjectileStandard : MonoBehaviour
             }
         } else
         {
-            Instantiate(GameAssets.Instance.Defaults.ImpactEffect.SurfaceVFX, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
-            RuntimeManager.PlayOneShot(GameAssets.Instance.Defaults.ImpactEffect.SurfaceSFX, transform.position);
+            Instantiate(GameAssets.Instance.Defaults.ImpactEffect.VFX, point, Quaternion.LookRotation(Vector3.Reflect(transform.forward, normal)));
+            RuntimeManager.PlayOneShot(GameAssets.Instance.Defaults.ImpactEffect.SFX, transform.position);
         }
 
         Vector3 inFrontPosition = point + normal;
@@ -171,7 +163,7 @@ public class ProjectileStandard : MonoBehaviour
         if (IsExplosive)
         {
             Collider[] hitByExplosionColliders = Physics.OverlapSphere(inFrontPosition, ExplosionRange, HittableLayers);
-            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<Damagable>()));
+            Dictionary<int, DamagableObject> collidersDictionary = hitByExplosionColliders.ToDictionary(x => x.GetInstanceID(), x => new DamagableObject(x, -1, x.GetComponent<Health>()));
 
             if (ShowExplosionRadius)
             {
@@ -190,7 +182,7 @@ public class ProjectileStandard : MonoBehaviour
                     int id = raycastHit.collider.GetInstanceID();
                     if (expolsionDamagePointsLeft > 0 && collidersDictionary[id].Damagable != null)
                     {
-                        int damageToDeal = Mathf.Min(collidersDictionary[id].Damagable.GetCurrentHP(), expolsionDamagePointsLeft);
+                        int damageToDeal = Mathf.Min(collidersDictionary[id].Damagable.HP, expolsionDamagePointsLeft);
                         collidersDictionary[id].Damage = Mathf.Max(collidersDictionary[id].Damage, damageToDeal);
                         expolsionDamagePointsLeft -= damageToDeal;
                     }
