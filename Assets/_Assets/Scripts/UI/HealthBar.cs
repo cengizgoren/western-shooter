@@ -4,14 +4,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider healthBar;
-
-    private PlayerHealth playerHealth;
-
-    private void Awake()
-    {
-        playerHealth = FindObjectOfType<PlayerHealth>();
-    }
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private PlayerHealth playerHealth;
 
     private void Start()
     {

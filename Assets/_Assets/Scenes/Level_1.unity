@@ -8599,22 +8599,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
-      propertyPath: surface
-      value: 
-      objectReference: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
-    - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
-      propertyPath: Invincible
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
-      propertyPath: MaxHpAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: edafedef3963e694fa4291dae2e9ffe8, type: 2}
-    - target: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
-      propertyPath: DestructionEffect
-      value: 
-      objectReference: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
     - target: {fileID: 4816328661789272516, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -8685,7 +8669,7 @@ PrefabInstance:
       objectReference: {fileID: 928194555}
     - target: {fileID: 6431496564097576892, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_VersionIndex
-      value: 8356
+      value: 8368
       objectReference: {fileID: 0}
     - target: {fileID: 6431496564097576895, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
       propertyPath: m_Mesh
@@ -11056,6 +11040,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8143561313886008644, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
   m_PrefabInstance: {fileID: 1434970338}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1967054414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3928391025034219905, guid: 23c2e6ec4d851a14aacc109f31dda78f, type: 3}
+  m_PrefabInstance: {fileID: 1434970338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda4f1fe184529d4aa0b12ecb8a2d6dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1980486107
 GameObject:
   m_ObjectHideFlags: 0
@@ -12933,6 +12928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2893999}
+  playerHealth: {fileID: 1967054414}
 --- !u!222 &2536905934447583736
 CanvasRenderer:
   m_ObjectHideFlags: 0
