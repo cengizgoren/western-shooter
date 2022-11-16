@@ -4,24 +4,20 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class PostProcessing : MonoBehaviour
+public class VignettePulse : MonoBehaviour
 {
-    public Volume volume;
-
-    [Header("Vignette")]
-    [Range(0f, 1f)] public float VignettePeakIntensity = 0.25f;
-    [Range(0f, 2f)] public float VignetteAttackTime = 0.1f;
-
-    public Color VignetteColor;
+    [SerializeField] private Volume GlobalVolume;
+    [SerializeField] private PlayerHealth playerHP;
+    [SerializeField] private Color VignetteColor;
+    [SerializeField][Range(0f, 1f)] private float VignettePeakIntensity = 0.25f;
+    [SerializeField][Range(0f, 2f)] private float VignetteAttackTime = 0.1f;
 
     private Vignette vignette;
-    private PlayerHealth playerHP;
-
-    private Tween attack;
+    private Tween tween;
 
     private void Start()
     {
-        volume.profile.TryGet<Vignette>(out vignette);
+        GlobalVolume.profile.TryGet<Vignette>(out vignette);
 
         if (vignette)
         {
@@ -29,18 +25,16 @@ public class PostProcessing : MonoBehaviour
             vignette.color.value = VignetteColor;
 
             // Cannot easly change values from this premade tween, it works, but maybe I should make this tween at runtime
-            attack = DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, VignettePeakIntensity, VignetteAttackTime)
+            tween = DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, VignettePeakIntensity, VignetteAttackTime)
                 .SetEase(Ease.InOutCubic)
                 .SetAutoKill(false)
                 .Pause();
-            attack.OnComplete(() => attack.SmoothRewind());
+            tween.OnComplete(() => tween.SmoothRewind());
         }
         else
         {
             Debug.LogErrorFormat("{0} - Vigniette not found", gameObject.name);
         }
-
-        playerHP = FindObjectOfType<PlayerHealth>();
 
         if (playerHP)
         {
@@ -54,23 +48,24 @@ public class PostProcessing : MonoBehaviour
 
     private void HurtVignettePulse()
     {
-        if (attack.IsPlaying())
+        if (tween.IsPlaying())
         {
-            if (attack.IsBackwards())
+            if (tween.IsBackwards())
             {
-                attack.Flip();
+                tween.Flip();
             }
         }
         else
         {
-            attack.Restart();
+            tween.Restart();
         }
     }
+
     private void OnDestroy()
     {
         if (playerHP)
             playerHP.OnHpLost -= HurtVignettePulse;
 
-        attack.Kill();
+        tween.Kill();
     }
 }
