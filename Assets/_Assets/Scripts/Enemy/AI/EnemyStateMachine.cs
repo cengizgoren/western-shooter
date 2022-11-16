@@ -28,14 +28,15 @@ public class EnemyStateMachine : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         var targetPicker = GetComponent<TargetPicker>();
         var enemyController = GetComponent<EnemyController>();
+        var enemyAim = GetComponent<EnemyAim>();
         var messager = GetComponent<Messager>();
 
         stateMachine = new StateMachine();
 
         var idle = new Idle(messager);
         var chase = new Chase(PlayerController.transform, navMeshAgent, targetPicker);
-        var attack = new Attack(targetDetector, enemyController, PlayerController.transform, navMeshAgent);
-        var attackReposition = new AttackReposition(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent);
+        var attack = new Attack(targetDetector, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
+        var attackReposition = new AttackReposition(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
 
         At(idle, chase, TargetDetected());
         At(idle, attackReposition, TargetContact());

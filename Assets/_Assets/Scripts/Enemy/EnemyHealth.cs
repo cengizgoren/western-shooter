@@ -26,9 +26,12 @@ public class EnemyHealth : Damagable
         CurrentHP -= amount;
         OnHpChanged?.Invoke(CurrentHP);
         OnHpLost?.Invoke();
+
         if (CurrentHP <= 0)
         {
             OnHpDepleted?.Invoke();
+            Instantiate(DestructionEffect.DestructionVFX, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }

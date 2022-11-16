@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37771cb588f96ad4c96d47926a5bcb10, type: 3}
+  m_Name: FleshDestructionEffect
+  m_EditorClassIdentifier: 
+  DestructionVFX: {fileID: 1277154925287174, guid: 3b517eddec185dd4a830743a742ad00b, type: 3}
+  DestructionSFX:
+    Guid:
+      Data1: -2071995192
+      Data2: 1287199111
+      Data3: 442495923
+      Data4: 1229083977
+    Path: event:/Impacts/Flesh Impact

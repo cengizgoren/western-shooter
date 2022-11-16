@@ -2647,14 +2647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453417828cea6654189baf2abf2b4f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationOrdered: 0
-  timeStartedWeaponSwitch: 0
-  _startingRotation: {x: 0, y: 0, z: 0, w: 0}
-  _finalRotation: {x: 0, y: 0, z: 0, w: 0}
-  DeathVfx: {fileID: 1277154925287174, guid: 3b517eddec185dd4a830743a742ad00b, type: 3}
-  DeathVfxSpawnOffset: 1
-  DeathVfxLifetime: 5
-  DeathVfxRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
 --- !u!114 &7529303639434750992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2684,7 +2676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surface: {fileID: 11400000, guid: c40815ecebcf86940b37ac4ea2f4981f, type: 2}
-  DestructionEffect: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  DestructionEffect: {fileID: 11400000, guid: e5ab225bf53cee14abec07347287972b, type: 2}
   MaxHP: {fileID: 11400000, guid: dbd5ddb52adb5a44eaf43c024402ac8c, type: 2}
   CurrentHP: 0
 --- !u!114 &8555749047885385819
