@@ -1,8 +1,7 @@
-// MoveTo.cs
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DummyEnemyAnimator : MonoBehaviour
+public class EnemyAnimator : MonoBehaviour
 {
     private Animator animator;
     private NavMeshAgent agent;
