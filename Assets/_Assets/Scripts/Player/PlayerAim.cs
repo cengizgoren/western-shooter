@@ -1,35 +1,39 @@
 using UnityEngine;
-using UnityEngine.Windows;
 
-public class PlayerAim : MonoBehaviour
+public class PlayerAim : Aim
 {
-    [SerializeField] private float AngularSpeed = 720f;
-    [SerializeField] private Transform AimPoint;
-    [SerializeField][Range(1.0f, 5.0f)] private float OveraimFactor = 1.25f;
+    [SerializeField] private Transform CameraRoot;
+    [SerializeField] private Transform DirectionArrow;
 
-    private Vector3 forwardAim = new Vector3(0f, 0f, 0f);
+    [Range(0.0f, 1.0f)]
+    [SerializeField] private float MouseWeight = 0.6f;
 
-    private PlayerInput input;
+    [Range(0.0f, 100.0f)]
+    [SerializeField] private float MaxCameraOffset = 25f;
 
     private void Awake()
     {
-        input = GetComponent<PlayerInput>();
+        input = GetComponent<Input>();
         AimPoint.localPosition = Vector3.zero;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        Rotation();
+        if (input.IsAimingAllowed)
+        {
+            Camera();
+            Rotate();
+            Arrow();
+        }
     }
 
-    private void Rotation()
+    private void Camera()
     {
-        // Rotation
-        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(input.DirectionToMouse.x, 0f, input.DirectionToMouse.z), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * AngularSpeed);
+        CameraRoot.position = transform.position + Vector3.ClampMagnitude(MouseWeight * input.DirectionToMouse, MaxCameraOffset);
+    }
 
-        // Aim Point
-        forwardAim.z = input.DirectionToMouse.magnitude * OveraimFactor;
-        AimPoint.localPosition = forwardAim;
+    private void Arrow()
+    {
+        DirectionArrow.SetPositionAndRotation(new Vector3(input.MouseWorldPosition.x, DirectionArrow.position.y, input.MouseWorldPosition.z), targetRotation);
     }
 }

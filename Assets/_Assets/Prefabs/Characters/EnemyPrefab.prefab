@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 8143561313886008644}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1649686958292408916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6795687853366788311}
+  m_Layer: 0
+  m_Name: Mouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6795687853366788311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649686958292408916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8143561313886008644}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832895145900129485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,6 +2606,7 @@ GameObject:
   - component: {fileID: 8143561313886008644}
   - component: {fileID: 1545839327076763308}
   - component: {fileID: 5175585789158803026}
+  - component: {fileID: -182673099191696694}
   - component: {fileID: 7529303639434750992}
   - component: {fileID: 8555749047885385819}
   - component: {fileID: 6220337005894232667}
@@ -2632,6 +2664,7 @@ Transform:
   - {fileID: 7927277942824863464}
   - {fileID: 6431496564097576865}
   - {fileID: 1577515978293641278}
+  - {fileID: 6795687853366788311}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2661,8 +2694,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHpAsset: {fileID: 11400000, guid: dbd5ddb52adb5a44eaf43c024402ac8c, type: 2}
   Invincible: 0
+  DoNotDestroy: 0
   ImpactEffectAsset: {fileID: 11400000, guid: b149a7a8fbbcc134aa9101fb391b3f1e, type: 2}
   DestructionEffectAsset: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+--- !u!114 &-182673099191696694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148622678007600720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7d1eff7dc00c9469191ff832e64155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mouse: {fileID: 6795687853366788311}
+  AllowAiming: 0
+  Target: {fileID: 0}
+  DefaultTarget: {fileID: 1577515978293641278}
 --- !u!114 &7529303639434750992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2675,10 +2725,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774d3421ef8e4c34ea8491caa3df3b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultTarget: {fileID: 1577515978293641278}
-  Target: {fileID: 1577515978293641278}
   AimPoint: {fileID: 7927277942824863464}
-  RotationSpeed: 360
+  AngularSpeed: 360
+  OveraimFactor: 1
 --- !u!114 &8555749047885385819
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class EnemyStateMachine : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         var targetPicker = GetComponent<TargetPicker>();
         var enemyController = GetComponent<EnemyController>();
-        var enemyAim = GetComponent<EnemyAim>();
+        var enemyAim = GetComponent<EnemyInput>();
         var messager = GetComponent<Messager>();
 
         stateMachine = new StateMachine();

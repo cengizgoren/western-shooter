@@ -11,16 +11,16 @@ public class AttackReposition : IState
     private TargetDetector targetDetector;
     private TargetPicker targetPicker;
     private EnemyController enemyController;
-    private EnemyAim enemyAim;
+    private EnemyInput enemyInput;
 
-    public AttackReposition(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyAim enemyAim)
+    public AttackReposition(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
     {
         this.playerTransform = playerTransform;
         this.targetPicker = targetPicker;
         this.navMeshAgent = navMeshAgent;
         this.targetDetector = targetDetector;
         this.enemyController = enemyController;
-        this.enemyAim = enemyAim;
+        this.enemyInput = enemyInput;
     }
 
     public void Tick()
@@ -49,13 +49,13 @@ public class AttackReposition : IState
         navMeshAgent.ResetPath();
         navMeshAgent.speed = 4f;
         navMeshAgent.updateRotation = false;
-        enemyAim.SetTargetTransform(playerTransform);
+        enemyInput.SetTargetTransform(playerTransform);
     }
 
     public void OnExit()
     {
         enemyController.OnAttack?.Invoke(false);
-        enemyAim.ResetTargetTransform();
+        enemyInput.ResetTargetTransform();
     }
 
 }

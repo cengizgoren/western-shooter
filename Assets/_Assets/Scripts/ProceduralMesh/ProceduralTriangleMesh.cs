@@ -26,7 +26,7 @@ public class ProceduralTriangleMesh : MonoBehaviour
     {
         Vector3[] vertices = mesh.vertices;
 
-        vertices[2] = AimPoint.transform.localPosition;
+        vertices[2] = transform.InverseTransformPoint(AimPoint.position);
 
         mesh.vertices = vertices;
 
