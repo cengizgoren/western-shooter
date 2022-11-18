@@ -38,14 +38,14 @@ public class EnemyStateMachine : MonoBehaviour
         var attack = new Attack(targetDetector, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
         var attackReposition = new AttackReposition(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
 
-        At(idle, chase, TargetDetected());
-        At(idle, attackReposition, TargetContact());
-        At(chase, attackReposition, TargetContact());
-        At(attack, chase, TargetObstructed());
-        At(attackReposition, attack, ReachedTheirDestination());
-        At(attack, attackReposition, TargetTooFarAway());
+        At(new Vector2(0, 1), idle, chase, TargetDetected());
+        At(new Vector2(0, 1), idle, attackReposition, TargetContact());
+        At(new Vector2(0, 1), chase, attackReposition, TargetContact());
+        At(new Vector2(0, 1), attack, chase, TargetObstructed());
+        At(new Vector2(0, 1), attackReposition, attack, ReachedTheirDestination());
+        At(new Vector2(0, 1), attack, attackReposition, TargetTooFarAway());
 
-        void At(IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition);
+        void At(Vector2 reactionTimeRange, IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition, reactionTimeRange);
 
         Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.Alerted;
         Func<bool> TargetContact() => () => targetDetector.TargetSighted && !targetDetector.TargetObstructed;
@@ -59,7 +59,7 @@ public class EnemyStateMachine : MonoBehaviour
     public void Tick()
     {
         targetDetector.Tick();
-        stateMachine.Tick();
+        stateMachine.Tick(Time.deltaTime);
     }
 
 #if UNITY_EDITOR
