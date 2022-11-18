@@ -1,6 +1,7 @@
 using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Task))]
@@ -17,7 +18,8 @@ public class KillTask : Task
     {
         if (KillList == null || KillList.Capacity == 0)
         {
-            Debug.LogErrorFormat("There are no designated targets in {0}", name);
+            //Debug.LogErrorFormat("There are no designated targets in {0}", name);
+            KillList = FindObjectsOfType<EnemyController>().Select(enemy => enemy.GetComponent<Health>()).ToList();
         }
     }
 
