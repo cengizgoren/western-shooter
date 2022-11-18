@@ -2695,8 +2695,8 @@ MonoBehaviour:
   MaxHpAsset: {fileID: 11400000, guid: dbd5ddb52adb5a44eaf43c024402ac8c, type: 2}
   Invincible: 0
   DoNotDestroy: 0
-  ImpactEffectAsset: {fileID: 11400000, guid: b149a7a8fbbcc134aa9101fb391b3f1e, type: 2}
-  DestructionEffectAsset: {fileID: 11400000, guid: 3c511978fd114764aa45222d8af35d22, type: 2}
+  ImpactEffectAsset: {fileID: 11400000, guid: 37d373ca754128a42b08cfaac8455282, type: 2}
+  DestructionEffectAsset: {fileID: 11400000, guid: e5ab225bf53cee14abec07347287972b, type: 2}
 --- !u!114 &-182673099191696694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,7 +2726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AimPoint: {fileID: 7927277942824863464}
-  AngularSpeed: 360
+  AngularSpeed: 270
   OveraimFactor: 1
 --- !u!114 &8555749047885385819
 MonoBehaviour:
@@ -2814,7 +2814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RandomPointsCount: 10
-  RandomCircleSize: 10
+  RandomCircleSize: 30
   RandomRangeFromCircle: 2
   ObstructsDirectPathClearCheck:
     serializedVersion: 2

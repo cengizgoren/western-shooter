@@ -27,20 +27,11 @@ public class StateMachine
 
     private static List<Transition> EmptyTransitions = new List<Transition>(0);
 
-    private float time = 0f;
-
-    public void Tick(float deltaTime)
+    public void Tick()
     {
         var transition = GetTransition();
         if (transition != null)
-        {
-            if (time > transition.ReactionTimeRange.y)
-            {
-                SetState(transition.To);
-                time = 0f;
-            }
-            time += deltaTime;
-        }
+            SetState(transition.To);
 
         CurrentState?.Tick();
     }
@@ -60,7 +51,7 @@ public class StateMachine
         CurrentState.OnEnter();
     }
 
-    public void AddTransition(IState from, IState to, Func<bool> predicate, Vector2 reactionTimeRange)
+    public void AddTransition(IState from, IState to, Func<bool> predicate)
     {
         if (_transitions.TryGetValue(from.GetType(), out var transitions) == false)
         {
@@ -68,25 +59,23 @@ public class StateMachine
             _transitions[from.GetType()] = transitions;
         }
 
-        transitions.Add(new Transition(to, predicate, reactionTimeRange));
+        transitions.Add(new Transition(to, predicate));
     }
 
-    public void AddAnyTransition(IState state, Func<bool> predicate, Vector2 reactionTimeRange)
+    public void AddAnyTransition(IState state, Func<bool> predicate)
     {
-        _anyTransitions.Add(new Transition(state, predicate, reactionTimeRange));
+        _anyTransitions.Add(new Transition(state, predicate));
     }
 
     private class Transition
     {
         public Func<bool> Condition { get; }
         public IState To { get; }
-        public Vector2 ReactionTimeRange { get; }
 
-        public Transition(IState to, Func<bool> condition, Vector2 reactionTimeRange)
+        public Transition(IState to, Func<bool> condition)
         {
             To = to;
             Condition = condition;
-            ReactionTimeRange = reactionTimeRange;
         }
     }
 

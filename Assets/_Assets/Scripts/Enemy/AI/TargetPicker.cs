@@ -18,7 +18,17 @@ public class TargetPicker : MonoBehaviour
         playerTransform = GetComponent<EnemyStateMachine>().PlayerController.transform;
     }
 
+    public bool TryFindPositionAwayFromPlayer(out Vector3 pos)
+    {
+        return TryFindPosition(-(playerTransform.position - transform.position), out pos);
+    }
+
     public bool TryFindPositionCloseToPlayer(out Vector3 closesPoint)
+    {
+        return TryFindPosition(playerTransform.position, out closesPoint);
+    }
+
+    public bool TryFindPosition(Vector3 position, out Vector3 closesPoint)
     {
         bool atLeastOnePointFound = false;
         bool unobstructedPointFound = false;
@@ -27,10 +37,10 @@ public class TargetPicker : MonoBehaviour
 
         for (int i = 0; i < RandomPointsCount; i++)
         {
-            if (RandomPointOnCircle(playerTransform.position, RandomCircleSize, RandomRangeFromCircle, out Vector3 randomPoint))
+            if (RandomPointOnCircle(position, RandomCircleSize, RandomRangeFromCircle, out Vector3 randomPoint))
             {
-                Vector3 dirToPoint = randomPoint - playerTransform.position;
-                if (!Physics.Raycast(playerTransform.position, dirToPoint, dirToPoint.magnitude, ObstructsDirectPathClearCheck))
+                Vector3 dirToPoint = randomPoint - position;
+                if (!Physics.Raycast(position, dirToPoint, dirToPoint.magnitude, ObstructsDirectPathClearCheck))
                 {
                     Debug.DrawRay(randomPoint, Vector3.up, Color.green, 1f);
 

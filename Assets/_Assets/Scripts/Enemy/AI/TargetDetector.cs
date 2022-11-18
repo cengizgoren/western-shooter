@@ -6,6 +6,7 @@ public partial class TargetDetector : MonoBehaviour
     public bool TargetObstructed = false;
     public bool Alerted = false;
     public bool TooFarAway = false;
+    public bool TooClose = false;
 
     [Space(10)]
     [Tooltip("Cone of player detection in from of an enemy agent. The value is doubled.")]
@@ -13,6 +14,8 @@ public partial class TargetDetector : MonoBehaviour
     public float SightDetectionRadius = 10f;
     public float HearingDetectionRadius = 5f;
     public float FriendlySphereCastThickness = 0.5f;
+    public float KeepMaxDistanceFromTarget = 40f;
+    public float KeepMinDistanceFromTarget = 20f;
     public LayerMask ObstructsVision;
     public LayerMask PreventsWeaponFire;
 
@@ -50,7 +53,9 @@ public partial class TargetDetector : MonoBehaviour
     {
         TargetSighted = IsPlayerInSightRange();
         TargetObstructed = IsPlayerObstructed();
-        TooFarAway = Vector3.Distance(transform.position, playerTransform.position) > 20f;
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        TooFarAway = distance > KeepMaxDistanceFromTarget;
+        TooClose = distance < KeepMinDistanceFromTarget;
     }
 
     private bool IsPlayerInSightRange()

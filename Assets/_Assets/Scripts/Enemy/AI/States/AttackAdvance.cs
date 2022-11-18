@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackReposition : IState
+public class AttackAdvance : IState
 {
-    private Transform playerTransform;
-    private NavMeshAgent navMeshAgent;
-    private TargetDetector targetDetector;
-    private TargetPicker targetPicker;
-    private EnemyController enemyController;
-    private EnemyInput enemyInput;
+    private readonly Transform playerTransform;
+    private readonly TargetPicker targetPicker;
+    private readonly NavMeshAgent navMeshAgent;
+    private readonly TargetDetector targetDetector;
+    private readonly EnemyController enemyController;
+    private readonly EnemyInput enemyInput;
 
-    public AttackReposition(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
+    private float cooldown = 0.2f;
+    private float lastRepositionTime = Mathf.NegativeInfinity;
+
+    public AttackAdvance(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
     {
         this.playerTransform = playerTransform;
         this.targetPicker = targetPicker;
@@ -22,9 +22,6 @@ public class AttackReposition : IState
         this.enemyController = enemyController;
         this.enemyInput = enemyInput;
     }
-
-    private float cooldown = 0.2f;
-    private float lastRepositionTime = Mathf.NegativeInfinity;
 
     public void Tick()
     {
@@ -39,7 +36,7 @@ public class AttackReposition : IState
 
         if (Time.time - lastRepositionTime > cooldown)
         {
-            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance || targetDetector.TooFarAway || targetDetector.TooClose)
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 //navMeshAgent.ResetPath();
                 if (targetPicker.TryFindPositionCloseToPlayer(out Vector3 pos))
@@ -53,15 +50,15 @@ public class AttackReposition : IState
 
     public void OnEnter()
     {
-        navMeshAgent.ResetPath();
-        navMeshAgent.speed = 4f;
         navMeshAgent.updateRotation = false;
+        navMeshAgent.speed = 4f;
         enemyInput.SetTargetTransform(playerTransform);
     }
 
     public void OnExit()
     {
         enemyController.OnAttack?.Invoke(false);
+        navMeshAgent.updateRotation = true;
         enemyInput.ResetTargetTransform();
     }
 }

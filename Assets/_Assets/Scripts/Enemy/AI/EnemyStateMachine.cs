@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -35,31 +36,44 @@ public class EnemyStateMachine : MonoBehaviour
 
         var idle = new Idle(messager);
         var chase = new Chase(PlayerController.transform, navMeshAgent, targetPicker);
-        var attack = new Attack(targetDetector, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
-        var attackReposition = new AttackReposition(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
+        var attackStandStill = new AttackStandStill(targetDetector, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
+        var attackAdvance = new AttackAdvance(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
+        var attackRetreat = new AttackRetreat(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
 
-        At(new Vector2(0, 1), idle, chase, TargetDetected());
-        At(new Vector2(0, 1), idle, attackReposition, TargetContact());
-        At(new Vector2(0, 1), chase, attackReposition, TargetContact());
-        At(new Vector2(0, 1), attack, chase, TargetObstructed());
-        At(new Vector2(0, 1), attackReposition, attack, ReachedTheirDestination());
-        At(new Vector2(0, 1), attack, attackReposition, TargetTooFarAway());
+        At(idle, chase, TargetDetected());
+        At(idle, attackAdvance, TargetContact());
+        
+        At(chase, attackAdvance, TargetContact());
 
-        void At(Vector2 reactionTimeRange, IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition, reactionTimeRange);
+        At(attackAdvance, chase, TargetObstructed());
+        At(attackAdvance, attackStandStill, ReachedTheirDestination());
+        At(attackAdvance, attackRetreat, TargetTooClose());
+
+        At(attackRetreat, chase, TargetObstructed());
+        At(attackRetreat, attackStandStill, Retreated());
+        At(attackRetreat, attackAdvance, TargetTooFarAway());
+
+        At(attackStandStill, chase, TargetObstructed());
+        At(attackStandStill, attackAdvance, TargetTooFarAway());
+        At(attackStandStill, attackRetreat, TargetTooClose());
+
+        void At(IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition);
 
         Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.Alerted;
         Func<bool> TargetContact() => () => targetDetector.TargetSighted && !targetDetector.TargetObstructed;
         Func<bool> TargetObstructed() => () => targetDetector.TargetObstructed;
         Func<bool> TargetTooFarAway() => () => targetDetector.TooFarAway;
+        Func<bool> TargetTooClose() => () => targetDetector.TooClose;
         Func<bool> ReachedTheirDestination() => () => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance;
-
+        Func<bool> Retreated() => () => (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance) || targetDetector.TooFarAway;
+        
         stateMachine.SetState(idle);
     }
 
     public void Tick()
     {
         targetDetector.Tick();
-        stateMachine.Tick(Time.deltaTime);
+        stateMachine.Tick();
     }
 
 #if UNITY_EDITOR

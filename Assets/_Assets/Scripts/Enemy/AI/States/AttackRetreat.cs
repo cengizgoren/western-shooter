@@ -1,17 +1,23 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Attack : IState
+public class AttackRetreat : IState
 {
     private readonly Transform playerTransform;
+    private readonly TargetPicker targetPicker;
     private readonly NavMeshAgent navMeshAgent;
     private readonly TargetDetector targetDetector;
     private readonly EnemyController enemyController;
     private readonly EnemyInput enemyInput;
 
-    public Attack(TargetDetector targetDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
+    private float cooldown = 0.2f;
+    private float lastRepositionTime = Mathf.NegativeInfinity;
+
+    public AttackRetreat(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
     {
         this.playerTransform = playerTransform;
+        this.targetPicker = targetPicker;
         this.navMeshAgent = navMeshAgent;
         this.targetDetector = targetDetector;
         this.enemyController = enemyController;
@@ -28,13 +34,25 @@ public class Attack : IState
         {
             enemyController.OnAttack?.Invoke(false);
         }
+
+        if (Time.time - lastRepositionTime > cooldown)
+        {
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                //navMeshAgent.ResetPath();
+                if (targetPicker.TryFindPositionAwayFromPlayer(out Vector3 pos))
+                {
+                    navMeshAgent.SetDestination(pos);
+                    lastRepositionTime = Time.time;
+                }
+            }
+        }
     }
 
     public void OnEnter()
     {
-        navMeshAgent.ResetPath();
         navMeshAgent.updateRotation = false;
-        navMeshAgent.speed = 2f;
+        navMeshAgent.speed = 4f;
         enemyInput.SetTargetTransform(playerTransform);
     }
 
