@@ -10,8 +10,8 @@ public partial class TargetDetector : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Cone of player detection in from of an enemy agent. The value is doubled.")]
-    public float SightDetectionAngle = 90f;
-    public float SightDetectionRadius = 10f;
+    public float SightDetectionAngle;
+    public float SightDetectionRadius;
     public float HearingDetectionRadius = 5f;
     public float FriendlySphereCastThickness = 0.5f;
     public float KeepMaxDistanceFromTarget = 40f;

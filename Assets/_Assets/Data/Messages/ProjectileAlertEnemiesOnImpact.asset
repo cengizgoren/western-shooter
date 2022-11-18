@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProjectileAlertEnemiesOnImpact
   m_EditorClassIdentifier: 
   messageType: 0
-  BroadCastRadius: 1
+  BroadCastRadius: 16
   MessageReceivers:
     serializedVersion: 2
     m_Bits: 256
