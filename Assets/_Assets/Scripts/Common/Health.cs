@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
         ImpactEffect = ImpactEffectAsset;
     }
 
-    public void Damage(int amount)
+    public virtual void Damage(int amount)
     {
         if (!Invincible)
         {
