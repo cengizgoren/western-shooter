@@ -15,9 +15,9 @@ MonoBehaviour:
   Projectile: {fileID: 11400000, guid: 02b9e4898e2a42749a4d6747eb6c9efb, type: 2}
   ShootType: 1
   TimeBetweenShots: 0.2
-  BulletSpreadAngle: 1
+  BulletSpreadAngle: 2.4
   ClipSize: 3
-  ReloadTime: 1.5
+  ReloadTime: 3
   MuzzleFlash: {fileID: 11400000, guid: 9a24f2b50533033468cfb7c71d6bb909, type: 2}
   WeaponFireSFX:
     Guid:

@@ -2773,10 +2773,13 @@ MonoBehaviour:
   TargetObstructed: 0
   Alerted: 0
   TooFarAway: 0
+  TooClose: 0
   SightDetectionAngle: 180
   SightDetectionRadius: 50
   HearingDetectionRadius: 5
   FriendlySphereCastThickness: 0.5
+  KeepMaxDistanceFromTarget: 60
+  KeepMinDistanceFromTarget: 20
   ObstructsVision:
     serializedVersion: 2
     m_Bits: 12352
@@ -2814,7 +2817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RandomPointsCount: 10
-  RandomCircleSize: 30
+  RandomCircleSize: 50
   RandomRangeFromCircle: 2
   ObstructsDirectPathClearCheck:
     serializedVersion: 2
