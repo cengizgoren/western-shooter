@@ -1,8 +1,8 @@
-using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 public class VignettePulse : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class VignettePulse : MonoBehaviour
     [SerializeField][Range(0f, 2f)] private float VignetteAttackTime = 0.1f;
 
     private Vignette vignette;
-    private Tween tween;
+    private Tween vignettePulse;
 
     private void Start()
     {
@@ -25,11 +25,11 @@ public class VignettePulse : MonoBehaviour
             vignette.color.value = VignetteColor;
 
             // Cannot easly change values from this premade tween, it works, but maybe I should make this tween at runtime
-            tween = DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, VignettePeakIntensity, VignetteAttackTime)
+            vignettePulse = DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, VignettePeakIntensity, VignetteAttackTime)
                 .SetEase(Ease.InOutCubic)
                 .SetAutoKill(false)
                 .Pause();
-            tween.OnComplete(() => tween.SmoothRewind());
+            vignettePulse.OnComplete(() => vignettePulse.SmoothRewind());
         }
         else
         {
@@ -48,16 +48,16 @@ public class VignettePulse : MonoBehaviour
 
     private void HurtVignettePulse()
     {
-        if (tween.IsPlaying())
+        if (vignettePulse.IsPlaying())
         {
-            if (tween.IsBackwards())
+            if (vignettePulse.IsBackwards())
             {
-                tween.Flip();
+                vignettePulse.Flip();
             }
         }
         else
         {
-            tween.Restart();
+            vignettePulse.Restart();
         }
     }
 
@@ -66,6 +66,6 @@ public class VignettePulse : MonoBehaviour
         if (playerHP)
             playerHP.OnHpLost -= HurtVignettePulse;
 
-        tween.Kill();
+        vignettePulse.Kill();
     }
 }
