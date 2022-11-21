@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Enemy Highlight
+  m_Name: RenderEnemyModelOccluded
   m_EditorClassIdentifier: 
   m_Active: 0
   settings:
-    passTag: Enemy Highlight
+    passTag: RenderEnemyModelOccluded
     Event: 300
     filterSettings:
       RenderQueueType: 0
@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Normal
+  m_Name: RenderModels
   m_EditorClassIdentifier: 
   m_Active: 0
   settings:
-    passTag: Normal
+    passTag: RenderModels
     Event: 300
     filterSettings:
       RenderQueueType: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62c9c65cf3354c93be831c8bc075510, type: 3}
   m_Name: ScreenSpaceAmbientOcclusion
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   m_Shader: {fileID: 4800000, guid: 0849e84e3d62649e8882e9d6f056a017, type: 3}
   m_Settings:
     Downsample: 0
@@ -189,11 +189,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Player Highlight
+  m_Name: RenderPlayerModelOccluded
   m_EditorClassIdentifier: 
   m_Active: 0
   settings:
-    passTag: Player Highlight
+    passTag: RenderPlayerModel
     Event: 300
     filterSettings:
       RenderQueueType: 0
@@ -240,9 +240,9 @@ MonoBehaviour:
   - {fileID: 2420581021979829411}
   - {fileID: -5290281392646365020}
   - {fileID: 6752584827372485184}
-  - {fileID: -4027851444019845283}
   - {fileID: 4081416629073941471}
-  m_RendererFeatureMap: c841d5c3591e6ef58995924add78688d3c5aa2058257e8d10fd206bee38d85d6a3e4285d9da19721a460743d1a2595b640ba3aaf1f00b65d5d2727bf73321ac8df1353c4cc1aa438
+  - {fileID: -4027851444019845283}
+  m_RendererFeatureMap: c841d5c3591e6ef58995924add78688d3c5aa2058257e8d10fd206bee38d85d6a3e4285d9da19721a460743d1a2595b640ba3aaf1f00b65ddf1353c4cc1aa4385d2727bf73321ac8
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

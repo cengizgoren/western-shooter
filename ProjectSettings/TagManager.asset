@@ -16,12 +16,12 @@ TagManager:
   - Obstacle
   - Ground
   - Agent
-  - RenderOnTop1
+  - PlayerModel
   - Arrow
-  - RenderOnTop3
+  - EnemyModel
   - Player
   - LightCover
-  - RenderOnTop4
+  - 
   - Reticle
   - 
   - 
