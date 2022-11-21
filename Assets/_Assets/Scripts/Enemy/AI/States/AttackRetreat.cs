@@ -39,7 +39,7 @@ public class AttackRetreat : IState
         {
             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                //navMeshAgent.ResetPath();
+                
                 if (targetPicker.TryFindPositionAwayFromPlayer(out Vector3 pos))
                 {
                     navMeshAgent.SetDestination(pos);
@@ -51,6 +51,7 @@ public class AttackRetreat : IState
 
     public void OnEnter()
     {
+        navMeshAgent.ResetPath();
         navMeshAgent.updateRotation = false;
         navMeshAgent.speed = 4f;
         enemyInput.SetTargetTransform(playerTransform);

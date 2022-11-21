@@ -20,7 +20,7 @@ public class TargetPicker : MonoBehaviour
 
     public bool TryFindPositionAwayFromPlayer(out Vector3 pos)
     {
-        return TryFindPosition(-(playerTransform.position - transform.position), out pos);
+        return TryFindPosition(transform.position - (playerTransform.position - transform.position).normalized, out pos);
     }
 
     public bool TryFindPositionCloseToPlayer(out Vector3 closesPoint)
