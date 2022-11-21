@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 11400000, guid: 02b9e4898e2a42749a4d6747eb6c9efb, type: 2}
   ShootType: 1
-  TimeBetweenShots: 0.1
-  BulletSpreadAngle: 0
+  TimeBetweenShots: 0.07
+  BulletSpreadAngle: 1
   ClipSize: 45
   ReloadTime: 0
   MuzzleFlash: {fileID: 11400000, guid: 9a24f2b50533033468cfb7c71d6bb909, type: 2}

@@ -7,10 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ReticleIntersect1
-  m_Shader: {fileID: -6465566751694194690, guid: 0d4a22e1afa0b8646bd12b95cb981fd8, type: 3}
+  m_Name: ReticleOccluded
+  m_Shader: {fileID: -6465566751694194690, guid: 72a3f74b9211d1545affde0be61ad7e7, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -115,20 +116,19 @@ Material:
     - _Gradient2: 1
     - _GradientClampMax: 1
     - _GradientClampMin: 0.15
-    - _GradientMultiplier: 1
+    - _GradientMultiplier: 0
     - _GradientOffset: 2.55
     - _Hue: 202
-    - _Intersect_Power: 0.6
     - _Metallic: 0
     - _Multiply_Alpha: 1
     - _Multiply_RGB: 1
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0.5
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Saturation: 1
+    - _Saturation: 0.36
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -142,10 +142,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.8550148, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IntersectColor: {r: 1, g: 0, b: 0.07510948, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
