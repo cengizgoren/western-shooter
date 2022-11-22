@@ -14,13 +14,13 @@ public class AttackRetreat : IState
     private float cooldown = 0.2f;
     private float lastRepositionTime = Mathf.NegativeInfinity;
 
-    public AttackRetreat(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
+    public AttackRetreat(Transform playerTransform, TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
     {
         this.playerTransform = playerTransform;
-        this.targetPicker = targetPicker;
-        this.navMeshAgent = navMeshAgent;
         this.targetDetector = targetDetector;
+        this.targetPicker = targetPicker;
         this.enemyController = enemyController;
+        this.navMeshAgent = navMeshAgent;
         this.enemyInput = enemyInput;
     }
 
@@ -39,7 +39,7 @@ public class AttackRetreat : IState
         {
             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                
+
                 if (targetPicker.TryFindPositionAwayFromPlayer(out Vector3 pos))
                 {
                     navMeshAgent.SetDestination(pos);

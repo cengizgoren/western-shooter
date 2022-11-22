@@ -13,13 +13,13 @@ public class AttackAdvance : IState
     private float cooldown = 0.2f;
     private float lastRepositionTime = Mathf.NegativeInfinity;
 
-    public AttackAdvance(TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
+    public AttackAdvance(Transform playerTransform, TargetDetector targetDetector, TargetPicker targetPicker, EnemyController enemyController, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
     {
         this.playerTransform = playerTransform;
-        this.targetPicker = targetPicker;
-        this.navMeshAgent = navMeshAgent;
         this.targetDetector = targetDetector;
+        this.targetPicker = targetPicker;
         this.enemyController = enemyController;
+        this.navMeshAgent = navMeshAgent;
         this.enemyInput = enemyInput;
     }
 

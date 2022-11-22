@@ -9,12 +9,12 @@ public class AttackStandStill : IState
     private readonly EnemyController enemyController;
     private readonly EnemyInput enemyInput;
 
-    public AttackStandStill(TargetDetector targetDetector, EnemyController enemyController, Transform playerTransform, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
+    public AttackStandStill(Transform playerTransform, TargetDetector targetDetector, EnemyController enemyController, NavMeshAgent navMeshAgent, EnemyInput enemyInput)
     {
         this.playerTransform = playerTransform;
-        this.navMeshAgent = navMeshAgent;
         this.targetDetector = targetDetector;
         this.enemyController = enemyController;
+        this.navMeshAgent = navMeshAgent;
         this.enemyInput = enemyInput;
     }
 
