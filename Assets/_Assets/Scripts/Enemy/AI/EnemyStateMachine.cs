@@ -15,13 +15,13 @@ public class EnemyStateMachine : MonoBehaviour
 {
     public CharacterController PlayerController;
 
+    [Header("Debug")]
+    [SerializeField] private DebugItem NavMeshAgentPath;
+    [SerializeField] private bool StateLabel;
+
     private StateMachine stateMachine;
     private TargetDetector targetDetector;
     private NavMeshAgent navMeshAgent;
-
-    [Header("Debug")]
-    public DebugItem NavMeshAgentPath;
-    public bool StateLabel;
 
     public void Awake()
     {
@@ -36,13 +36,15 @@ public class EnemyStateMachine : MonoBehaviour
 
         var idle = new Idle(messager);
         var chase = new Chase(PlayerController.transform, navMeshAgent, targetPicker);
-        var attackStandStill = new AttackStandStill(targetDetector, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
-        var attackAdvance = new AttackAdvance(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
-        var attackRetreat = new AttackRetreat(targetDetector, targetPicker, enemyController, PlayerController.transform, navMeshAgent, enemyAim);
+        var attackStandStill = new AttackStandStill(PlayerController.transform, targetDetector, enemyController, navMeshAgent, enemyAim);
+        var attackAdvance = new AttackAdvance(PlayerController.transform, targetDetector, targetPicker, enemyController, navMeshAgent, enemyAim);
+        var attackRetreat = new AttackRetreat(PlayerController.transform, targetDetector, targetPicker, enemyController, navMeshAgent, enemyAim);
+
+        void At(IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition);
 
         At(idle, chase, TargetDetected());
         At(idle, attackAdvance, TargetContact());
-        
+
         At(chase, attackAdvance, TargetContact());
 
         At(attackAdvance, chase, TargetObstructed());
@@ -57,8 +59,6 @@ public class EnemyStateMachine : MonoBehaviour
         At(attackStandStill, attackAdvance, TargetTooFarAway());
         At(attackStandStill, attackRetreat, TargetTooClose());
 
-        void At(IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition);
-
         Func<bool> TargetDetected() => () => (targetDetector.TargetSighted && !targetDetector.TargetObstructed) || targetDetector.Alerted;
         Func<bool> TargetContact() => () => targetDetector.TargetSighted && !targetDetector.TargetObstructed;
         Func<bool> TargetObstructed() => () => targetDetector.TargetObstructed;
@@ -66,7 +66,7 @@ public class EnemyStateMachine : MonoBehaviour
         Func<bool> TargetTooClose() => () => targetDetector.TooClose;
         Func<bool> ReachedTheirDestination() => () => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance;
         Func<bool> Retreated() => () => (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance) || targetDetector.TooFarAway;
-        
+
         stateMachine.SetState(idle);
     }
 
