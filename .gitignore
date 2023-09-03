@@ -82,7 +82,7 @@ crashlytics-build.properties
 ## Asset Store Packages
 
 # Ignore everything in there
-Assets/*
+#Assets/*
 
 # However, include this
 !Assets/_Assets/
